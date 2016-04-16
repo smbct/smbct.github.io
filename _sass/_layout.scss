@@ -258,10 +258,34 @@
         }
     }
 	
+	/* images flottantes */
+	img {
+		display: block;
+		border-radius: 20px;
+		float:left;
+		padding: 10px;
+		
+	}
+	
 	background-color: $fond-post;
 	border-radius: 10px;
 	padding: 3%;
 	color: $police-claire;
+
+	.programme-math {
+		background-color: #2d3133;
+		border-radius: 10px;
+		padding: 5px;
+	}
+
+	.question {
+		background-color: #0b2327;
+		border-radius: 30px;
+		font-size: 20px;
+		text-shadow: 1px 1px grey;
+		padding: 5px;
+
+	}
 	
 
 }
