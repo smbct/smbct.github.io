@@ -44,8 +44,16 @@ Ces limitations peuvent paraître très contraignantes. Cependant, un très gran
 
 ## Un premier exemple de modélisation
 
-Prenons un premier exemple de modélisation. Partons d'une situation simple : nous voulons préparer deux types de petits biscuits. Les deux demandent les mêmes ingrédients : de la farine et du sucre.
+Prenons un premier exemple de modélisation.
+
+![Des cookies !](/assets/cookies.jpg)
+
+Partons d'une situation simple : nous voulons préparer deux types de petits biscuits. Les deux demandent les mêmes ingrédients : de la farine et du sucre.
+
+
+
 Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n'ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ?
+
 
 ### Les variables du problème
 
@@ -81,6 +89,8 @@ max \,z = x_{1} + x_{2}\\
 	\end{align*}
 $$
 </p>
+
+Après résolution, on trouve $$x_1 = 20$$ et $$x_2 = 61$$. Nous allons donc pouvoir confectionner 81 gateaux pour nos invités. On peut remarquer que la solution n'a rien d'évident, il parrait difficile de prévoir un ce résultat à partir des données du problème.
 
 ### Conclusion
 
