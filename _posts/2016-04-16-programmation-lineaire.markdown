@@ -52,7 +52,7 @@ Partons d'une situation simple : nous voulons préparer deux types de petits bis
 
 
 
-Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n'ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ?
+Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n'ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ? Dans l'exemple présenté, les données sont issues de recettes respectives de madelaines et de biscuits à la cannelle.
 
 
 ### Les variables du problème
