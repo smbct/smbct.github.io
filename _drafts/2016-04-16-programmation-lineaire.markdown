@@ -13,19 +13,13 @@ Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie p
 
 <p class = "question">Mais au fait, c'est quoi l'optimisation finalement ?</p>
 
-Optimiser, c'est essayer de faire de la meilleure façon possible. Cela peut concerner le fait de partir d'une façon de faire, d'une procédure, d'un plan, et trouver des moyens de l'améliorer pour traiter au mieux une situation. Cela peut aussi concerner le fait de prévoir à l'avance quelle va être la meilleure stratégie pour attaquer un problème. L'améliorer peut alors vouloir dire gagner du temps, réduire des dépenses, maximiser ses chances, etc...
+Optimiser, c'est essayer de faire de la meilleure façon possible. Cela peut concerner le fait de partir d'une façon de faire, d'une procédure, d'un plan, et trouver des moyens de l'améliorer pour traiter au mieux une situation. Cela peut aussi concernet le fait de prévoir à l'avance quelle va être la meilleure stratégie pour attaquer un problème. L'améliorer peut alors vouloir dire gagner du temps, réduire des dépenses, maximiser ses chances, etc...
 
 ## L'optimisation en maths et en info
 
-En mathématiques, l'optimisation est une notion très précise. Optimiser signifie trouver les valeurs maximale et minimale que peut atteindre une fonction. 
+En mathématiques, l'optimisation est une notion très précise. Optimiser signifie trouver les valeurs maximale et minimale que peut atteindre une fonction. Si l'on veut traduire un problème d'optimisation naturel en problème mathématique, cela consiste donc à trouver une fonction qui exprime le mieux possible la quantité à optimiser (que ça soit du temps, de l'argent, etc...)
 
-<p class = "question">Et pourquoi un maximum ou un minimum ?</p>
-
-Il n'est pas forcément évident aux premiers abords qu'un problème d'optimisation est un problème de recherche de maximum ou de minimum. Cependant, en y réfléchissant, derrière tout problème d'optimisation se cache un min ou un max. Par example, dans certaines situations, on veut optimiser le temps mis pour faire une action. Cela veut alors dire prendre le moins de temps possible. On cherche bien un minimum. Dans d'autres contextes, on peut aussi chercher à optimiser un gain. On cherche alors à obtenir le gain maximum.
-
-Donc si l'on veut traduire un problème d'optimisation naturel en problème mathématique, cela consiste donc à trouver une fonction qui exprime le mieux possible la quantité à optimiser (que ça soit du temps, de l'argent, etc...)
-
-Passer d'un problème réel à un problème mathématique, c'est l'action de modéliser. Une des première chose à faire pour modéliser un problème, c'est identifier les variables. Les variables sont impliquées de le calcul de la fonction à optimiser. Elles correspondent pour le problème réel aux différentes décisions que l'on peut prendre (par exemple, "combien d'unité produire ?" ou encore "doit-on activer cette option ?").
+Passer d'un problème réel à un problème mathématique, c'est l'action de modéliser. Une des première chose à faire pour modéliser un problème, c'est identifier les variables. Les variables sont impliquées de le calcul de la fonction à optimiser. Elles correspondent pour le problème réel aux différentes décisions que l'on peut prendre (par exemple, "combien d'unité produire ?"" ou encore "doit-on activer cette option ?").
 
 Une autre chose que l'on doit prendre en compte lorsque l'on optimise est la présence de contraintes. En effet, les variables de notre fonction (que l'on appelle variables de décision) ne peuvent pas prendre n'importe quelles valeurs ! Par exemple, si nos variables concernent un nombre d'unité à produire, on ne peut pas évidemment pas produire en quantité infinie. Les ressources diponibles entre donc en compte dans ce type de problème. Par ailleurs, les contraintes apparaissent parfois de manière plus subtile.
 
@@ -38,7 +32,7 @@ Cependant, les problèmes que l'on veut résoudre peuvent parfois comporter des 
 
 Implémenter des méthodes de calculs automatiques ne suffit toutefois pas à résoudre tous les problèmes. Certains problèmes sont en effet par nature très difficiles à résoudre et les algorithmes généraux prennent énormément de temps. Les outils mathématiques sont limités pour ces problèmes. Il est donc nécessaire de les étudier en profondeur afin de trouver des techniques algorithmiques adaptées pour la résolution.
 
-<p class = "info">Une des caractéristiques du domaine est qu'il n'existe pas de méthode générale efficace pour traiter n'importe quel problème.</p>
+<p class = "info">Une des caractéristiques du domaine est qu'il n'existe pas de méthode absolue infaillible pour traiter n'importe quel problème.</p>
 
 ## La programmation linéaire dans tout ça
 
@@ -54,10 +48,11 @@ Prenons un premier exemple de modélisation.
 
 ![Des cookies !](/assets/cookies.jpg)
 
-Partons d'une situation simple : nous allons recevoir des invités et nous voulons leur préparer deux types de petits biscuits. Les deux demandent les mêmes ingrédients : de la farine et du sucre.
+Partons d'une situation simple : nous voulons préparer deux types de petits biscuits. Les deux demandent les mêmes ingrédients : de la farine et du sucre.
 
 
-Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n'ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ? Dans l'exemple présenté, les données sont issues de recettes respectives de madeleines et de biscuits à la cannelle.
+
+Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n'ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ? Dans l'exemple présenté, les données sont issues de recettes respectives de madelaines et de biscuits à la cannelle.
 
 
 ### Les variables du problème
@@ -95,7 +90,7 @@ max \,z = x_{1} + x_{2}\\
 $$
 </p>
 
-Je passe les détails de la résolution de ce problème car cela nécessiterait plusieurs articles. Elle est néanmoins basée sur la méthode du branch and bound et l'algorihme du simplexe. Après résolution, on trouve $$x_1 = 20$$ et $$x_2 = 61$$. Nous allons donc pouvoir confectionner 81 gateaux pour nos invités.
+Après résolution, on trouve $$x_1 = 20$$ et $$x_2 = 61$$. Nous allons donc pouvoir confectionner 81 gateaux pour nos invités. On peut remarquer que la solution n'a rien d'évident, il parrait difficile de prévoir un ce résultat à partir des données du problème.
 
 ## Conclusion
 
@@ -104,3 +99,8 @@ La programmation linéaire est donc un outil très intéressant pour l'optimisat
 ## Crédit
 
 photo credit: <a href="http://www.flickr.com/photos/7702423@N04/26056556830">297/365/2853 (April 3, 2016) - Chocolate Coconut Cookies</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(license)</a>
+
+liens :
+madelaines : http://www.750g.com/madeleines-a-lancienne-r1918.htm
+cannelles : http://www.750g.com/biscuit-a-la-cannelle-r61686.htm
+biscuits : http://www.750g.com/recettes_biscuits.htm

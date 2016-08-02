@@ -17,3 +17,7 @@ github_username:  smbct
 
 # Build settings
 markdown: kramdown
+
+#emoji
+gems:
+ - jemoji

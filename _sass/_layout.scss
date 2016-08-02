@@ -180,7 +180,6 @@
 }
 
 
-
 /**
  * Page content
  */
@@ -211,8 +210,6 @@
     display: block;
     font-size: 24px;
 }
-
-
 
 /**
  * Posts
@@ -272,16 +269,14 @@
 	padding: 3%;
 	color: $police-claire;
 
+    /* maths */
 	.programme-math {
 		background-color: #2d3133;
 		border-radius: 10px;
 		padding: 5px;
 	}
 
-    /* boite à question */
-
-
-
+    /* boites à question, infos, attention*/
 	.question, .info {
         position: relative;
         padding: 6px 20px 6px 70px;
@@ -294,11 +289,13 @@
 		#text-shadow: 1px 1px grey;
 		#padding: 5px;
 
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+
         background-repeat:no-repeat;
         background-position: 0.5% center;
         background-size: 30px 30px;
 	}
-
     .question:after, .info:after
     {
     	content: ' ';
@@ -310,15 +307,22 @@
     	border-width: 8px 19px;
     	border-style: solid;
     	border-color: #767676 #767676 transparent transparent;
-
     }
-
     .question {
         background-image:url(../assets/question.svg);
     }
-
     .info {
         background-image:url(../assets/info.svg);
+    }
+
+    /* tableaux */
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: 2px solid black;
+        padding: 7px;
     }
 
 
