@@ -3,6 +3,7 @@ layout: post
 title:  "Programmation linéaire"
 date:   2016-04-16 21:20:33 +0200
 categories: optimisation
+comments: true
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>

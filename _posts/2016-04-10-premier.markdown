@@ -3,6 +3,7 @@ layout: post
 title:  "Présentation du blog"
 date:   2016-04-10 20:34:00 +0200
 categories: general
+comments: true
 ---
 
 Bienvenue sur mon blog !
