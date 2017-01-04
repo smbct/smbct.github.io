@@ -1,0 +1,17 @@
+---
+layout: post
+title:  "Présentation du blog"
+date:   2016-04-10 20:34:00 +0200
+categories: general
+comments: true
+---
+
+Bienvenue sur mon blog !
+
+Je vais parler ici de divers sujets liés à l'informatique. Sans grandes prétentions, ce blog est juste ici pour me permettre de partager mes expériences en tant qu'étudiant. Je compte faire différents types d'articles, allant de l'article traitant de l'actualité jusqu'au petit cours improvisé. L'idée est d'essayer d'être en rapport avec les enjeux actuels de l'informatique, tout en gardant une dimension scientifique. 
+
+Une de mes intentions est de laisser chacun réfléchir à propos de questions ouvertes. Tout en considérent les avancées du domaines et les techniques modernes, je voudrais laisser place aux idées de chacun et envisager toutes les possibilités d'innovations et d'améliorations.
+
+Ce blog étant expérimental, je ne donne malheureusement aucune garantie sur le résultat et sur la régularité des mises à jours. 
+
+Cela étant dit, bonne lecture !
