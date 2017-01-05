@@ -209,6 +209,57 @@ div.post-meta {
 }
 
 //********************************************************
+//                  math mode
+//********************************************************
+.programme-math {
+
+    background-color: #212023;
+    border-radius: 6px;
+    padding: 7;
+}
+
+//********************************************************
+//                  question / infos
+//********************************************************
+
+.question, .info {
+    position: relative;
+    padding: 6px 20px 6px 70px;
+	margin: 30px 10px 10px -60px;
+
+	background-color: #0b2327;
+	#font-size: 15px;
+    font-weight: bold;
+	#text-shadow: 1px 1px #6d6d6d;
+	#padding: 5px;
+
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+    background-repeat:no-repeat;
+    background-position: 0.5% center;
+    background-size: 30px 30px;
+}
+.question:after, .info:after
+{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 0px;
+    top: 100%;
+    border-width: 5px 21px;
+    border-style: solid;
+    border-color: #767676 #767676 transparent transparent;
+}
+.question {
+    background-image:url(../assets/question.svg);
+}
+.info {
+    background-image:url(../assets/info.svg);
+}
+
+//********************************************************
 //                    Note / Warning
 //********************************************************
 .note {

@@ -65,7 +65,7 @@ Dans l'état oui. Mais on n'a pas encore commencé à écrire les contraintes. C
 
 ### Les contraintes
 
-On peut commencer par remarquer que la première contrainte n'est plus nécessaire. En effet, la nature des variables a une incidance directe sur les contraintes et il n'est plus possible de choisir une valeur non permise pour une case. 
+On peut commencer par remarquer que la première contrainte n'est plus nécessaire. En effet, la nature des variables a une incidance directe sur les contraintes et il n'est plus possible de choisir une valeur non permise pour une case.
 
 La première contrainte qui peut venir à l'esprit concerne le fait de choisir plusieurs valeurs pour une case. Cette contrainte est très simple a écrire. Etant donné que toutes les variables concernant une case ne peuvent avoir pour valeur uniquement 0 ou 1 et qu'une seule de ces variables doit être à 1, il suffit d'écrire $$\sum\limits_{k=1}^9 x_{i,j/k} = 1$$.
 
@@ -95,14 +95,14 @@ $$
 ## Conclusion
 
 Cet exemple nous montre donc que la pogrammation linéaire qui semblait plutôt limitée permet en fait de modéliser un large éventail de problème.
-Plus les problèmes sont complexes, plus il faut avoir recours à des astuces afin de réussir à les modéliser correctement. 
+Plus les problèmes sont complexes, plus il faut avoir recours à des astuces afin de réussir à les modéliser correctement.
 Il faut aussi faire attention à ce que le nombre de contrainte ne soit pas trop important. En effet, cela peut compromettre la résolution car les solvers ne sont pas infaillibles et ces problèmes restent des problèmes difficiles en informatique.
 On peut par exemple citer le problème du voyageur de commerce avec son nombre très important de contrainte qui le rend particulièrement difficile à résoudre.
 
 J'ai créé un programme se basant sur ce billet pour résoudre des grilles de sudoku.
-Le code source est disponible [ici](https://github.com/smbct/Sudoplex). 
+Le code source est disponible [ici](https://github.com/smbct/Sudoplex).
 Le programme a été écrit en c++ et utilise la bibliothèque [glpk](https://www.gnu.org/software/glpk/) pour la résolution du problème.
-Les détails pour le compiler se trouvent dans le readme. On peut remarquer en testant le programme que le temps de résolution est très court, malgré un nombre important de contrainte. 
+Les détails pour le compiler se trouvent dans le readme. On peut remarquer en testant le programme que le temps de résolution est très court, malgré un nombre important de contrainte.
 
 
 Enfin, il faut tout de même garder à l'esprit que la programmation linéaire n'est pas le seul moyen de résoudre ce problème et qu'il n'est pas le plus adapté.
@@ -123,5 +123,3 @@ Et bien sûr, elle a été résolue avec le programme linéaire !
 | 4 | 9 | 6 | * | 3 | 1 | 8 | * | 5 | 2 | 7 |
 | 7 | 5 | 3 | * | 2 | 4 | 9 | * | 1 | 6 | 8 |
 | 8 | 1 | 2 | * | 7 | 6 | 5 | * | 3 | 9 | 4 |
-
-
