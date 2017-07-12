@@ -18,7 +18,7 @@ Optimiser, c'est essayer de faire de la meilleure façon possible. Cela peut con
 
 ## L'optimisation en maths et en info
 
-En mathématiques, l'optimisation est une notion très précise. Optimiser signifie trouver les valeurs maximale et minimale que peut atteindre une fonction. 
+En mathématiques, l'optimisation est une notion très précise. Optimiser signifie trouver les valeurs maximale et minimale que peut atteindre une fonction.
 
 <p class = "question">Et pourquoi un maximum ou un minimum ?</p>
 
@@ -85,7 +85,7 @@ On peut donc récapituler le modèle de notre problème :
 
 <p class = "programme-math">
 $$
-max \,z = x_{1} + x_{2}\\
+\text{max} \,z = x_{1} + x_{2}\\
 	 \begin{align*}
 		s.c.\quad 4.2 x_1 + 15 x_2 &\leq 1000 \\
 			5.8 x_1 + 7.5 x_2 &\leq 1000 \\

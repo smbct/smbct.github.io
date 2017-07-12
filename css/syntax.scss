@@ -122,8 +122,8 @@ p > code,
 .w { color: $varAndProp  } /* Text.Whitespace */
 .mf { color: $numbers } /* Literal.Number.Float */
 .mh { color: $numbers } /* Literal.Number.Hex */
-.mi { color: $numbers } /* Literal.Number.Integer */
-.mo { color: $numbers } /* Literal.Number.Oct */
+// .mi { color: $numbers } /* Literal.Number.Integer */
+// .mo { color: $numbers } /* Literal.Number.Oct */
 .sb { color: $strings } /* Literal.String.Backtick */
 .sc { color: $strings } /* Literal.String.Char */
 .sd { color: $strings } /* Literal.String.Doc */
