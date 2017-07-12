@@ -100,7 +100,7 @@ Il faut aussi faire attention à ce que le nombre de contrainte ne soit pas trop
 On peut par exemple citer le problème du voyageur de commerce avec son nombre très important de contrainte qui le rend particulièrement difficile à résoudre.
 
 J'ai créé un programme se basant sur ce billet pour résoudre des grilles de sudoku.
-Le code source est disponible [ici](https://github.com/smbct/Sudoplex).
+Le code source est disponible [ici](https://github.com/smbct/blog_code/tree/master/sudoplex).
 Le programme a été écrit en c++ et utilise la bibliothèque [glpk](https://www.gnu.org/software/glpk/) pour la résolution du problème.
 Les détails pour le compiler se trouvent dans le readme. On peut remarquer en testant le programme que le temps de résolution est très court, malgré un nombre important de contrainte.
 
