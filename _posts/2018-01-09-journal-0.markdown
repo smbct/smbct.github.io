@@ -1,0 +1,25 @@
+---
+layout: post
+title:  "Journal d'un stagiaire #0 - Intro"
+date:   2018-01-09 18:00:00 +0200
+categories: stage bioinfo communication
+comments: true
+---
+
+<p class = "question">C'est un peu vide par ici, pas vrai ? Voici quelques explications</p>
+
+Quand j'ai commencé ce blog, j'étais réellement passionné par les cours que je suivais et j'avais envie communiquer autour de cela. Mon but était de faire découvrir au plus grand nombre ce que je faisais, en le rendant accessible.
+
+Pour plusieurs raisons, j'ai commencé à me désintéresser des cours assez tôt dans mon master, même si j'ai tout de même tenu à le poursuivre jusqu'au bout. Malgré cela, les sciences en générale m'intéressent toujours et j'ai encore la volonté de partager ce que je fais avec le plus grand nombre. A l'heure où j'écris ces lignes, je m'apprête à commencer mon stage de fin de master. Celui-ci représente beaucoup pour moi car c'est l'occasion de décider si j'ai envie de continuer à mettre des efforts dans ce ce genre d'activités (et même pas forcément dans la vie profesionnelle). Ce stage est donc également pour moi l'occasion de reprendre le blog et de vous impliquer un peu dans mon quotidien via une série d'articles, sous la forme d'un journal de bord.
+
+Communiquer autour de ce domaine a plusieurs intérêts selon moi. Tout d'abord, cela me permet tout simplement de tenir au courant mon entourage de mes activités, en évitant de refaire trop souvent les mêmes explications. De plus, mettre différents niveaux de détails sur le travail que j'effectue permet aux personnes intéressées d'aller un peu plus loin dans la compréhension. De la même manière, cela permet aux personnes moins intéressées d'aller uniquement à l'essentiel, en sautant les parties les plus techniques. Au delà de ça, expliquer certains aspects de l'informatique peut se révéler utile dans notre société. En effet, les algorithmes, les modèles mathématiques et autres bizarreries sont présents partout autour de nous et ont modifié la façon dont nous vivons de manière radicale. Il est parfois difficile de comprendre la nature exacte de ces objets théoriques et d'avoir une intuition correcte sur ce dont ils sont réellement capables. Mon but n'est pas de philosopher sur l'intelligence artificielle, mais plutôt de montrer quelques aspects concrets de ces technologies afin de mieux les cerner. Enfin, les sciences en général me semblent paraître étrangères à beaucoup de personnes. Je ne compte plus le nombre de fois ou l'on m'a considéré comme un surdoué (point de vue que je ne partage absolument pas). Je voudrais montrer que le travail d'un chercheur n'est pas forcément si différent de celui d'un ouvrier, et que la vision de la recherche dans la société pourrait être bien différente si ce domaine était plus familier pour certaines personnes.
+
+# Le stage
+
+J'ai choisi mon sujet de stage avec précautions afin d'avoir le plus de chance d'être intéressé. A ce niveau là (bac+5), inutile de préciser qu'on choisit de travailler sur ce genre de chose uniquement si on en a vraiment envie. On a évidemment une chance énorme de pouvoir accéder facilement à ce niveau d'étude, car ce n'est malheureusement pas donné à tout le monde. Cependant, je suis persuadé que pour donner le meilleur de soi-même, il faut avoir la motivation.
+
+Pour diverses raisons que je détaillerais peut-être dans le futur, j'ai donc choisi de m'orienter vers le domaine de la bio-informatique. La bioinfo, c'est simplement le fait de faire de l'informatique pour attaquer des problèmes issues de la biologie. Cela peut désigner beaucoup de choses mais dans ce stage, on s'intéresse au domaine de la biologie des systèmes. Les problèmes visés concernent la présence ou non de protéines dans l'organisme et de l'interaction entre ces différentes protéines. Le but est donc de modéliser ce système en utilisant des méthodes issues de l'informatique. Cette approche permet ainsi de résoudre des problèmes que les biologistes pouvaient difficilement gérer.
+
+# Le journal
+
+J'ai plusieurs objectifs via ce journal. Tout d'abord, l'idée est de sortir des articles régulièrement, afin de montrer l'avancement du stage au cours des 6 mois. J'aimerais expliquer le sujet du stage, en le vulgarisant, afin que tout le monde puisse comprendre. Je voudrais également vous faire vivre le quotidien d'un laboratoire, entre le travail individuel et les différents évênements qui s'y produisent (réunions d'équipe, séminaires, etc...). Enfin, je voudrais montrer concrètement en quoi consiste mon travail. Cette partie n'a pas pour but d'expliquer précisément ce qui est fait dans le stage mais elle vise à montrer le genre de travail que peut réaliser un bioinformaticien (même si il s'agit d'un domaine particulier).
