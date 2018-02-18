@@ -1,11 +1,25 @@
 ---
 layout: post
-title:  "Journal d'un stagiaire #1 - ???"
-date:   2018-01-22 18:00:00 +0200
+title:  "Journal d'un stagiaire #1 - Le début"
+date:   2018-02-16 18:00:00 +0200
 categories: stage bioinfo communication
 comments: true
 ---
 
-# Un titre
+# Le début
 
-# Un deuxieme titre
+C'est parfois perturbant de commencer quelque chose de nouveau, en particulier quand on n'a pas changé d'activité depuis un moment. Le début du stage, je le vois un peu comme ça. Fini les cours, désormais ce sont des journées complètes passées à travailler sur un même sujet.
+
+Un stage, ça commence toujours par un peu de papiers. Il faut en effet faire valider le stage côté formation et ensuite établir une convention entre la fac, le labo/l'entreprise du stage et le stagiaire. à ce niveau là, ça s'est donc un peu éternisé et on m'a envoyé de la documentation afin que je puisse entrer dans le vif du sujet avant même la date de début officielle.
+
+# Entrer dans le vif du sujet
+
+Concernant ce début de travail en autonomie, autant dire qu'il n'est pas aisé d'assimiler des notions nouvelles tout seul. Un document ne suffit généralement pas, c'est pourquoi je suis allé chercher des cours introduisant le sujet. C'est d'ailleurs ce que je conseillerais de faire pour travailler sur une nouvelle notion. Avant de se lancer dans des articles techniques (par exemple des articles de revues scientifiques dans le cadre du stage), il vaut mieux commencer par des cours ou des livres, qui présenteront les concepts de manière posée. En somme, le document que j'ai lu pendant cette semaine de pré-stage m'est resté bien obscure et je me suis dit que ça promettait pour la suite !
+
+# Premier contact
+
+C'est lorsque j'ai eu l'occasion d'avoir un entretien avec mes encadrants de stage que les choses se sont précisées. On m'a alors rassuré en m'expliquant qu'il était normal que je ne comprenne pas tout, et que je ne devais pas m'arrêter à ça. J'ai alors pu poser beaucoup de questions afin de comprendre dans quelle direction devait aller le stage. En effet, le domaine a beau être précis, il m'est encore inconnu et le sujet est également assez large. Il m'a alors été utile de demander beaucoup de choses afin de cadrer un peu le travail à réaliser. Un point essentiel est de se fixer des **objectifs** et des **tâches** à réaliser, ce qui n'est pas toujours aisé lorsque le sujet est vague.
+
+Une fois ce premier entretien passé, j'ai pu commencer à lire des documents un peu plus inspirants et poser des questions petit à petit. Une stage de ce type commence en effet par un grande partie de **bibliographie**. Cela permet tout d'abord de s'approprier le sujet et comprendre en profondeur la nature du travail à réaliser. Dans un second temps, cela permet d'explorer les avancées qui ont déjà été faites via des documents rédigés par les chercheurs du domaine. J'ai alors réalisé que le stage était plutôt un travail en autonomie. En effet, mes encadrants étant des enseigants-chercheurs, ils ne sont pas souvent disponibles pour des entretiens à cause des cours, déplacements et autre formalités administratives. C'est donc moi qui décide du travail que je réalise et la direction du stage évolue en fonction des interogations qui apparaissent et des indications que donnent les encadrants. C'est quelque chose de très gratifiant car on nous accorde une certaine confiance pour avancer sur un sujet. D'un autre côté, c'est également risqué puisque si la motivation n'est pas là, le travail n'avance pas. Concernant mes méthodes de travail, j'ai au tout début du stage mis en place un document de brouillon dans lequel je note à peu près tout. Il contient entre autre les notes que je prends sur les documents que je lis et les détails techniques concernant le travail que j'effectue. Il m'aide à mieux comprendre et à me retrouver plus rapidement entre toutes les notions que j'utilise. Enfin, il me servira également comme base de rapport au moment de la rédaction.
+
+En conclusion, ça y est, le travail est définitivement lancé. Difficile de savoir où ça va mener, autant d'un point de vue recherche que d'un pont de vue personnel. Mes encadrants me l'ont d'ailleurs fait remarqué, l'approche tentée sur le sujet du stage ne donnera peut être rien, même si évidemment l'idée qu'ils ont leur semble prometteuse. C'est le risque en faisant de la recherche, on ne peut pas savoir à l'avance si le travail va aboutir. Je dois d'ailleurs avouer que si je mets beaucoup d'efforts et que le projet ne donne rien, cela ne me donnera peut-être pas envie de continuer dans ce domaine. En attendant, même si une phase d'adaptation a été nécessaire, j'ai maintenant pris mes habitudes et je peux commencer à travailler plus efficacement.
