@@ -22,7 +22,7 @@ En mathématiques, l'optimisation est une notion très précise. Optimiser signi
 
 <p class = "question">Et pourquoi un maximum ou un minimum ?</p>
 
-Il n'est pas forcément évident aux premiers abords qu'un problème d'optimisation est un problème de recherche de maximum ou de minimum. Cependant, en y réfléchissant, derrière tout problème d'optimisation se cache un min ou un max. Par example, dans certaines situations, on veut optimiser le temps mis pour faire une action. Cela veut alors dire prendre le moins de temps possible. On cherche bien un minimum. Dans d'autres contextes, on peut aussi chercher à optimiser un gain. On cherche alors à obtenir le gain maximum.
+Il n'est pas forcément évident aux premiers abords qu'un problème d'optimisation est un problème de recherche de maximum ou de minimum. Cependant, en y réfléchissant, derrière tout problème d'optimisation se cache un min ou un max. Par exemple, dans certaines situations, on veut optimiser le temps mis pour faire une action. Cela veut alors dire prendre le moins de temps possible. On cherche bien un minimum. Dans d'autres contextes, on peut aussi chercher à optimiser un gain. On cherche alors à obtenir le gain maximum.
 
 Donc si l'on veut traduire un problème d'optimisation naturel en problème mathématique, cela consiste donc à trouver une fonction qui exprime le mieux possible la quantité à optimiser (que ça soit du temps, de l'argent, etc...)
 

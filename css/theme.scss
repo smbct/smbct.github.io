@@ -39,6 +39,7 @@ body {
   color: $font-color;
   // background: $background-color url(./pics/triangles.png);
   background: $background-color url(./pics/squares.png); // Another good pattern for background
+  font-family: sans-serif;
 }
 .well {
   background-color: $post-panel-color;
@@ -206,6 +207,36 @@ div.post-meta {
   position: relative;
   margin-top: 32px;
   text-align: center;
+}
+
+.post, table {
+ border: 3px solid #d6d6d6;
+ border-collapse:separate;
+ border-radius: 5px;
+ -moz-border-radius:5px;
+ // box-shadow: 5px 5px 3px black, 5px 5px 3px black;
+ box-shadow: 0 4px 8px 0 black, 0 4px 8px 0 black;
+ // padding: 6px;
+ margin: 6px;
+ margin-left:auto;
+    margin-right:auto;
+}
+
+.post, td, th {
+    border-left:solid #d6d6d6 1px;
+    border-top:solid #d6d6d6 1px;
+    padding: 6px;
+}
+
+.post, td:first-child, th:first-child {
+    border-left: none;
+}
+
+.post-content {
+    h1, h2, h3, h4 {
+        text-shadow: 2px 2px 4px black, 0 0 25px black, 0 0 5px black;
+        font-weight: 600;
+    }
 }
 
 //********************************************************
