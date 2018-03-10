@@ -1,0 +1,59 @@
+---
+layout: post
+title:  "JDS #2 - Avancements et galères"
+date:   2018-03-10 18:00:00 +0200
+categories: stage bioinfo communication
+comments: true
+---
+
+Un petit moment que je n'avais pas ajouté quelque chose sur mon quotidien de stagiaire. Désormais je n'essaie plus de compter les semaines. J'ai l'impression d'avoir des milliards de trucs à faire et de constament prendre du retard ^^. Mais le sujet avance bien et c'est plutôt satisfaisant :) Je vais donc essayer de résumer un peu ce que j'ai fait ces dernières semaines.
+
+## Prise en main des modèles
+
+Dans le dernier article, j'introduisais les réseaux de régulation biologiques sur lesquels je travaille. Ces modèles sont nouveaux pour moi et j'ai été amené à étudier des documents afin de me familiariser avec.
+
+Les modèles de réseaux biologiques sur lesquels je travaille sont une création de mon équipe de recherche et ont été affiné au cours du temps avec les recherches qui ont été faites. Un de mes encadrant à même avoué qu'ils se sont senti bête de ne pas avoir pensé à leur forme actuelle dès le début !
+
+Le sérieux avantage de travailler sur un "produit local" est que le modèle est présenté de manière claire et détaillée dans les thèses des anciens doctorants de l'équipe. Ces thèses sont en plus écrites en fraçais, ce qu'on peut trouver agréable au milieu des articles anglophones ;) La prise en main du modèle n'a pas été compliquée, d'autant plus que pour le moment, nous avons décidé de nous limiter à étudier une variante simple. L'idée est que les résultats obtenus sur cette variante seront adaptables aux autres versions.
+
+## Biblio en model checking
+
+En parallèle à la familiarisation avec les modèles, j'ai commencé une étude biblio sur la discipline du modèle checking, et plus particulièrement du bounded model checking. Comme je l'évoquais dans le dernier article, cette discipline qui étudie la recherche de bugs dans les logiciels tente de résoudre des problèmes qui sont très proches de ceux sur lesquels je bosse.
+
+Le but était évidemment de se concentrer sur ce qui existe en model checking appliqué aux problèmes SAT. La recherche biblio sur l'encodage du modèle en SAT ne m'a pas été trop utile car les systèmes qui sont modélisés dans les articles sont parfois très différents de celui sur lequel je travaille.
+
+Je me suis par contre concentré sur les méthodes qui existent pour résoudre certains problèmes. Le soucis principal que je trouvais dans le bounded model checking est justement le côté bounded. Cela permet de chercher si le système vérifie une propriété ou de trouver un contre exemple. Le soucis est que la recherche est effectuée seulement pour une longueur d'exécution limitée du système. Par exemple, si je n'ai pas trouvé de contre-exemple pour 10 étapes d'évolutions, rien ne garantit qu'à la 11ème je ne vais pas en trouver un. Et comme il est impossible de le vérifer pour un nombre infini d'étape, il faut trouver d'autres techniques.
+
+Et là j'ai commencé à avoir du mal. Faire de bonnes trouvailles alors qu'on ne sait pas exactement ce qu'on cherche est pas toujours simple ! Car évidemment, je ne sais pas exactement ce qui existe et trouver les bons mots clés pour tomber sur des mines d'or d'informations relève plutôt de la chance. J'ai d'ailleurs honte de le dire mais les gros moteurs de recherche du web m'ont été plus utiles que les moteurs de recherche exclusivement dédiés aux articles scientifiques...
+
+Une bonne méthode pour savoir dans quelle direction chercher pour un domaine inconnu est de se baser sur des connaisances générales et sur des états de l'art. Par connaissances générale, je veux dire aller chercher dans un livre par exemple. On y trouvera une présentation générale ainsi que les grands concepts du domaine. Les états de l'arts, qui peuvent être faits également dans les livres, tentent de faire une analyse exhaustive sur ce qui a été publié. C'est donc ce qu'on vise au début d'une recherche, et de préférence des états de l'art récents. Dans mon cas, impossible de tomber sur ça ! J'ai cherché pendant plus d'une semaine et je suis uniquement tombé sur des articles presentants des choses bien spécifiques. Au mieux j'ai trouvé certains articles avec une ou deux techniques intéressantes mais le mieux que j'avais restait des slides d'une présentation trouvée dans un coin du web...
+
+Au fur et à mesure, j'ai modifié mes mots clés. Et là... Miracle ! Je suis finalement tombé sur un chapitre de livre qui faisait exactement ce que je cherchais ! Il présentait de manière globale ce qui existait. J'ai donc décidé de stopper ma recherche à ce moment là, en me disant que le chapitre me donnerait les pistes nécessaires pour aller chercher des techniques au moment ou j'en aurai besoin. Je suis juste un peu triste de ne pas être tombé sur ce chapitre directement.
+
+D'ailleurs, cette recherche m'a donné l'occasion de vivre un petit moment de gênance comme on les aime :p J'avais trouvé une technique utile que je pensais avoir compris et j'ai tenté de l'expliquer lors d'une réunion. Et là, impossible de sortir quoi que ce soit... Je me suis rendu compte qu'il y avait un soucis et j'ai fini par dire que j'allais retourner voir la ref et réfléchir un peu dessus pour pouvoir la réexpliquer. Résultat, un peu plus tard, j'ai finalement pu fournir une explication claire. J'ai réalisé que j'avais absolument pas compris ce truc la première fois ! Et une des choses que j'adore dans ce boulot, c'est ce moment de satisfaction quand on comprend enfin :D
+
+## Premières modélisations en SAT
+
+En parallèle à la recherche biblio, j'ai commencé à programmer la première modélisation SAT que j'avais établie. Le but consistait donc à charger en mémoire le modèle de réseau biologique à partir d'un fichier et créer la formule SAT pour résoudre un problème correspondant à ce modèle. Une fois la formule créée, il fallait encore lancer le solver SAT (que je n'ai PAS codé) et charger le résultat retourner par le solver.
+
+Pour ce type de stage je ne m'attendais pas à faire autant de programmation. Ce n'est cependant pas pour me déplaire car, même si je n'ai pas envie de faire que ça, ça me change de la recherche bibliographique. Et une chose sympa en info est d'appuyer sur un bouton et de voir tout fonctionner du premier coup... ou pas !
+
+Pour le côté programmation, j'ai choisi d'utiliser python dans sa version 3 ! En général, on choisit des langages bas niveau comme le C ou le C++ pour programmer des algorithmes qui résolvent des problèmes difficiles. Ces langages sont préférés car ils sont plus rapides que les langages haut niveau comme python. Ici, le problème dur à résoudre est en fait le problème SAT, et justement les solvers que j'utilise sont faits en C++. Les traitements qu'effectuent mon programme sont rapides et ce qui m'a fait choisir python c'est la facilité d'utilisation et la rapidité avec laquelle on peut programmer certains trucs. ça m'a été utile pour programmer le chargement du modèle à partir d'un fichier, un truc en général pénible à programmer.
+
+La programmation m'a pris pas mal de temps comme je le disais. J'ai assez vite produit une première version qui fonctionnait.  Cependant, je l'ai beaucoup modifiée dans le but de préparer la suite. Le soucis avec ce que j'avais fait est que je ne pouvais pas trop l'adapter pour résoudre beaucoup de problèmes. Une chose qui m'a pris beaucoup de temps est la programmation d'une technique permettant de transformer une formule SAT. En effet, après avoir créé la formule correspondant au problème, il est nécessaire de lui donner une forme particulière pour qu'elle soit utilisable par le solver.
+
+Pour la première version du programme, j'ai utilisé une vieille technique que j'ai appliquée à la main. ça fonctionnait mais j'ai trouvé par la suite une technique plus récente qui l'améliorait un peu. Mon objectif était de programmer cette technique de manière automatique, pour ne pas faire la transformation à la main et donc gagner du temps. Il m'a alors fallu une semaine entière pour comprendre comment la technique fonctionnait. Je vous laisse imaginer ma satisfaction quand j'ai ENFIN pigé l'idée ! Mais ce n'était pas fini car j'ai passé beaucoup de temps à l'ajouter à mon programme. Il s'est avéré que ce genre de chose était particulièrement pénible à programmer. J'ai même fini par supprimer et recommencer complètement cette partie là du code ! Dans ces moments là, je prescris une bonne pause café/thé pour se changer les idées :P
+
+Avoir un programme solide et foncitonnel m'a donc bien occupé. Je n'ai d'ailleurs pas évoqué l'heure que j'ai perdue lorsque j'ai de manière non intentionnelle supprimé tout un fichier dans lesquels je venais juste de faire des modifications, pas enregistrées... Bref, j'ai désormais un code qui marche et qui est prêt pour la suite !
+
+## Communication scientifique
+
+Une des choses dont je voulais parler par rapport à mon stage est l'esprit du partage et de la collaboration scientifique. ça tombe très bien car en ce moment même, un de mes encadrant est en séjour de recherche au japon. Mon équipe a en effet plusieurs contacts japonais et ils travaillent ensembles sur certains sujets.
+
+Ce séjour tombe très bien car il s'avère que certains de ces chercheurs japonais sont des experts en SAT ! C'est pourquoi on m'a proposé de préparer une présentation rapide sur ce que j'avais fait jusqu'ici pour avoir leur avis de spécialistes. C'est donc une des choses qui va bien m'occuper pour les prochaines semaines.
+
+## Et la suite ?
+
+On a désormais pas mal d'éléments en place et la suite s'annonce plutôt bien. Beaucoup de choses sont prévues pour les semaines suivantes, notamment la présentation pour les japonais, effectuer des tests sur l'encodage fait, continuer la bibliographie sur d'autres aspects et chercher des nouvelles techniques de modélisation SAT.
+
+L'équipe est par ailleurs dans une période assez creuse en terme de communication en ce moment. Avec un de mes encadrants au japon et l'autre peu disponible, il y a très peu de réunions. Cependant, cela va aussi changer prochainement car d'autres personnes vont arriver dans l'équipe (stagiaire, post-doc) et ce sera l'occasion d'avoir un peu plus d'interactions.
