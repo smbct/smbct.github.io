@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "JDS #3 - De l'expérimental à l'analytique"
+date:   2018-04-23 18:00:00 +0200
+categories: stage bioinfo communication recherche
+comments: true
+---
+
+Hey ! ça fait encore un petit moment que je n'avais pas mis à jour ce blog :o En réalité, mon objectif était d'écrire un article pour présenter en détail les types modèles de régulation biologique sur lesquels je travaille (ils sont très simples ceci-dit). Je voulais d'ailleurs carrément faire des animations à base javascript (en utilisant processing) pour bien montrer le fonctionnement. Mais il faut savoir que ce genre de chose prend un temps FOU ! Je m'y remettrais peut-être mais je ne peux rien promettre :-/
+
+## Retour du japon et vie d'équipe
+
+Je le disais dans le dernier *JDS*, un de mes encadrants a effectué un séjour de recherche au japon. Il est désormais de retour depuis un petit moment et a été également rejoint par un autre chercheur précédemment invité au japon ! Ce chercheur, qui commence bientôt un postdoc dans mon équipe (une sorte de CDD de recherche), travaille sur la partie apprentissage des réseaux.
+
+Enfin, une 3ème personne a également rejoint l'équipe ! Il s'agit d'un stagiaire ingénieur, qui travaille ainsi dans la même salle que moi. L'équipe est désormais plus vivante que précédemment. Toues ces arrivées ont été l'occasion de faire un restau avec les profs (c'est moins pire qu'on le pense, et ce sont eux qui ont régalé :D) ! Bref travailler c'est bien, en toute convivialité c'est mieux !
+
+En parlant de travail, cette journée de retrouvaille/restau s'est poursuivie avec une réunion qui nous à pris une bonne partie de l'après midi. C'était l'occasion d'échanger avec les autres stagiaires/postdoc sur ce que j'ai fait depuis le début du stage. Les discussions ont été très intéressantes, cela nous a même permis de parler d'autres domaines comme les ia de jeux vidéos (on aura peut-être l'occasion d'en reparler ;)) !
+
+## Des premiers résultats de stage en demi-teinte
+
+Dans la dernière entrée du journal, j'évoquais mon super code fonctionnel et incroyablement génial. Entendez par là qu'il n'est en fait pas aussi fou qu'on pourrait le penser ^^'. J'ai eu l'occasion de le tester pour résoudre des problèmes d'accessibilité (les problèmes sur lesquels je travaille) qui étaient détaillés dans une des thèses de l'équipe. Les résultats que j'ai obtenu n'étaient pas très encourageants. En effet, je me suis rendu compte que mon programme était en fait extrêmement lent. Mon principal soucis était le fait que la création de la formule SAT prenait un temps considérable comparé à la résolution de la formule par le solver (~ 30s vs - d'1s). ça m'embêtait beaucoup car la partie compliquée du problème est normalement celle que gère le solver. La création de la formule devait être rapide en comparaison (même si la comparaison en question n'est pas facile). D'ailleurs, je ne pouvais même pas effectuer les tests jusqu'au bout car si je donnais la longueur suffisante aux formules pour que l'accessibilité soit possible, le programme plantait.
+
+Devant ce soucis, j'ai pris la décision de refaire mon code avec un langage plus bas niveau, et donc plus rapide. J'ai choisi le c++ car c'est un des langage que je maîtrise le mieux. Le résultat est sans appel, ce qui prenait 30s prend maintenant environ 1s. Seul bémol, c'est toujours (un peu) plus long que le solver SAT. Il devrait y avoir moyen de l'améliorer encore mais je me suis dit que j'avais passé assez de temps comme ça sur ce code. D'autant plus qu'étant donné la difficulté du problème SAT, augmenter un peu la taille de la formule devrait permettre au programme c++ de surpasser largement le solver (même si fondamentalement on voudrait que le solver tienne le plus longtemps possible).
+
+## Retours des japonais
+
+Sur un tout autre sujet, le retour du japon de mon encadrant m'a permis de savoir ce que les chercheurs japonais ont pensé de mon travail jusqu'ici. Pour commencer, il a été indiqué que la présentation du modèle sur lequel je travaille n'était pas assez détaillée. Ce genre d'indication est utile car ça me permet de retravailler ma présentation du sujet pour la soutenance du stage. Ensuite, les échanges ont montré la modélisation en SAT semble être quelque chose d'assez naturel, ce qui nous fait penser que nous sommes dans une bonne direction. Enfin, les chercheurs ont évoqué d'autres pistes pour la problème, à savoir différentes techniques d'encodage ainsi qu'un autre type de modèle. C'est d'ailleurs vers ces modèles que nous voudrions nous tourner pour faire des comparaisons, étant donné qu'ils sont utilisés dans les compétitions de modèle checking (ouioui les chercheurs font vraiment des compétitions !).
+
+## La recherche commence
+
+De mon côté, j'ai poursuivi mon travail dans une toute autre direction. Une chose qui est vraiment bien dans ce type de stage est que mes encadrants me laissent regarder ce qui m'intéresse, je me sens donc particulièrement libre. J'ai décidé de me pencher sur une autre approche pour le problème d'accessibilité, sur laquelle les doctorants de l'équipe avaient beaucoup travaillé. On peut appeler cette approche l'analyse statique (en comparaison à l'analyse dynamique, ce que je fais actuellement). Le but est d'essayer de résoudre le problème en regardant seulement la structure du modèle, et sans en dérouler le fonctionnement. L'intérêt dans tout ça est que c'est très rapide à effectuer, on ne souffre plus du nombre exponentiel d'état du système. Malheureusement, ces méthodes ne marchent pas dans tous les cas, d'où l'intérêt de mon stage :P.
+
+Mon objectif était dans un premier temps de comprendre comment ça fonctionnait. Cette étape n'a d'ailleurs pas été facile car ces notions étaient présentées de manière très très mathématique dans les thèses. J'ai fini par comprendre globalement comment ça marche et j'ai commencé à travailler sur ça pour mon approche SAT.
+
+Un de mes objectifs était de calculer une borne sur la longueur d'un chemin vérifiant l'accessibilité. L'objectif ? Une fois la borne connue, plus qu'à lancer le solver sat sur la formule de la bonne longueur, et on sait automatiquement que si la résolution n'est pas possible, l'accessibilité ne l'est pas non plus. J'ai passé beaucoup de temps dessus ces derniers jours et j'ai trouvé une borne qui semble correcte. Il me reste à faire une preuve pour valider le résultat et voir si la preuve est assez petite pour être utilisable en pratique.
+
+Un de mes deuxièmes objectifs était de trouver un nouvel encodage SAT plus efficace, en se basant sur l'analyse statique. J'ai pas mal d'idées et peut-être quelque chose à proposer mais c'est encore tôt pour en parler. Si j'ai le temps, je continuerais à travailler dessus en parallèle mais c'est pas gagné :-/
+
+## Et la suite ?
+
+Comme vous pouvez le voir, pas mal de choses ont été faite jusque là. C'est rassurant d'ailleurs car le temps passe vite et je vais bientôt devoir penser à la soutenance et au rapport (je cherche tout de même à obtenir mon master !)
+
+En ce qui concerne la recherche, il faut d'abord que je prouve mon résultat sur la borne. Cela me permettra d'appliquer mon encodage sur les modèles évoqués par les japonais. L'intérêt est d'avoir un point de comparaison avec ce qui existe déjà. Dans l'idéal je voudrais tenter d'améliorer la borne et proposer un meilleur encodage. Cependant, je ne sais pas du tout si je vais avoir le temps. Enfin, quand je parlais de rédaction du rapport, il me reste toujours une partie de biblio à faire. Elle passera probablement à la fin, lors de la rédaction.
+
+En somme, un programme bien chargé. Je vais presque regretter de ne pas rester plus longtemps en stage afin d'avancer plus sur le sujet. Car au cours de mes journées de travail, je comprend de mieux en mieux le problème et mon intuition s'améliore. Cela me donne des idées pour le résoudre de plus en plus efficacement et j'ai toujours la conviction qu'on peut faire encore mieux. On verra bien ce que ça donnera !
