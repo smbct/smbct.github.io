@@ -8,7 +8,7 @@ comments: true
 
 Hey ! ça fait encore un petit moment que je n'avais pas mis à jour ce blog :o En réalité, mon objectif était d'écrire un article pour présenter en détail les types modèles de régulation biologique sur lesquels je travaille (ils sont très simples ceci-dit). Je voulais d'ailleurs carrément faire des animations à base javascript (en utilisant processing) pour bien montrer le fonctionnement. Mais il faut savoir que ce genre de chose prend un temps FOU ! Je m'y remettrais peut-être mais je ne peux rien promettre :-/
 
-## Retour du japon et vie d'équipe
+## Retour du Japon et vie d'équipe
 
 Je le disais dans le dernier *JDS*, un de mes encadrants a effectué un séjour de recherche au japon. Il est désormais de retour depuis un petit moment et a été également rejoint par un autre chercheur précédemment invité au japon ! Ce chercheur, qui commence bientôt un postdoc dans mon équipe (une sorte de CDD de recherche), travaille sur la partie apprentissage des réseaux.
 
