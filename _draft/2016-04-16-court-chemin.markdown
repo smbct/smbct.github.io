@@ -7,6 +7,8 @@ categories: optimisation graphe
 
 Visualisation : http://www.graphviz.org/
 
+Encore graphe : http://veniceatlas.epfl.ch/atlas/gis-and-databases/named-entities/network-analysis-of-the-social-graph-of-venetian-citizens/
+
 Trouver un chemin, ou même le plus court chemin, est un problème que l'on peut rencontrer assez souvent en informatique.
 Parmis les applications concrètes de ce problème, on peut tout d'abord penser à l'itinéraire le plus court, donné par un dispositif gps par exemple.
 Ce n'est cependant pas la seule application réelle de ce problème.
