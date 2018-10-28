@@ -3,7 +3,7 @@ layout: page
 title: À propos
 ---
 
-Bienvenue sur mon site ! Je suis smbct, étudiant en informatique.
+Bienvenue sur mon site ! Je suis smbct, doctorant en informatique.
 
 J'ai créé ce site pour posséder une page perso, contenant mon blog ainsi que certaines informations me concernant.
 
