@@ -1,5 +1,5 @@
 ---
-title:  "Soutenir sa thèse en comodal en 2022"
+title:  Soutenir sa thèse en comodal en 2022
 author: samuel
 date:   2022-04-26 18:00:00 +0200
 categories: these doctorat covid comodal
@@ -41,6 +41,7 @@ Enfin, ma présentation pdf était projetée via le vidéoprojecteur et partagé
 
 
 ![Schéma de la soutenance](/assets/schema_soutenance.png)
+Schéma de l'installation de ma soutenance.
 
 # Bilan et améliorations possibles
 

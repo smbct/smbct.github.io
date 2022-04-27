@@ -1,5 +1,5 @@
 ---
-title:  "SAT, un problème de logique"
+title:  SAT, un problème de logique
 author: samuel
 date:   2018-03-04 18:00:00 +0200
 categories: stage logique SAT sudoku
