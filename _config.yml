@@ -15,7 +15,6 @@ baseurl:          '/hydeout'
                   # sidebar_blog_link below.
                   
 remote_theme: fongandrew/hydeout
-theme: jekyll-theme-hydeout
 
 author:
   name:           'Andrew Fong'
