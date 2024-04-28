@@ -4,7 +4,7 @@ author: samuel
 date:   2023-05-15 10:00:00 +0200
 categories: SAT logic puzzle games model-checking
 comments: true
-layout: index
+layout: post
 ---
 
 I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame.

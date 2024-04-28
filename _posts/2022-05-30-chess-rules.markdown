@@ -4,7 +4,7 @@ author: samuel
 date:   2022-05-30 10:00:00 +0200
 categories: deep-learning chess games combinatorics
 comments: true
-layout: index
+layout: post
 ---
 
 As I recently defended my thesis, and since I am now looking for a job, I decided to dedicate to myself some time to study cutting edge computer science topics. Deep learning is one very famous (and somehow [controversial](https://www.youtube.com/watch?v=fe9u6YQTsWY)) topic that I didn't have the occasion to experiment with so far. Thus I started playing with dl frameworks such as pytorch and recently I decided to implement an old idea that I had back during my thesis: inducing the rules of chess using a machine learning algorithm.

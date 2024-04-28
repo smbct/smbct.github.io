@@ -4,7 +4,7 @@ author: samuel
 date:   2018-03-04 18:00:00 +0200
 categories: stage logique SAT sudoku
 comments: true
-layout: index
+layout: post
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>

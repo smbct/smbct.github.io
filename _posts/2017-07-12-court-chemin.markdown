@@ -4,7 +4,7 @@ author: samuel
 date:   2017-07-12 18:00:00 +0200
 categories: optimisation graphes file algorithme
 comments: true
-layout: index
+layout: post
 ---
 
 Trouver un chemin, ou même le plus court chemin, est un problème courant en informatique. Parmi les applications concrètes de ce problème, on peut tout d'abord penser à l'itinéraire le plus court, donné par un dispositif GPS. Ce n'est cependant pas la seule application réelle. On peut par exemple chercher un plus court chemin pour une IA dans un jeu ou encore trouver la manière la plus rapide de mettre deux personnes en relation dans un réseau professionnel.

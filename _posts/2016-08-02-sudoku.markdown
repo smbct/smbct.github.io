@@ -4,7 +4,7 @@ author: samuel
 date:   2016-08-02 15:20:33 +0200
 categories: optimisation IA jeux
 comments: true
-layout: index
+layout: post
 ---
 
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
