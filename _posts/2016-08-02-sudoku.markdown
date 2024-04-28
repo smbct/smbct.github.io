@@ -1,0 +1,128 @@
+---
+title: Optimisation et sudoku
+author: samuel
+date:   2016-08-02 15:20:33 +0200
+categories: optimisation IA jeux
+comments: true
+layout: index
+---
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C'est ce que je voudrais montrer aujourd'hui en donnant la modélisation sous forme d'un programme linéaire de la résolution d'un sudoku. La modélisation va donc être moins évidente qu'avec l'exemple présenté dans l'article sur la programmation linéaire.
+
+## Présentation du problème
+
+La résolution du sudoku consiste à trouver des valeurs pour les cases vides d'une grille de telle sorte que plusieurs contraintes soient respectées. On cherche donc a représenter ce problème sous forme d'un programme linéaire. Plus précisément, on veut trouver un ensemble de de variable traduisant les décisions à prendre pour résoudre le problème. Les décisions sont ici les chiffres à insérer dans les cases vides.
+
+> Et en quoi c'est un problème d'optimisation ?
+{: .prompt-info }
+
+Ce n'est tout simplement pas un problème d'optimisation. On cherche une valeur pour chaque case telle que la grille soit correcte. Cependant, la programmation linéaire peut tout de même nous venir en aide. Même s'il y avait plusieurs solutions possibles, seule une nous intéresse. On peut évidemment définir une fonction objectif pour obtenir des conditions supplémentaires sur le résultat mais ça n'aurait pas d'intérêt pratique. Le fait est que trouver une solution réalisable (c'est à dire une grille valide) est facile à faire lorsqu'on sait trouver la solution optimale d'un problème. Donc bien que l'optimisation n'ait pas vraiment de sens ici, on utilise un outil que l'on sait efficace pour répondre à une question plus facile.
+
+## Rappels sur le jeu
+
+Le problème consiste donc à remplir la grille de sudoku de taille 9*9 avec des valeurs valides. Les données du problème sont donc un ensemble de valeur comprises entre 1 et 9 et les positions de ces valeurs dans la grille.
+
+Voilà la grille d'exemple que nous allons résoudre :
+
+|   |   |   | * | 4 |   |   | * | 8 | 7 |   |
+|   | 4 | 7 | * |   | 9 | 2 | * |   | 5 |   |
+| 2 |   |   | * | 6 |   |   | * |   | 3 |   |
+| * | * | * | * | * | * | * | * | * | * | * |
+| 9 | 7 |   | * | 5 |   |   | * | 2 |   | 3 |
+| 5 |   | 8 | * |   | 2 | 4 | * | 7 |   | 6 |
+| 6 |   | 4 | * |   |   | 7 | * |   | 8 | 5 |
+| * | * | * | * | * | * | * | * | * | * | * |
+|   | 9 |   | * | 3 |   | 8 | * |   |   | 7 |
+|   |   | 3 | * | 2 | 4 |   | * | 1 | 6 |   |
+|   | 1 | 2 | * |   |   |   | * |   | 9 |   |
+
+J'ai rajouter des cases supplémentaires afin de visualiser les différentes zones. On veut donc trouver des valeurs pour les cases vides tout en respectant certaines contraintes :
+
+1. Les valeurs des cases sont comprises entre 1 et 9
+2. Sur chaque ligne, on ne peut pas trouver plusieurs cases ayant la même valeur
+3. Sur chaque colonne, on ne peut pas trouver non plus plusieurs cases ayant la même valeur
+4. Dans chaque bloc de 3*3 cases matérialisé dans la grille ci-dessus, on ne peut encore pas trouver plusieurs fois la même valeur
+
+## Modélisation du problème
+
+Comme pour la modélisation de l'article sur la programmation linéaire, on va procéder par étape. Tout d'abord, on va choisir les variables du problème et ensuite on écrira les différentes contraintes. La modélisation sera ensuite terminés car il n'y a pas de fonction objectif. Il est toutefois possible d'en mettre une quelconque. Cela peut être nécessaire si le solver utilisé (le programme de résolution) ne permet pas de résoudre des problèmes sans fonction objectif. Mais encore une fois, peu importe la fonction objectif. A partir du moment où les contraintes sont respectées et la modélisation est correcte, la résolution donnera une solution correcte à notre problème.
+
+### Les variables
+
+Lorsque j'ai commencé à réfléchir au problème, j'ai voulu choisir une variable par case. Comme cela, on obtenait à la fin de la résolution directement la valeur de chaque case. Ce choix me semblait naturel mais la modélisation qui en résultait n'était pas simple. En effet, de cette façon, toutes les contraintes ne sont pas faciles à traduire en terme de programme linéaire. Bien sûr, la contrainte n°1 est très simple mais pour les contraintes suivantes, ce n'est pas la même chose. On veut exprimer le fait qu'une variable ne peut pas être égale à une autre variable ou à une constant.
+
+Par exemple, si on se situe dans la case en haut à gauche de la grille et on considère la première colonne, on ne pourra pas choisir 2, 9, 5 et 6 comme valeur. On voudrait donc écrire quelque chose comme : $$var \neq 2$$, $$var \neq 9$$, etc...  Ces inégalités ne sont pas valides en programmation linéaire. On pourrait les remplacer par quelque chose comme $$var < 2$$ ou $$var > 2$$ pour la première. Encore une fois, on se heurte à plusieurs obstacles. Premièrement, les inégalités de programmes linéaires sont seulement des inégalités larges. Ici, comme on ne manipule uniquement des entiers, on peut écrire à la place : $$var \leq 1$$ *ou* $$var \geq 3$$. On peut alors sembler être tiré d'affaire mais... toujours pas ! Il faut en effet se rappeler que les contraintes d'un programme linéaire doivent être vérifiée simultanément. C'est donc le *ou* qui pose problème ici. Enfin, le nombre de contrainte à écrire devient très important. En effet, pour chaque variable, on a besoin de 19 contraintes. Face à tous ces inconvénients, on va donc chercher un meilleur moyen de modéliser le soduko.
+
+> En réalité, il existe une astuce pour modéliser un *ou*. Celle-ci repose sur l'utilisation d'une variable intermédiaire et la technique utilisée n'est pas forcément élégante. De plus, vu le nombre de contrainte, il est préférable de laisser ça de côté.
+{: .prompt-info }
+
+La modélisation alternative profite d'une particularité du problème : le nombre de valeur que peut prendre chaque case est assez limité. On va utiliser des variables que l'on appelle variables binaires. Contrairement aux variables classiques, celles-ci ne peuvent prendre que deux valeurs possibles : 0 ou 1. Ces variables apparaissent naturellement dans beaucoup de problèmes d'optimisation car elles représentent le fait de prendre ou de ne pas prendre une décision. On peut obtenir le même type de résultat en utilisant des variables entières et en les bornant mais il faut garder à l'esprit qu'il existe des méthodes particulières pour traiter ces variables de manière efficace.
+
+Pour revenir à notre problème, au lieu d'utiliser une variable par case, on va en utiliser 9 ! Pour chaque case, une des 9 variables aura la valeur *1* et c'est le numéro de cette variable qui sera inséré dans la grille. Par exemple, considérons la 5ième variable de la première case. Elle représente la décision de choisir 5 comme valeur pour la première case. Si cette variable est affectée à 1, on choisit 5, sinon, on ne choisit pas 5.
+
+
+> Minute ! ça veut dire que pour une même case, on peut choisir plusieurs valeurs en même temps ?
+{: .prompt-info }
+
+Dans l'état oui. Mais on n'a pas encore commencé à écrire les contraintes. C'est justement ce que l'on s'apprête à faire. Et nous allons voir que ça se fait plutôt bien finalement. Pour la suite, on considère que la variable $$x_{i/j_k}$$ représente le fait de choisir la valeur k pour la case (i,j). i représente la ligne de la grille et j la colonne. On considère également que la case en haut à gauche a pour coordonnée (0,0) et que les indices sont croissants quand on se déplace vers le bas ou vers la droite.
+
+### Les contraintes
+
+On peut commencer par remarquer que la première contrainte n'est plus nécessaire. En effet, la nature des variables a une incidence directe sur les contraintes et il n'est plus possible de choisir une valeur non permise pour une case.
+
+La première contrainte qui peut venir à l'esprit concerne le fait de choisir plusieurs valeurs pour une case. Cette contrainte est très simple a écrire. Étant donné que toutes les variables concernant une case ne peuvent avoir pour valeur uniquement 0 ou 1 et qu'une seule de ces variables doit être à 1, il suffit d'écrire $$\sum\limits_{k=1}^9 x_{i,j/k} = 1$$.
+
+Ensuite, on veut traduire le fait qu'une valeur ne peut apparaître deux fois dans une ligne. Comme précédemment, il suffit de tester si la somme des variables concernant la *même valeur* dans une colonne est égale à 1. On obtient $$\sum\limits_{j=0}^8 x_{i,j/k} = 1$$.
+
+On veut enfin le faire pour les colonnes et les les blocs 3*3. Pour les colonnes, cela donne $$\sum\limits_{i=0}^8 x_{i,j/k} = 1$$. Pour le premier bloc, c'est $$\sum\limits_{i=0}^2 \sum\limits_{j=0}^2 (x_{i,j/k} = 1)$$.
+
+## Le programme linéaire
+
+On peut donc récapituler tout ça sous forme d'un programme linéaire. Une petite réflexion cependant à propos des variables : Pour simplifier l'écriture du programme, on peut décider de définir les 9 variable pour *toutes* les cases. Or, certaines cases ont une valeur fixée par les données de la grille. Pour ces cases, les contraintes seront donc des égalités qui fixeront les valeurs. Ces variables sont à priori inutiles mais cela permet de gagner du temps sur l'écriture du solver.
+
+On obtient donc finalement le programme linéaire suivant :
+
+$$
+max \,z = 0\\
+	 \begin{align*}
+		s.c. \sum\limits_{k=1}^9 x_{i,j/k} &= 1, i \in \{0, .., 8\}, j \in \{0, .., 8\} \\
+            \sum\limits_{j=0}^8 x_{i,j/k} &= 1, i \in \{0, .., 8\}, k \in \{1, .., 9\} \\
+            \sum\limits_{i=0}^8 x_{i,j/k} &= 1, j \in \{0, .., 8\}, k \in \{1, .., 9\} \\
+            \sum\limits_{i=l}^{l+2} \sum\limits_{j=m}^{m+2} (x_{i,j/k} &= 1), l, m \in \{0,3,6\}, k \in \{1, .., 9\} \\
+			x_{i,j/k} &\in \{0, 1\}
+	\end{align*}
+$$
+
+## Conclusion
+
+Cet exemple nous montre donc que la programmation linéaire qui semblait plutôt limitée permet en fait de modéliser un large éventail de problème.
+Plus les problèmes sont complexes, plus il faut avoir recours à des astuces afin de réussir à les modéliser correctement.
+Il faut aussi faire attention à ce que le nombre de contrainte ne soit pas trop important. En effet, cela peut compromettre la résolution car les solvers ne sont pas infaillibles et ces problèmes restent des problèmes difficiles en informatique.
+On peut par exemple citer le problème du voyageur de commerce avec son nombre très important de contrainte qui le rend particulièrement difficile à résoudre.
+
+J'ai créé un programme se basant sur ce billet pour résoudre des grilles de sudoku.
+Le code source est disponible [ici](https://github.com/smbct/blog_code/tree/master/sudoplex).
+Le programme a été écrit en c++ et utilise la bibliothèque [glpk](https://www.gnu.org/software/glpk/) pour la résolution du problème.
+Les détails pour le compiler se trouvent dans le readme. On peut remarquer en testant le programme que le temps de résolution est très court, malgré un nombre important de contrainte.
+
+
+Enfin, il faut tout de même garder à l'esprit que la programmation linéaire n'est pas le seul moyen de résoudre ce problème et qu'il n'est pas le plus adapté.
+Il donne ici un bon exemple de ce qu'il est possibles de faire en modélisation avec des variables binaires mais ce n'est pas forcément la méthode la plus rapide.
+
+Pour finir je vous donne le résultat de la résolution de la grille donnée plus haut.
+Et bien sûr, elle a été résolue avec le programme linéaire !
+
+
+| 1 | 6 | 9 | * | 4 | 5 | 3 | * | 8 | 7 | 2 |
+| 3 | 4 | 7 | * | 8 | 9 | 2 | * | 6 | 5 | 1 |
+| 2 | 8 | 5 | * | 6 | 7 | 1 | * | 4 | 3 | 9 |
+| * | * | * | * | * | * | * | * | * | * | * |
+| 9 | 7 | 1 | * | 5 | 8 | 6 | * | 2 | 4 | 3 |
+| 5 | 3 | 8 | * | 9 | 2 | 4 | * | 7 | 1 | 6 |
+| 6 | 2 | 4 | * | 1 | 3 | 7 | * | 9 | 8 | 5 |
+| * | * | * | * | * | * | * | * | * | * | * |
+| 4 | 9 | 6 | * | 3 | 1 | 8 | * | 5 | 2 | 7 |
+| 7 | 5 | 3 | * | 2 | 4 | 9 | * | 1 | 6 | 8 |
+| 8 | 1 | 2 | * | 7 | 6 | 5 | * | 3 | 9 | 4 |
