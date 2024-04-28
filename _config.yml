@@ -4,7 +4,7 @@ highlighter:      rouge
 
 # Setup
 title:            smbct's blog
-tagline:          'smbct blog'
+tagline:          'blog'
 description:      'Notes on computer science, programming, society and more.'
 url:              https://smbct.github.io
 
@@ -22,6 +22,11 @@ author:
 paginate:         5
 # paginate_path:    '/page:num'
                     # Or '/blog/page:num' if you want to move your index pages
+
+hydeout:
+  repo: https://github.com/smbct
+
+disqus.shortname: 'smbct'
 
 plugins:
   - jekyll-feed
