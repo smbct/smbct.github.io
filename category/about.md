@@ -1,8 +1,6 @@
 ---
-layout: index
+layout: category
 title: About
-permalink: /about/
-sidebar_link: true
 ---
 
 ## About
