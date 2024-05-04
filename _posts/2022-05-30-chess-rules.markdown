@@ -1,6 +1,6 @@
 ---
 title:  Can deep neural networks learn the rules of chess ?
-author: samuel
+author: smbct
 date:   2022-05-30 10:00:00 +0200
 categories: deep-learning chess games combinatorics
 comments: true

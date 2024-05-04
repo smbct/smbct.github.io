@@ -1,6 +1,6 @@
 ---
 title:  Plus court chemin et graphe
-author: samuel
+author: smbct
 date:   2017-07-12 18:00:00 +0200
 categories: optimisation graphes file algorithme
 comments: true

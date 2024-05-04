@@ -1,0 +1,115 @@
+---
+title:  Assembly x86 programming 101 &#58 part 2, drawing a circle
+author: smbct
+date:   2024-05-04 10:00:00 +0200
+categories: low-level programming assembly
+comments: true
+layout: post
+---
+
+
+Now that we've seen how to write a basic program, let's write a more complex program that will illustrate the use of variables and conditionals.
+In this new program, we will draw a circle in the terminal with the sys_write system call we used four our "hello world".
+
+Starting from the empty-exiting program :
+
+```nasm
+.global _start, debug
+.intel_syntax noprefix
+
+_start:
+
+    ; exit
+    mov rax, 60
+    mov rdi, 69
+    syscall
+```
+
+Our first goal will be to define local variables that will help us iterate over a square.
+Variables do not really exist in assembly, instead we directly manipulate memory and associate specific spots with our higher level variable-like abstraction.
+
+## Control flow in assembly
+
+## Defining local variables on the stack
+
+The easiest way to define a variable is to allocate some space in the program's "stack".
+The stack is a memory space dedicated to our program, which can be used not only for our variable but also for storing information such as function parameters and instruction pointers.
+The stack can be accessed via its address stored in the `rsp` pointer.
+The address is expressed in bytes, meaning that it points to a 8-bits memory space.
+
+We can start by compiling the previous code and inspecting the value of `rsp` with gdb.
+Let's gdb : `gdb draw_circle` and execute `starti` command to run exactly one instruction in the program.
+Then we can print the register : `print $rsp`.
+This outputs 0x7fffffffddb0 in hexadecimal in my terminal.
+Now we will allocate some space to store a value on the stack.
+This is simply done by subtracting to the current address the number of bytes we want to allocate : `sub rsp, 4`.
+The allocation is performed by a subtraction since the stack grows by convention to lower address in x86 assembly.
+Here we allocate 4 bytes * 8 = 32 bits of memory.
+We can check the new value of rsp by running gdb with a breakpoint after the allocation.
+This gives me 0x7fffffffddac.
+Checking the difference in gnome calculator : 0x7fffffffddac-0x7fffffffddb = -4.
+
+With the memory being reserved for our usage, we may now assign some value into it.
+To do so, we use the previously encountered `mov` instruction by specifying this time a memory address : `mov [rsp], 42`.
+If you test it, the assembly will complain about some ambiguity on the size of the values.
+Indeed, we must indicate to the assembler that we are writing in 4 bytes of memory.
+This is done by specifying the size with a directive : `mov [rsp], word ptr 42`, "word" being a standard term to designate 4 bytes in assembly.
+
+Now checking our value in the stack would be a little more difficult than previously, as using `print $rsp` in gdb would only give us the current address of the stack.
+To do so, we will instead mov the value to a register : `mov rax, [rsp]` and then print the value of `rax` in gdb.
+Starting from a complete program :
+
+```nasm
+.global _start, debug
+.intel_syntax noprefix
+
+_start:
+
+    ; allocating 4 bytes in the stack
+    sub rsp, 4
+
+    ; setting the revered space to the value 42
+    mov [rsp], dword ptr 42
+
+    ; inspecting the value through a register
+    mov rax, [rsp]
+    debug:
+
+    ; exit
+    mov rax, 60
+    mov rdi, 69
+    syscall
+
+```
+
+Running the program in gdb with a breakpoint at the debug symbol, printing the value of rax gives : 
+
+`$1 = 4294967338`?
+
+Something has not working the way we expect.
+If you carefully followed the previous steps, compared to this time we specified the size of the value 42 but we did not do it this time.
+Actually, writing something as $mov rax, word ptr `[rsp]` would not work since `rsp` is a 8 bytes (64 bits) register and it cannot receive a 4 bytes value.
+The solution here consists in using a register with a smaller size.
+In fact, the rax register also exits in other sizes.
+Its 4 bytes size version has the `eax` name instead.
+Thus, we will fix our previous issue with : `mov eax, [rsp]`.
+In gdb, the `print $eax` command now gives : `$1 = 42`!
+Perfect, we are now able to reserve space in memory to store our local variables.
+
+Note the difference between the instruction `mov` used here and `lea` that we encountered  previously.
+`mov` is used to put a value into a register or at a memory address while `lea` which stands for "load effective address" will rather put an address, without accessing to the value at that address.
+
+#### Using a stack frame in our function
+
+We have just seen how to "reserve" some space in that stack by subtracting the desired number of bytes to reserve to the stack pointer.
+Allocation here only consists in indicating to the potential sub-functions called from our `_start` function that they can use the stack 4 bytes farther from our initial address.
+When using multiple local variables, a more convenient way to do it will be to define a **stack frame**.
+The stack frame designates a space in the stack reserved at the beginning of our function that will be dedicated to our local variables.
+
+To define a stack frame, we will set the `rbp` register to the current `rsp` value at the beginning of the function with a `mov` instruction.
+Then we can subtract from `rsp` the number of bytes to be reserved and refer to our variables from the address in `rbp`.
+This will be more convenient as the `rsp` register only points to the top of the stack and 
+
+
+
+## Our second program : drawing a circle
