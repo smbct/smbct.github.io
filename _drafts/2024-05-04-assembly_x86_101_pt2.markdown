@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 2, drawing a circle
+title:  Assembly x86 programming 101 &#58 part 2, drawing a square
 author: smbct
 date:   2024-05-04 10:00:00 +0200
 categories: low-level programming assembly
@@ -8,10 +8,170 @@ layout: post
 ---
 
 
-Now that we've seen how to write a basic program, let's write a more complex program that will illustrate the use of variables and conditionals.
-In this new program, we will draw a circle in the terminal with the sys_write system call we used four our "hello world".
+In the previous post, we've seen how to write a basic hello world program in assembly.
+In this post, we will dive further in assembly programming and by writing a more complex program that will illustrate the use of variables and conditionals.
+In this new program, we will draw a circle in the terminal with the sys_write system call we used for our "hello world".
 
-Starting from the empty-exiting program :
+
+## Writing conditionals and loops
+
+An important part of programming languages is the ability to control the execution through conditions.
+Conditions appear not only in conditional statements but it also control loops termination.
+These programming structures as we know it in languages like C or python can be reproduced in assembly using more rudimentary instruction : jumps and conditional jumps.
+
+#### Jump instructions
+
+Jumps are instructions that allow to move to a specific point in our program.
+In our code, this can be simply performed by defining a new symbol and using the `jmp` instruction to this symbol.
+Let's start from the hello world written in the previous post:
+
+```nasm
+.intel_syntax noprefix
+.global _start
+
+_start:
+
+    ; printing hello world
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [hello_world]
+    mov rdx, 14
+    syscall
+
+    ; exit
+    mov rax, 60
+    mov rdi, 0
+    syscall
+
+hello_world:
+    .asciz "Hello, World!\n"
+```
+
+We will now add a new symbol after the "write" system call and jump to this symbol from the beginning of the start function: 
+
+```nasm
+_start:
+
+    jmp after_printing
+
+    ; printing hello world
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [hello_world]
+    mov rdx, 14
+    syscall
+
+    after_printing:
+
+    ; exit
+    mov rax, 60
+    mov rdi, 0
+    syscall
+```
+
+When executing this program you will observe that the "hello world" output is gone.
+We have indeed told the program to skip these instructions by directly jumping to the `after_printing` symbol.
+Jump can be performed anywhere in the code, including backward and accros functions (we will see in another post that jumping is actually part of a function call).
+
+Jumps becomes more interesting in their conditional form.
+To use it, we will use the `cmp` instruction that performs a numerical comparison between two registers/memory spots.
+The `cmp` instruction does not directly produce an input but rather sets internal flag that will be read by some following jump instruction.
+Starting from the previous code, we will add a conditional jump after comparing two registers :
+
+
+```nasm
+_start:
+
+    mov rax, 43
+    mov rbx, 42
+    cmp rax, rbx ; compare rax and rbx and set internal flag
+    jg after_printing ; jump depending on the internal flag
+
+    ; printing hello world
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [hello_world]
+    mov rdx, 14
+    syscall
+
+    after_printing:
+
+    ; exit
+    mov rax, 60
+    mov rdi, 0
+    syscall
+```
+Here the jg (jump if greater than) instruction will check wether `rax > rbx` from the internal flag set by `cmp`.
+Since 43 is greater than 42, our message is not printed to the standard output.
+Now if we replace the first line by `mov rax, 42`, the message is being printed as the jump is performed on strict inequality.
+
+#### If..else.. statements
+
+Thanks to jumping instructions we are now able to write conditional statements in our code.
+The thinking is a be a bit different from more standard programming but we can setup an "if..else" by placing proper jumps.
+Here is an example:
+
+```nasm
+    cmp rax, rbx ; compare rax and rbx and set internal flag
+    jg else_label
+
+    if_label: ; entering if when "rax <= rbx"
+
+        ; code to perform if condition is not verified
+        jmp endif ; skip the "else"
+    
+    else_label: ; executed when "rax > rbx" is true
+    
+        ; condition to perform if the code is verified
+    
+    endif:
+```
+
+In this example, we added three different labels to perform an "if..else.." statement.
+When the comparison is true, the program will jump directly to the "else" label, making it skip the "if" part.
+It is an inverse way of thinking compared to classical statements since the comparison should be false in order to perform the "if" instructions.
+At then end of the "if" instructions, a jump is necessary to prevent from executing the "else", hence the presence of an "endif" label.
+Note that in this example, the "if_label" is not mandatory as there are no jump to this label, it could be written as a comment.
+Additionally, the indentation is not really a convention in assembly but I found it to help clarify the code.
+
+In some situations, writing an if-else statement can be simplified.
+This is a question of habits and clarity.
+
+#### Loops
+
+Jumps are not only helpful to write conditional statements but they also offer the possibility to write loops.
+Indeed a loop simply consists in a conditional jump verifying if the looping condition is still true or not.
+Let's write a simple for loop:
+
+```nasm
+    mov rbx, 0
+
+    for_label:
+
+        ; loop instructions
+
+        inc rbx ; increase the loop counter
+        
+        cmp rbx, 10
+        jl for_label ; repeat if the counter is < 10
+```
+
+Here we run repeat the loop instructions fot 10 iterations by using the rbx register as our loop index.
+The comparison is performed at the end of each iteration, meaning that the program will perform at least one iteration (similarly to a do..while loop).
+This behavior may be avoided by adding an additional (unconditional) jump and by performing the comparison before the loop instructions.
+
+The ability to perform control flow in our programs gives us a lot more possibilities. However, for now we relied on registers to store our variables.
+
+
+
+## Our second program : drawing a square
+
+Now that we are able to define variables and perform control flow in assembly, our programs become much more interesting.
+To demonstrate theses notions, we will write a program that draws a square in the console by using the sys_write system call and by writing "for" loops.
+This program will iterate over coordinates of a square of predefined size.
+
+We will first write the base of our program with the exit system call.
+We can also define the constants of our program and already add some printing calls that will help us for following. 
 
 ```nasm
 .global _start, debug
@@ -19,45 +179,53 @@ Starting from the empty-exiting program :
 
 _start:
 
+    ; printing a star
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [star_character]
+    mov rdx, 1
+    syscall
+
+    ; printing a new line
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [star_character]
+    mov rdx, 1
+    syscall
+
     ; exit
     mov rax, 60
-    mov rdi, 69
+    mov rdi, 0
     syscall
+
+square_size:
+    .quad 20
+
+star_character:
+    .word '*'
+
+new_line:
+    .word '\n'
 ```
 
-Our first goal will be to define local variables that will help us iterate over a square.
-Variables do not really exist in assembly, instead we directly manipulate memory and associate specific spots with our higher level variable-like abstraction.
+For this program, it will be convenient to hard-code the size of the square in a word.
+I also added the star character '*' and the new line character '\n' as constants since for convenience.
+Indeed, the sys_write system call requires an address to the character to be printed and saving them as constants allow to directly give their address in the program's memory.
 
-## Control flow in assembly
+We may notice that different directives are used when defining the squares_size constant (.quad) and the characters constants (.word).
+These directives actually specify the size of these constants (2 bytes for ".word" and 8 bytes for ".quad").
+We will discuss more about data sizes in the third part.
 
-## Defining local variables on the stack
+#### Drawing a line
 
-The easiest way to define a variable is to allocate some space in the program's "stack".
-The stack is a memory space dedicated to our program, which can be used not only for our variable but also for storing information such as function parameters and instruction pointers.
-The stack can be accessed via its address stored in the `rsp` pointer.
-The address is expressed in bytes, meaning that it points to a 8-bits memory space.
+Starting by drawing a simple line, we now need to write a "for" loops that will iterate over character positions (or columns).
+We will dedicate a register to storing this column index, but we should care about choosing a register that is not being use elsewhere in the program.
+Otherwise, its value would be lost.
+We can see that rax, rdx, rsi and rdi are already used for the system calls.
+We can then dedicate r8 and r9 to store our variables.
 
-We can start by compiling the previous code and inspecting the value of `rsp` with gdb.
-Let's gdb : `gdb draw_circle` and execute `starti` command to run exactly one instruction in the program.
-Then we can print the register : `print $rsp`.
-This outputs 0x7fffffffddb0 in hexadecimal in my terminal.
-Now we will allocate some space to store a value on the stack.
-This is simply done by subtracting to the current address the number of bytes we want to allocate : `sub rsp, 4`.
-The allocation is performed by a subtraction since the stack grows by convention to lower address in x86 assembly.
-Here we allocate 4 bytes * 8 = 32 bits of memory.
-We can check the new value of rsp by running gdb with a breakpoint after the allocation.
-This gives me 0x7fffffffddac.
-Checking the difference in gnome calculator : 0x7fffffffddac-0x7fffffffddb = -4.
-
-With the memory being reserved for our usage, we may now assign some value into it.
-To do so, we use the previously encountered `mov` instruction by specifying this time a memory address : `mov [rsp], 42`.
-If you test it, the assembly will complain about some ambiguity on the size of the values.
-Indeed, we must indicate to the assembler that we are writing in 4 bytes of memory.
-This is done by specifying the size with a directive : `mov [rsp], word ptr 42`, "word" being a standard term to designate 4 bytes in assembly.
-
-Now checking our value in the stack would be a little more difficult than previously, as using `print $rsp` in gdb would only give us the current address of the stack.
-To do so, we will instead mov the value to a register : `mov rax, [rsp]` and then print the value of `rax` in gdb.
-Starting from a complete program :
+To draw a line, we will start from the "for" loop structure that we already implemented earlier in this post.
+The loop will surround the star printing instructions: 
 
 ```nasm
 .global _start, debug
@@ -65,51 +233,135 @@ Starting from a complete program :
 
 _start:
 
-    ; allocating 4 bytes in the stack
-    sub rsp, 4
+    ; init the column counter to 0
+    mov r8, 0
 
-    ; setting the revered space to the value 42
-    mov [rsp], dword ptr 42
+    for_loop_columns:
 
-    ; inspecting the value through a register
-    mov rax, [rsp]
-    debug:
+        ; printing a star
+        mov rax, 1
+        mov rdi, 1
+        lea rsi, [star_character]
+        mov rdx, 1
+        syscall
+
+        ; increment the column counter
+        inc r8
+
+        ; compare the column counter to the predefined size and jump if required
+        cmp r8, [square_size]
+        jne for_loop_columns
+
+    ; printing a new line
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [star_character]
+    mov rdx, 1
+    syscall
 
     ; exit
     mov rax, 60
-    mov rdi, 69
+    mov rdi, 0
     syscall
 
+square_size:
+    .quad 20
+
+star_character:
+    .word '*'
+
+new_line:
+    .word '\n'
 ```
 
-Running the program in gdb with a breakpoint at the debug symbol, printing the value of rax gives : 
+This program does not add any particular complexity to the notions previously seen.
+The first action consists in initializing our column index variable `r8` to 0.
+Then, we enter the loop by passing the "for_loop_columns" label and print a start character.
+Then, the rbx register is incremented (+1) and its value is compared to the square size constant.
 
-`$1 = 4294967338`?
+#### Drawing a square
 
-Something has not working the way we expect.
-If you carefully followed the previous steps, compared to this time we specified the size of the value 42 but we did not do it this time.
-Actually, writing something as $mov rax, word ptr `[rsp]` would not work since `rsp` is a 8 bytes (64 bits) register and it cannot receive a 4 bytes value.
-The solution here consists in using a register with a smaller size.
-In fact, the rax register also exits in other sizes.
-Its 4 bytes size version has the `eax` name instead.
-Thus, we will fix our previous issue with : `mov eax, [rsp]`.
-In gdb, the `print $eax` command now gives : `$1 = 42`!
-Perfect, we are now able to reserve space in memory to store our local variables.
+Starting from the previous code, printing a square is no more complicated than adding an additional surrounding loop.
+This time, we will use the `r9` register to store our row index variable:  
 
-Note the difference between the instruction `mov` used here and `lea` that we encountered  previously.
-`mov` is used to put a value into a register or at a memory address while `lea` which stands for "load effective address" will rather put an address, without accessing to the value at that address.
+```nasm
+.global _start, debug
+.intel_syntax noprefix
 
-#### Using a stack frame in our function
+_start:
 
-We have just seen how to "reserve" some space in that stack by subtracting the desired number of bytes to reserve to the stack pointer.
-Allocation here only consists in indicating to the potential sub-functions called from our `_start` function that they can use the stack 4 bytes farther from our initial address.
-When using multiple local variables, a more convenient way to do it will be to define a **stack frame**.
-The stack frame designates a space in the stack reserved at the beginning of our function that will be dedicated to our local variables.
+    ; init the row counter to 0
+    mov r9, 0
 
-To define a stack frame, we will set the `rbp` register to the current `rsp` value at the beginning of the function with a `mov` instruction.
-Then we can subtract from `rsp` the number of bytes to be reserved and refer to our variables from the address in `rbp`.
-This will be more convenient as the `rsp` register only points to the top of the stack and 
+    for_loop_rows:
+        
+        ; init the column counter to 0
+        mov r8, 0
 
+        for_loop_columns:
+            ; printing a star
+            mov rax, 1
+            mov rdi, 1
+            lea rsi, [star_character]
+            mov rdx, 1
+            syscall
 
+            inc r8
+            cmp r8, [square_size]
+            jne for_loop_columns
 
-## Our second program : drawing a circle
+        ; writing a new line
+        mov rax, 1
+        mov rdi, 1
+        lea rsi, [new_line]
+        mov rdx, 1
+        syscall
+        
+        inc r9
+        cmp r9, [square_size]
+        jne for_loop_rows
+
+    ; exit
+    mov rax, 60
+    mov rdi, 0
+    syscall
+
+square_size:
+    .quad 20
+
+star_character:
+    .word '*'
+
+space_character:
+    .word ' '
+
+new_line:
+    .word '\n'
+```
+
+Hmmpf that does not exactly look like a square.
+In fact, the characters are usually not squares.
+We can adjust this without much effort by adding a blank character after each star:
+
+```
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * *
+```

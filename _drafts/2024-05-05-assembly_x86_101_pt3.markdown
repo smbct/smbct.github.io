@@ -1,0 +1,167 @@
+---
+title:  Assembly x86 programming 101 &#58 part 3, drawing a circle
+author: smbct
+date:   2024-05-05 10:00:00 +0200
+categories: low-level programming assembly
+comments: true
+layout: post
+---
+
+
+In the previous post, we've seen how to write a basic hello world program in assembly.
+In this post, we will dive further in assembly programming and by writing a more complex program that will illustrate the use of variables and conditionals.
+In this new program, we will draw a circle in the terminal with the sys_write system call we used for our "hello world".
+
+Unfortunately, registers are not meant to store our data, their are not many and they are shared across functions. To "define" variables in assembly, we instead need to directly allocate memory.
+We will now see how to use the program's memory to store our variables. 
+
+## Defining local variables on the stack
+
+Programming languages usually rely on two different modes for storing variables : [the stack and the heap](https://www.geeksforgeeks.org/stack-vs-heap-memory-allocation/?ref=header_search).
+You may have heard of them if you are familiar with lower level languages such as C or C++.
+Dynamic memory allocation is performed on the heap whereas local variables and internal information about function calls is stored on the stack.
+
+We will use the stack here to store our program's variables.
+It is the simplest way to perform memory allocation since it does not require any system or function call.
+Its use is similar to a stack of plates, with a last-in-first-out management : memory is always allocated on its top and the last allocated memory would be de-allocated first.
+The top of the stack can be accessed via its memory address stored in the `rsp` pointer ("sp" standing for "stack pointer").
+Our memory allocation will be performed by manually manipulating this address.
+
+#### Manipulating the stack pointer to allocate memory
+
+The stack pointer address stored in the `rsp` registers is expressed in bytes, meaning that it points to a 8-bits memory space (recall that byte is the smallest unit of storage and 1 byte equals to 8 bits, or binary digits).
+The stack in x86 assembly grows downward, meaning that the address stored in `rsp` will actually decrease as memory is allocated. 
+To simplify things, we will allocate memory only once per function execution.
+Of course, if a function is called multiple times (recursively for instance), the allocation for its local variables will be performed each time. 
+
+In the following example, 4 bytes of memory are allocated on the stack by subtracting the value 4 to the stack address :
+
+```nasm
+.global _start, before_allocation, after_allocation, inspection
+.intel_syntax noprefix
+
+_start:
+    before_allocation:
+
+    ; allocating 4 bytes in the stack
+    sub rsp, 4
+
+    after_allocation:
+
+    ; storing the value 42 to the reserved space
+    mov [rsp], dword ptr 42
+
+    ; inspecting the value through a register
+    mov rax, [rsp]
+    
+    inspection:
+
+    ; memory is de-allocated by restoring the original rsp value
+    add rsp, 4
+
+    ; exit
+    mov rax, 60
+    mov rdi, 0
+    syscall
+```
+
+Let's compile and analyse the code with gdb, as we did in the previous post.
+We will start by adding breakpoints to each of the labels defined here: `b before_allocation`, `b after_allocation` and `b inspection`.
+Now let's start the program in gdb and print the initial stack's top address : `print $rsp`.
+This outputs 0x7fffffffddb0 in hexadecimal in my terminal.
+This address points toward the last byte that has been reserved before we start our function.
+Thus the memory at this address should not be used by us.
+Then the 4 bytes (32 bits) of memory are allocated by subtracting 4 to the current stack top address.
+We can use the command `continue` in gdb and check the new value of `rsp` when it stops at `after_allocation`:
+This gives me 0x7fffffffddac.
+Checking the difference in an hexadecimal calculator : 0x7fffffffddac-0x7fffffffddb0 = -4, we have reserved our 4 bytes in the stack
+
+We can let the program continue again so that the value 42 is stored at the reserved stack location with the `mov` instruction.
+As opposed to previously, we use the brackets here to indicate that the value 42 should not be stored in the `rsp` pointer but rather at the memory address stored in the rsp register.
+Having this value stored, we then load it in a register in order to be able to look at it in gdb.
+We can then inspect the value of `rax` with `print $rax` as it is supposed to contain the value 42 : 
+
+`$3 = 4294967338` ???
+
+Oh! The Value of `rax` is not what we expected.
+In fact, when managing memory stored in the stack it is important to correctly specify the number of bytes that is being accessed and manipulated. 
+
+#### Reading and writing in the stack
+
+If you carefully followed the previous code, we added additional directives when moving the value 42 to the stack.
+Indeed, when writing to reading from a memory address, the program requires us to specify the number of bytes to access as it has no other way to know it.
+The instruction `mov [rsp], dword ptr 42` then means that we are writing the value 42 into at the address stored in rsp (and not into the rsp register) encoded on 8 bytes (dword standing from double word, where a word corresponds to 4 bytes).
+There exists actually several versions of instructions like `mov` that dictates the number of bytes to consider.
+
+When specifying `mov rax, [rsp]`, the program would consider that we are extracting 8 bytes from the memory, inferred from the fact that rax is an 8 bytes register.
+Since we actually reserved 4 bytes, the additional 4 bytes the program is reading from in the stack are undefined and a part of the `rax` register would contain undefined bits.
+
+The solution here consists in using a register with the proper size of 4 bytes.
+In fact, several 8 bytes registers such as rax, rbx, rcx etc.. exist in multiple versions with various sizes.
+We will fix our previous issue by using the 4 bytes of `rax` which is named `eax` : `mov eax, [rsp]`.
+In gdb, the `print $eax` command now gives : `$3 = 42`!
+Perfect, we are now able to reserve space in memory to store our local variables.
+
+Note the difference between the instruction `mov` used here and `lea` that we encountered  previously.
+`mov` is used to put a value into a register or at a memory address while `lea` which stands for "load effective address" will rather put an address, without accessing to the value at that address.
+
+#### Defining a stack frame
+
+We have just seen how to "reserve" some space in the stack by subtracting from the stack pointer the desired number of bytes to reserve.
+We then accessed our memory space by directly using the `rsp` value, which then contain the address of our first byte.
+However, the stack is meant to grow further as the code of our function (and sub functions) would be executed.
+This makes our reference address stored in `rsp` invalid as soon as additional data is pushed into the stacK.
+This is why we need an invariant reference to access our variables in the function.
+
+In assembly, the **stack frame** designates the space of the stack that is reserved for our function.
+In the previous example, our stack from goes from the address stored in rsp to this same address minus 4 bytes.
+As the top of the stack would potentially change when executing the function, we should save a reference address before allocating in the stack so that we can refer to our data from "bellow".
+This is exactly the function of the `rbp` pointer (the **b**ase **p**ointer).
+
+We can now modify the previous program by saving the value of `rsp` into `rbp`.
+This time, we will store two 4-bytes values by reserving a total of 8 bytes.
+Then, at the end of the function, the stack is de-allocated and the previous value of `rbp` is restored from `rsp`.
+> Please keep in mind that registers such as `rsp` and `rbp` are being used by other functions of our program and they should be preserved 
+
+```nasm
+.global _start, before_allocation, after_allocation, inspection
+.intel_syntax noprefix
+
+_start:
+    before_allocation:
+
+    ; allocating 4 bytes in the stack
+    mov rbp, rsp
+    sub rsp, 8 ; allocating two 4 bytes value in the stack
+    ; First variable, address=[rbp-4], size = 4 bytes
+    ; Second variable, address=[rbp-8], size = 4 bytes
+
+    ; storing the values 40 and 2 to our 2 stack variables
+    mov [rbp-4], dword ptr 40
+    mov [rbp-8], dword ptr 2
+
+    ; computing the sum of the values previously stored
+    mov eax, [rbp-4]
+    add eax, [rbp-8]
+    
+    ; memory is de-allocated by restoring the original rsp value
+    add rsp, 8
+    mov rsp, rbp
+
+    ; exit
+    mov rax, 60
+    mov rdi, 0
+    syscall
+```
+
+Compared to the previous example, this time we refer to our variable by subtracting a corresponding number of bytes from our base points `rbp`.
+Since the stack grows toward lower addresses, we access to our variables by offsetting the base address with their size in bytes and the size of their preceding variables.
+The values of our variables will be read from lower to higher adresses which is why we need to subtract their entier size from the base address.   
+
+## Our third program : drawing a circle
+
+Now that we are able to define variables and perform control flow in assembly, our programs become much more interesting.
+To demonstrate theses notions, we will write a program that draws a circle in the console by using the sys_write system call.
+This program will iterate over coordinates of a square and test if a specific position would be part of the defined circle or not?
+
+
