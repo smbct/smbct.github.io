@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-05-07T01:26:32+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Assembly x86 programming 101 &amp;amp;#58 part 1, Hello, world!</title><link href="http://localhost:4000/low-level/programming/assembly/2024/05/03/assembly_x86_101_pt1.html" rel="alternate" type="text/html" title="Assembly x86 programming 101 &amp;amp;#58 part 1, Hello, world!" /><published>2024-05-03T10:00:00+02:00</published><updated>2024-05-03T10:00:00+02:00</updated><id>http://localhost:4000/low-level/programming/assembly/2024/05/03/assembly_x86_101_pt1</id><content type="html" xml:base="http://localhost:4000/low-level/programming/assembly/2024/05/03/assembly_x86_101_pt1.html"><![CDATA[<p>The last few months, I developed an increasing interest in low level programming and especially in assembly programming.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-05-09T00:59:25+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Assembly x86 programming 101 &amp;amp;#58 part 1, Hello, world!</title><link href="http://localhost:4000/low-level/programming/assembly/2024/05/03/assembly_x86_101_pt1.html" rel="alternate" type="text/html" title="Assembly x86 programming 101 &amp;amp;#58 part 1, Hello, world!" /><published>2024-05-03T10:00:00+02:00</published><updated>2024-05-03T10:00:00+02:00</updated><id>http://localhost:4000/low-level/programming/assembly/2024/05/03/assembly_x86_101_pt1</id><content type="html" xml:base="http://localhost:4000/low-level/programming/assembly/2024/05/03/assembly_x86_101_pt1.html"><![CDATA[<p>The last few months, I developed an increasing interest in low level programming and especially in assembly programming.
 What seemed for a long time an obscure and inaccessible hobby to me has become a fascinating and engaging topic as I started digging.
 From someone with a computer science background, learning assembly programming feels like exploring the fundamentals of computing and looking back at the history of modern computers.
 Learning to code in assembly is a way to become better at understanding how computers and programs work and how they can be secured and optimizes.</p>
@@ -73,14 +73,19 @@ Last, but not least, we will rely on the GNU debugger (GDB) to inspect our progr
 
 </code></pre></div></div>
 
-<p>The first line of the code does nothing more than specifying the use of the intel syntax with some noprefix mode, a syntax that is more readable for beginners.
+<p>The first line of the code just specifies the use of the intel syntax with some noprefix mode, a syntax that is more readable for beginners.
 The second line makes sure that the symbol <code class="language-plaintext highlighter-rouge">_start</code> (our function’s name) will be visible from outside the program.
 In general, symbols such as local function names would not be exported when releasing programs as they are not necessary from the outside.
 On the contrary, function names that are part of a library’s interface would be made visible to the users.
 <code class="language-plaintext highlighter-rouge">_start</code> is in fact the name of the program’s entry point (first line to be executed), which is why and this symbol must be known from the outside.</p>
 
 <p>Then the definition of our <code class="language-plaintext highlighter-rouge">_start</code> function begins with its label followed by a colon (:).
-For now the function does nothing.</p>
+For now the function does nothing, as indicated with a comment.</p>
+
+<blockquote>
+  <p>Note that comments with a semicolon seems not de be supported by GNU assembler.
+The hash symbol however is supported but I will use the semicolon on the post to activate the syntax coloring.</p>
+</blockquote>
 
 <h4 id="compilation-and-linking">Compilation and linking</h4>
 

@@ -86,14 +86,17 @@ _start:
 
 ```
 
-The first line of the code does nothing more than specifying the use of the intel syntax with some noprefix mode, a syntax that is more readable for beginners.
+The first line of the code just specifies the use of the intel syntax with some noprefix mode, a syntax that is more readable for beginners.
 The second line makes sure that the symbol `_start` (our function's name) will be visible from outside the program.
 In general, symbols such as local function names would not be exported when releasing programs as they are not necessary from the outside.
 On the contrary, function names that are part of a library's interface would be made visible to the users.
 `_start` is in fact the name of the program's entry point (first line to be executed), which is why and this symbol must be known from the outside.
 
 Then the definition of our `_start` function begins with its label followed by a colon (:).
-For now the function does nothing.
+For now the function does nothing, as indicated with a comment.
+
+> Note that comments with a semicolon seems not de be supported by GNU assembler.
+> The hash symbol however is supported but I will use the semicolon on the post to activate the syntax coloring.
 
 #### Compilation and linking
 
