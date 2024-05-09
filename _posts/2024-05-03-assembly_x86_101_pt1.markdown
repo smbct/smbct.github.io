@@ -15,9 +15,10 @@ Learning to code in assembly is a way to become better at understanding how comp
 This blog post is the first of a series where I would like to introduce the basics of assembly.
 I plan to cover fundamental notions as well as practical development with higher level libraries.
 My goal is to make us feel that it is actually possible to develop modern applications in assembly, although it is much slower and much less convient than using any modern language.
-I should however warn you that I am still very new to the topic and I will probably make some imprecisions and mistakes along the way
+I should however warn you that I am still very new to the topic and I will probably make some imprecisions and mistakes along the way.
 I will still focus on bringing enough content so that we become autonomous at proof reading and learning more advanced notions.
-I will use Linux tools in theses posts but this could probably be adapted to any other operating system. 
+I will use Linux tools in theses posts but this could probably be adapted to any other operating system.
+Some notions of "relatively" low level languages such as C would be helpful (but not mandatory) as I will mention mechanisms like the program's stack. 
 
 This first post will give some insights about assembly languages and we will then see how to write a first hello world program.
 Among the ressources that I used for this series, I can recommend the great Youtube channel [Low Level Learning](https://www.youtube.com/@LowLevelLearning), that proposes content about low level programming and security.
@@ -36,26 +37,26 @@ Assembly languages allow us to program by almost directly using the processor's 
 
 A given assembly language is thus associated to a specific computer architecture such as x86 (desktop and portable computers) or ARM (processors found in smartphones and other mobile devices).
 A program made with an x86 assembly language will be then unable to run on ARM devices for instance.
-In this series, we will only look at **x86-64 assembly**, x86-64 being the most common architecture of everyone's personal computers.
-However, it is actually possible to practice assembly for other platforms by relying on emulators.
-Architectures other than x86 are also quite interesting to study since ARM, for instance, became recently more present in personal computers with the [apple silicons](https://en.wikipedia.org/wiki/Apple_silicon) and is also used in Raspberry Pi boards and Nintendo switch consoles.
-MIPS is another interesting architecture as it is used in several old generation consoles such as the nintendo 64 and the first playstation.
+In this series, we will only look at **x86-64 assembly** since x86-64, the 64 bits version of x86 processors, is the most common architecture of everyone's personal computers.
+However, learning assembly for other platforms is also possible by using of emulators.
+Architectures other than x86 also quite interesting to study since ARM, for instance, became recently more present in personal computers with the [apple silicons](https://en.wikipedia.org/wiki/Apple_silicon) and is also used in Raspberry Pi boards and Nintendo switch consoles.
+MIPS is another interesting architecture as it is used in several old generation consoles such as the Nintendo 64 and the first Playstation.
 
 [![The Raspberry Pi model 5](/assets/23551-raspberry-pi-5.jpg)](https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg)
 The Raspberry Pi model 5, embedding an ARM processor.
 
-An important note is that while writing assembly really feels like having a precise control on our computer's processor, modern processors are extremely complex and many hidden operations are still happening under the hood, preventing us from fully apprehending it.
-Learning assembly remains a useful to better understand how computer work.
+An important note is that while writing assembly really feels like having a precise control on our computer's processor, modern processors are extremely complex and many hidden operations are still happening under the hood, which prevents us from fully apprehending it.
+Learning assembly remains an important step to better understand how computers work.
 
 #### Compilation of assembly programs?
 
-When it comes to programming languages, one may often distinguish compiled langages such as C, C++, Rust, etc..  from interpreted languages like python or Lua.
-Compilation may be described as the process of translating a program into machine code, an operation after which the original source code is gone.
+When it comes to programming languages, one may often distinguish compiled langages such as C, C++, Rust, etc..  from interpreted languages like Python or Lua.
+Compilation may be described as the process of translating a program's code into machine code, an operation after which the original source code is gone.
 Nonetheless, the machine code that is produced is actually nothing more than one of our architecture's specific assembly language.
 
 This means that assembly code does not need to be compiled : it is already in the form of processor's instructions.
 It is in fact possible to read the assembly code from any compiled program by *disassembling* it.
-However, you should not expect to recover a clean, abstract and commented version of the code with variable names since this information is lost during compilation.
+However, you should not expect to recover a clean, abstract and commented version of the code with variable names and so on, since most information is lost during compilation.
 The ability to read compiled program's code remains a good motivation to learn assembly.
 Without evoking potential illegal action on proprietary softwares, manipulating binary programs can be used for instance to [patch](https://www.youtube.com/watch?v=cwBoUuy4nGc) old and unmaintained softwares that would no longer properly work on recent systems. 
 
@@ -69,10 +70,10 @@ For instance, Linux systems use the [elf format](https://en.wikipedia.org/wiki/E
 
 We will start assembly programming by writing a simple program that performs the most basic operations.
 Our tools here will be any text editor supporting x86 assembly syntax, an assembler of x86 assembly code and a linker that produces the final executable.
-Visual Studio can be used with the "x86 and x86_64 Assembly" extension for the writing part.
-To translate our code into binary, we will use the gnu assembler which is the assembler used by [GCC](https://gcc.gnu.org/).
+Visual Studio Code can be used with the "x86 and x86_64 Assembly" extension for the writing part.
+To translate our code into binary, we will use the [GNU Assembler](https://www.gnu.org/software/binutils/) which is the assembler used by the [GCC](https://gcc.gnu.org/) compiler.
 GCC will also be our linker in order to produce the executable file (GCC actually calls "ld" for linking).
-Last, but not least, we will rely on the GNU debugger (GDB) to inspect our program.
+Last, but not least, we will rely on the [GNU debugger (GDB)](https://sourceware.org/gdb/) to inspect and debug our programs.
 
 Let's write our first lines of x86 assembly :
 
@@ -90,13 +91,13 @@ The first line of the code just specifies the use of the intel syntax with some 
 The second line makes sure that the symbol `_start` (our function's name) will be visible from outside the program.
 In general, symbols such as local function names would not be exported when releasing programs as they are not necessary from the outside.
 On the contrary, function names that are part of a library's interface would be made visible to the users.
-`_start` is in fact the name of the program's entry point (first line to be executed), which is why and this symbol must be known from the outside.
+`_start` is in fact the name of the program's entry point (first line to be executed), which is why this symbol must always be known from the outside.
 
 Then the definition of our `_start` function begins with its label followed by a colon (:).
 For now the function does nothing, as indicated with a comment.
 
-> Note that comments with a semicolon seems not de be supported by GNU assembler.
-> The hash symbol however is supported but I will use the semicolon on the post to activate the syntax coloring.
+> Note that the semicolon ";" symbol for comments seems to be unsupported by the GNU assembler.
+> I will use it in my examples for the purpose of syntax highlighting but it should be replaced with a hash "#" symbol to work properly with the "as" command.
 
 #### Compilation and linking
 
@@ -116,7 +117,7 @@ Two important options are passed to gcc : `-static` to produce a position-depend
 These two options are required for now but we will see in another post how to do differently.
 
 When we try to execute this program it results into a *segmentation fault*.
-It happens because our program does not actually know how to exit.
+This happens because our program does not actually know how to exit.
 We will add the following lines to solve the issue :
 
 ```nasm
@@ -131,14 +132,14 @@ _start:
 ```
 
 The program should now terminate properly.
-In assembly, even simple things such as exiting a program have to be done manually !
-This step is performed by a "system call", which is triggered by the last instruction.
+In assembly, even simple things such as exiting a program have to be done manually!
+This step is performed by a "system call", triggered by the last instruction.
 [System calls](https://www.geeksforgeeks.org/introduction-of-system-call/) are a way for programs to interact with the operating system. 
 The two instructions preceding the call are used to specify parameters through the two registers `rax` and `rdi`.
 The first line specify the type of system call to perform, which is sys_exit here ([tables](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/) of Linux system calls can be found online).
-The second line set the return value of the program, similarly to ``return 42;`` at the end of a C program.
+The second line sets the return value of the program, similarly to ``return 42;`` at the end of a C program.
 
-After compiling the program again the execution does not produce a segmentation fault anymore!
+After compiling the program again the execution does not produce a segmentation fault anymore.
 This time we can run it and check its return value in bash :
 ```./hello_world ; echo $?``` which outputs 42!
 
@@ -162,7 +163,7 @@ Starting from the previous code, we can now make a program that writes the famou
 To do so, we will use the `sys_write` system call.
 From the link [on linux system calls](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/), we see that invoking a "sys_write" system call is performed by setting the `rax` register to `1`.
 The `rdi` register specifies the file descriptor, which will be set to `1` to write to the standard output.
-There are two other parameters: `rsi`, the memory address of our "hello world" string and ``rdx``, the length of the string.
+There are two other parameters passed by registers : `rsi`, the memory address of our "hello world" string and ``rdx``, the length of the string.
 We can define the string as a constant in our program thanks to a new symbol :
 
 ```nasm
@@ -197,12 +198,12 @@ hello_world:
     .asciz "Hello, World!\n"
 ```
 
-That's it ! We just created the famous hello world program in x86-64 assembly.
+That's it! We just created the famous hello world program in x86-64 assembly.
 
 ## Inspecting our program with gdb
 
-It might strike us that in assembly, simple operations such as writing to the standard output are already difficult to perform and take several linse of code.
-This make us realize all the computations performed in background when using higher level programming languages.
+It might strike us that in assembly, simple operations such as writing to the standard output are already difficult to perform and take several lines of code.
+This makes us realize all the computations performed in background when using higher level programming languages.
 In C, printing the value of a variable, which is essential for debugging, would be as easy as simply calling the "printf" function and passing the variable to it.
 Here, a sys_write only handles a string and there are no predefined functions to output the value of a register.
 
@@ -217,29 +218,30 @@ _start:
     debug:
 ```
 
-You may guess that the first new line loads the value 30 to the `rax` register and the second one adds 12 to it.
+You may guess that the first new line assigns the value 30 to the `rax` register and the second one adds 12 to it.
 We will verify this behavior with GDB by adding a *breakpoint*.
-A "breakpoint" can be used to stop the program during its execution at a specific location.
-Here instead of relying on line number, we can tell GDB to stop at a given symbol, which will be "debug" in our case.
+*Breakpoints* can be used to stop the program during its execution at a specific location.
+Here instead of relying on line numbers, we can tell GDB to stop at a given symbol, which will be "debug" in our case.
 
 To do so, we can add the symbol to the list of global symbols, which becomes : `.global _start, debug`.
 Then, we compile the program and run GDB by attaching the program to it : `gdb hello_world`.
-Then, the breakpoint can be added by referring to the new "debug" label : `b debug`.
+Then, the breakpoint can be added by referring to the new "debug" symbol : `b debug`.
 We now execute the program from the beginning with `start`.
 Normally, the program would stop after executing the instruction preceding our label, indicating "Breakpoint 1".
 From this point, we can verify the register's value with : `print $rax`, which produces the intended output "$1 = 42".
 We can also obtain information about other registers with the command `info registers`. 
 
 Great! GDB allows us to debug our program in a much simpler way than having to manually print our registers values.
-I find the use of in-code labels very convenient for debugging.
-For instance you may define several debugging symbols like `.global _start, debug1, debug2, ...` and set breakpoints to them in gdb such that the program execution will stop successively at these different points in the program.
+I find the use of symbols as in-code labels very convenient for debugging.
+For instance you may define several debugging symbols like `.global _start, debug1, debug2, ...` and set breakpoints to them in GDB such that the program execution would stop successively at these different points in the program.
 This feels even more convenient than specifying a line number as one would do when debugging a C program, even though this is also possible with our program.
-GDB will be of great use in the following posts as we practice assembly so it is worth covering it.
+GDB will be of great use for debugging as we practice assembly so it is worth covering it.
 
 ## What's next ?
 
-Although writing the hello world is a good success for such a low language as assembly, our capabilities remain limited for the moment.
+Although writing the hello world is a good success for such a low level language, our capabilities remain limited for now.
 In the next post, we will se how to add control flow to our programs so that we can write conditionals and loops.
-In the mean time, feel free to experiment with registers and simple operations such as mov, add, and, etc...
-Documentation can usually be found online and I invite you to use GDB (and its documentation) to understand the program. 
+In the mean time, you will find the hello world code from this post at the [following link](https://github.com/smbct/x86-64_101_linux/tree/main/hello_world).
+Feel free to modify it and experiment with registers and simple operations such as `mov`, `add`, `and`, etc...
+Tutorials adn references can usually be found online and I invite you to use GDB (and its documentation) to understand the program. 
 
