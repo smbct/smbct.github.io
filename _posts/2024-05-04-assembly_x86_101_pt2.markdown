@@ -376,4 +376,4 @@ In the next post, we will see how to use the program's stack for storing our loc
 By that time, the square printing code is available at the [following link](https://github.com/smbct/x86-64_101_linux/tree/main/draw_square).
 As previously, you can experiment by adding complexity to the code.
 For instance, with additional jumps and modulo operations you can try to only fill some of the columns or rows, or even draw sub rectangles.
-Please leave a comment if you have any suggestion or question about this post !
+Please leave a comment if you have any suggestion or question about this post!
