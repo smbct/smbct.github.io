@@ -428,10 +428,10 @@ And voilà, our circle is now printed to the terminal :
 
 ## What's next ?
 
-By interacting with the stack to store our variables, our program is now muche cleaner than before.
-There is still a lot to say about the stack, in particular how to properly manage it for function calls.
-We will discuss about it in the next part of the series.
+By interacting with the stack to store our variables, our program is now much cleaner.
+There is still a lot to say about the stack, in particular how to properly use it when calling function.
+We will discuss function calls in details in the next part of the series.
 
-By the time, you will find the complete code for drawing the circle at that [address](https://github.com/smbct/x86-64_101_linux/tree/main/draw_circle).
-Once agin, many improvements are possible such as defining a radius for the circle that is different from the square size.
+By the time, you will find the complete code for drawing the circle at [that address](https://github.com/smbct/x86-64_101_linux/tree/main/draw_circle).
+Many improvements are still possible such as defining a circle radius that is different from the size of the square.
 Once again, do not hesitate to share your thoughts in the comments, I will welcome your feedbacks!
