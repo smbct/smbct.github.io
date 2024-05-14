@@ -9,7 +9,7 @@ layout: post
 
 
 In the previous post, we've seen how to write a basic "hello world" program in assembly.
-In this post, we will dive further in assembly by exploring the use of "jump" instructions to perform conditionals and loops.
+In this post, we will dive further in assembly by exploring the use of "jump" instructions to perform **conditionals and loops**.
 In this new program, we will draw a square in the terminal with the sys_write system call that we previously used for the "hello world" example.
 
 
