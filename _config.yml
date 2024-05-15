@@ -26,9 +26,6 @@ paginate:         5
 hydeout:
   repo: https://github.com/smbct
 
-disqus:
-  shortname: http-smbct-github-io
-
 plugins:
   - jekyll-feed
   - jekyll-gist
