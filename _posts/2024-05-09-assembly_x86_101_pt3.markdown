@@ -134,7 +134,7 @@ _start:
     before_allocation:
 
     ; allocating 4 bytes in the stack
-    mov rbp, rsp ; save the current base address of the stack
+    mov rbp, rsp ; save the current stack address in the rbp register
     sub rsp, 8 ; allocate two 4-bytes variables in the stack
     ; First variable, address=[rbp-4], size = 4 bytes
     ; Second variable, address=[rbp-8], size = 4 bytes
