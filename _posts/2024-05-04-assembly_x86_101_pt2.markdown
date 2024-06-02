@@ -52,7 +52,7 @@ We will now add a new symbol after the "write" system call and jump to this symb
 ```nasm
 _start:
 
-    jmp after_printing
+    jmp .L_after_printing
 
     ; printing hello world
     mov rax, 1
@@ -61,7 +61,7 @@ _start:
     mov rdx, 14
     syscall
 
-    after_printing:
+    .L_after_printing:
 
     ; exit
     mov rax, 60
@@ -69,8 +69,12 @@ _start:
     syscall
 ```
 
+In our programs, symbols for loops and conditionals will always be **local** symbols, as opposed to global symbols used to define functions as we will see in future posts.
+These symbols are not exported when the code is compiled.
+This is the reason why their names start with the "**.L**" prefix, telling the compiler that the should be replaced by local references in the code (using program's code addresses).
+
 When executing this program you will observe that the "hello world" output is gone.
-We have indeed told the program to skip these instructions by directly jumping to the `after_printing` symbol.
+We have indeed told the program to skip these instructions by directly jumping to the `.L_after_printing` symbol.
 A jump can be performed anywhere in the code, including backward and accros functions (we will see in another post that jumping is actually part of function calls).
 
 Jumps becomes more interesting in their conditional form.
@@ -85,7 +89,7 @@ _start:
     mov rax, 43
     mov rbx, 42
     cmp rax, rbx ; compare rax and rbx and set the internal flag
-    jg after_printing ; jump if the internal flag corresponds to "greater"
+    jg .L_after_printing ; jump if the internal flag corresponds to "greater"
 
     ; printing hello world
     mov rax, 1
@@ -94,14 +98,14 @@ _start:
     mov rdx, 14
     syscall
 
-    after_printing:
+    .L_after_printing:
 
     ; exit
     mov rax, 60
     mov rdi, 0
     syscall
 ```
-Here the jg (jump if greater than) instruction will check wether `rax > rbx` from the internal flag set by `cmp`.
+Here the `jg` (jump if greater than) instruction will check wether `rax > rbx` from the internal flag set by `cmp`.
 Since 43 is greater than 42, our message is not printed to the standard output.
 Now if we replace the first line by `mov rax, 42`, the message would be printed as the jump is triggered on a strict inequality.
 
@@ -113,18 +117,18 @@ Here is an example:
 
 ```nasm
     cmp rax, rbx ; compare rax and rbx and set the internal flag
-    jg else_label
+    jg .L_else_label
 
-    if_label: ; entering when "rax <= rbx"
+    .L_if_label: ; entering when "rax <= rbx"
 
         ; code to perform if condition is not verified
         jmp endif ; skip the "else"
     
-    else_label: ; executed when "rax > rbx" is true
+    .L_else_label: ; executed when "rax > rbx" is true
     
         ; condition to perform if the code is verified
     
-    endif:
+    .L_endif:
 ```
 
 In this example, we added three different labels to perform an "if..else.." statement.
@@ -146,14 +150,14 @@ Let's write a simple for loop:
 ```nasm
     mov rbx, 0
 
-    for_label:
+    .L_for_label:
 
         ; loop instructions
 
         inc rbx ; increase the loop counter
         
         cmp rbx, 10
-        jl for_label ; repeat if the counter is < 10
+        jl .L_for_label ; repeat if the counter is < 10
 ```
 
 Here we repeat the loop instructions for 10 iterations by using the `rbx` register as our loop index.
@@ -171,7 +175,7 @@ We will first write the base of our program with the exit system call.
 We can also define the constants of our program and already add some printing calls that will help us for the following. 
 
 ```nasm
-.global _start, debug
+.global _start
 .intel_syntax noprefix
 
 _start:
@@ -226,7 +230,7 @@ To draw the line, we can re-use the "for" loop structure that we previously impl
 The loop will surround the star printing instructions : 
 
 ```nasm
-.global _start, debug
+.global _start
 .intel_syntax noprefix
 
 _start:
@@ -234,7 +238,7 @@ _start:
     ; init the column counter to 0
     mov r8, 0
 
-    for_loop_columns:
+    .L_for_loop_columns:
 
         ; printing a star
         mov rax, 1
@@ -248,7 +252,7 @@ _start:
 
         ; compare the column counter to the predefined size and jump if required
         cmp r8, [square_size]
-        jne for_loop_columns
+        jne .L_for_loop_columns
 
     ; printing a new line
     mov rax, 1
@@ -284,7 +288,7 @@ Starting from the previous code, printing a square is no more complicated than a
 This time, we use the `r9` register for our row index variable :  
 
 ```nasm
-.global _start, debug
+.global _start
 .intel_syntax noprefix
 
 _start:
@@ -292,12 +296,12 @@ _start:
     ; init the row counter to 0
     mov r9, 0
 
-    for_loop_rows:
+    .L_for_loop_rows:
         
         ; init the column counter to 0
         mov r8, 0
 
-        for_loop_columns:
+        .L_for_loop_columns:
             ; printing a star
             mov rax, 1
             mov rdi, 1
@@ -307,7 +311,7 @@ _start:
 
             inc r8
             cmp r8, [square_size]
-            jne for_loop_columns
+            jne .L_for_loop_columns
 
         ; writing a new line
         mov rax, 1
@@ -318,7 +322,7 @@ _start:
         
         inc r9
         cmp r9, [square_size]
-        jne for_loop_rows
+        jne .L_for_loop_rows
 
     ; exit
     mov rax, 60

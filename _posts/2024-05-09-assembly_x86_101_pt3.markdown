@@ -34,26 +34,20 @@ The stack in x86 assembly grows **downward**, meaning that the address stored in
 
 In the following example, 4 bytes of memory are allocated on the stack by subtracting the value 4 to the stack address (addresses being expressed in bytes):
 
-```nasm
-.global _start, before_allocation, after_allocation, inspection
+{% highlight nasm linenos %}
+.global _start
 .intel_syntax noprefix
 
 _start:
 
-    before_allocation:
-
     ; allocating 4 bytes in the stack
     sub rsp, 4
-
-    after_allocation:
 
     ; storing the value 42 to the reserved space
     mov [rsp], dword ptr 42
 
     ; inspecting the value through a register
     mov rax, [rsp]
-    
-    inspection:
 
     ; memory is de-allocated by restoring the original rsp value
     add rsp, 4
@@ -62,18 +56,20 @@ _start:
     mov rax, 60
     mov rdi, 0
     syscall
-```
+{% endhighlight %}
 
 Let's compile and analyse the code with GDB, as we did in the first part of the assembly series.
-We will start by adding breakpoints to each of the labels defined here: `b before_allocation`, `b after_allocation` and `b inspection`.
-Now let's start the program in GDB and print the initial stack's top address : `print $rsp`.
+We will start by compiling the code in debug mode (-g option) and by adding breakpoints at three different places in the code: `b code.s:5` (before the allocation), `b code.s:8` (after the allocation) and `b code.s:14` (after writing in the stack).
+Here "code.s" corresponds to the name of our assembly file.
+
+Now let's start the program in GDB until the first breakpoint and print the initial stack's top address : `print $rsp`.
 This outputs *0x7fffffffddb0* in hexadecimal in my terminal.
 This address points toward the last byte that has been reserved before we started our function.
-Thus memory at this address should not be used by us.
+Thus memory at this address should not be used by our code.
 
 Then the 4 bytes (32 bits) of memory are allocated by subtracting 4 to the current stack top address.
 After this operation, the `rsp` register points toward the start of our 4 bytes memory location that is, this time, reserved for our own use. 
-We can use the command `continue` in GDB and check the new value of `rsp` when it stops at `after_allocation`:
+We can use the command `continue` in GDB to go to the next breakpoint after the allocation and check the new value of `rsp`:
 This gives me *0x7fffffffddac*.
 Checking the difference in an hexadecimal calculator : *0x7fffffffddac-0x7fffffffddb0 = -4*, we have reserved our 4 bytes  of memory in the stack!
 
@@ -125,13 +121,11 @@ This time, we will store two 4-bytes values by reserving a total of 8 bytes.
 Then, at the end of the function, the stack will be de-allocated and the previous value of `rbp` will be restored from `rsp`.
 > Keep in mind that registers such as `rsp` and `rbp` are being used by other functions in our program and they should be preserved across function calls.
 
-```nasm
-.global _start, inspection
+{% highlight nasm linenos %}
+.global _start
 .intel_syntax noprefix
 
 _start:
-
-    before_allocation:
 
     ; allocating 4 bytes in the stack
     mov rbp, rsp ; save the current stack address in the rbp register
@@ -146,8 +140,6 @@ _start:
     ; computing the sum of the values previously stored
     mov eax, [rbp-4]
     add eax, [rbp-8]
-
-    inspection:
     
     ; memory is de-allocated by restoring the original rsp value
     mov rsp, rbp
@@ -156,15 +148,15 @@ _start:
     mov rax, 60
     mov rdi, 0
     syscall
-```
+{% endhighlight %}
 
 Compared to the previous example, we refer this time to our variables by subtracting a corresponding number of bytes from the address in `rbp`, our stack base.
 I added 1 line of comment for each variable allocated with its size and offset for the readability of our code.
 Since the stack grows toward lower addresses, we access our variables by offsetting the base address with their size in bytes and the size of their preceding variables.
 The values of our variables will be read from lower to higher adresses which is why we need to subtract their entier size from the base address.
 
-Once again, variables can be inspected with GDB.
-We would run GDB and add a breakpoint at `inspection:` in order to print the `eax` register.
+Once again, variables can be inspected with GDB after compiling in debug mode.
+We would run GDB and add a breakpoint at `code.s:19` in order to print the `eax` register.
 You will notice that inspecting memory rapidly becomes difficult since the values should be stored into some register in order to be printed.
 There is actually a command named [examine](https://ftp.gnu.org/old-gnu/Manuals/gdb/html_node/gdb_55.html) in GDB to look at a specific location in memory, by providing an address. 
 
@@ -177,10 +169,10 @@ We start from the following base (I included only the drawing part for clarity) 
 
 ```nasm
 mov r9, 0
-    for_loop_rows:    
+    .L_for_loop_rows:    
 
         mov r8, 0
-        for_loop_columns:
+        .L_for_loop_columns:
 
             ; printing a star
             mov rax, 1
@@ -198,7 +190,7 @@ mov r9, 0
 
             inc r8
             cmp r8, [square_size]
-            jne for_loop_columns
+            jne .L_for_loop_columns
 
         ; printing a new line
         mov rax, 1
@@ -209,7 +201,7 @@ mov r9, 0
         
         inc r9
         cmp r9, [square_size]
-        jne for_loop_rows
+        jne .L_for_loop_rows
 ```
 
 #### Storing indexes on the stack
@@ -225,10 +217,10 @@ The code is similar to what we saw previously :
     ; column index : offset=16, size=8
 
     mov qword ptr [rbp-8], 0 ; row index var is set to 0
-    for_loop_rows:    
+    .L_for_loop_rows:    
 
         mov qword ptr [rbp-16], 0 ; col index var is set to 0
-        for_loop_columns:
+        .L_for_loop_columns:
 
             ; printing a star
             mov rax, 1
@@ -249,7 +241,7 @@ The code is similar to what we saw previously :
             ; test column loop termination
             mov rax, [rbp-16]
             cmp rax, [square_size]
-            jne for_loop_columns
+            jne .L_for_loop_columns
 
         ; writing a new line
         mov rax, 1
@@ -263,7 +255,7 @@ The code is similar to what we saw previously :
         ; test row loop termination
         mov rax, [rbp-8]
         cmp rax, [square_size]
-        jne for_loop_rows
+        jne .L_for_loop_rows
 
     ; memory de allocation
     mov rsp, rbp
@@ -378,14 +370,14 @@ We can now add the last missing piece of code that compare the distances and dec
     ; compare distance_squared to radius_squared
     mov rax, [rbp-32]
     cmp [rbp-40], rax
-    jge print_space
+    jge .L_print_space
 
-    ; print_star:
+    ; .L_print_star:
         lea rsi, [star_character]
         jmp end_print
-    print_space:
+    .L_print_space:
         lea rsi, [space_character]
-    end_print:
+    .L_end_print:
 
     ; printing the chosen character
     mov rax, 1

@@ -207,7 +207,7 @@ This makes us realize all the computations performed in background when using hi
 In C, printing the value of a variable, which is essential for debugging, would be as easy as simply calling the "printf" function and passing the variable to it.
 Here, a sys_write only handles a string and there are no predefined functions to output the value of a register.
 
-Instead of coding our own functions to do it, we can run the GNU debugger to inspect our program.
+Instead of coding our own functions to do it, we can run the GNU debugger for now to inspect our program.
 Let's add the following lines at the beginning of our function first :
 
 ```nasm
@@ -223,19 +223,40 @@ We will verify this behavior with GDB by adding a *breakpoint*.
 *Breakpoints* can be used to stop the program during its execution at a specific location.
 Here instead of relying on line numbers, we can tell GDB to stop at a given symbol, which will be "debug" in our case.
 
-To do so, we can add the symbol to the list of global symbols, which becomes : `.global _start, debug`.
-Then, we compile the program and run GDB by attaching the program to it : `gdb hello_world`.
+We can recompile the program and run GDB by attaching the program to it : `gdb hello_world`.
 Then, the breakpoint can be added by referring to the new "debug" symbol : `b debug`.
 We now execute the program from the beginning with `start`.
 Normally, the program would stop after executing the instruction preceding our label, indicating "Breakpoint 1".
 From this point, we can verify the register's value with : `print $rax`, which produces the intended output "$1 = 42".
 We can also obtain information about other registers with the command `info registers`. 
 
-Great! GDB allows us to debug our program in a much simpler way than having to manually print our registers values.
+Great! GDB allows us to debug our program in a much simpler way than having to manually convert our numerical registers into character strings.
 I find the use of symbols as in-code labels very convenient for debugging.
-For instance you may define several debugging symbols like `.global _start, debug1, debug2, ...` and set breakpoints to them in GDB such that the program execution would stop successively at these different points in the program.
-This feels even more convenient than specifying a line number as one would do when debugging a C program, even though this is also possible with our program.
+For instance you may define several debugging symbols like `debug1`, `debug2`, ... and set breakpoints to them in GDB such that the program execution would stop successively at these different points in the program.
 GDB will be of great use for debugging as we practice assembly so it is worth covering it.
+
+#### Edit from 2024-06-05
+
+This is an edit to the previous statement about using symbols for debugging purposes.
+As I am learning through the making of these posts, I realized that using symbols for debugging actually seems not to be good practice as it may disturb GDB for instance.
+It seems that exported symbols must be only used for function definitions.
+Alternatively, we can inspect our program by adding debugging information during the compilation process with the *-g* option :  `as -g hello_world.s -o hello_world.o`
+
+After that, breakpoints can be added by directly referencing a line number : `b hello_wolrd.s:11` where 11 is the line that follows the instruction `add rax, 12` in my code.
+This would give some higher level information about the code execution :
+
+```
+(gdb) breakpoint hello_world.s:11
+Breakpoint 1 at 0x40100b: file hello_world.s, line 12.
+(gdb) run
+Breakpoint 1, _start () at hello_world.s:12
+12	    mov rax, 1
+(gdb) print $rax
+$1 = 42
+```
+
+Here gdb directly indicates the line that follows the breakpoint.
+As it has stopped at the expected place, we can now check the value of the rax register and verify that the computation was executed successfully.  
 
 ## What's next ?
 
