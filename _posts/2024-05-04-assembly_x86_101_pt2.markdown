@@ -25,7 +25,7 @@ Jumps are instructions that allow to move to a specific point in our program.
 In our code, this can be simply performed by defining a new symbol (with a "label" in our code) and using the `jmp` instruction to this symbol.
 Let's start from the hello world written in the previous post :
 
-```nasm
+{% highlight nasm linenos %}
 .intel_syntax noprefix
 .global _start
 
@@ -45,11 +45,11 @@ _start:
 
 hello_world:
     .asciz "Hello, World!\n"
-```
+{% endhighlight %}
 
 We will now add a new symbol after the "write" system call and jump to this symbol from the beginning of the start function: 
 
-```nasm
+{% highlight nasm linenos %}
 _start:
 
     jmp .L_after_printing
@@ -67,7 +67,7 @@ _start:
     mov rax, 60
     mov rdi, 0
     syscall
-```
+{% endhighlight %}
 
 In our programs, symbols for loops and conditionals will always be **local** symbols, as opposed to global symbols used to define functions as we will see in future posts.
 These symbols are not exported when the code is compiled.
@@ -82,8 +82,7 @@ To achieve conditional jumps, we will use the `cmp` instruction that performs a 
 The `cmp` instruction does not directly produce an output but rather sets internal flags that will be read by the proper jump instructions.
 Starting from the previous code, we will add a conditional jump after comparing two registers :
 
-
-```nasm
+{% highlight nasm linenos %}
 _start:
 
     mov rax, 43
@@ -104,7 +103,8 @@ _start:
     mov rax, 60
     mov rdi, 0
     syscall
-```
+{% endhighlight %}
+
 Here the `jg` (jump if greater than) instruction will check wether `rax > rbx` from the internal flag set by `cmp`.
 Since 43 is greater than 42, our message is not printed to the standard output.
 Now if we replace the first line by `mov rax, 42`, the message would be printed as the jump is triggered on a strict inequality.
@@ -115,21 +115,21 @@ Thanks to jumping instructions we are now able to write conditional statements i
 The thinking is a be a bit different from more standard programming languages but we can setup an "if..else" by placing proper jumps.
 Here is an example:
 
-```nasm
-    cmp rax, rbx ; compare rax and rbx and set the internal flag
-    jg .L_else_label
+{% highlight nasm linenos %}
+cmp rax, rbx ; compare rax and rbx and set the internal flag
+jg .L_else_label
 
-    .L_if_label: ; entering when "rax <= rbx"
+.L_if_label: ; entering when "rax <= rbx"
 
-        ; code to perform if condition is not verified
-        jmp endif ; skip the "else"
+    ; code to perform if condition is not verified
+    jmp endif ; skip the "else"
     
-    .L_else_label: ; executed when "rax > rbx" is true
+.L_else_label: ; executed when "rax > rbx" is true
     
-        ; condition to perform if the code is verified
+    ; condition to perform if the code is verified
     
-    .L_endif:
-```
+.L_endif:
+{% endhighlight %}
 
 In this example, we added three different labels to perform an "if..else.." statement.
 When the comparison is true, the program will jump directly to the "else" label, making it skip the "if" part.
@@ -147,18 +147,18 @@ Conditional jumps are not only helpful to write conditional statements but they 
 Indeed a loop simply consists in a jump that as conditioned on the loop termination condition.
 Let's write a simple for loop:
 
-```nasm
-    mov rbx, 0
+{% highlight nasm linenos %}
+mov rbx, 0
 
-    .L_for_label:
+.L_for_label:
 
-        ; loop instructions
+    ; loop instructions
 
-        inc rbx ; increase the loop counter
+    inc rbx ; increase the loop counter
         
-        cmp rbx, 10
-        jl .L_for_label ; repeat if the counter is < 10
-```
+    cmp rbx, 10
+    jl .L_for_label ; repeat if the counter is < 10
+{% endhighlight %}
 
 Here we repeat the loop instructions for 10 iterations by using the `rbx` register as our loop index.
 The comparison is performed at the end of each iteration, meaning that the program will perform at least one iteration (similarly to a do..while loop).
@@ -174,7 +174,7 @@ This program will iterate over coordinates of a square of a predefined size.
 We will first write the base of our program with the exit system call.
 We can also define the constants of our program and already add some printing calls that will help us for the following. 
 
-```nasm
+{% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
 
@@ -207,7 +207,7 @@ star_character:
 
 new_line:
     .word '\n'
-```
+{% endhighlight %}
 
 For this program, it will be convenient to hard-code the size of the square with a constant.
 I also added the star character '*' constant and a new line character '\n' constant for convenience.
@@ -229,7 +229,7 @@ We can then dedicate r8 and r9 to store our variables.
 To draw the line, we can re-use the "for" loop structure that we previously implemented in the post.
 The loop will surround the star printing instructions : 
 
-```nasm
+{% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
 
@@ -274,7 +274,7 @@ star_character:
 
 new_line:
     .word '\n'
-```
+{% endhighlight %}
 
 This program behaves similarly to what we previously seen.
 The first action consists in initializing our column index variable in the register `r8` to 0.
@@ -287,7 +287,7 @@ The brackets '[ ]' in the `cmp` instructions mean that we consider the value sto
 Starting from the previous code, printing a square is no more complicated than adding an additional surrounding loop.
 This time, we use the `r9` register for our row index variable :  
 
-```nasm
+{% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
 
@@ -340,7 +340,7 @@ space_character:
 
 new_line:
     .word '\n'
-```
+{% endhighlight %}
 
 And here is our square!
 Hmm... well, if you test it, this looks more like a rectangle.

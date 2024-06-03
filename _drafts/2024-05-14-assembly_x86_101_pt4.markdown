@@ -25,26 +25,26 @@ This instruction will concretely perform two operations :
 `pop` is the reversed instruction : it moves the value from the stack to a register and increases the stack pointer accordingly.
 Let's create a simple example :
 
-```nasm
-    .global _start, debug, debug2
-    .intel_syntax noprefix
+{% highlight nasm linenos %}
+.global _start, debug, debug2
+.intel_syntax noprefix
 
-    _start:
-        mov rbp, rsp
+_start:
+    mov rbp, rsp
 
-        ; moving the value 42 into 8 bytes in the stack
-        sub rsp, 8
-        mov [rsp], qword ptr 42
+    ; moving the value 42 into 8 bytes in the stack
+    sub rsp, 8
+    mov [rsp], qword ptr 42
 
-        debug:
+    debug:
 
-        mov rsp, rbp
+    mov rsp, rbp
 
-        ; exit
-        mov rax, 60
-        mov rdi, 0
-        syscall
-```
+    ; exit
+    mov rax, 60
+    mov rdi, 0
+    syscall
+{% endhighlight %}
 
 Nothing new here, we allocate 8 bytes on the stack and we store the value 42.
 We will check that the value is properly stored : run GDB on the program, type `b debug` and `run` to stop just after the move.
@@ -60,25 +60,24 @@ Note that alternative command `x/dg 0x7fffffffdd98` could also be used to print 
 
 Now let's modify this code with the push instruction and let's add a pop instruction afterward :
 
-```nasm
-    
-    _start:
-        mov rbp, rsp
+{% highlight nasm linenos %}
+_start:
+    mov rbp, rsp
 
-        ; moving the value 42 into 8 bytes in the stack
-        push qword ptr 42
+    ; moving the value 42 into 8 bytes in the stack
+    push qword ptr 42
 
-        debug:
+    debug:
 
-        pop rax
+    pop rax
 
-        debug2:
+    debug2:
 
-        mov rsp, rbp
+    mov rsp, rbp
 
-        ; exit
-        ; ...
-```
+    ; exit
+    ; ...
+{% endhighlight %}
 
 We can use GDB with the previous commands to check that the `push` instruction did exactly the same as a `sub` followed by a `mov`:
 
@@ -313,12 +312,12 @@ _pow_rec:
     test rbx, rbx
     jnz else_exponent_not_0
 
-    if_exponent_0:
+    .L_if_exponent_0:
 
         mov rax, 1
         jmp endif
 
-    else_exponent_not_0:
+    .L_else_exponent_not_0:
 
         dec qword ptr [rbp-16]
 
@@ -331,7 +330,7 @@ _pow_rec:
 
         add rsp, 16
 
-    endif:
+    .L_endif:
 
     ; restoring the stack pointer and returning
     ; ...
@@ -434,18 +433,18 @@ _compute_fibonacci_rec:
 
     ; test the index value
     cmp word ptr [rbp-18], 1
-    je if_n_1
-    jg else_n_gt1
+    je .L_if_n_1
+    jg .L_else_n_gt1
     
-    if_n_0: ; special case when n is 0, return 0
+    .L_if_n_0: ; special case when n is 0, return 0
         mov rax, qword ptr 0
         jmp end_if_n
 
-    if_n_1: ; special case when n is 1, return 1
+    .L_if_n_1: ; special case when n is 1, return 1
         mov rax, qword ptr 1
         jmp end_if_n
 
-    else_n_gt1: ; recursive case : compute f_(n-2) + f_(n-1)
+    .L_else_n_gt1: ; recursive case : compute f_(n-2) + f_(n-1)
 
         ; compute f_(n-2)
         mov si, [rbp-18]
@@ -464,7 +463,7 @@ _compute_fibonacci_rec:
         add rax, [rbp-16]
         add rax, [rbp-8]
 
-    end_if_n:
+    .L_end_if_n:
 
     mov rsp, rbp
     pop rbp

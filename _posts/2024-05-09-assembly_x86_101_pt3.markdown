@@ -167,42 +167,42 @@ Now that we are able to define variables and perform control flow in assembly, o
 To demonstrate theses notions, we will modify our square drawing program from the previous post in order to draw a circle.
 We start from the following base (I included only the drawing part for clarity) :
 
-```nasm
+{% highlight nasm linenos %}
 mov r9, 0
-    .L_for_loop_rows:    
+.L_for_loop_rows:    
 
-        mov r8, 0
-        .L_for_loop_columns:
+    mov r8, 0
+    .L_for_loop_columns:
 
-            ; printing a star
-            mov rax, 1
-            mov rdi, 1
-            lea rsi, [star_character]
-            mov rdx, 1
-            syscall
-
-            ; printing a space
-            mov rax, 1
-            mov rdi, 1
-            lea rsi, [space_character]
-            mov rdx, 1
-            syscall
-
-            inc r8
-            cmp r8, [square_size]
-            jne .L_for_loop_columns
-
-        ; printing a new line
+        ; printing a star
         mov rax, 1
         mov rdi, 1
-        lea rsi, [new_line]
+        lea rsi, [star_character]
         mov rdx, 1
         syscall
-        
-        inc r9
-        cmp r9, [square_size]
-        jne .L_for_loop_rows
-```
+
+        ; printing a space
+        mov rax, 1
+        mov rdi, 1
+        lea rsi, [space_character]
+        mov rdx, 1
+        syscall
+
+        inc r8
+        cmp r8, [square_size]
+        jne .L_for_loop_columns
+
+    ; printing a new line
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [new_line]
+    mov rdx, 1
+    syscall
+            
+    inc r9
+    cmp r9, [square_size]
+    jne .L_for_loop_rows
+{% endhighlight %}
 
 #### Storing indexes on the stack
 
@@ -210,56 +210,56 @@ The first step will be to modify the program and store the index variables in th
 We can replace the r8 and r9 registers by allocating two 8-bytes variables in the stack.
 The code is similar to what we saw previously :
 
-```nasm
-    mov rbp, rsp
-    sub rsp, 16
-    ; row index : offset=8, size=8
-    ; column index : offset=16, size=8
+{% highlight nasm linenos %}
+mov rbp, rsp
+sub rsp, 16
+; row index : offset=8, size=8
+; column index : offset=16, size=8
 
-    mov qword ptr [rbp-8], 0 ; row index var is set to 0
-    .L_for_loop_rows:    
+mov qword ptr [rbp-8], 0 ; row index var is set to 0
+.L_for_loop_rows:    
 
-        mov qword ptr [rbp-16], 0 ; col index var is set to 0
-        .L_for_loop_columns:
+    mov qword ptr [rbp-16], 0 ; col index var is set to 0
+    .L_for_loop_columns:
 
-            ; printing a star
-            mov rax, 1
-            mov rdi, 1
-            lea rsi, [star_character]
-            mov rdx, 1
-            syscall
-
-            ; printing a space
-            mov rax, 1
-            mov rdi, 1
-            lea rsi, [space_character]
-            mov rdx, 1
-            syscall
-
-            ; increment col index var
-            inc qword ptr [rbp-16]
-            ; test column loop termination
-            mov rax, [rbp-16]
-            cmp rax, [square_size]
-            jne .L_for_loop_columns
-
-        ; writing a new line
+        ; printing a star
         mov rax, 1
         mov rdi, 1
-        lea rsi, [new_line]
+        lea rsi, [star_character]
         mov rdx, 1
         syscall
-        
-        ; increment col index var
-        inc qword ptr [rbp-8]
-        ; test row loop termination
-        mov rax, [rbp-8]
-        cmp rax, [square_size]
-        jne .L_for_loop_rows
 
-    ; memory de allocation
-    mov rsp, rbp
-```
+        ; printing a space
+        mov rax, 1
+        mov rdi, 1
+        lea rsi, [space_character]
+        mov rdx, 1
+        syscall
+
+        ; increment col index var
+        inc qword ptr [rbp-16]
+        ; test column loop termination
+        mov rax, [rbp-16]
+        cmp rax, [square_size]
+        jne .L_for_loop_columns
+
+    ; writing a new line
+    mov rax, 1
+    mov rdi, 1
+    lea rsi, [new_line]
+    mov rdx, 1
+    syscall
+        
+    ; increment col index var
+    inc qword ptr [rbp-8]
+    ; test row loop termination
+    mov rax, [rbp-8]
+    cmp rax, [square_size]
+    jne .L_for_loop_rows
+
+; memory de-allocation
+mov rsp, rbp
+{% endhighlight %}
 
 We have previously seen how to allocate two variables on the stack.
 The changes regarding the previous version of our program are symmetrical for the two index variables for rows and columns.
@@ -283,26 +283,26 @@ This is performs by calculating the distance between the character's position an
 If the distance is smaller or equal to the radius of the circle, the character can be printed.
 Writing it as a pseudocode first will help in our assembly implementation :
 
-```
-    const square_size
+{% highlight plaintext linenos %}
+const square_size
 
-    var row_index
-    var col_index
-    var square_center
-    var radius_squared
-    var distance_squared
+var row_index
+var col_index
+var square_center
+var radius_squared
+var distance_squared
 
-    square_center <- square_size / 2
-    radius_squared <- (square_size / 2)²
+square_center <- square_size / 2
+radius_squared <- (square_size / 2)²
 
-    distance_squared <- (row_index-square_center)² + (col_index-square_center)² 
+distance_squared <- (row_index-square_center)² + (col_index-square_center)² 
 
-    if distance_squared <= radius_squared 
-        draw '*'
-    else:
-        draw ' '
-    endif
-```
+if distance_squared <= radius_squared 
+    draw '*'
+else:
+    draw ' '
+endif
+{% endhighlight %}
 
 In this pseudocode, I decomposed the instructions in order to simplify the assembly implementation.
 You may first notice that instead of compute distances, we compute squared distances to avoid calculating a square root.
@@ -314,30 +314,30 @@ Our last variable is a temporary variable used to store the squared distance, so
 
 Let's write or new stack allocation from this :
 
-```nasm
-    mov rbp, rsp
-    sub rsp, 40
-    ; row index : offset=8, size=8
-    ; column index : offset=16, size=8
-    ; square center : offset=24, size=8
-    ; radius squared : offset=32, size=8
-    ; distance squared : offset=40, size=8
-```
+{% highlight nasm linenos %}
+mov rbp, rsp
+sub rsp, 40
+; row index : offset=8, size=8
+; column index : offset=16, size=8
+; square center : offset=24, size=8
+; radius squared : offset=32, size=8
+; distance squared : offset=40, size=8
+{% endhighlight %}
 
 We can then add two lines to assign the square center and radius squared variables at the beginning of our function, as their value won't change :
 
-```nasm
-    ; rax is temporary used to compute square_size/2
-    mov rax, [square_size]
-    shr rax
-    ; storing the value in the square center variable
-    mov qword ptr [rbp-24], rax
+{% highlight nasm linenos %}
+; rax is temporary used to compute square_size/2
+mov rax, [square_size]
+shr rax
+; storing the value in the square center variable
+mov qword ptr [rbp-24], rax
 
-    ; rax is squared
-    imul rax, rax
-    ; storing the squared radius
-    mov qword ptr [rbp-32], rax
-```
+; rax is squared
+imul rax, rax
+; storing the squared radius
+mov qword ptr [rbp-32], rax
+{% endhighlight %}
 
 The rax register is used temporarily to compute the values of our variables.
 The square center variable is the first one to be assigned.
@@ -354,37 +354,37 @@ The `imul` instruction is used here to perform an integer multiplication of the 
 
 We can now add the last missing piece of code that compare the distances and decide if the printed character should be a star '*' or a space ' ' :
 
-```nasm
-    ; compute (row_index - square_center)² into distance_squared
-    mov rax, [rbp-8]
-    sub rax, [rbp-24]
-    imul rax, rax
-    mov [rbp-40], rax
+{% highlight nasm linenos %}
+; compute (row_index - square_center)² into distance_squared
+mov rax, [rbp-8]
+sub rax, [rbp-24]
+imul rax, rax
+mov [rbp-40], rax
 
-    ; add (col_index - square_center)² to distance_squared
-    mov rax, [rbp-16]
-    sub rax, [rbp-24]
-    imul rax, rax
-    add [rbp-40], rax
+; add (col_index - square_center)² to distance_squared
+mov rax, [rbp-16]
+sub rax, [rbp-24]
+imul rax, rax
+add [rbp-40], rax
 
-    ; compare distance_squared to radius_squared
-    mov rax, [rbp-32]
-    cmp [rbp-40], rax
-    jge .L_print_space
+; compare distance_squared to radius_squared
+mov rax, [rbp-32]
+cmp [rbp-40], rax
+jge .L_print_space
 
-    ; .L_print_star:
-        lea rsi, [star_character]
-        jmp end_print
-    .L_print_space:
-        lea rsi, [space_character]
-    .L_end_print:
+; .L_print_star:
+    lea rsi, [star_character]
+    jmp .L_end_print
+.L_print_space:
+    lea rsi, [space_character]
+.L_end_print:
 
-    ; printing the chosen character
-    mov rax, 1
-    mov rdi, 1
-    mov rdx, 1
-    syscall
-```
+; printing the chosen character
+mov rax, 1
+mov rdi, 1
+mov rdx, 1
+syscall
+{% endhighlight %}
 
 Once again, we use the `rax` register as a temporary register to compute our values.
 The first two groups of lines correspond to the computation of the squared distance between the current character and the center.
@@ -395,7 +395,7 @@ Indeed, the value of the other registers do not change between the two cases.
 
 And voilà, our circle is now printed to the terminal :
 
-```
+{% highlight plaintext linenos %}
                                         
             * * * * * * * * *           
           * * * * * * * * * * *         
@@ -416,7 +416,7 @@ And voilà, our circle is now printed to the terminal :
       * * * * * * * * * * * * * * *     
           * * * * * * * * * * *         
             * * * * * * * * *           
-```
+{% endhighlight %}
 
 ## What's next ?
 
