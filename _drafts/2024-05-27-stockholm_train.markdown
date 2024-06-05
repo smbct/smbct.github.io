@@ -79,10 +79,11 @@ Arrivée à Hambourg !
 
 ### Galères au Danemark
 
-![Passage sur le pont de l'Øresund !](/assets/stockholm/pont_danemark_suede.jpg)
-Passage sur le pont de l'Øresund !
 
 ### La journée bonus
 
 Dans le train je repère encore d'autres français.
 Je comprend alors que beaucoup doivent être en train de voyager avec l'inter-rail, ce qui rend le trajet plus robuste et moins cher !
+
+![Passage sur le pont de l'Øresund !](/assets/stockholm/pont_danemark_suede.jpg)
+Passage sur le pont de l'Øresund !
