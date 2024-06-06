@@ -5,6 +5,7 @@ date:   2024-05-03 10:00:00 +0200
 categories: low-level programming assembly
 comments: true
 layout: post
+series: x86_assembly
 ---
 
 The last few months, I developed an increasing interest in low level programming and especially in assembly programming.

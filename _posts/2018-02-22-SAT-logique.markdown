@@ -7,11 +7,11 @@ comments: true
 layout: post
 ---
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
 Afin de pouvoir parler un peu plus en détails de mon stage, je voulais aujourd'hui présenter un problème très connu en info. Ce problème, SAT de son petit nom, tente de répondre à la question suivante : pour une formule logique donnée, existe-il une affectation des variables de cette formule permettant de la rendre vraie ?
 
 Quelques explications s'imposent...
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 # Logique, Maths et Info
 

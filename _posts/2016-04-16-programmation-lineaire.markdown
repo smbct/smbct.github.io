@@ -7,16 +7,17 @@ comments: true
 layout: post
 ---
 
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
 Pour un premier article, j'ai choisi de parler d'un sujet que je vais avoir probablement l'occasion d'évoquer à nouveau par la suite : la programmation linéaire.
-
 Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l'on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d'optimisation, et des méthodes efficaces pour les traiter.
 
 > Mais au fait, c'est quoi l'optimisation finalement ?
 {: .prompt-info }
 
 Optimiser, c'est essayer de faire de la meilleure façon possible. Cela peut concerner le fait de partir d'une façon de faire, d'une procédure, d'un plan, et trouver des moyens de l'améliorer pour traiter au mieux une situation. Cela peut aussi concerner le fait de prévoir à l'avance quelle va être la meilleure stratégie pour attaquer un problème. L'améliorer peut alors vouloir dire gagner du temps, réduire des dépenses, maximiser ses chances, etc...
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
 
 ## L'optimisation en maths et en info
 

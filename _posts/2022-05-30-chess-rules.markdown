@@ -19,7 +19,7 @@ To be clear, the goal here is not to create an algorithm able to **play** chess 
 
 For this project, I decided to use the deep learning framework [pytorch](https://pytorch.org/). I started by creating a python program that is able to show a board in different configurations using [matplotlib](https://matplotlib.org/) with these [images](https://commons.wikimedia.org/wiki/Category:PNG_chess_pieces/Standard_transparent). I used the very nice [python-chess](https://python-chess.readthedocs.io/en/latest/) package as a chess engine to simplify the work. With these elements, I was already able to visualize all the board configuration form a given game, with the possible moves for each piece (see below).
 
-![The chess interface](/assets/chess_interface.png)
+![The chess interface](/assets/chess_rules/chess_interface.png)
 
 The chess interface.
 
@@ -66,7 +66,7 @@ By doing so, the model will be able to perform computations involving different 
 You can visualize the idea of the board encoding on the figure below, where the first board layers have been shown for the white pieces.
 
 
-![The input encoding.](/assets/chess_encoding.png)
+![The input encoding.](/assets/chess_rules/chess_encoding.png)
 
 
 
@@ -94,7 +94,7 @@ This way, all the intermediate inputs are 8*8 arrays, and I also introduced resi
 Finally, there are two transposed convolutional layers to obtain a final 8x8 output.
 
 
-![The model architecture.](/assets/chess_model.jpg)
+![The model architecture.](/assets/chess_rules/chess_model.jpg)
 
 
 
@@ -124,7 +124,7 @@ You can find a first comparison on the image below.
 The result is quite satisfying, although it is not perfect.
 It really gives the impression that the model learnt something, and that it is able to generalize on the data.  
 
-![First comparison between predicted moves versus legal moves.](/assets/chess_comp2.png)
+![First comparison between predicted moves versus legal moves.](/assets/chess_rules/chess_comp2.png)
 
 ## Observations
 
@@ -134,7 +134,7 @@ For instance the model allows pawns to move diagonally, which has been probably 
 The moves from the rooks are partially well predicted, but these seem difficult to compute
 We can also see that illegal moves are not managed at all by the model.
 
-![Second comparison between predicted moves versus legal moves.](/assets/chess_comp1.png)
+![Second comparison between predicted moves versus legal moves.](/assets/chess_rules/chess_comp1.png)
 
 
 

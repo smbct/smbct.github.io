@@ -7,9 +7,10 @@ comments: true
 layout: post
 ---
 
+La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C'est ce que je voudrais montrer aujourd'hui en donnant la modélisation sous forme d'un programme linéaire de la résolution d'un sudoku. La modélisation va donc être moins évidente qu'avec l'exemple présenté dans l'article sur la programmation linéaire.
+
 <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
-La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C'est ce que je voudrais montrer aujourd'hui en donnant la modélisation sous forme d'un programme linéaire de la résolution d'un sudoku. La modélisation va donc être moins évidente qu'avec l'exemple présenté dans l'article sur la programmation linéaire.
 
 ## Présentation du problème
 
