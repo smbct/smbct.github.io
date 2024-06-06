@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Plus court chemin et graphe &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="24" width="28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2024.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Plus court chemin et graphe</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">12 Jul 2017</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        optimisation
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        graphes
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        file
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        algorithme
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>Trouver un chemin, ou même le plus court chemin, est un problème courant en informatique. Parmi les applications concrètes de ce problème, on peut tout d’abord penser à l’itinéraire le plus court, donné par un dispositif GPS. Ce n’est cependant pas la seule application réelle. On peut par exemple chercher un plus court chemin pour une IA dans un jeu ou encore trouver la manière la plus rapide de mettre deux personnes en relation dans un réseau professionnel.</p>
+
+<blockquote class="prompt-info">
+  <p>Un problème facile ?</p>
+</blockquote>
+
+<p>Le problème du plus court chemin est un problème très connu et très étudié. En réalité, il y a pleins de variantes possibles. Certaines peuvent être faciles à résoudre, comme trouver le meilleur itinéraire avec un GPS. D’autres au contraire peuvent être extrêmement difficiles, comme trouver le chemin le plus court passant par un ensemble de villes, pour effectuer des livraisons par exemple (problème du voyageur de commerce/tournées de véhicules). Nous allons voir ici un algorithme simple pour résoudre un problème similaire à celui de l’itinéraire.</p>
+
+<h1 id="présentation-du-problème">Présentation du problème</h1>
+
+<p>Imaginons que nous connaissons certaines personnes qui détiennent une même information cruciale que nous voulons récupérer. Le soucis est que ces personnes ne nous donneront pas ce message directement, par manque de confiance. En effet, elle ne font confiance qu’à leurs amis directs et le confieront seulement à eux.</p>
+
+<p>Si on considère notre cercle d’amis, nous sommes connectés à un certain nombre de personnes qui sont elles-même connectées à d’autres personnes par des relations d’amitié. Notre défi est de récupérer cette information le plus rapidement possible, en la faisant transmettre d’amis en amis. Pour ce faire, nous allons donc demander à nos amis proches de demander a leurs amis de demander à leurs amis etc… jusqu’à ce qu’un personne diffuse l’information dans le sens inverse pour qu’elle revienne vers nous.</p>
+
+<p>L’objectif est donc de trouver le lien le plus court entre nous et l’information, c’est à dire de trouver une suite de personne Alice - Bob - Charles - … la plus courte telle que deux personnes successives sont amies, la première personne de la liste étant nous et la dernière étant une personne qui détient l’info.</p>
+
+<h1 id="détour-par-les-graphes">Détour par les graphes</h1>
+
+<p>Les données de notre problèmes constituent un réseau d’amis. Nous avons les noms des personnes, ainsi que leurs relations, c’est à dire avec quelles autres personnes elle sont amies. Une bonne façon de manipuler nos données est de les représenter sous forme d’un graphe.</p>
+
+<p>Un graphe est un objet mathématique qui peut être utilisé pour manipuler des données comportant une relation.
+Cet objet est constitué de <strong>sommets</strong> (ici les différentes personnes) et d’<strong>arêtes</strong>, qui représentent les liens entre les différents sommets (ici ce sont les liens d’amitié).</p>
+
+<h1 id="algorithme-de-résolution">Algorithme de résolution</h1>
+
+<p>L’algorithme de résolution du problème est un algorithme qui effectue un <strong>parcours en largeur</strong> du graphe. Cela signifie qu’il va parcourir tous les sommets du graphe, en commençant du plus proches du sommet de départ au plus éloignés. Dire que deux sommets sont proches signifie ici qu’ils sont connectés par un petit nombre d’<strong>arêtes</strong>.</p>
+
+<h2 id="déroulement-de-lalgorithme">Déroulement de l’algorithme</h2>
+
+<p>L’algorithme utilise une file d’attente (souvent appelé <strong>file</strong> en info) contenant les sommets (amis) à <em>visiter</em>. Au tout début, cette file d’attente contient le sommet qui nous réprésente dans le graphe. Ensuite, une même étape est répétée tant que la file d’attente n’est pas vide : le <strong>premier</strong> sommet ajouté dans la file est retiré et l’algorithme vérifie si il contient l’info recherchée. Si c’est le cas, il peut s’arrêter, sinon il retire ce sommet et ajoute tous les amis de ce sommet.
+Une seule règle doit être respectée : les amis d’un sommet sont ajoutés à la file uniquement s’ils n’ont pas déjà été visités par l’algorithme.</p>
+
+<p>L’algorithme va donc parcourir progressivement le graphe en partant d’un sommet et en allant vers ses amis. Concrètement, il va d’abord considérer le premier sommet, celui qui nous correspond. Il va ensuite chercher tous les amis de ce sommet et les ajouter à une file d’attente. Ces amis seront ensuite considérés et l’algorithme va vérifier si l’info est détenu par l’un d’eux. Enfin les amis de cet ami considéré seront ajoutés à la file d’attente également.</p>
+
+<p>Il y a encore une chose dont on a pas parlé. Avec les étapes précédentes, on est capable de trouver l’info mais on ne peut pas encore afficher le chemin qui permet de l’atteindre (c’est à dire la liste des personnes). On a cependant déjà fait le plus gros du travail. Pour retrouver le chemin on procède en plusieurs étapes. Dans une premier temps, on indique pour chaque sommet à partir de quel sommet on l’a visité. Par exemple, si on visite le sommet A et on ajoute son ami B à la file, on indique alors que B est obtenu à partir de A. La deuxième étape consiste à prendre le sommet contenant l’info une fois sorti de la boucle, et a remonter successivement vers le sommet d’origine pour finir vers le sommet nous représentant.</p>
+
+<h2 id="un-mot-sur-les-files">Un mot sur les files</h2>
+
+<p>L’algorithme que je propose pour résoudre ce problème utilise une structure de donnée appelée file (la fameuse file d’attente). En quelque mots, une file est une liste d’éléments, ici de sommets ou de personnes. Le premier élément est appelé la tête et le dernier la queue.</p>
+
+<p>Elle respecte deux propriétés :</p>
+
+<ul>
+  <li>lorsqu’un élément est ajouté à la file, il est ajouté à la fin et il devient ainsi la queue</li>
+  <li>le seul élément qui peut être consulté et retiré est le premier élément, c’est à dire la tête.</li>
+</ul>
+
+<p>Cette structure de donnée est généralement appelée FIFO (First In First Out). En effet, dans une telle structure, c’est le premier élément ajouté dans la file qui sera retiré en premier. Pensez donc à la file d’attente de la caisse d’un magasin. On ne peut s’insérer qu’à la fin de la file (en général!) et c’est la première personne arrivée qui est servie en premier.</p>
+
+<p>Créer les mécanismes d’une file est assez simple. Il y a plusieurs façon de le faire et tous les langages de programmation proposent directement ce genre d’outil.</p>
+
+<h2 id="algorithme-en-pseudo-code">Algorithme en pseudo code</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ajout à file du sommet nous correspondant
+
+TANT QUE l'info n'est pas trouvée et que la file n'est pas vide FAIRE
+
+    sommet &lt;- tête de la file
+    retirer la tête de la file
+
+    SI le sommet contient l'info ALORS
+        sortir de la boucle
+    SINON
+        ajouter à la file ses amis non visités
+        indiquer aux sommets amis que leur sommet d'origine est le sommet visité
+    FIN SI
+
+FIN TANT QUE
+
+SI l'info a été trouvée ALORS
+    afficher l'info
+    reconstruire le chemin à partir des sommets d'origines
+FIN SI  
+
+</code></pre></div></div>
+
+<h2 id="explications-sur-lalgorithme">Explications sur l’algorithme</h2>
+
+<p>Il n’est pas forcément évident au premiers abords de comprendre réellement ce que l’algorithme fait. Je rappelle qu’on cherche ici un plus court chemin. Si le chemin trouvé est bien le plus court (ou un des plus court) c’est pour une unique raison. Ce qu’il faut garder à l’esprit, c’est que tous les amis des sommets visités sont ajoutés à la <strong>fin</strong> de la liste d’attente. Cela signifie qu’ils seront visités seulement après tous les sommets présents avant dans la liste. De plus, les sommets ajoutés en fin de liste auront toujours une distance supérieure à ceux ajoutés avant (la distance est le nombre d’amis intermédiaires qui sépare Moi du sommet). De ce fait, lorsqu’un sommet contenant l’info est trouvé, tous les sommets de distance inférieur ont déjà été visités.</p>
+
+<h1 id="exemple-pas-à-pas">Exemple pas à pas</h1>
+
+<p>Voici un exemple de graphe d’amis. Le sommet nous représentant est le sommet <em>Moi</em> et le sommet contenant l’info est le sommet avec la pastille jaune (Jackorah). Nous allons ici dérouler toutes les étapes de la résolution du problème. La liste des sommets d’origines est présente à la fin de l’exemple.</p>
+
+<p><img src="/assets/graphe_exemple.png" alt="Un exemple" /></p>
+
+<p>Comme dit précédemment, un tout début, la file d’attente contient uniquement le sommet nous représentant :</p>
+
+<p>-&gt; Moi</p>
+
+<p>On entre ensuite dans la boucle et on retire ce sommet de la file. Ce sommet n’est pas un sommet contenant l’info, on ne sort donc pas de la boucle. On ajoute donc les sommets amis de ce sommet. On n’oublie pas de préciser pour les amis que Moi est leur sommet d’origine. Cela donne :</p>
+
+<p>-&gt; Ley ; Ricnath ; Joanea</p>
+
+<p>Nouveau tour de boucle, l’algorithme retire le premier sommet de la file (le seul accessible pour cette structure de donnée). Manque de chance, Ley ne détient pas l’info non plus, on ajoute donc ses amis à la fin de la file.</p>
+
+<p>-&gt; Ricnath ; Joenea ; Kimi</p>
+
+<p>On recommence encore une fois, cette fois c’est Ricnath qui est visité, il ne détient pas l’info, ses amis sont ajoutés.</p>
+
+<p>-&gt; Joanea ; Kimi ; Here’chet</p>
+
+<p>Au tour de Jonea désormais. Toujours pas d’info, on ajoute ses amis… Ah mince ! Here’chet a déjà été ou est présent dans la file, on ne l’ajoute donc pas !</p>
+
+<p>-&gt; Kimi ; Here’chet</p>
+
+<p>Au tour de Kimi, pas d’info ni d’amis, on passe vite dessus.</p>
+
+<p>-&gt; Here’chet</p>
+
+<p>Le fameux Here’chet désormais. Ah toujours rien ! Mais il a un amis, on l’ajoute donc à la file.</p>
+
+<p>-&gt; Jackorah</p>
+
+<p>Notre dernière chance, car il n’a pas d’amis et si la liste est vide alors l’algo s’arrête. Ouf ! Il a bien l’info, on peut la récupérer.</p>
+
+<p>Voici le tableau des sommets d’origine :</p>
+
+<hr />
+
+<table style="width:100%">
+ <tr>
+   <th>Sommet</th>
+   <th>Ley</th>
+   <th>Kimi</th>
+   <th>Ricnath</th>
+   <th>Joanea</th>
+   <th>Here'chet</th>
+   <th>Jackorah</th>
+ </tr>
+ <tr>
+   <td>Sommet d'origine</td>
+   <td>Moi</td>
+   <td>Ley</td>
+   <td>Moi</td>
+   <td>Moi</td>
+   <td>Ricnath</td>
+   <td>Here'chet</td>
+ </tr>
+</table>
+
+<hr />
+
+<p>Ceci nous permet donc de reconstruire la liste. On part donc du sommet sur lequel on a trouvé l’info : Jackorah. On remonte vers le sommet d’origine, cela donne Here’chet. On continue avec le sommet d’origine de Here’chet, cela donne Ricnath. Et on termine enfin car le sommet d’origine de Ricnath est Moi.</p>
+
+<p>Finalement on obtient donc la liste : Moi -&gt; Ricnath -&gt; Here’chet -&gt; Jackorah</p>
+
+<p>On a donc une liste de 4 personnes, et il n’est pas possible de faire plus court. On peut néanmoins remarquer qu’il y avait un autre chemin de même longueur possible. Le chemin retourné par l’algorithme dépend en fait de l’ordre dans lequel sont ajouté les amis d’un sommet.</p>
+
+<h1 id="détails-sur-limplémentation">Détails sur l’implémentation</h1>
+
+<p>Certains détails n’ont toujours pas été éclairés dans l’algorithme. Comme précisé précédemment, les files sont présentes dans tous les langages, donc pas besoin de les reprogrammer. Cependant, les graphes sont des structures un peu plus sophistiquées et il y a de nombreuses façon de les implémenter.</p>
+
+<p>Dans l’implémentation que je propose plus bas, j’ai choisi de programmer le graphe en utilisant une <strong>liste de successeurs</strong>. Cela signifie que chaque sommet du graphe contient un lien vers la liste des sommets qui lui sont connectés. En faisant comme ceci, on peut alors accéder facilement aux sommets connectés. Le seul problème est que si on cherche un ami en particulier, il faut parcourir toute la liste d’amis pour le trouver. Avec cette implémentation, il faut également garder à l’esprit que la liste des amis contient uniquement des <strong>liens</strong> vers les sommets amis, et que la mémoire n’est pas recopiées dans toutes les listes.</p>
+
+<p>Il y a beaucoup d’autre façons d’implémenter des graphes. Une autre façon de faire est d’utiliser un tableau indiquant pour chaque couple de sommet si ils sont connectés (ou amis) ou non. Cette façon de faire utilise plus de mémoire car il y a autant de variables que de connexions possibles dans le graphe.</p>
+
+<p>Enfin, concernant l’implémentation, on peut également parler de l’obtention de la liste finale à partir des sommets d’origine. Pour la liste des sommets d’origines, on peut utiliser une liste d’association qui associe à chaque sommet un lien vers un autre sommet qui est son sommet d’origine. Ensuite, pour construire le chemin, il suffit d’écrire une boucle qui bascule vers le sommet d’origine et va cherche son propre sommet d’origine à chaque étape.</p>
+
+<h1 id="code">Code</h1>
+
+<p>Vous pouvez retrouver une implémentation de l’algorithme <a href="https://github.com/smbct/blog_code/tree/master/graphe_secret">ici</a>. L’implémentation a été faite en python. Elle permet de générer aléatoirement un graphe d’amis à partir d’une liste de noms et calcule le plus court chemin pour récupérer l’information dans le graphe. Le code est commenté et le fichier readme donne les détails pour l’exécution du programme.</p>
+
+<h1 id="vers-les-algorithmes-dintelligence-artificielle">Vers les algorithmes d’intelligence artificielle</h1>
+
+<p>En conclusion, nous avons vu ici un algorithme de base mais qui est également fondamental en informatique. On a fait du parcours de graphe, ce que l’on retrouve dans de nombreux problèmes. Il y a beaucoup de façons de parcourir un graphe, par exemple en largeur, ce qui est présenté ici, ou encore en profondeur, en ajoutant les amis en début de liste d’attente. Ces types de parcours peuvent être utilisés dans de nombreux types de graphes. On considère souvent des parcours d’<strong>arbres</strong> lorsqu’un un sommet n’est jamais visité deux fois.</p>
+
+<p>Lorsqu’on essaie de résoudre des problèmes de plus en plus complexes, ce qu’on pourrait appeler intelligence artificielle, ces parcours de graphes reviennent très souvent. Par exemple, si on veut créer un programme jouant aux échecs, on va alors explorer le graphe des coups possibles, et essayer de sélectionner le meilleur coup possible. On ne cherche alors plus une simple information mais on cherche à maximiser le score. Dans ce genre de problème, l’algorithme présenté ici est malheureusement très inefficace à cause de la taille du graphe/de l’arbre considéré. Mais des algorithmes très efficaces existent, dont on aura peut-être l’occasion de reparler.</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/sat/logic/puzzle/games/model-checking/2023/05/15/pokemon-puzzle.html">
+            Solving a pokemon puzzle with SAT solvers
+            <small>15 May 2023</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/deep-learning/chess/games/combinatorics/2022/05/30/chess-rules.html">
+            Can deep neural networks learn the rules of chess ?
+            <small>30 May 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/these/doctorat/covid/comodal/2022/04/26/soutenance-these.html">
+            Soutenir sa thèse en comodal en 2022
+            <small>26 Apr 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

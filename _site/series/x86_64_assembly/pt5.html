@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Assembly x86 programming 101 &#58 part 5, printing arrays &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+
+
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="24" width="28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2024.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Assembly x86 programming 101 &#58 part 5, printing arrays</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">21 May 2024</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        low-level programming assembly
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>and also how to interact with C functions in our program!
+We will use these new notions to print the content of an integer array in assembly.</p>
+
+<h2 id="calling-the-c-printf-functions">Calling the C printf functions</h2>
+
+<p>One dimension that function calls bring to our program is not only the ability to structure it, but also the opportunity to call higher level libraries that would perform more advanced operations like opening windows, networking, etc..
+However, although we previously had the freedom to decide our own convention for parameters and return value, calling a function from a library requires us to follow the library’s convention.
+We will see how to do so by calling the “printf” function from the standard C library.</p>
+
+<h4 id="using-the-c-standard-lib-in-our-program">Using the C standard lib in our program</h4>
+
+<p>Our program’s compilation will now change a bit.
+Previously, we created executables from assembly code by using nothing more than systems calls to interact with a user.
+Now, the idea is to interface the program with the C standard library.</p>
+
+<p>Adding the C standard library to our program’s is simply done by removing the option <code class="language-plaintext highlighter-rouge">-nostdlib</code> when linking the executable with gcc.
+However, the C library adds a lot more features to our program : it defines the _start function (program’s entry point) by itself.
+For this reason, our program’s first function will now be the classical <code class="language-plaintext highlighter-rouge">main</code> function.
+The “hello world” code now becomes :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">.global</span> <span class="nv">main</span>
+<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+
+<span class="nl">main:</span>
+
+    <span class="nf">push</span> <span class="nb">rbp</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
+    <span class="nf">syscall</span>
+
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">pop</span> <span class="nb">rbp</span>
+
+    <span class="c1">; return</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">42</span>
+    
+    <span class="nf">ret</span>
+
+<span class="nl">hello_world:</span>
+    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
+</code></pre></div></div>
+
+<p>There are two changes regarding the previous hello_world : our function is now called main and it will be automatically be called by the <code class="language-plaintext highlighter-rouge">_start</code> function defined in the cstdlib ; and since it is now a called function, the <code class="language-plaintext highlighter-rouge">ret</code> instruction is now called at its end.
+The compilation is done as previously, except for the second command that now becomes <code class="language-plaintext highlighter-rouge">gcc -static my_program.o -o my_program</code>.</p>
+
+<p>You can verify that the program’s output is actually <em>42</em>, which is given as the main’s return value : <code class="language-plaintext highlighter-rouge">./my_program ; echo $?</code>.
+Now if you try to compile our first hello_world program with this same command, so that it is linked with the c standard library, this would not work since the program’s entry point <code class="language-plaintext highlighter-rouge">_start</code> would be defined twice : once in the code and another time in the library.
+If you want a more precise idea of the additional material added by the standard libc, you might check this <a href="http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html">interesting article</a>!</p>
+
+<h4 id="passing-parameters-to-printf">Passing parameters to printf</h4>
+
+<p>Now that everything is in place, let’s call the printf function.
+Know that since the standard libc is now linked, the <code class="language-plaintext highlighter-rouge">printf</code> symbol will be known by the linker.
+Now the important thing is to see how to pass parameters to the “printf” functions.
+That part is tricky : the (calling) convention used by Linux is called the <strong>AMD64 System V ABI</strong>.</p>
+
+<p>Documentation is sometimes hard to find and I personally learned this from this <a href="https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler">stackoverflow post</a>.
+You can see in the post that parameters are in part passed by registers : <code class="language-plaintext highlighter-rouge">rdi</code> for the first one, <code class="language-plaintext highlighter-rouge">rsi</code> for the second one, <code class="language-plaintext highlighter-rouge">rdx</code> for the third etc.. 
+They also indicate that the <code class="language-plaintext highlighter-rouge">al</code> (the 8 bits version of <code class="language-plaintext highlighter-rouge">rax</code> register) register must be set to 0 since “printf” has a variable number of arguments.</p>
+
+<p>Following the convention, our printf call to print “hello world” now becomes :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span> <span class="c1">; al is set to 0</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span> <span class="c1">; 1st argument passed to register</span>
+    <span class="nf">call</span> <span class="nv">printf</span>
+</code></pre></div></div>
+
+<p>If you try this, you would normally see a segmentation fault :(</p>
+
+<h4 id="one-more-requirement--stack-pointer-alignment">One more requirement : stack pointer alignment</h4>
+
+<p>By further reading the stackoverflow post that I linked above, we learn that there is on more condition that needs to be met when calling functions in the <strong>AMD64 System V ABI</strong> convention : the stack pointer must be aligned to 16 bytes, meaning its value must be a multiple of 16.</p>
+
+<p>You can run gdb on your program and check the value of <code class="language-plaintext highlighter-rouge">rsp</code> before calling “printf” : <code class="language-plaintext highlighter-rouge">breakpoint main</code> followed by <code class="language-plaintext highlighter-rouge">print $rsp</code>.
+It gives <em>0x7fffffffdbd8</em> for me and <em>0x7fffffffdbd8 modulo 0x10 = 0x8</em> (where <em>0x10</em> is 16 in hexadecimal).
+We see that there is an 8 bytes shift of the <code class="language-plaintext highlighter-rouge">rsp</code> value.
+This shift comes from the fact that the <code class="language-plaintext highlighter-rouge">call</code> instruction pushes the return address (8 bytes) to the stack, as we saw previously.
+As a result the stack pointer is misaligned by 8 bytes.
+This will be fixes by simply re-aligning the stack pointer before starting the call, which can be done by “allocating” 8 additional bytes (unused) :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
+    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span> <span class="c1">; al is set to 0</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span> <span class="c1">; 1st argument passed to register</span>
+    <span class="nf">call</span> <span class="nv">printf</span>
+    <span class="nf">add</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
+</code></pre></div></div>
+
+<p>This should now work as expected!
+Note that since our string is zero terminated (it ends by ‘\0’, as defined by the .asci<strong>z</strong> type with the gnu assembler), it is not necessary to specify its length to printf.</p>
+
+<p>In our following codes, we will now make sure the stack pointer is well aligned before starting any operation in our functions.
+A proper place to do it is when the local variables are allocated, as we saw in the previous post of the series.
+This may also be done automatically by subtracting the offset : <code class="language-plaintext highlighter-rouge">rsp</code> modulo 8, which can be performed by “anding” 15 to the value of <code class="language-plaintext highlighter-rouge">rsp</code>: <code class="language-plaintext highlighter-rouge">and rsp, 15</code> (recall that a modulo operation on a power of two can be obtained by directly looking at the right number of bits in the binary representation).</p>
+
+<h4 id="printing-integers-with-printf">Printing integers with printf</h4>
+
+<p>Calling a C function was not easy!
+The good thing is now it will be much easier to bring concrete features to our programs.
+Let’s start by accomplishing a task that was previously much harder : printing integer values.</p>
+
+<p>To print a value in the terminal, we can use the printf function with its formatting ability : the value would be passed as a parameter, as well as a string indicating how to format it.
+We can have a look at the <a href="https://cplusplus.com/reference/cstdio/printf/">documentation</a> of “printf” to choose the correct formatter.
+We start by defining the formatter as a constant string in our program (this does not change) :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">integer_formatter:</span>
+    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">integer</span> <span class="nv">value</span><span class="p">:</span> <span class="o">%</span><span class="nv">i</span><span class="err">\</span><span class="nv">n</span><span class="err">"</span>
+</code></pre></div></div>
+
+<p>The  “%i” formatter is used in order to print a decimal integer.
+We will then call printf and pass this string as well as the register value.
+For this, we will use the <code class="language-plaintext highlighter-rouge">rsi</code> register, as it is specified to pass the second argument in Linux.</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">integer_formatter</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="mi">42</span>
+    <span class="nf">call</span> <span class="nv">printf</span>
+</code></pre></div></div>
+
+<p>The program should now print: “integer value: 42”.
+This adds a lot more possibilities to interact with the user!</p>
+
+<h2 id="printing-an-array">Printing an array</h2>
+
+<p>Now that we know how to call printf, we will perform a useful task for the future post : printing an array!
+We will start by defining a constant array in the program’s memory :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">my_array:</span>
+    <span class="nf">.byte</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">14</span>
+<span class="nl">my_array_length:</span>
+    <span class="nf">.word</span> <span class="mi">9</span>
+</code></pre></div></div>
+
+<p>In this case, the array elements will be stored as bytes (8 bits long, integer values between -128 and 127).
+We also define a constant for its size as a word (2 bytes).
+That will eventually be helpful.</p>
+
+<p>Now we may define our strings constants to be used by printf :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">array_elt_formatter:</span>
+    <span class="nf">.asciz</span> <span class="s">"%hhd "</span>
+<span class="nl">new_line:</span>
+    <span class="nf">.asciz</span> <span class="err">"\</span><span class="nv">n</span><span class="s">"
+my_array_str:
+    .asciz "</span><span class="nv">My</span> <span class="nv">array</span> <span class="p">:</span> <span class="err">"</span>
+</code></pre></div></div>
+
+<p>The “array_elt_formatter” is used to format a single byte as an integer with printf, followed by a space.
+We also define the new_line string that only prints the return character for convenience, as well as a string announcing the array to be printed.</p>
+
+<h4 id="the-local-variables">The local variables</h4>
+
+<p>We will need 2 local variables in our code : an 8 bytes variable to store the array address and a 2 bytes variable to an index for iterating over the array.
+This results in 10 bytes allocated on the stack.
+With the 8 bytes already present to store the return address of the main function, the stack pointer would be aligned to 26 bytes.
+Hence, 6 additional bytes are necessary for a 16 bytes alignment (<em>32=2x16</em>).</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; storing the rsp value before local variables definition</span>
+<span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+<span class="c1">; rbp - 8 : array pointer, 8 bytes</span>
+<span class="c1">; rbp - 10 : array index, 2 bytes</span>
+<span class="c1">; 6 padding bytes</span>
+<span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">24</span>
+</code></pre></div></div>
+<p>The local variables are then initialized, and the first string announcing the array can be printed :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="mi">0</span> <span class="c1">; array_index &lt;- 0</span>
+<span class="c1">; loading the array pointer</span>
+<span class="nf">lea</span> <span class="nb">rax</span><span class="p">,</span> <span class="nv">my_array</span>
+<span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rax</span>
+
+<span class="c1">; printing the "my_array_str" string</span>
+<span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+<span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">my_array_str</span><span class="p">]</span>
+<span class="nf">call</span> <span class="nv">printf</span>
+</code></pre></div></div>
+
+<h4 id="writing-the-main-loop">Writing the main loop</h4>
+
+<p>The main scheme here is similar to our print_square and print_circle programs.
+What changes is the call to printf and the array manipulation in order to extract its values.
+Accessing the values of the array is performed by increasing the array address.
+Indeed, the address accessed through the label “my_array” actually points toward the first value of the array in the program’s memory.
+Since are the values are contiguous, and since they are coded on 1 byte, accessing the next value is performed by increasing the address by one (recall that the addresses are expressed as bytes).</p>
+
+<p>Our main loop is as follows :</p>
+
+<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">for_loop_writing:</span>
+    <span class="c1">; printing the "my_array_str" string</span>
+    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">array_elt_formatter</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; load the array pointer</span>
+    <span class="nf">mov</span> <span class="nb">si</span><span class="nv">l</span><span class="p">,</span> <span class="p">[</span><span class="nb">rsi</span><span class="p">]</span> <span class="c1">; load the value stored at the address</span>
+    <span class="nf">call</span> <span class="nv">printf</span>
+
+    <span class="nf">inc</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; increase the array pointer</span>
+    <span class="nf">inc</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span> <span class="c1">; increase the array index</span>
+    <span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+    <span class="nf">cmp</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nv">my_array_length</span><span class="p">]</span>
+    <span class="nf">jne</span> <span class="nv">for_loop_writing</span> <span class="c1">; test if all characters have been printed</span>
+</code></pre></div></div>
+
+<p>You may notice that two steps are necessary to load a value from the array before calling printf : the address of the array must first be retrieved from the stack and then, the <code class="language-plaintext highlighter-rouge">mov</code> instruction is used to load the value coded at the address.
+Note that the 1-byte register <code class="language-plaintext highlighter-rouge">sil</code> is used here to store the array values since the array values are encoded on single bytes.
+These two steps cannot be concatenated into a sigle one since an instruction can have a memory reference in only one of its operand.</p>
+
+<p>After the call to printf, the array index is increased as well as the array address.
+Note the different prefixes as these two values are not coded on the same number of bytes.
+Then, the index is compared to the array size, which is performed on two steps for the reasons evoked just before.</p>
+
+<p>This is it for printing the array !
+The next step for this code would be to encapsulate it as a function.
+This time, we may use the “Linux calling convention” to pass the parameters : for instance using <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">si</code> (<code class="language-plaintext highlighter-rouge">rsi</code>) to pass the array pointer and the array length respectively.
+I will leave it as an exercise and put the solution in the repository.</p>
+
+<h2 id="whats-next-">What’s next ?</h2>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

@@ -10,8 +10,7 @@ layout: post
 Cette année, mon travail m'a donné la chance d'assister à une conférence de recherche en Suède.
 Malheureusement, les conférences de chercheurs me renvoient une image de plus en plus négative à l'heure de l'urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l'avion pour passer quelques jours seulement à l'étranger (potentiellement à l'autre bout du monde) à écouter des présentations de travaux d'autres chercheurs.
-L'avion n'est qu'une part des émissions CO2 de l'activité humaine, soit.
-Mais quand même, l'impacte individuel est énorme.
+L'impacte individuel des déplacements en avion en terme d'émissions CO₂ est énorme.
 Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressources fragiles, qui souffre énormément de l'activité humaine ?
 
 En tout cas je suis décidé personnellement: aucuns de mes déplacements ne justifient un impacte aussi négatif.
@@ -38,15 +37,16 @@ Le [pont de l'Øresund](https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund) 
 Pour rejoindre le Danemark, il parait évident de passer par Hambourg, une des plus grandes villes d'Allemagne et relativement proche de la frontière avec le Danemark.
 Voulant effectuer le trajet rapidement en évitant au maximum les nuits d'hôtel, j'ai décidé d'effectuer le trajet entre Hambourg et Stockholm de nuit, ce qui est possible grâce à un train de nuit direct opéré par la société ferroviaire suédoise (la ligne complète va en fait de Berlin à Stockholm, et inversement).
 L'autre partie du trajet consiste donc à effectuer un Paris - Hambourg, ce qui est faisable à la journée.
+
 Pour les non parisiens, il faut éventuellement rajouter à cela une étape supplémentaire que je ne détaille pas ici pour rejoindre Paris (soit la veille, soit suffisamment tôt).
 Cette étape peut probablement être sautée pour les personnes vivant dans l'est de la France.
 
 ![Carte des chemins de fer en Europe.](https://i.pinimg.com/originals/e3/b3/5c/e3b35c9e96b9c906e0b2c68ec5db783d.gif)
 Carte des chemins de fer en Europe, empruntée de [Train World](https://trainmaps.netlify.app/rail-europe-train-maps.html).
 
-Pour récapituler le trajet, l'idée a donc été de partir de Paris au matin pour me rendre à Hambourg en fin d'après-midi.
+Pour récapituler, l'idée est donc de partir de Paris au matin pour me rendre à Hambourg en fin d'après-midi.
 Ce trajet était prévu initialement avec une unique correspondance en Allemagne.
-Après cela, le train de nuit au départ d'Hambourg permettait d'arriver à Stockholm dans la matinée de la journée suivante.
+Après cela, le train de nuit au départ d'Hambourg me permet d'arriver à Stockholm dans la matinée de la journée suivante.
 **Plutôt simple, n'est-ce pas ?**
 
 
@@ -54,10 +54,11 @@ Après cela, le train de nuit au départ d'Hambourg permettait d'arriver à Stoc
 ### Les premiers soucis avant le départ
 
 J'étais évidemment conscient avant de partir qu'un tel trajet en train est assez risqué : il suffit qu'un train saute et qu'une correspondant ne soit pas possible pour que cela se répercute sur tous les autres trains.
-Pire encore.
-Le trajet étant découpé en deux parties, les différentes compagnies ferroviaires ne seraient d'aucune aide en cas de problème sur les correspondances entre ces deux parties cat il s'agissait d'un trajet personnalisé.
+Pire encore, le trajet étant composé par mes soins à partir de deux parties distinctes, les différentes compagnies ferroviaires n'ont aucune obligation d'assurer ces correspondances et de nous assister en cas de problèmes. 
+
 
 Pour anticiper les problèmes, j'ai effectué les réservations le plus tôt possible et de manière flexible, permettant d'échanger les billets tardivement en cas de besoin.
+Voyageant dans un cadre professionnel, je suis passé par le prestataire en contrat avec mon employeur
 Des travaux prévus sur les voies concernées ont cependant retardé cette étape de réservation car 
 
 Les premiers soucis sur ce voyage se sont présentés avant le départ.

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  <title>
+    
+      Optimisation et sudoku &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+  
+    <a class="home-link "
+        href="/">Home</a>
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="24" width="28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+</nav>
+
+  <p>
+  &copy; 2024.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+
+    <main class="container">
+      <header>
+  <h1 class="post-title">Optimisation et sudoku</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">02 Aug 2016</span>
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        optimisation
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        IA
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        jeux
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.</p>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<h2 id="présentation-du-problème">Présentation du problème</h2>
+
+<p>La résolution du sudoku consiste à trouver des valeurs pour les cases vides d’une grille de telle sorte que plusieurs contraintes soient respectées. On cherche donc a représenter ce problème sous forme d’un programme linéaire. Plus précisément, on veut trouver un ensemble de de variable traduisant les décisions à prendre pour résoudre le problème. Les décisions sont ici les chiffres à insérer dans les cases vides.</p>
+
+<blockquote class="prompt-info">
+  <p>Et en quoi c’est un problème d’optimisation ?</p>
+</blockquote>
+
+<p>Ce n’est tout simplement pas un problème d’optimisation. On cherche une valeur pour chaque case telle que la grille soit correcte. Cependant, la programmation linéaire peut tout de même nous venir en aide. Même s’il y avait plusieurs solutions possibles, seule une nous intéresse. On peut évidemment définir une fonction objectif pour obtenir des conditions supplémentaires sur le résultat mais ça n’aurait pas d’intérêt pratique. Le fait est que trouver une solution réalisable (c’est à dire une grille valide) est facile à faire lorsqu’on sait trouver la solution optimale d’un problème. Donc bien que l’optimisation n’ait pas vraiment de sens ici, on utilise un outil que l’on sait efficace pour répondre à une question plus facile.</p>
+
+<h2 id="rappels-sur-le-jeu">Rappels sur le jeu</h2>
+
+<p>Le problème consiste donc à remplir la grille de sudoku de taille 9*9 avec des valeurs valides. Les données du problème sont donc un ensemble de valeur comprises entre 1 et 9 et les positions de ces valeurs dans la grille.</p>
+
+<p>Voilà la grille d’exemple que nous allons résoudre :</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>4</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>8</td>
+      <td>7</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>4</td>
+      <td>7</td>
+      <td>*</td>
+      <td> </td>
+      <td>9</td>
+      <td>2</td>
+      <td>*</td>
+      <td> </td>
+      <td>5</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>6</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td> </td>
+      <td>3</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>7</td>
+      <td> </td>
+      <td>*</td>
+      <td>5</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>2</td>
+      <td> </td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td> </td>
+      <td>8</td>
+      <td>*</td>
+      <td> </td>
+      <td>2</td>
+      <td>4</td>
+      <td>*</td>
+      <td>7</td>
+      <td> </td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td> </td>
+      <td>4</td>
+      <td>*</td>
+      <td> </td>
+      <td> </td>
+      <td>7</td>
+      <td>*</td>
+      <td> </td>
+      <td>8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>9</td>
+      <td> </td>
+      <td>*</td>
+      <td>3</td>
+      <td> </td>
+      <td>8</td>
+      <td>*</td>
+      <td> </td>
+      <td> </td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>3</td>
+      <td>*</td>
+      <td>2</td>
+      <td>4</td>
+      <td> </td>
+      <td>*</td>
+      <td>1</td>
+      <td>6</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>1</td>
+      <td>2</td>
+      <td>*</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td> </td>
+      <td>9</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>J’ai rajouter des cases supplémentaires afin de visualiser les différentes zones. On veut donc trouver des valeurs pour les cases vides tout en respectant certaines contraintes :</p>
+
+<ol>
+  <li>Les valeurs des cases sont comprises entre 1 et 9</li>
+  <li>Sur chaque ligne, on ne peut pas trouver plusieurs cases ayant la même valeur</li>
+  <li>Sur chaque colonne, on ne peut pas trouver non plus plusieurs cases ayant la même valeur</li>
+  <li>Dans chaque bloc de 3*3 cases matérialisé dans la grille ci-dessus, on ne peut encore pas trouver plusieurs fois la même valeur</li>
+</ol>
+
+<h2 id="modélisation-du-problème">Modélisation du problème</h2>
+
+<p>Comme pour la modélisation de l’article sur la programmation linéaire, on va procéder par étape. Tout d’abord, on va choisir les variables du problème et ensuite on écrira les différentes contraintes. La modélisation sera ensuite terminés car il n’y a pas de fonction objectif. Il est toutefois possible d’en mettre une quelconque. Cela peut être nécessaire si le solver utilisé (le programme de résolution) ne permet pas de résoudre des problèmes sans fonction objectif. Mais encore une fois, peu importe la fonction objectif. A partir du moment où les contraintes sont respectées et la modélisation est correcte, la résolution donnera une solution correcte à notre problème.</p>
+
+<h3 id="les-variables">Les variables</h3>
+
+<p>Lorsque j’ai commencé à réfléchir au problème, j’ai voulu choisir une variable par case. Comme cela, on obtenait à la fin de la résolution directement la valeur de chaque case. Ce choix me semblait naturel mais la modélisation qui en résultait n’était pas simple. En effet, de cette façon, toutes les contraintes ne sont pas faciles à traduire en terme de programme linéaire. Bien sûr, la contrainte n°1 est très simple mais pour les contraintes suivantes, ce n’est pas la même chose. On veut exprimer le fait qu’une variable ne peut pas être égale à une autre variable ou à une constant.</p>
+
+<p>Par exemple, si on se situe dans la case en haut à gauche de la grille et on considère la première colonne, on ne pourra pas choisir 2, 9, 5 et 6 comme valeur. On voudrait donc écrire quelque chose comme : \(var \neq 2\), \(var \neq 9\), etc…  Ces inégalités ne sont pas valides en programmation linéaire. On pourrait les remplacer par quelque chose comme \(var &lt; 2\) ou \(var &gt; 2\) pour la première. Encore une fois, on se heurte à plusieurs obstacles. Premièrement, les inégalités de programmes linéaires sont seulement des inégalités larges. Ici, comme on ne manipule uniquement des entiers, on peut écrire à la place : \(var \leq 1\) <em>ou</em> \(var \geq 3\). On peut alors sembler être tiré d’affaire mais… toujours pas ! Il faut en effet se rappeler que les contraintes d’un programme linéaire doivent être vérifiée simultanément. C’est donc le <em>ou</em> qui pose problème ici. Enfin, le nombre de contrainte à écrire devient très important. En effet, pour chaque variable, on a besoin de 19 contraintes. Face à tous ces inconvénients, on va donc chercher un meilleur moyen de modéliser le soduko.</p>
+
+<blockquote class="prompt-info">
+  <p>En réalité, il existe une astuce pour modéliser un <em>ou</em>. Celle-ci repose sur l’utilisation d’une variable intermédiaire et la technique utilisée n’est pas forcément élégante. De plus, vu le nombre de contrainte, il est préférable de laisser ça de côté.</p>
+</blockquote>
+
+<p>La modélisation alternative profite d’une particularité du problème : le nombre de valeur que peut prendre chaque case est assez limité. On va utiliser des variables que l’on appelle variables binaires. Contrairement aux variables classiques, celles-ci ne peuvent prendre que deux valeurs possibles : 0 ou 1. Ces variables apparaissent naturellement dans beaucoup de problèmes d’optimisation car elles représentent le fait de prendre ou de ne pas prendre une décision. On peut obtenir le même type de résultat en utilisant des variables entières et en les bornant mais il faut garder à l’esprit qu’il existe des méthodes particulières pour traiter ces variables de manière efficace.</p>
+
+<p>Pour revenir à notre problème, au lieu d’utiliser une variable par case, on va en utiliser 9 ! Pour chaque case, une des 9 variables aura la valeur <em>1</em> et c’est le numéro de cette variable qui sera inséré dans la grille. Par exemple, considérons la 5ième variable de la première case. Elle représente la décision de choisir 5 comme valeur pour la première case. Si cette variable est affectée à 1, on choisit 5, sinon, on ne choisit pas 5.</p>
+
+<blockquote class="prompt-info">
+  <p>Minute ! ça veut dire que pour une même case, on peut choisir plusieurs valeurs en même temps ?</p>
+</blockquote>
+
+<p>Dans l’état oui. Mais on n’a pas encore commencé à écrire les contraintes. C’est justement ce que l’on s’apprête à faire. Et nous allons voir que ça se fait plutôt bien finalement. Pour la suite, on considère que la variable \(x_{i/j_k}\) représente le fait de choisir la valeur k pour la case (i,j). i représente la ligne de la grille et j la colonne. On considère également que la case en haut à gauche a pour coordonnée (0,0) et que les indices sont croissants quand on se déplace vers le bas ou vers la droite.</p>
+
+<h3 id="les-contraintes">Les contraintes</h3>
+
+<p>On peut commencer par remarquer que la première contrainte n’est plus nécessaire. En effet, la nature des variables a une incidence directe sur les contraintes et il n’est plus possible de choisir une valeur non permise pour une case.</p>
+
+<p>La première contrainte qui peut venir à l’esprit concerne le fait de choisir plusieurs valeurs pour une case. Cette contrainte est très simple a écrire. Étant donné que toutes les variables concernant une case ne peuvent avoir pour valeur uniquement 0 ou 1 et qu’une seule de ces variables doit être à 1, il suffit d’écrire \(\sum\limits_{k=1}^9 x_{i,j/k} = 1\).</p>
+
+<p>Ensuite, on veut traduire le fait qu’une valeur ne peut apparaître deux fois dans une ligne. Comme précédemment, il suffit de tester si la somme des variables concernant la <em>même valeur</em> dans une colonne est égale à 1. On obtient \(\sum\limits_{j=0}^8 x_{i,j/k} = 1\).</p>
+
+<p>On veut enfin le faire pour les colonnes et les les blocs 3*3. Pour les colonnes, cela donne \(\sum\limits_{i=0}^8 x_{i,j/k} = 1\). Pour le premier bloc, c’est \(\sum\limits_{i=0}^2 \sum\limits_{j=0}^2 (x_{i,j/k} = 1)\).</p>
+
+<h2 id="le-programme-linéaire">Le programme linéaire</h2>
+
+<p>On peut donc récapituler tout ça sous forme d’un programme linéaire. Une petite réflexion cependant à propos des variables : Pour simplifier l’écriture du programme, on peut décider de définir les 9 variable pour <em>toutes</em> les cases. Or, certaines cases ont une valeur fixée par les données de la grille. Pour ces cases, les contraintes seront donc des égalités qui fixeront les valeurs. Ces variables sont à priori inutiles mais cela permet de gagner du temps sur l’écriture du solver.</p>
+
+<p>On obtient donc finalement le programme linéaire suivant :</p>
+
+\[max \,z = 0\\
+	 \begin{align*}
+		s.c. \sum\limits_{k=1}^9 x_{i,j/k} &amp;= 1, i \in \{0, .., 8\}, j \in \{0, .., 8\} \\
+            \sum\limits_{j=0}^8 x_{i,j/k} &amp;= 1, i \in \{0, .., 8\}, k \in \{1, .., 9\} \\
+            \sum\limits_{i=0}^8 x_{i,j/k} &amp;= 1, j \in \{0, .., 8\}, k \in \{1, .., 9\} \\
+            \sum\limits_{i=l}^{l+2} \sum\limits_{j=m}^{m+2} (x_{i,j/k} &amp;= 1), l, m \in \{0,3,6\}, k \in \{1, .., 9\} \\
+			x_{i,j/k} &amp;\in \{0, 1\}
+	\end{align*}\]
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Cet exemple nous montre donc que la programmation linéaire qui semblait plutôt limitée permet en fait de modéliser un large éventail de problème.
+Plus les problèmes sont complexes, plus il faut avoir recours à des astuces afin de réussir à les modéliser correctement.
+Il faut aussi faire attention à ce que le nombre de contrainte ne soit pas trop important. En effet, cela peut compromettre la résolution car les solvers ne sont pas infaillibles et ces problèmes restent des problèmes difficiles en informatique.
+On peut par exemple citer le problème du voyageur de commerce avec son nombre très important de contrainte qui le rend particulièrement difficile à résoudre.</p>
+
+<p>J’ai créé un programme se basant sur ce billet pour résoudre des grilles de sudoku.
+Le code source est disponible <a href="https://github.com/smbct/blog_code/tree/master/sudoplex">ici</a>.
+Le programme a été écrit en c++ et utilise la bibliothèque <a href="https://www.gnu.org/software/glpk/">glpk</a> pour la résolution du problème.
+Les détails pour le compiler se trouvent dans le readme. On peut remarquer en testant le programme que le temps de résolution est très court, malgré un nombre important de contrainte.</p>
+
+<p>Enfin, il faut tout de même garder à l’esprit que la programmation linéaire n’est pas le seul moyen de résoudre ce problème et qu’il n’est pas le plus adapté.
+Il donne ici un bon exemple de ce qu’il est possibles de faire en modélisation avec des variables binaires mais ce n’est pas forcément la méthode la plus rapide.</p>
+
+<p>Pour finir je vous donne le résultat de la résolution de la grille donnée plus haut.
+Et bien sûr, elle a été résolue avec le programme linéaire !</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>6</td>
+      <td>9</td>
+      <td>*</td>
+      <td>4</td>
+      <td>5</td>
+      <td>3</td>
+      <td>*</td>
+      <td>8</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4</td>
+      <td>7</td>
+      <td>*</td>
+      <td>8</td>
+      <td>9</td>
+      <td>2</td>
+      <td>*</td>
+      <td>6</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>8</td>
+      <td>5</td>
+      <td>*</td>
+      <td>6</td>
+      <td>7</td>
+      <td>1</td>
+      <td>*</td>
+      <td>4</td>
+      <td>3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>7</td>
+      <td>1</td>
+      <td>*</td>
+      <td>5</td>
+      <td>8</td>
+      <td>6</td>
+      <td>*</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>3</td>
+      <td>8</td>
+      <td>*</td>
+      <td>9</td>
+      <td>2</td>
+      <td>4</td>
+      <td>*</td>
+      <td>7</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>2</td>
+      <td>4</td>
+      <td>*</td>
+      <td>1</td>
+      <td>3</td>
+      <td>7</td>
+      <td>*</td>
+      <td>9</td>
+      <td>8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>9</td>
+      <td>6</td>
+      <td>*</td>
+      <td>3</td>
+      <td>1</td>
+      <td>8</td>
+      <td>*</td>
+      <td>5</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>5</td>
+      <td>3</td>
+      <td>*</td>
+      <td>2</td>
+      <td>4</td>
+      <td>9</td>
+      <td>*</td>
+      <td>1</td>
+      <td>6</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>1</td>
+      <td>2</td>
+      <td>*</td>
+      <td>7</td>
+      <td>6</td>
+      <td>5</td>
+      <td>*</td>
+      <td>3</td>
+      <td>9</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+
+    
+
+
+
+<div class="post-tags">
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/sat/logic/puzzle/games/model-checking/2023/05/15/pokemon-puzzle.html">
+            Solving a pokemon puzzle with SAT solvers
+            <small>15 May 2023</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/deep-learning/chess/games/combinatorics/2022/05/30/chess-rules.html">
+            Can deep neural networks learn the rules of chess ?
+            <small>30 May 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/these/doctorat/covid/comodal/2022/04/26/soutenance-these.html">
+            Soutenir sa thèse en comodal en 2022
+            <small>26 Apr 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
