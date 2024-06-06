@@ -7,8 +7,8 @@ comments: true
 layout: post
 ---
 
-Cette année, mon travail m'a donné la chance d'assister à une conférence de recherche en Suède.
-Malheureusement, les conférences de chercheurs me renvoient une image de plus en plus négative à l'heure de l'urgence climatique.
+Cette année, mon travail m'a donné la chance d'assister à une conférence de recherche en Suède 🇸🇪.
+Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l'heure de l'urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l'avion pour passer quelques jours seulement à l'étranger (potentiellement à l'autre bout du monde) à écouter des présentations de travaux d'autres chercheurs.
 L'impacte individuel des déplacements en avion en terme d'émissions CO₂ est énorme.
 Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressources fragiles, qui souffre énormément de l'activité humaine ?
@@ -29,7 +29,7 @@ Ce trajet est particulièrement opportun pour moi car, ayant des amis qui vivent
 Je pouvais ensuite rejoindre Uppsala en train pour un trajet de 40 minutes environ. 
 
 Le plus directe pour rejoindre Stockholm en train depuis la France est de passer par le Danemark.
-En effet, il existe des ponts au Danemark et entre le Danemark et la Suède pour connecter les différentes îles, empruntables en voiture mais également [en train](https://fr.wikipedia.org/wiki/Ligne_de_Copenhague_%C3%A0_Malm%C3%B6) !
+En effet, il existe des ponts 🌉 au Danemark et entre le Danemark et la Suède pour connecter les différentes îles, empruntables en voiture mais également [en train](https://fr.wikipedia.org/wiki/Ligne_de_Copenhague_%C3%A0_Malm%C3%B6) !
 
 ![Le pont de l'Øresund entre le Danemark et la Suède.](https://upload.wikimedia.org/wikipedia/commons/0/06/%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg)
 <span style="font-size:0.7em;">Le [pont de l'Øresund](https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund) entre le Danemark et la Suède, image empruntée de [Wikipédia](https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund#/media/Fichier:%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg).</span>
@@ -98,11 +98,11 @@ Il me propose donc un trajet alternatif arrivant plus tôt, avec une corresponda
 
 Et c'est finalement une correspondance réussie 🕓 !
 Une fois le stresse évacué, je peux enfin me poser dans le train suivant pour plusieurs heures, tapoter un peu sur l'ordinateur et suivre assidûment le défilement des noms de grandes villes dont j'ai déjà entendu parler pour la plupart, pendant que le train effectue sa traversée de l'Allemagne.
-J'en profite alors pour installer une superbe appli qui m'aurait été bien utile avant : [DB Navigator](https://int.bahn.de/fr/informations-reservation/application-db-navigator) !
+J'en profite alors pour installer une superbe appli qui m'aurait été bien utile avant : [DB Navigator](https://int.bahn.de/fr/informations-reservation/application-db-navigator) 📱 !
 Il s'agit d'un équivalent de SNCF connect pour les trains allemands mais qui donne plus d'informations sur les correspondances, notamment le numéro de voie à l'avance pour n'importe quel trajet et le temps à jour en fonction des retards.
 
-Sur le chemin, je remarque notamment un train de nuit à destination d'Innsbruck en Autriche ! 
-Le train de nuit, que je j'ai découvert assez récemment pour ma part, est en fait bien présent en Europe.
+Sur le chemin, je remarque notamment un train de nuit à destination d'Innsbruck en Autriche ⛰️ ! 
+Le train de nuit, que je j'ai découvert assez récemment en France pour ma part, est en fait bien présent en Europe.
 Je trouve dommage que ceux de la SNCF relient forcément Paris, mais il s'agit d'une option intéressante pour les longs trajets : cela permet d'économiser à la fois du temps et de l'argent !
 
 ![Un train de nuit vers Innsbruck.](/assets/stockholm/train_innsbruck.jpg)
@@ -171,8 +171,8 @@ Le retard étant pris en charge par la compagnie de train, il m'aurait en fait s
 Une fois à Copenhague, c'est la course pour prendre un second train vers Stockholm cette fois-ci.
 Je suis d'autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d'entrer pour la première fois dans un train Suédois !
 
-![Un train vers Stockholm.](/assets/stockholm/train_copenhague_suede.jpg)
-<span style="font-size:0.7em;">Un train vers Stockholm..</span>
+![Le train à destination de Stockholm.](/assets/stockholm/train_copenhague_suede.jpg)
+<span style="font-size:0.7em;">Le train à destination de Stockholm.</span>
 
 Ça y est, je peux enfin entamer la dernière partie de mon voyage !
 En fait, l'annulation de mon train de nuit a un bon côté : faisait désormais le trajet de jour, je peux admirer les différentes vues à mesure que je progresse vers Stockholm.
@@ -200,7 +200,7 @@ Je suis soulagé en descendant du train après ces différentes mésaventures.
 <span style="font-size:0.7em;">Arrivée à Stockholm !</span>
 
 Il me reste encore un dernier "petit" train local à emprunter pour rejoindre mes amis et profiter de la destination !
-
+Les jours suivants me permettent donc de découvrir Stockholm et de prendre un peu de repos avant la conférence.
 
 ![Visite de Stockholm.](/assets/stockholm/stockholm.jpg)
 <span style="font-size:0.7em;">Visite de Stockholm.</span>
@@ -214,8 +214,52 @@ Avec les soucis de l'aller, j'appréhende un peu ce retour mais je rêve déjà 
 
 Le trajet vers Stockholm ne pose pas de problème particulier.
 J'entre donc dans le train de nuit pour Hambourg en espérant vivement que celui-ci circule bien.
-Il y a cependant une différence avec le trajet aller : les places en couchettes n'étaient pas disponible, et c'est donc une place assise qui est indiquée sur mon billet.
+Il y a cependant une différence avec le trajet aller : les places en couchettes n'étaient pas disponibles, et c'est donc une place assise 💺 qui est indiquée sur mon billet.
 Or, surpris à mon entrée : la place assise est en fait une place dans un compartiment couchette avec les couchettes du milieu abaissées
 En me renseignant, je comprend alors que nous sommes libres d'installer les couchettes si les autres occupants du compartiment sont d'accord !
+Je finis donc par dormir sur une des couchettes supérieures 🛏️ !
+C'est donc une bonne surprise sur ce retour, malgré l'absence de couverture par rapport aux places en couchettes qui m'a donné un peu froid, j'ai tout de même probablement bien mieux dormi que prévu.
+
+Pendant ce trajet, j'ai l'occasion d’apercevoir le fret ferroviaire que j'avais déjà remarqué auparavant.
+Je le vois rarement en France donc j'ai été surpris de le voir aussi présent en Allemagne, au Danemark et en Suède.
+En l’occurrence, le train que j'ai croisé à ce moment là permettait d'embarquer directement les remorques des camions. 🚛
+Plutôt efficace !
+
+![Le fret ferroviaire.](/assets/stockholm/fret.jpg)
+<span style="font-size:0.7em;">Le fret ferroviaire.</span>
+
+J'arrive donc le lendemain matin à Hambourg.
+Concernant le trajet retour de Hambourg à Paris, rebelote !
+La DB envoie un second message indiquant que le train prévu au départ de Hambourg part une heure plus tôt que prévu pour cause de travaux !
+Il s'agit décidément de la première fois qu'un train part plus tôt que prévu 🤷‍♀️ !
+Je commence donc mon trajet avec une nouvelle source de stresse par rapport à une correspondance qui s'annonce tendue.
+Heureusement, mon changement de train se passe finalement sans problèmes et je finis par arriver tranquillement à Paris à l'heure prévue.
+Ouf 🥳 !
 
 ## Conclusion
+
+Un mot de fin sur cette aventure à travers l'Europe 🇪🇺.
+Dans l'ensemble, bien que cette expérience m'ait épuisé, je suis très heureux d'avoir eu l'occasion de la réaliser !
+En particulier, je suis reconnaissant envers mon employeur de m'avoir autorisé à réaliser ce trajet en train et de m'avoir accordé des jours de repos en compensation à mon retour (il s'agit d'une formalité prévue pour les déplacements professionnels mais celle-ci n'avait pas été confrontée à un voyage aussi complexe).
+Je déplore tout de même de voir aussi peu de chercheurs conscientisé par l'impacte du transport ✈️ étant donné l'urgence climatique.
+
+Vient donc la question finale : referais-je un tel trajet ?
+Oui évidemment !
+Pour rappeler ma position initiale : l'urgence climatique me semble telle que pour moi c'est soit un déplacement bas carbone, soit pas de déplacement !
+En terme d'émissions CO₂, le [calculateur de l'ADEME](https://impactco2.fr/transport?km=2032) indique que ce trajet aller-retour en train a émis dans les **46 kg** de CO₂, contre environ **950 kg** pour un avion !
+Il y a par ailleurs plusieurs bénéfices à ce type de trajet.
+Il s'agit d'une expérience suffisamment intense pour qu'elle nous limite naturellement en terme de fréquence, limitant par conséquent notre impacte climatique individuel.
+De plus, ce type de déplacement donne **vraiment** l'impression de voyager : on peut assister au changement des paysages, des maisons, au passage d'île en île, etc...
+
+Il y a tout de même certaines choses que je ferais différemment pour un tel trajet.
+Tout d'abord, pour un trajet plus long je choisirais de ne pas enchaîner les nuits en train.
+Bien qu'on puisse dormir en couchette, il s'agit d'un trajet autrement plus épuisant qu'une nuit en hôtel 😴 !
+Ensuite, le train est connu pour être particulièrement cher.
+Je vois deux alternatives : le passe inter-rail, qui est fait pour ce gros trajets, et l'alternance entre trains et bus de voyages 🚍 qui sont eux moins chers et qui restent raisonnables du point de vue des [émissions CO₂](https://impactco2.fr/transport?km=2032).
+
+Dans tous les cas, le voyage reste un loisir privilégié et je pense qu'il est bon de se rappeler que tout le monde n'a pas les moyens d'en profiter.
+Il ne nous reste qu'à le réaliser de manière humble et responsable, et à en tirer les meilleures expériences possibles !
+
+
+![Un lac suédois.](/assets/stockholm/suede_3.jpg)
+<span style="font-size:0.7em;">Un lac suédois.</span>
