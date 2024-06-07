@@ -112,8 +112,8 @@ Je trouve dommage que ceux de la SNCF relient forcément Paris, mais il s'agit d
 
 J'arrive finalement à Hambourg en début de soirée.
 
-![Arrivée à Hambourg !](/assets/stockholm/arrivee_hambourg.jpg)
-<span style="font-size:0.7em;">Arrivée à Hambourg !</span>
+![L'arrivée à Hambourg !](/assets/stockholm/arrivee_hambourg.jpg)
+<span style="font-size:0.7em;">L'arrivée à Hambourg !</span>
 
 #### Une note sur la ponctualité des trains
 
@@ -155,6 +155,7 @@ Il s'agit d'un train de nuit type TER que je vois arriver sur le quai.
 ![Le train de nuit vers la Suède.](/assets/stockholm/train_nuit_aller.jpg)
 <span style="font-size:0.7em;">Le train de nuit vers la Suède.</span>
 
+L'entrée dans le train de nuit se fait comme dans un TER : il n'y a pas de contrôle de billet à l'extérieur comme avec la CNCF, un check-in se fait au contraire à l'intérieur au moment du départ 🛂. 
 Je découvre donc ma couchette 🛏️ dans le compartiment qui est en fait très similaire à ceux qu'on trouve dans les trains de nuits de la SNCF.
 Par contre, pas de kit de nuit contrairement à ces derniers.
 Je découvre une unique briquette d'eau 💧 à destination des voyageurs.
@@ -177,8 +178,13 @@ Le retard étant pris en charge par la compagnie de train, il m'aurait en fait s
 ![En route vers Copenhague.](/assets/stockholm/vers_copenhague.jpg)
 <span style="font-size:0.7em;">En route vers Copenhague.</span>
 
-Une fois à Copenhague, c'est la course pour prendre un second train vers Stockholm cette fois-ci.
-Je suis d'autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d'entrer pour la première fois dans un train Suédois !
+Sur le chemin de Copenhague, le train me fait donc traverser un nouveau pays : le Danemark.
+Il faut savoir que c'est l'unique pays de ce trajet susceptible d'effectuer un contrôle d'identité 🪪.
+Il me semble que cela n'est pas censé être le cas à l'intérieur de l'[espace Schengen](https://fr.wikipedia.org/wiki/Espace_Schengen) mais en pratique, les voyageurs m'apprennent que les contrôles sont toutefois de mise.
+Dans mon cas, le train s'arrête effectivement durant le trajet avec une annonce de contrôle mais finalement nous repartons sans voir un seul agent dans notre voiture.
+
+Une fois à Copenhague, c'est la course pour prendre un second train vers Stockholm cette fois-ci 🏃‍♂️.
+Je suis d'autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d'arriver pour la première fois dans un train Suédois !
 
 ![Le train à destination de Stockholm.](/assets/stockholm/train_copenhague_suede.jpg)
 <span style="font-size:0.7em;">Le train à destination de Stockholm.</span>

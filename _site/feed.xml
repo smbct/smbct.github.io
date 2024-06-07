@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-06-07T15:14:49+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Un Paris - Stockholm en train 🚆</title><link href="http://localhost:4000/voyage/train/climat/2024/06/07/stockholm_train.html" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>http://localhost:4000/voyage/train/climat/2024/06/07/stockholm_train</id><content type="html" xml:base="http://localhost:4000/voyage/train/climat/2024/06/07/stockholm_train.html"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2024-06-07T18:47:11+02:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Un Paris - Stockholm en train 🚆</title><link href="http://localhost:4000/voyage/train/climat/2024/06/07/stockholm_train.html" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>http://localhost:4000/voyage/train/climat/2024/06/07/stockholm_train</id><content type="html" xml:base="http://localhost:4000/voyage/train/climat/2024/06/07/stockholm_train.html"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
 Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs.
 L’impacte individuel des déplacements en avion en terme d’émissions CO₂ est énorme.
@@ -99,8 +99,8 @@ Je trouve dommage que ceux de la SNCF relient forcément Paris, mais il s’agit
 
 <p>J’arrive finalement à Hambourg en début de soirée.</p>
 
-<p><img src="/assets/stockholm/arrivee_hambourg.jpg" alt="Arrivée à Hambourg !" />
-<span style="font-size:0.7em;">Arrivée à Hambourg !</span></p>
+<p><img src="/assets/stockholm/arrivee_hambourg.jpg" alt="L'arrivée à Hambourg !" />
+<span style="font-size:0.7em;">L’arrivée à Hambourg !</span></p>
 
 <h4 id="une-note-sur-la-ponctualité-des-trains">Une note sur la ponctualité des trains</h4>
 
@@ -141,7 +141,8 @@ Il s’agit d’un train de nuit type TER que je vois arriver sur le quai.</p>
 <p><img src="/assets/stockholm/train_nuit_aller.jpg" alt="Le train de nuit vers la Suède." />
 <span style="font-size:0.7em;">Le train de nuit vers la Suède.</span></p>
 
-<p>Je découvre donc ma couchette 🛏️ dans le compartiment qui est en fait très similaire à ceux qu’on trouve dans les trains de nuits de la SNCF.
+<p>L’entrée dans le train de nuit se fait comme dans un TER : il n’y a pas de contrôle de billet à l’extérieur comme avec la CNCF, un check-in se fait au contraire à l’intérieur au moment du départ 🛂. 
+Je découvre donc ma couchette 🛏️ dans le compartiment qui est en fait très similaire à ceux qu’on trouve dans les trains de nuits de la SNCF.
 Par contre, pas de kit de nuit contrairement à ces derniers.
 Je découvre une unique briquette d’eau 💧 à destination des voyageurs.
 C’est donc à nous de prévoir un supplément eau (pour 12h !), des bouchons d’oreille et autres instruments indispensables pour la survie de nuit en train.</p>
@@ -163,8 +164,13 @@ Le retard étant pris en charge par la compagnie de train, il m’aurait en fait
 <p><img src="/assets/stockholm/vers_copenhague.jpg" alt="En route vers Copenhague." />
 <span style="font-size:0.7em;">En route vers Copenhague.</span></p>
 
-<p>Une fois à Copenhague, c’est la course pour prendre un second train vers Stockholm cette fois-ci.
-Je suis d’autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d’entrer pour la première fois dans un train Suédois !</p>
+<p>Sur le chemin de Copenhague, le train me fait donc traverser un nouveau pays : le Danemark.
+Il faut savoir que c’est l’unique pays de ce trajet susceptible d’effectuer un contrôle d’identité 🪪.
+Il me semble que cela n’est pas censé être le cas à l’intérieur de l’<a href="https://fr.wikipedia.org/wiki/Espace_Schengen">espace Schengen</a> mais en pratique, les voyageurs m’apprennent que les contrôles sont toutefois de mise.
+Dans mon cas, le train s’arrête effectivement durant le trajet avec une annonce de contrôle mais finalement nous repartons sans voir un seul agent dans notre voiture.</p>
+
+<p>Une fois à Copenhague, c’est la course pour prendre un second train vers Stockholm cette fois-ci 🏃‍♂️.
+Je suis d’autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d’arriver pour la première fois dans un train Suédois !</p>
 
 <p><img src="/assets/stockholm/train_copenhague_suede.jpg" alt="Le train à destination de Stockholm." />
 <span style="font-size:0.7em;">Le train à destination de Stockholm.</span></p>
