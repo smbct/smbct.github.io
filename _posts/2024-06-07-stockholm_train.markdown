@@ -206,7 +206,7 @@ Je découvre ensuite les paysages suédois : entre lacs, forêts et maisons roug
 
 Dans le train je repère plusieurs français allant également à Stockholm.
 Il ne s'agit pas des premiers que j'aperçois et je suis heureux de voir que tout le monde ne mise pas sur l'avion pour ce genre de voyage !
-Je comprend alors que beaucoup doivent être en train de voyager avec [l'inter-rail](https://www.interrail.eu/fr), ce qui j'imagine rend le trajet plus fiable et moins cher cat il peut être prévu au dernier moment !
+Je comprend alors que beaucoup doivent être en train de voyager avec [l'Interrail](https://www.interrail.eu/fr), ce qui j'imagine rend le trajet plus fiable et moins cher cat il peut être prévu au dernier moment !
 
 L'arrivée à Stockholm se fait finalement en soirée.
 Je suis soulagé en descendant du train après ces différentes mésaventures.
@@ -269,10 +269,11 @@ Il s'agit d'une expérience suffisamment intense pour qu'elle nous limite nature
 De plus, ce type de déplacement donne **vraiment** l'impression de voyager : on peut assister au changement des paysages, des maisons, au passage d'île en île, etc...
 
 Il y a tout de même certaines choses que je ferais différemment pour un tel trajet.
-Tout d'abord, pour un trajet plus long je choisirais de ne pas enchaîner les nuits en train.
+Tout d'abord, pour un trajet plus long je choisirais probablement de m'arrêter en chemin et ne pas tenter les nuits successives en train.
 Bien qu'on puisse dormir en couchette, il s'agit d'un trajet autrement plus épuisant qu'une nuit en hôtel 😴 !
+En comparaison, je trouve cette [vidéo](https://www.youtube.com/watch?v=r1i6hMQbkx8) (en anglais) très intéressante à propos d'un trajet encore plus long à travers l'Europe, sur plusieurs jours.
 Ensuite, le train est connu pour être particulièrement cher.
-Je vois deux alternatives : le passe inter-rail, qui est fait pour ce type de gros trajets, et l'alternance entre trains et bus de voyages 🚍 qui sont eux moins chers et qui restent raisonnables du point de vue des [émissions CO₂](https://impactco2.fr/transport?km=2032).
+Je vois deux alternatives : le Pass Interrail, qui est fait pour ce type de gros trajets, et l'alternance entre trains et bus de voyages 🚍 qui sont eux moins chers et qui restent raisonnables du point de vue des [émissions CO₂](https://impactco2.fr/transport?km=2032).
 
 Dans tous les cas, le voyage reste un loisir privilégié et je pense qu'il est bon de se rappeler que tout le monde n'a pas les moyens d'en profiter.
 Il ne nous reste qu'à le réaliser de manière humble et responsable, et à en tirer les meilleures expériences possibles !
