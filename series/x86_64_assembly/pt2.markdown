@@ -378,7 +378,7 @@ In our square printing program, we had to look for registers that were not used 
 Obviously, this is not a proper way to manage local variables in assembly since there are a limited number of registers.
 In the next post, we will see how to use the program's stack for storing our local variables.
 
-By that time, the square printing code is available at the [following link](https://github.com/smbct/x86-64_101_linux/tree/main/draw_square).
+By that time, the square printing code is available at the [following link](https://github.com/smbct/x86-64_101_linux/tree/main/pt2_draw_square).
 As previously, you can experiment by adding complexity to the code.
 For instance, with additional jumps and modulo operations you can try to only fill some of the columns or rows, or even draw sub rectangles.
 Please leave a comment if you have any suggestion or question about this post!

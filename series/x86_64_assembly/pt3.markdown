@@ -424,6 +424,6 @@ By interacting with the stack to store our variables, our program is now much cl
 There is still a lot to say about the stack, in particular how to properly use it when calling function.
 We will discuss function calls in details in the next part of the series.
 
-By the time, you will find the complete code for drawing the circle at [that address](https://github.com/smbct/x86-64_101_linux/tree/main/draw_circle).
+By the time, you will find the complete code for drawing the circle at [that address](https://github.com/smbct/x86-64_101_linux/tree/main/pt3_draw_circle).
 Many improvements are still possible such as defining a circle radius that is different from the size of the square.
 Once again, do not hesitate to share your thoughts in the comments, I will welcome your feedbacks!

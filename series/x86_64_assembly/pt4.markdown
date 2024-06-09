@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 4, recursive fibonacci
+title:  Assembly x86 programming 101 &#58 part 4, recursive power
 author: smbct
 date:   2024-05-14 10:00:00 +0200
 categories: low-level programming assembly
@@ -10,7 +10,7 @@ layout: post
 In the last post of the assembly x86 series, we have seen how to manipulate the stack in order to store local variables.
 The stack is also essential for **calling functions** : it is used to store information such as the return instruction address.
 In this post, we will see how to write and call functions, and also how to interact with C functions in our program!
-We will use these new notions to print the content of an integer array in assembly.
+We will apply these new notions to write a recursive functions that computes the power of a number.
 
 
 ## More about the stack : pushing and popping values
@@ -125,7 +125,7 @@ To do so, we will see the `call` and `ret` instructions that take care of this.
 
 Let's start with a simple function that prints "hello world" :
 
-```nasm
+{% highlight nasm linenos %}
 .global _start, _before_call, _after_call
 .intel_syntax noprefix
 
@@ -150,8 +150,7 @@ _start:
 
 hello_world:
     .asciz "Hello, World!\n"
-
-```
+{% endhighlight %}
 
 Compared to our hello_world example, this code simply encapsulates the printing instructions within a function by the use of a new symbol ("_print_hello_world").
 The function is executed with the `call` instruction and the program returns the the `_start` function execution thanks to the `ret` instruction.
@@ -228,7 +227,7 @@ There are actually different ways to pass information between the functions : yo
 We will start or pow function by passing the two parameters (the base and the exponent) to our function.
 In this example, we pass the values by using the stack :
 
-```nasm
+{% highlight nasm linenos %}
 _pow_rec:
     mov rbp, rsp
     mov rbx, [rbp+8]
@@ -250,7 +249,7 @@ _start:
     mov rax, 60
     mov rdi, 0
     syscall
-```
+{% endhighlight %}
 
 In this code, the `_start` function starts by placing the two parameters of our pow function on the stack.
 The first parameter to be push is the base and the second one is the exponent, hence we expect to compute *5^4* here.
@@ -269,7 +268,7 @@ By going further in the stack we end up finding the base parameter, 16 bytes abo
 
 Let's now store the two parameters on the stack by allocating two 8 bytes local variables :
 
-```nasm
+{% highlight nasm linenos %}
 _pow_rec:
     
     mov rbp, rsp
@@ -287,9 +286,9 @@ _pow_rec:
 
     mov rsp, rbp
     ret
-```
+{% endhighlight %}
 
-#### Our first recursive function
+#### The recursive pow function
 
 Now we can now write the recursion, the central part of our algorithm.
 Our program will first accumulate the function calls on the stack until the exponent *0* is reached.
@@ -298,7 +297,7 @@ After that, the function calls would be unstacked and each time, as the results 
 
 To implement this, we separate the base case, when the exponent is 0, from the general case :
 
-```nasm
+{% highlight nasm linenos %}
 _pow_rec:
     
     ; saving the stack register and allocating memory
@@ -315,7 +314,7 @@ _pow_rec:
     .L_if_exponent_0:
 
         mov rax, 1
-        jmp endif
+        jmp .L_endif
 
     .L_else_exponent_not_0:
 
@@ -335,7 +334,7 @@ _pow_rec:
     ; restoring the stack pointer and returning
     ; ...
 
-```
+{% endhighlight %}
 
 The first part of the algorithm is the comparison of the exponent value with 0, indirectly done through the `rbx` register.
 Here this comparison is performed with the `test` [instruction](https://en.wikipedia.org/wiki/TEST_(x86_instruction)) that performs a logical and operation and sets an internal flag depending on the result.
@@ -360,7 +359,7 @@ In this situation, since the sub-calls are recursive calls, the function actuall
 
 We will now change the function's base code to :
 
-```nasm
+{% highlight nasm linenos %}
 _my_function_base:
     
     push rbp
@@ -374,14 +373,14 @@ _my_function_base:
     mov rsp, rbp
     pop rbp
     ret
-```
+{% endhighlight %}
 
 The two additional `push` instructions here make sure that the `rbp` register is saved and restore at each function call.
 This is handled in the called function directly, which is convenient for readability as these instructions would always be the at the beginning and at the end the our functions.
 
 We can now add the first instructions of the functions (indicated by comments in the previous snippet) :
 
-```nasm
+{% highlight nasm linenos %}
     push rbp
     mov rbp, rsp
 
@@ -394,95 +393,19 @@ We can now add the first instructions of the functions (indicated by comments in
     mov [rbp-8], rax
     mov rax, [rbp+16]
     mov [rbp-16], rax
-```
+{% endhighlight %}
 
 Note that since the stack now contains one more 8-byte value, the addresses of the parameters, relative to `rbp`, should be changed by subtracting 8 additional bytes hence the modification. 
 
 And here is how the function is exited :
 
-```nasm
+{% highlight nasm linenos %}
     mov rsp, rbp
     pop rbp
     ret
-```
+{% endhighlight %}
 
 #### Memory usage with recursion
-
-## Writing a recursive Fibonacci function
-
-```nasm
-; compute a fibonacci number recursively
-_compute_fibonacci_rec:
-    
-    push rbp
-    mov rbp, rsp
-
-    sub rsp, 18
-    ; local variables:
-    ; rbp-18 : sequence index, 2 bytes
-    ; rbp-16 : f_(n-2), 8 bytes
-    ; rbp-8 : f_(n-1), 8 bytes
-
-    ; fibonacci sequence :
-    ; f_0 = 0
-    ; f_1 = 1
-    ; f_n = f_(n-1) + f_(n-2)
-
-    ; store the index parameter in the stack
-    mov [rbp-18], si
-
-    ; test the index value
-    cmp word ptr [rbp-18], 1
-    je .L_if_n_1
-    jg .L_else_n_gt1
-    
-    .L_if_n_0: ; special case when n is 0, return 0
-        mov rax, qword ptr 0
-        jmp end_if_n
-
-    .L_if_n_1: ; special case when n is 1, return 1
-        mov rax, qword ptr 1
-        jmp end_if_n
-
-    .L_else_n_gt1: ; recursive case : compute f_(n-2) + f_(n-1)
-
-        ; compute f_(n-2)
-        mov si, [rbp-18]
-        sub si, 2
-        call _compute_fibonacci_rec
-        mov [rbp-16], rax
-
-        ; compute f_(n-1)
-        mov si, [rbp-18]
-        dec si
-        call _compute_fibonacci_rec
-        mov [rbp-8], rax
-
-        ; compute f_n = f_(n-2)+f_(n-1) in the rax register
-        xor rax, rax
-        add rax, [rbp-16]
-        add rax, [rbp-8]
-
-    .L_end_if_n:
-
-    mov rsp, rbp
-    pop rbp
-
-    ret
-
-_start:
-
-    mov si, 17
-    call _compute_fibonacci_rec
-
-    ; exit
-    mov rax, 60
-    mov rdi, 0
-    syscall
-```
-
-
-
 
 
 

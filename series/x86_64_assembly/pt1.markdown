@@ -261,7 +261,7 @@ As it has stopped at the expected place, we can now check the value of the rax r
 
 Although writing the hello world is a good success for such a low level language, our capabilities remain limited for now.
 In the next post, we will se how to add control flow to our programs so that we can write conditionals and loops.
-In the mean time, you will find the hello world code from this post at the [following link](https://github.com/smbct/x86-64_101_linux/tree/main/hello_world).
+In the mean time, you will find the hello world code from this post at the [following link](https://github.com/smbct/x86-64_101_linux/tree/main/pt1_hello_world).
 Feel free to modify it and experiment with registers and simple operations such as `mov`, `add`, `and`, etc...
 Tutorials adn references can usually be found online and I invite you to use GDB (and its documentation) to understand the program. 
 
