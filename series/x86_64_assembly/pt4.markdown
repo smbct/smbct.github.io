@@ -251,7 +251,7 @@ _pow_rec:
     ret
 {% endhighlight %}
 
-#### The recursive pow function
+#### The recursive pow algorithm
 
 We can now write the recursion, namely the central part of our algorithm.
 Our program will first accumulate the function calls on the stack until the value *0* is reached for the exponent *0*.
@@ -386,29 +386,85 @@ _my_function_base:
     ret
 {% endhighlight %}
 
-#### Testing the memory usage
+#### Testing and memory usage
 
 We can now test our complete program with the help of gdb by reading.
+As we did previously, the program can be compiled in debug mode in order to add a breakpoint in gdb just after the call to `_my_function_base` in the `_start` function.
+You should be able to see that the value returned by the function in the `rax` register is indeed the value *5^5 = 125*!
 
+Now it is also interesting to take a look at the memory usage of this function.
+As explained previously, the recursive calls in our program are accumulated on the stack until the base case is reached, namely when the base parameter equals *0*. 
+This means that all information required for the function calls are multiplied on the stack, leading to a consequent use of memory.
 
-breakpoint just before the 0 case.
-backtrace command in gdb, number of calls, for each frame print rsp pointer and compute the memory usage.
+To verify this, we can set a breakpoint at the base case of the recursion, just after the `.L_if_exponent_0` symbol.
+If we now run the program in gdb, the calls will be accumulated until this case is reached.
+We can then use the `backtrace` (or `bt`) command in gdb to see the different calls present on the stack, namely the stack frames :
+
+{% highlight plain linenos %}
+Breakpoint 1, _pow_rec () at pow_rec.s:31
+31	        mov rax, 1
+(gdb) backtrace
+#0  _pow_rec () at pow_rec.s:31
+#1  0x0000000000401033 in _pow_rec () at pow_rec.s:41
+#2  0x0000000000401033 in _pow_rec () at pow_rec.s:41
+#3  0x0000000000401033 in _pow_rec () at pow_rec.s:41
+#4  0x0000000000401054 in _start () at pow_rec.s:61
+{% endhighlight %}
+
+This list shows all the functions that are being called by our program and that are not terminated.
+We can see that there are 4 different calls to the `_pow_rec` function that are pending in the stack.
+Indeed, at each call the base parameter is decreased.
+Since the execution starts with base=3, four calls are required to reach the value *0*.
+
+gdb allows us to navigate to each of these **stack frames** and explore the memory and registers there.
+The command `frame 0` for instance will load the first frame.
+This helps us to analyze the evolution the the stack pointer register `rsp` :
+
+{% highlight plain linenos %}
+(gdb) frame 4
+#4  0x0000000000401054 in _start () at pow_rec.s:61
+61	    call _pow_rec
+(gdb) print $rsp
+$1 = (void *) 0x7fffffffdd88
+(gdb) frame 0
+#0  _pow_rec () at pow_rec.s:31
+31	        mov rax, 1
+(gdb) print $rsp
+$2 = (void *) 0x7fffffffdd08
+(gdb) print 0x7fffffffdd88-0x7fffffffdd08
+$3 = 128
+{% endhighlight %}
+
+We can see the 128 bytes are used on the stack between the oldest function call (`_start`) and the most recent one.
+Let's see if we can understand each of this use :
+
+Our `_pow_rec` function stores 2 8-bytes registers on the stack for each call. 
+Additionally, the `rbp` register is saved.
+Then, for each function call, the program must store its return address as an additional 8-bytes value.
+This means that we have 4 8-bytes values stored for each function call.
+Since our program is currently executing 4 times the `_pow_rec` function, this results in 4 * 4 * 8 = 128 bytes of memory begin used !
+
+Our analysis helps to realize how much memory is used for our small `_pow_rec` function.
+We would directly see that the value stored by the intermediate calls are actually useless since an iterative version of our program can be made : each intermediate computation step in of our function only depends on the previous result.
+Recursion can be very handy to use but sometimes its memory usage is not beneficial.
 
 ## An alternative version : passing parameters through the stack
 
-We have previously seen how to write a simple function that takes no parameters and that returns nothing.
-In practice, parameters and return values are essential to our programs.
-There are actually different ways to pass information between the functions : you may pass parameters into registers for instance or store them into the stack, it depends on the **convention** that is adopted.
+In our last example, we have passed parameters to our function by the use of 2 registers.
+It is however possible to do it differently, for instance by using the stack.
 
-We will start our pow function by passing the two parameters (the base and the exponent) to our function.
-In this example, we pass the values by using the stack :
+We will now write a second version of our algorithm following this new convention.
+We will start from the initial code backbone and modify the `_start` function to pass the parameters on the stack :
 
 {% highlight nasm linenos %}
 _pow_rec:
+    push rbp
     mov rbp, rsp
-    mov rbx, [rbp+8]
-    debug:
+
+    ; recursive pow computation 
+
     mov rsp, rbp
+    pop rbp
     ret
 
 _start:
@@ -427,155 +483,51 @@ _start:
     syscall
 {% endhighlight %}
 
-In this code, the `_start` function starts by placing the two parameters of our pow function on the stack.
-The first parameter to be push is the base and the second one is the exponent, hence we expect to compute *5^4* here.
-The `_start` then calls the `_pow_rec` function and after that it removes the values from the stack with the `add` instructions (2* (8 bytes)).
+Compared to our previous version, the `_start` function now contains two push instructions, one for each parameter.
+Since the `rsp` pointer is modified at this point, it is necessary to restore it after the cal, hence the `add` instruction.
+You may realize that in the configuration, we did not bother to save the stack and the frame pointers contrarily to what we saw previously.
+Indeed, our function remains simple and our program exits right after the power computation.
 
-For now, our `_pow_rec` function only extracts one of the parameter from the stack.
-Since this function will use the stack, we added the rwo `mov` instructions to save and restore the stack pointer, as we saw in the previous post of the series on the local variables allocation.
-However at this point, since no additional data is stored in stack, the `rbp` and `rsp` registers would be equal during the function's execution.
+It is now necessary to modify the code in charge of storing the parameters in the stack in our `_pow_rec` function.
+I agree that this step seems counterintuitive as the parameters are now already present in the stack when the function is called.
+However, it is important to place the local variables of our function in their own stack frame and not interfere with the stack frame of the calling function.
 
-You can test run the program in gdb and add a breakpoint at `debug` to test the `rbx` register.
-The resulting value is *4*, which corresponds to the exponent parameter.
-The value is accessed by adding *8* to the `rbp` register.
-This can be understand from the fact that the stack pointer points toward the return address of the function call (8 bytes) as we saw previously.
-This means that `rsp+8` points to the last value added to the stack before the call (as the stack grows toward lower addresses), which corresponds to the exponent parameter in our case.
-By going further in the stack we end up finding the base parameter, 16 bytes above the current stack address.
-
-Let's now store the two parameters on the stack by allocating two 8 bytes local variables :
+The beginning of `_pow_rec` function becomes :
 
 {% highlight nasm linenos %}
 _pow_rec:
-    
+    push rbp
     mov rbp, rsp
+
     sub rsp, 16
     ; base : offset=rbp-8, size=8
     ; exponent : offset=rbp-16, size=8
 
     ; storing the base parameter
-    mov rbx, [rbp+8]
-    mov [rbp-8], rbx
-
-    ; storing the exponent parameter
-    mov rbx, [rbp+16]
-    mov [rbp-16], rbx
-
-    mov rsp, rbp
-    ret
-{% endhighlight %}
-
-Now we can now write the recursion, the central part of our algorithm.
-Our program will first accumulate the function calls on the stack until the exponent *0* is reached.
-Once it is done, the function can return 1 (x^0 = 1 for all x) without any additional recursive call.
-After that, the function calls would be unstacked and each time, as the results of the previous call would be multiplied by the base.
-
-To implement this, we separate the base case, when the exponent is 0, from the general case :
-
-{% highlight nasm linenos %}
-_pow_rec:
-    
-    ; saving the stack register and allocating memory
-    ; ...
-
-    ; storing the parameters on the stack
-    ; ...
-
-    ; compare the exponent to 0
-    mov rbx, [rbp-16]
-    test rbx, rbx
-    jnz else_exponent_not_0
-
-    .L_if_exponent_0:
-
-        mov rax, 1
-        jmp .L_endif
-
-    .L_else_exponent_not_0:
-
-        dec qword ptr [rbp-16]
-
-        ; store the left and right parameters for the next recursive call
-        push qword ptr [rbp-8]
-        push qword ptr [rbp-16]
-
-        call _pow_rec ; the recursive call
-        imul rax, [rbp-8] ; compute the result
-
-        add rsp, 16
-
-    .L_endif:
-
-    ; restoring the stack pointer and returning
-    ; ...
-
-{% endhighlight %}
-
-The first part of the algorithm is the comparison of the exponent value with 0, indirectly done through the `rbx` register.
-Here this comparison is performed with the `test` [instruction](https://en.wikipedia.org/wiki/TEST_(x86_instruction)) that performs a logical and operation and sets an internal flag depending on the result.
-The `jnz` instruction (jump if not zero) will be triggered if the tested value (`rbx` here) is not equal to zero, as the instruction says.
-
-The following instructions emulate an if..else.. statement, where the first condition corresponds to the base equal to 0.
-In this example, we choose to put the return value of the function in the `rax` register, which is handled in these two different conditions without using additional memory.
-In the first case, the value 1 is simply moved to the register and the program jumps to the end of the function, to skip the second case's instructions.
-In the second case, the base variable is first decremented and the recursive call is performed after pushing the parameters to the stack.
-
-If you test the complete function by adding the remaining instructions from the previous code snippet, you would observe an infinite loop!
-There is one crucial missing step in our code that handles the stack pointers.
-For now we had only performed function calls from the main function.
-
-We have seen how to save the stack pointer and restore it at the end of the function but we did not do anything for the base pointer.
-That is the issue here : the base pointer is modified in each sub call.
-Hence, when returning in the function, the base pointer which is then written in `rsp` is no longer valid, causing the function to return in the wrong place.
-In this situation, since the sub-calls are recursive calls, the function actually returns inside itself, just after the recursive call.
-
-We will now change the function's base code to :
-
-{% highlight nasm linenos %}
-_my_function_base:
-    
-    push rbp
-    mov rbp, rsp
-
-    ; allocate memory
-    ; ...
-    ; compute stuff
-    ; ...
-
-    mov rsp, rbp
-    pop rbp
-    ret
-{% endhighlight %}
-
-The two additional `push` instructions here make sure that the `rbp` register is saved and restore at each function call.
-This is handled in the called function directly, which is convenient for readability as these instructions would always be the at the beginning and at the end the our functions.
-
-We can now add the first instructions of the functions (indicated by comments in the previous snippet) :
-
-{% highlight nasm linenos %}
-    push rbp
-    mov rbp, rsp
-
-    sub rsp, 16
-    ; rbp-8 : base (8 bytes)
-    ; rbp-16 : exponent (8 bytes)
-
-    ; store the local variables
     mov rax, [rbp+24]
     mov [rbp-8], rax
+
+    ; storing the exponent parameter
     mov rax, [rbp+16]
     mov [rbp-16], rax
+
+    ; instructions that follow do not change
+    ; ...
 {% endhighlight %}
 
-Note that since the stack now contains one more 8-byte value, the addresses of the parameters, relative to `rbp`, should be changed by subtracting 8 additional bytes hence the modification. 
+The only difference with the previous version is where the parameters' values are taken from.
+Counterintuitively, we get access to the values by navigating backward in the stack, adding  a positive offset to the `rbp` register instead of a negative one.
+This is because our parameters were stored in the previous stack frame.
 
-And here is how the function is exited :
+When the function starts, the `rsp` register points toward the return address as we saw previously.
+Since the `rbp` register is also pushed to the stack, this means that two registers are already present between the stack frame and the function's parameters.
+For this reason, the parameters are being picked from above in the stack addresses : the exponent parameter being that last to be pushed, it is accessed at offset *16* from the `rbp` register.
+On the other hand, the exponent parameter is accessed from above, at offset *24*.
 
-{% highlight nasm linenos %}
-    mov rsp, rbp
-    pop rbp
-    ret
-{% endhighlight %}
+I find it useful to take some time to apprehend how the stack is being used here.
+The best way to organize our code for the function calls is to carefully respect the stack frame from each function call and refrain from interfering with the frame of another function.
 
+ 
 ## What's next ?
 
 
