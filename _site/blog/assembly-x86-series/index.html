@@ -11,7 +11,7 @@
 
   <title>
     
-      smbct's blog &middot; blog
+      A series on x86 assembly programming &middot; smbct's blog
     
   </title>
 
@@ -35,11 +35,11 @@
 </head>
 
 
-  <body class="index">
+  <body class="post">
 
     <div id="sidebar">
   <header>
-    <h1 class="site-title">
+    <div class="site-title">
       <a href="/">
         
           <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -49,7 +49,7 @@
         
         smbct's blog
       </a>
-    </h1>
+    </div>
     <p class="lead">Notes on computer science, programming, society and more.</p>
   </header>
   <nav id="sidebar-nav-links">
@@ -116,8 +116,6 @@
     
   
 
-  
-
 
 
   <a class="category-link "
@@ -181,8 +179,6 @@
     
   
 
-  
-
 
   <!-- Optional additional links to insert in sidebar nav -->
 </nav>
@@ -242,28 +238,12 @@
 </div>
 
     <main class="container">
-      <div class="content">
-  
-<div class="pagination">
-  <a class="pagination-item newer"
-     href="/">
-    Newer
-  </a>
-</div>
-
-
-
-  
-
-  
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/blog/SAT-logique/">
-        SAT, un problème de logique
-      </a>
-    </h2>
-    <div class="post-meta">
-  <span class="post-date">04 Mar 2018</span>
+      <header>
+  <h1 class="post-title">A series on x86 assembly programming</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  <span class="post-date">15 May 2023</span>
   <span class="post-categories">
     
       &bull;
@@ -273,7 +253,7 @@
       
 
       
-        stage
+        assembly
       
     
       &bull;
@@ -283,7 +263,7 @@
       
 
       
-        logique
+        x86
       
     
       &bull;
@@ -293,7 +273,7 @@
       
 
       
-        SAT
+        programming
       
     
       &bull;
@@ -303,204 +283,119 @@
       
 
       
-        sudoku
+        low-level
       
     
   </span>
 </div>
 
 
-    
-      <p>Afin de pouvoir parler un peu plus en détails de mon stage, je voulais aujourd’hui présenter un problème très connu en info. Ce problème, SAT de son petit nom, tente de répondre à la question suivante : pour une formule logique donnée, existe-il une affectation des variables de cette formule permettant de la rendre vraie ?</p>
+  <div class="post-body">
+    <p>This is an announce that I am currently working on a series of posts about assembly programming.
+For this occasion, I created the <strong>series</strong> section in the blog 📑 : a place dedicated to articles that intend to deeply explore 🔎 some specific topics with advanced explanations and hands-on examples.</p>
+
+<p>In my first series, I will hence explore assembly programming : namely programming directly with the processors’ instruction sets 🧑‍💻.
+x86 being the most common processor architecture on desktop and laptop computers 💻, I will solely focus on this platform.
+The idea is to progress step by step toward the goal of being able to implement practical programs directly in assembly.</p>
+
+<p>My interest in assembly programming and more generally in low level programming comes from the impression that modern softwares have a very intensive use of resources for many avoidable tasks ⚡ (as a rebound effect due to the increase of computing power).
+The idea is to understand more deeply how softwares work and apprehend their use of computing resources.
+I am also concerned by planned obsolescence that could come from softwares becoming unusable after system upgrade for instance.
+For this reason, I am also interested in the idea of retro-compatibility and the possibility to patch softwares without any source code by manipulating its assembly instructions 💾.
+For instance, see this <a href="https://www.youtube.com/watch?v=eQOOx4mmY6I">example</a> about patching an old game to make it work on modern operating systems.
+Slowly, theses different concerns got me into the topic of assembly and more generally low level programming.</p>
+
+<p>This series will be written as I learn on the topic, with potential mistakes and imprecisions made along the way 🤐.
+I take some time to write about it as a ways to compile knowledge that can be sometimes difficult to find on the web, and also to rise the interest in this approach.
+The series would be more adapted to someone already familiar with programming, preferably with a low level language like C.</p>
+
+<p>The first few posts of this series are available in this <a href="/series/x86_64_assembly/headline">page</a>.
+I will also update the links directly here :</p>
+
+<ul>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt1">part 1 : Hello, world!</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt2">Part 2 : drawing a square</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt3">Part 3 : drawing a circle</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt4">Part 4 : recursive power</a></p>
+  </li>
+</ul>
+
+<p>Enjoy!</p>
+
 
     
 
-    
-      
-      
-      
 
-      
-        <a href="/blog/SAT-logique/">More &hellip;</a>
-      
-    
-  </article>
+
+<div class="post-tags">
   
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/blog/court-chemin/">
-        Plus court chemin et graphe
-      </a>
-    </h2>
-    <div class="post-meta">
-  <span class="post-date">12 Jul 2017</span>
-  <span class="post-categories">
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+  <section class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts-list">
     
-      &bull;
-
-      
-      
-      
-
-      
-        optimisation
-      
+      <li>
+        <h3>
+          <a href="/blog/stockholm_train/">
+            Un Paris - Stockholm en train 🚆
+            <small>07 Jun 2024</small>
+          </a>
+        </h3>
+      </li>
     
-      &bull;
-
-      
-      
-      
-
-      
-        graphes
-      
+      <li>
+        <h3>
+          <a href="/blog/pokemon-puzzle/">
+            Solving a pokemon puzzle with SAT solvers
+            <small>15 May 2023</small>
+          </a>
+        </h3>
+      </li>
     
-      &bull;
-
-      
-      
-      
-
-      
-        file
-      
+      <li>
+        <h3>
+          <a href="/blog/chess-rules/">
+            Can deep neural networks learn the rules of chess ?
+            <small>30 May 2022</small>
+          </a>
+        </h3>
+      </li>
     
-      &bull;
+  </ul>
+</section>
 
-      
-      
-      
-
-      
-        algorithme
-      
-    
-  </span>
 </div>
 
-
-    
-      <p>Trouver un chemin, ou même le plus court chemin, est un problème courant en informatique. Parmi les applications concrètes de ce problème, on peut tout d’abord penser à l’itinéraire le plus court, donné par un dispositif GPS. Ce n’est cependant pas la seule application réelle. On peut par exemple chercher un plus court chemin pour une IA dans un jeu ou encore trouver la manière la plus rapide de mettre deux personnes en relation dans un réseau professionnel.</p>
-
-    
-
-    
-      
-      
-      
-
-      
-        <a href="/blog/court-chemin/">More &hellip;</a>
-      
-    
-  </article>
-  
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/blog/sudoku/">
-        Optimisation et sudoku
-      </a>
-    </h2>
-    <div class="post-meta">
-  <span class="post-date">02 Aug 2016</span>
-  <span class="post-categories">
-    
-      &bull;
-
-      
-      
-      
-
-      
-        optimisation
-      
-    
-      &bull;
-
-      
-      
-      
-
-      
-        IA
-      
-    
-      &bull;
-
-      
-      
-      
-
-      
-        jeux
-      
-    
-  </span>
-</div>
-
-
-    
-      <p>La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.</p>
-
-    
-
-    
-      
-      
-      
-
-      
-        <a href="/blog/sudoku/">More &hellip;</a>
-      
-    
-  </article>
-  
-  <article class="post-body">
-    <h2 class="post-title">
-      <a href="/blog/programmation-lineaire/">
-        Programmation linéaire
-      </a>
-    </h2>
-    <div class="post-meta">
-  <span class="post-date">16 Apr 2016</span>
-  <span class="post-categories">
-    
-      &bull;
-
-      
-      
-      
-
-      
-        optimisation
-      
-    
-  </span>
-</div>
-
-
-    
-      <p>Pour un premier article, j’ai choisi de parler d’un sujet que je vais avoir probablement l’occasion d’évoquer à nouveau par la suite : la programmation linéaire.
-Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l’on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d’optimisation, et des méthodes efficaces pour les traiter.</p>
-
-    
-
-    
-      
-      
-      
-
-      
-        <a href="/blog/programmation-lineaire/">More &hellip;</a>
-      
-    
-  </article>
-  
-
-  
-
-</div>
     </main>
 
     <!-- Optional footer content -->

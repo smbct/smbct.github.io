@@ -11,7 +11,7 @@
 
   <title>
     
-      Assembly x86 programming 101 &#58 part 4, recursive fibonacci &middot; smbct's blog
+      Assembly x86 programming 101 &#58 part 4, recursive power &middot; smbct's blog
     
   </title>
 
@@ -243,7 +243,7 @@
 
     <main class="container">
       <header>
-  <h1 class="post-title">Assembly x86 programming 101 &#58 part 4, recursive fibonacci</h1>
+  <h1 class="post-title">Assembly x86 programming 101 &#58 part 4, recursive power</h1>
 </header>
 <div class="content">
   <div class="post-meta">
@@ -268,21 +268,119 @@
     <p>In the last post of the assembly x86 series, we have seen how to manipulate the stack in order to store local variables.
 The stack is also essential for <strong>calling functions</strong> : it is used to store information such as the return instruction address.
 In this post, we will see how to write and call functions, and also how to interact with C functions in our program!
-We will use these new notions to print the content of an integer array in assembly.</p>
+We will apply these new notions to write a recursive function that computes the power of a number.</p>
 
 <h2 id="more-about-the-stack--pushing-and-popping-values">More about the stack : pushing and popping values</h2>
 
-<p>Before diving into the mechanism of function calls, we should see two important instructions related to the stack that were bot mentioned in the previous post : <code class="language-plaintext highlighter-rouge">push</code> and <code class="language-plaintext highlighter-rouge">pop</code>.
+<p>Before diving into the mechanism of function calls, we should see two important instructions related to the stack that I did not mention in the previous post : <code class="language-plaintext highlighter-rouge">push</code> and <code class="language-plaintext highlighter-rouge">pop</code>.
 The <code class="language-plaintext highlighter-rouge">push</code> instruction allows to move a value to the stack in an automated way.
 This instruction will concretely perform two operations :</p>
 
 <ul>
-  <li>subtracting the stack address to allocate some bytes in the stack</li>
-  <li>moving the value at the resulting address in the stack</li>
+  <li>subtracting from the stack address to allocate some bytes in the stack</li>
+  <li>copying the value at the resulting address in the stack (<code class="language-plaintext highlighter-rouge">mov</code> instruction)</li>
 </ul>
 
-<p><code class="language-plaintext highlighter-rouge">pop</code> is the reversed instruction : it moves the value from the stack to a register and increases the stack pointer accordingly.
+<p><code class="language-plaintext highlighter-rouge">pop</code> is the reversed instruction : it copies the value from the stack to a register and increases the stack pointer accordingly.
 Let’s create a simple example :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">_start</span><span class="p">,</span> <span class="nv">debug</span><span class="p">,</span> <span class="nv">debug2</span>
+<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+
+<span class="nl">_start:</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="c1">; moving the value 42 into 8 bytes in the stack</span>
+    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
+    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rsp</span><span class="p">],</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="mi">42</span>
+
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">syscall</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Nothing new here, we allocate 8 bytes on the stack and we store the value 42.
+We will check that the value is properly stored : run GDB on the program after compiling in debug mode (as we did in a previous post), type <code class="language-plaintext highlighter-rouge">b my_prog.s:10</code> and <code class="language-plaintext highlighter-rouge">run</code> to stop just after the <code class="language-plaintext highlighter-rouge">mov</code> instruction (replace “my_prog” with your program’s name).
+After that, execute the commands <code class="language-plaintext highlighter-rouge">print $rbp</code> and <code class="language-plaintext highlighter-rouge">print $rsp</code>.
+This gives me <em>0x7fffffffdd90</em> and <em>0x7fffffffdd88</em>.
+<em>0x90-0x88=0x8</em> in hexadecimal, the 8 bits have been allocated (<em>0x</em> here simply means hexadecimal).</p>
+
+<p>Now we would check the value that has been moved to the stack, directly from its memory address this time : <code class="language-plaintext highlighter-rouge">print *0x7fffffffdd88</code> (in this step, you should replace the specified address by the output you obtained with the <code class="language-plaintext highlighter-rouge">print $rsp</code> command).
+The star character (*) here is used to specify an address. 
+We end up with the value <em>42</em>, perfect!
+Note that the alternative command <code class="language-plaintext highlighter-rouge">x/dg 0x7fffffffdd88</code> could also be used to print the value, where <em>x</em> stands for “examining” memory.
+<a href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html#Memory">This page</a> shows the different options such as the output format and the number of bytes to read.</p>
+
+<p>Now let’s modify this code with the push instruction and let’s add a pop instruction afterward :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="nl">_start:</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="c1">; moving the value 42 into 8 bytes in the stack</span>
+    <span class="nf">push</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="mi">42</span>
+
+    <span class="nf">pop</span> <span class="nb">rax</span>
+
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+
+    <span class="c1">; exit ...</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Let’s verify that the <code class="language-plaintext highlighter-rouge">push</code> instruction did exactly the same as a <code class="language-plaintext highlighter-rouge">sub</code> followed by a <code class="language-plaintext highlighter-rouge">mov</code>.
+We run gdb in debug mode as previously and verify the rbp and rsp addresses after the <code class="language-plaintext highlighter-rouge">push</code> instruction at line 5 (to be replaced with your correct line number if different).
+We end up with the same values as previously.
+Great the <code class="language-plaintext highlighter-rouge">push</code> instruction did what we expected!</p>
+
+<p>Now let’s inspect the action of <code class="language-plaintext highlighter-rouge">pop</code> by adding a breakpoint at line 8.
+gdb indicates that <code class="language-plaintext highlighter-rouge">rbp = 0x7fffffffdd90</code> and <code class="language-plaintext highlighter-rouge">rsp = 0x7fffffffdd90</code>.
+This is it.
+After the <code class="language-plaintext highlighter-rouge">pop</code> instruction, the <code class="language-plaintext highlighter-rouge">rsp</code> register is now equal to the <code class="language-plaintext highlighter-rouge">rbp</code> register, which means the stack pointer took back its value before our allocation.
+We can see the second effect of the <code class="language-plaintext highlighter-rouge">pop</code> instruction : the popped value is now stored in the <code class="language-plaintext highlighter-rouge">rax</code> register.
+In this specific case, our last line <code class="language-plaintext highlighter-rouge">mov rsp, rbp</code> is not even necessary anymore since the de-allocation is now handled by <code class="language-plaintext highlighter-rouge">pop</code>.</p>
+
+<h2 id="writing-basic-functions">Writing basic functions</h2>
+
+<p>We have discovered in the previous posts of the series the <code class="language-plaintext highlighter-rouge">jmp</code> instruction which allows to go to a certain location in the program’s code.
+You may guess that this is the same mechanism at the base of function call : a jump is performed to the first instruction of the called function.
+However, when the execution of the function is terminated, the program must go back to the instruction that follows this <code class="language-plaintext highlighter-rouge">jmp</code>.
+To do so, we will see the <code class="language-plaintext highlighter-rouge">call</code> and <code class="language-plaintext highlighter-rouge">ret</code> instructions that take care of this.</p>
+
+<p>When defining new functions, our labels will not have the “<code class="language-plaintext highlighter-rouge">_L.</code>” prefix anymore as they will not be local symbols.
+Indeed, the functions can be called in other portions of the code or even from external programs (in libraries for instance).</p>
+
+<h4 id="writing-and-calling-our-first-function">Writing and calling our first function</h4>
+
+<p>Let’s start with a simple function that prints “hello world” :</p>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -302,39 +400,126 @@ Let’s create a simple example :</p>
 16
 17
 18
-</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">_start</span><span class="p">,</span> <span class="nv">debug</span><span class="p">,</span> <span class="nv">debug2</span>
+19
+20
+21
+22
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">_start</span>
 <span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
 
+<span class="nl">_print_hello_world:</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
+    <span class="nf">syscall</span>
+    <span class="nf">ret</span>
+
 <span class="nl">_start:</span>
-    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
 
-    <span class="c1">; moving the value 42 into 8 bytes in the stack</span>
-    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
-    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rsp</span><span class="p">],</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="mi">42</span>
-
-    <span class="nl">debug:</span>
-
-    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">call</span> <span class="nv">_print_hello_world</span>
 
     <span class="c1">; exit</span>
     <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
-    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">69</span>
     <span class="nf">syscall</span>
+
+<span class="nl">hello_world:</span>
+    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Nothing new here, we allocate 8 bytes on the stack and we store the value 42.
-We will check that the value is properly stored : run GDB on the program, type <code class="language-plaintext highlighter-rouge">b debug</code> and <code class="language-plaintext highlighter-rouge">run</code> to stop just after the move.
-After that, execute the commands <code class="language-plaintext highlighter-rouge">print $rbp</code> and <code class="language-plaintext highlighter-rouge">print $rsp</code>.
-This gives me <em>0x7fffffffdda0</em> and <em>0x7fffffffdd98</em>.
-<em>98-a0=-8</em> in hexadecimal, the 8 bits have been allocated (<em>0x</em> here simply means hexadecimal).</p>
+<p>Compared to our hello_world example, this code simply encapsulates the printing instructions within a function with the use of a new symbol : “<code class="language-plaintext highlighter-rouge">_print_hello_world</code>”.
+The new function is executed with the <code class="language-plaintext highlighter-rouge">call</code> instruction and, at its end, the program returns to the execution of the <code class="language-plaintext highlighter-rouge">_start</code> function thanks to the <code class="language-plaintext highlighter-rouge">ret</code> instruction.</p>
 
-<p>Now we would check the value, directly from the stack this time : <code class="language-plaintext highlighter-rouge">print *0x7fffffffdd98</code> (in this step, you should replace the specified address by the output you obtained with the <code class="language-plaintext highlighter-rouge">print $rsp</code> command).
-The star character (*) here is used to specify an address. 
-We end up with the value <em>42</em>, perfect!
-Note that alternative command <code class="language-plaintext highlighter-rouge">x/dg 0x7fffffffdd98</code> could also be used to print the value, where <em>x</em> stands for “examining” memory.
-<a href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html#Memory">This page</a> shows the different options such as the output format and the number of bytes to read.</p>
+<p>The ability to perform function calls brings a new dimension in our code : we are now working with the program’s instructions addresses at runtime.
+Indeed, when a function is being executed, the program must remember the address of the instruction that called the function (in the program’s memory, where all instructions are loaded).
+By doing so, the programs knows where to “return” in the program’s memory at the  <code class="language-plaintext highlighter-rouge">ret</code> instruction.
+There exists a register dedicated to store the address of the next instruction to be executed : the <code class="language-plaintext highlighter-rouge">rip</code> register (Relative Instruction Pointer).
+We will look at this register to understand our program.</p>
 
-<p>Now let’s modify this code with the push instruction and let’s add a pop instruction afterward :</p>
+<h4 id="how-function-calls-work-️">How function calls work ⚙️</h4>
+
+<p>Let’s use gdb on the previous code to see what is happening.
+We add breakpoints at lines 13 and 15 and another one at the <code class="language-plaintext highlighter-rouge">_print_hello_world</code> symbol (with <code class="language-plaintext highlighter-rouge">breakpoint _print_hello_world</code>) to see how the stack is manipulated.
+After executing the <code class="language-plaintext highlighter-rouge">run</code> command in gdb, the program will start and pause just before the <code class="language-plaintext highlighter-rouge">call</code> instruction.
+To illustrate the <code class="language-plaintext highlighter-rouge">rip</code> register mentioned before, we can already print the pointed instruction as follows :</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre>(gdb) x/i $rip
+=&gt; 0x401020 &lt;_start&gt;:	call   0x401000 &lt;_print_hello_world&gt;
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can see the instruction’s address in memory, <em>0x401020</em> and the decoded instruction which is our <code class="language-plaintext highlighter-rouge">call</code>.
+Let’s also print our stack pointer address : <code class="language-plaintext highlighter-rouge">print $rsp</code>, which gives <em>0x7fffffffdd70</em> in my case.
+Then, the <code class="language-plaintext highlighter-rouge">continue</code> command in gdb makes the program stop at the beginning of the <code class="language-plaintext highlighter-rouge">_print_hello_world</code> function, just after the execution of the <code class="language-plaintext highlighter-rouge">call</code> instruction.
+We will see what changed on the stack :</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>Breakpoint 2, _print_hello_world () at hello_world_func.s:9
+9	    mov rax, 1
+(gdb) print $rsp
+$2 = (void *) 0x7fffffffdd68
+(gdb) x *0x7fffffffdd68
+   0x401025 &lt;_start+5&gt;:	mov    $0x3c,%rax
+(gdb) print 0x7fffffffdd68 - 0x7fffffffdd70
+$3 = -8
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can see that the <code class="language-plaintext highlighter-rouge">rsp</code> register has changed from <em>0x7fffffffdd70</em> to <em>0x7fffffffdd68</em>.
+8 bytes have been allocated : the program has stored the return address of the function call.
+Indeed, by printing the instruction at the corresponding location, we see that it corresponds to the instruction that follows <code class="language-plaintext highlighter-rouge">call</code> in the <code class="language-plaintext highlighter-rouge">_start</code> function : <code class="language-plaintext highlighter-rouge">mov $0x3c,%rax</code> (<em>0x3c</em> corresponds to the value 60 in decimal).</p>
+
+<p>We continue the execution to see what happens when returning from the function :</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>Continuing.
+Hello, World!
+
+Breakpoint 3, _start () at hello_world_func.s:22
+22	    mov rax, 60
+(gdb) print $rsp
+$4 = (void *) 0x7fffffffdd70
+(gdb) x/i $rip
+=&gt; 0x401025 &lt;_start+5&gt;:	mov    $0x3c,%rax
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The <code class="language-plaintext highlighter-rouge">continue</code> command in gdb now brings us right after the <code class="language-plaintext highlighter-rouge">call</code> instruction.
+We can see that the <code class="language-plaintext highlighter-rouge">rsp</code> register took back its value from before the call, the return address is no longer necessary and has been popped out from the stack by the <code class="language-plaintext highlighter-rouge">ret</code> instruction.
+We additionally print the value of the <code class="language-plaintext highlighter-rouge">rip</code> register : the value is the same as the one previously stored on the stack, that is the return address of our function call.</p>
+
+<h2 id="writing-a-recursive-pow-function">Writing a recursive pow function</h2>
+
+<p>We will now study more complex functions to gain a deeper understanding of how the stack is manipulated when functions are called.
+A good exercise for this is recursion : a recursive function (a function that calls itself) must pay attention to preserve the stack in a coherent state, in order to avoid unpredicted behaviors.
+This is in fact an obligation for every function call but errors become easily fatal for our programs in the recursive case 💀.</p>
+
+<p>In this part, we will write a function that computes the exponentiation of a number recursively, by performing successive multiplications.
+Such an operation would easily be done iteratively with a simple loop but the recursive way is going to be more instructive.</p>
+
+<h4 id="passing-parameters-by-registers">Passing parameters by registers</h4>
+
+<p>We have previously seen how to write a simple function that takes no parameters and that returns nothing.
+In practice, parameters and return values are essential to our programs.
+There are actually different ways to pass information between the functions : you may pass parameters into registers for instance or store them into the stack, it depends on the <strong>convention</strong> that is adopted.</p>
+
+<p>We will start writing our pow function by passing the two parameters (the base and the exponent) to our function.
+In this example, we pass the two values (the base and the exponent) by using the two registers <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">rsi</code> :</p>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -352,167 +537,404 @@ Note that alternative command <code class="language-plaintext highlighter-rouge"
 14
 15
 16
-</pre></td><td class="code"><pre><span class="nl">_start:</span>
+17
+18
+19
+</pre></td><td class="code"><pre><span class="nl">_pow_rec:</span>
     <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
 
-    <span class="c1">; moving the value 42 into 8 bytes in the stack</span>
-    <span class="nf">push</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="mi">42</span>
-
-    <span class="nl">debug:</span>
-
-    <span class="nf">pop</span> <span class="nb">rax</span>
-
-    <span class="nl">debug2:</span>
+    <span class="c1">; ...</span>
 
     <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
-
-    <span class="c1">; exit</span>
-    <span class="c1">; ...</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-<p>We can use GDB with the previous commands to check that the <code class="language-plaintext highlighter-rouge">push</code> instruction did exactly the same as a <code class="language-plaintext highlighter-rouge">sub</code> followed by a <code class="language-plaintext highlighter-rouge">mov</code>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) break debug
-(gdb) break debug2
-(gdb) print $rbp
-$1 = (void *) 0x7fffffffdda0
-(gdb) print $rsp
-$2 = (void *) 0x7fffffffdd98
-(gdb) print *0x7fffffffdd98
-$3 = 42
-(gdb) print 0x7fffffffdda0-0x7fffffffdd98
-$4 = 8
-</code></pre></div></div>
-
-<p>Alright, that is indeed an 8 bytes allocation followed by the value 42 being stored in the stack.
-Now let’s inspect the action of <code class="language-plaintext highlighter-rouge">pop</code>:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) continue
-(gdb) print $rsp
-$5 = (void *) 0x7fffffffdda0
-(gdb) print $rbp
-$6 = (void *) 0x7fffffffdda0
-(gdb) print $rax
-$7 = 42
-</code></pre></div></div>
-
-<p>This is it.
-After the <code class="language-plaintext highlighter-rouge">pop</code> instruction, the <code class="language-plaintext highlighter-rouge">rsp</code> register is now equal to the <code class="language-plaintext highlighter-rouge">rbp</code> register, which means the stack pointer took back its value before our allocation.
-We can see the second effect of the <code class="language-plaintext highlighter-rouge">pop</code> instruction : the popped value is now stored in the <code class="language-plaintext highlighter-rouge">rax</code> register.</p>
-
-<h2 id="writing-basic-functions">Writing basic functions</h2>
-
-<p>We have discovered in a previous post of the series the <code class="language-plaintext highlighter-rouge">jmp</code> instruction which allows to go to a certain location in the program’s code.
-You may guess that this is the same mechanism at the base of function call : a jump is performed to the first instruction of the called function.
-However, when the execution of the function is terminated, the program must go back to the instruction that follows this <code class="language-plaintext highlighter-rouge">jmp</code>.
-To do so, we will see the <code class="language-plaintext highlighter-rouge">call</code> and <code class="language-plaintext highlighter-rouge">ret</code> instructions that take care of this.</p>
-
-<h4 id="writing-and-calling-our-first-function">Writing and calling our first function</h4>
-
-<p>Let’s start with a simple function that prints “hello world” :</p>
-
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">.global</span> <span class="nv">_start</span><span class="p">,</span> <span class="nv">_before_call</span><span class="p">,</span> <span class="nv">_after_call</span>
-<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
-
-<span class="nl">_print_hello_world:</span>
-    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
-    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
-    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span>
-    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
-    <span class="nf">syscall</span>
     <span class="nf">ret</span>
 
 <span class="nl">_start:</span>
+    <span class="c1">; pushing the two parameters to the stack</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">5</span> <span class="c1">; base</span>
+    <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="mi">4</span> <span class="c1">; exponent</span>
 
-    <span class="nl">_before_call:</span>
-    <span class="nf">call</span> <span class="nv">_print_hello_world</span>
-    <span class="nl">_after_call:</span>
+    <span class="nf">call</span> <span class="nv">_pow_rec</span>
 
     <span class="c1">; exit</span>
     <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
-    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">69</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
     <span class="nf">syscall</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<span class="nl">hello_world:</span>
-    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
+<p>In this code, the <code class="language-plaintext highlighter-rouge">_start</code> function starts by placing the two parameters in their (temporarily) respective registers.
+The first parameter to be pushed is the base and the second one is the exponent ; hence we will expect our program to compute <em>5^4</em> here.
+The <code class="language-plaintext highlighter-rouge">_start</code> function then calls the <code class="language-plaintext highlighter-rouge">_pow_rec</code> function and eventually exits normally.</p>
 
-</code></pre></div></div>
+<p>For now, our <code class="language-plaintext highlighter-rouge">_pow_rec</code> function simply takes care of saving and restoring the stack pointer, as we saw in the previous post of the series on the local variables allocation.
+These precautions will be useful as we will use the stack in our function. 
+You can run the program in gdb and verify that the two registers <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">rsi</code> received the correct values when the function <code class="language-plaintext highlighter-rouge">_pow_rec</code> is being called.</p>
 
-<p>Compared to our hello_world example, this code simply encapsulates the printing instructions within a function by the use of a new symbol (“_print_hello_world”).
-The function is executed with the <code class="language-plaintext highlighter-rouge">call</code> instruction and the program returns the the <code class="language-plaintext highlighter-rouge">_start</code> function execution thanks to the <code class="language-plaintext highlighter-rouge">ret</code> instruction.
-We will use the two additional symbols “_before_call” and “_after_call” as debugging labels with gdb to see how it works.</p>
+<p>Let’s now store the two parameters on the stack by allocating two 8-bytes local variables :</p>
 
-<p>Calling functions brings a new dimension in our code : we are now manipulating the program’s instructions addresses at runtime.
-Indeed, when a function is being executed, the program must remember the address of the instruction that calls the function (in the program’s memory, where all instructions are loaded).
-By doing so, at the return instruction the programs knows where to “return” in the program’s memory.
-There exists a register that is dedicated to store the address of the next instruction to be executed : the <code class="language-plaintext highlighter-rouge">rip</code> register (Relative Instruction Pointer).
-We will use look at this register to understand our program.</p>
-
-<h4 id="how-function-calls-work">How function calls work</h4>
-
-<p>Let’s use gdb on the previous code to see what is happening.
-We add breakpoints at <code class="language-plaintext highlighter-rouge">_before_call</code>, <code class="language-plaintext highlighter-rouge">_print_hello_world</code> (just after the <code class="language-plaintext highlighter-rouge">call</code> instruction) and at <code class="language-plaintext highlighter-rouge">_after_call</code> to see how the stack is manipulated.
-After executing the <code class="language-plaintext highlighter-rouge">run</code> command in gdb, the program will start and pause at <code class="language-plaintext highlighter-rouge">_before_call</code>, just before the function call.
-To illustrate the <code class="language-plaintext highlighter-rouge">rip</code> register mentioned before, we can already print the pointed instruction with :</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) x/i $rip
-=&gt; 0x401020 &lt;_start&gt;:	call   0x401000 &lt;_print_hello_world&gt;
-</code></pre></div></div>
-
-<p>We can see the address, <em>0x401020</em> and the encoded instruction which is our <code class="language-plaintext highlighter-rouge">call</code>.
-Let’s also print our stack pointer address : <code class="language-plaintext highlighter-rouge">print $rsp</code>, which gives <em>0x7fffffffdda0</em> in my case.
-Then, the <code class="language-plaintext highlighter-rouge">continue</code> command makes the program stops at <code class="language-plaintext highlighter-rouge">_print_hello_world</code>.
-We will see what changed on the stack :</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Breakpoint 3, 0x0000000000401000 in _print_hello_world ()
-(gdb) print $rsp
-$3 = (void *) 0x7fffffffdd98
-(gdb) x *0x7fffffffdd98
-   0x401025 &lt;_after_call&gt;:	mov    $0x3c,%rax
-(gdb) print 0x7fffffffdd98-0x7fffffffdda0
-$4 = -8
-</code></pre></div></div>
-
-<p>We can see that the <code class="language-plaintext highlighter-rouge">rsp</code> register has changed from <em>0x7fffffffdda0</em> to <em>0x7fffffffdd98</em>.
-8 Bytes have been allocated : the program has stored the return address of the function call.
-Indeed, by printing the instruction at the corresponding location, we see that it corresponds to the instruction that follows the <code class="language-plaintext highlighter-rouge">call</code> one in the <code class="language-plaintext highlighter-rouge">_start</code> function : <code class="language-plaintext highlighter-rouge">mov $0x3c,%rax</code> (<em>0x3c</em> corresponds to the value 60 in decimal).</p>
-
-<p>We continue the execution to see what happens when returning from the function :</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Continuing.
-Hello, World!
-
-Breakpoint 2, 0x0000000000401025 in _after_call ()
-(gdb) print $rsp
-$5 = (void *) 0x7fffffffdda0
-(gdb) x/i $rip
-=&gt; 0x401025 &lt;_after_call&gt;:	mov    $0x3c,%rax
-</code></pre></div></div>
-<p>The <code class="language-plaintext highlighter-rouge">continue</code> command in gdb now brings us at the <code class="language-plaintext highlighter-rouge">_after_call</code> label.
-We can see that the <code class="language-plaintext highlighter-rouge">rsp</code> register took back its value from before the call, the return address was is no longer necessary and is popped out with the <code class="language-plaintext highlighter-rouge">ret</code> instruction.
-We additionally print the value of the <code class="language-plaintext highlighter-rouge">rip</code> register : the value is the same as the one previously stored on the stack.</p>
-
-<h2 id="writing-a-recursive-pow-function">Writing a recursive pow function</h2>
-
-<p>We will now study more complex functions to gain a deeper understanding of how the stack is manipulated when functions are called.
-A good exercise for this is recursion : a recursive function (a function that calls itself) must pay attention to preserve the stack in coherent state, in order to avoid unpredicted behaviors.</p>
-
-<p>In this part, we will write a function that wil compute the exponentiation of a number recursively, by performing successive multiplications.
-Such operation would easily be done with a simple loop but the recursive way is going to be more instructive.</p>
-
-<h4 id="passing-parameters-through-the-stack">Passing parameters through the stack</h4>
-
-<p>We have previously seen how to write a simple function that takes no parameters and that returns nothing.
-In practice, parameters and return values are essential to our programs.
-There are actually different ways to pass information between the functions : you may pass parameters into registers for instance or store them into the stack, it depends on the <strong>convention</strong> that is adopted.</p>
-
-<p>We will start or pow function by passing the two parameters (the base and the exponent) to our function.
-In this example, we pass the values by using the stack :</p>
-
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">_pow_rec:</span>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="nl">_pow_rec:</span>
+    
     <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
-    <span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span>
-    <span class="nl">debug:</span>
+    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">16</span>
+    <span class="c1">; base : offset=rbp-8, size=8</span>
+    <span class="c1">; exponent : offset=rbp-16, size=8</span>
+
+    <span class="c1">; storing the base and exponent parameters</span>
+    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rdi</span>
+    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">],</span> <span class="nb">rsi</span>
+
     <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">ret</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="the-recursive-pow-algorithm">The recursive pow algorithm</h4>
+
+<p>We can now write the recursion, namely the central part of our algorithm.
+Our program will first accumulate the function calls on the stack until the value <em>0</em> is reached for the exponent parameter.
+Once it is done, the function can return 1 (<em>x^0 = 1</em> for all <em>x</em>) without any additional recursive call.
+After that, the function calls would be unstacked and, at each time, the results of the previous call would be multiplied by the base.</p>
+
+<p>To implement this, we separate the base case, when the exponent is <em>0</em>, from the general case :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="code"><pre><span class="nl">_pow_rec:</span>
+    
+    <span class="c1">; saving the stack register and allocating memory</span>
+    <span class="c1">; ...</span>
+
+    <span class="c1">; storing the parameters on the stack</span>
+    <span class="c1">; ...</span>
+
+    <span class="c1">; compare the exponent to 0</span>
+    <span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
+    <span class="nf">test</span> <span class="nb">rbx</span><span class="p">,</span> <span class="nb">rbx</span>
+    <span class="nf">jnz</span> <span class="nv">else_exponent_not_0</span>
+
+    <span class="nl">.L_if_exponent_0:</span>
+
+        <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">jmp</span> <span class="nv">.L_endif</span>
+
+    <span class="nl">.L_else_exponent_not_0:</span>
+
+        <span class="nf">dec</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
+
+        <span class="c1">; store the base and the exponent parameters in their associated registers</span>
+        <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+        <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
+
+        <span class="nf">call</span> <span class="nv">_pow_rec</span> <span class="c1">; the recursive call</span>
+        <span class="nf">imul</span> <span class="nb">rax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; compute the result</span>
+
+    <span class="nl">.L_endif:</span>
+
+    <span class="c1">; restoring the stack pointer and returning</span>
+    <span class="c1">; ...</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The first part of the algorithm is the comparison of the exponent value with <em>0</em>, indirectly done through the <code class="language-plaintext highlighter-rouge">rbx</code> register (an instruction cannot be given two memory addresses).
+Here this comparison is performed with the <code class="language-plaintext highlighter-rouge">test</code> <a href="https://en.wikipedia.org/wiki/TEST_(x86_instruction)">instruction</a> that performs a logical “and” operation and sets an internal flag depending on the result.
+The <code class="language-plaintext highlighter-rouge">jnz</code> instruction (jump if not zero) will be triggered if the tested value (<code class="language-plaintext highlighter-rouge">rbx</code> here) is not equal to zero, as the instruction says.</p>
+
+<p>The following instructions emulate an “if..else..” statement, where the first condition corresponds to the base being equal to <em>0</em>.
+In this example, we choose to put the return value of the function in the <code class="language-plaintext highlighter-rouge">rax</code> register, which is handled in these two different conditions without using additional memory.
+In the first case, the value <em>1</em> is simply moved to the register and the program jumps 🦘 to the end of the function, hence skipping the second case’s instructions.
+In the second case, the base variable is first decremented and the recursive call is then performed after moving the parameters to their registers.</p>
+
+<h4 id="preserving-the-stack-pointers-across-function-calls">Preserving the stack pointers across function calls</h4>
+
+<p>If you test the complete function by adding the remaining instructions from the previous code snippet, you would observe an infinite loop! ♾️
+There is one crucial missing step in our code that handles the stack pointers.
+For now we had only performed function calls from the main function.</p>
+
+<p>We have seen how to save the stack pointer and restore it at the end of the function but we did not take care of the <strong>base</strong> pointer.
+That is the issue here : the base pointer is modified in each sub call.
+Hence, when returning from the function, the base pointer then written in <code class="language-plaintext highlighter-rouge">rsp</code> is no longer valid, causing the function to return in the wrong place.
+In this situation, since the sub-calls are recursive, the function actually returns to itself, causing this infinite loop.</p>
+
+<p>We will now change the function’s base code to :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="nl">_my_function_base:</span>
+    
+    <span class="nf">push</span> <span class="nb">rbp</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="c1">; allocate memory</span>
+    <span class="c1">; ...</span>
+    <span class="c1">; compute stuff</span>
+    <span class="c1">; ...</span>
+
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">pop</span> <span class="nb">rbp</span>
+    <span class="nf">ret</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The two additional instructions <code class="language-plaintext highlighter-rouge">push</code> and <code class="language-plaintext highlighter-rouge">pop</code> here make sure that the <code class="language-plaintext highlighter-rouge">rbp</code> register is saved and restored at each function call.
+This is handled directly by the called function, which is convenient for readability as these instructions would always be placed at the beginning and at the end of our functions.</p>
+
+<p>We can now write the complete code of our recursive pow function : ✅</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre></td><td class="code"><pre><span class="nl">_pow_rec:</span>
+    
+    <span class="c1">; saving the stack and the base registers</span>
+    <span class="nf">push</span> <span class="nb">rbp</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">16</span>
+    <span class="c1">; base : offset=rbp-8, size=8</span>
+    <span class="c1">; exponent : offset=rbp-16, size=8</span>
+
+    <span class="c1">; storing the base and exponent parameters</span>
+    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rdi</span>
+    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">],</span> <span class="nb">rsi</span>
+
+    <span class="c1">; compare the exponent to 0</span>
+    <span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
+    <span class="nf">test</span> <span class="nb">rbx</span><span class="p">,</span> <span class="nb">rbx</span>
+    <span class="nf">jnz</span> <span class="nv">else_exponent_not_0</span>
+
+    <span class="nl">.L_if_exponent_0:</span>
+
+        <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">jmp</span> <span class="nv">.L_endif</span>
+
+    <span class="nl">.L_else_exponent_not_0:</span>
+
+        <span class="nf">dec</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
+
+        <span class="c1">; store the base and the exponent parameters in their associated registers</span>
+        <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
+        <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
+
+        <span class="nf">call</span> <span class="nv">_pow_rec</span> <span class="c1">; the recursive call</span>
+        <span class="nf">imul</span> <span class="nb">rax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; compute the result</span>
+
+    <span class="nl">.L_endif:</span>
+
+    <span class="c1">; restoring the stack and the base registers and returning</span>
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">pop</span> <span class="nb">rbp</span>
+    <span class="nf">ret</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="testing-and-memory-usage">Testing and memory usage</h4>
+
+<p>We can now test our complete program with the help of gdb.
+As we did previously, the program can be compiled in debug mode in order to add a breakpoint in gdb just after the call to <code class="language-plaintext highlighter-rouge">_pow_rec</code> in the <code class="language-plaintext highlighter-rouge">_start</code> function.
+You should be able to see that the value returned by the function in the <code class="language-plaintext highlighter-rouge">rax</code> register is indeed the value <em>5^5 = 125</em>!</p>
+
+<p>Now it is also interesting to take a look at the memory usage of this function.
+As explained previously, the recursive calls in our program are accumulated on the stack until the base case is reached, namely when the base parameter equals <em>0</em>. 
+This means that all information required for the function calls are multiplied on the stack, leading to a consequent use of memory.</p>
+
+<p>To verify this, we can set a breakpoint at the base case of the recursion, just after the <code class="language-plaintext highlighter-rouge">.L_if_exponent_0</code> symbol.
+If we now run the program in gdb, the calls will be accumulated until this base case is reached.
+We can then use the <code class="language-plaintext highlighter-rouge">backtrace</code> (or <code class="language-plaintext highlighter-rouge">bt</code>) command in gdb to see the different calls present on the stack, namely the stack frames :</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>Breakpoint 1, _pow_rec () at pow_rec.s:31
+31	        mov rax, 1
+(gdb) backtrace
+#0  _pow_rec () at pow_rec.s:31
+#1  0x0000000000401033 in _pow_rec () at pow_rec.s:41
+#2  0x0000000000401033 in _pow_rec () at pow_rec.s:41
+#3  0x0000000000401033 in _pow_rec () at pow_rec.s:41
+#4  0x0000000000401054 in _start () at pow_rec.s:61
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This list shows all the functions that are being called by our program and that are not terminated.
+We can see that there are 4 different calls to the <code class="language-plaintext highlighter-rouge">_pow_rec</code> function that are pending in the stack.
+Indeed, at each call the base parameter is decreased.
+Since the execution starts with <em>base=3</em>, four calls are required to reach the value <em>0</em>.</p>
+
+<p>gdb allows us to navigate to each of these <strong>stack frames</strong> and explore the memory and registers there.
+The command <code class="language-plaintext highlighter-rouge">frame 0</code> for instance will load the first frame.
+This helps us to analyze the evolution the the stack pointer register <code class="language-plaintext highlighter-rouge">rsp</code> :</p>
+
+<figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre>(gdb) frame 4
+#4  0x0000000000401054 in _start () at pow_rec.s:61
+61	    call _pow_rec
+(gdb) print $rsp
+$1 = (void *) 0x7fffffffdd88
+(gdb) frame 0
+#0  _pow_rec () at pow_rec.s:31
+31	        mov rax, 1
+(gdb) print $rsp
+$2 = (void *) 0x7fffffffdd08
+(gdb) print 0x7fffffffdd88-0x7fffffffdd08
+$3 = 128
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can see the 128 bytes are used on the stack between the oldest function call (<code class="language-plaintext highlighter-rouge">_start</code>) and the most recent one.
+Let’s see if we can understand each of this use :</p>
+
+<p>Our <code class="language-plaintext highlighter-rouge">_pow_rec</code> function stores 2 8-bytes registers on the stack for each call. 
+Additionally, the <code class="language-plaintext highlighter-rouge">rbp</code> register is saved.
+Moreover, for each function call, the program must store its return address as an additional 8-bytes value.
+This means that we have 4 8-bytes values stored for each function call.
+Since our program is currently executing 4 times the <code class="language-plaintext highlighter-rouge">_pow_rec</code> function, this results in <em>4 * 4 * 8 = 128</em> bytes of memory being used !</p>
+
+<p>Our analysis helps to realize how much memory is used for our small <code class="language-plaintext highlighter-rouge">_pow_rec</code> function.
+We would directly see that the value stored by the intermediate calls are actually useless since an iterative version of our program can be made : each intermediate computation step in our function only depends on the previous result.
+Recursion can be very handy to use but sometimes its memory usage is not beneficial.</p>
+
+<h2 id="an-alternative-version--passing-parameters-through-the-stack">An alternative version : passing parameters through the stack</h2>
+
+<p>In our last example, we have passed parameters to our function by the use of two registers.
+It is however possible to do it differently, for instance by using the stack.</p>
+
+<p>We will now write a second version of our algorithm following this new convention.
+We will start from the initial code backbone and modify the <code class="language-plaintext highlighter-rouge">_start</code> function to pass the parameters on the stack :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="code"><pre><span class="nl">_pow_rec:</span>
+    <span class="nf">push</span> <span class="nb">rbp</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="c1">; recursive pow computation </span>
+
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">pop</span> <span class="nb">rbp</span>
     <span class="nf">ret</span>
 
 <span class="nl">_start:</span>
@@ -529,231 +951,82 @@ In this example, we pass the values by using the stack :</p>
     <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
     <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
     <span class="nf">syscall</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>In this code, the <code class="language-plaintext highlighter-rouge">_start</code> function starts by placing the two parameters of our pow function on the stack.
-The first parameter to be push is the base and the second one is the exponent, hence we expect to compute <em>5^4</em> here.
-The <code class="language-plaintext highlighter-rouge">_start</code> then calls the <code class="language-plaintext highlighter-rouge">_pow_rec</code> function and after that it removes the values from the stack with the <code class="language-plaintext highlighter-rouge">add</code> instructions (2* (8 bytes)).</p>
+<p>Compared to our previous version, the <code class="language-plaintext highlighter-rouge">_start</code> function now contains two <code class="language-plaintext highlighter-rouge">push</code> instructions, one for each parameter.
+Since the <code class="language-plaintext highlighter-rouge">rsp</code> pointer is modified at this point, it is necessary to restore it after the call, hence the <code class="language-plaintext highlighter-rouge">add</code> instruction.
+You may realize that in the configuration, we did not bother to save the stack and the frame pointers contrarily to what we saw previously.
+Indeed, the <code class="language-plaintext highlighter-rouge">_start</code> function remains simple and our program exits right after the power computation.</p>
 
-<p>For now, our <code class="language-plaintext highlighter-rouge">_pow_rec</code> function only extracts one of the parameter from the stack.
-Since this function will use the stack, we added the rwo <code class="language-plaintext highlighter-rouge">mov</code> instructions to save and restore the stack pointer, as we saw in the previous post of the series on the local variables allocation.
-However at this point, since no additional data is stored in stack, the <code class="language-plaintext highlighter-rouge">rbp</code> and <code class="language-plaintext highlighter-rouge">rsp</code> registers would be equal during the function’s execution.</p>
+<p>It is now necessary to modify the code in charge of storing the parameters in the stack in our <code class="language-plaintext highlighter-rouge">_pow_rec</code> function.
+I agree that this step seems counterintuitive as the parameters are now already present in the stack when the function is called.
+However, it is important to place the local variables of our function in their own stack frame and <strong>not interfere</strong> with the stack frame of the calling function.</p>
 
-<p>You can test run the program in gdb and add a breakpoint at <code class="language-plaintext highlighter-rouge">debug</code> to test the <code class="language-plaintext highlighter-rouge">rbx</code> register.
-The resulting value is <em>4</em>, which corresponds to the exponent parameter.
-The value is accessed by adding <em>8</em> to the <code class="language-plaintext highlighter-rouge">rbp</code> register.
-This can be understand from the fact that the stack pointer points toward the return address of the function call (8 bytes) as we saw previously.
-This means that <code class="language-plaintext highlighter-rouge">rsp+8</code> points to the last value added to the stack before the call (as the stack grows toward lower addresses), which corresponds to the exponent parameter in our case.
-By going further in the stack we end up finding the base parameter, 16 bytes above the current stack address.</p>
+<p>The beginning of <code class="language-plaintext highlighter-rouge">_pow_rec</code> becomes :</p>
 
-<p>Let’s now store the two parameters on the stack by allocating two 8 bytes local variables :</p>
-
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">_pow_rec:</span>
-    
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre><span class="nl">_pow_rec:</span>
+    <span class="nf">push</span> <span class="nb">rbp</span>
     <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
     <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">16</span>
     <span class="c1">; base : offset=rbp-8, size=8</span>
     <span class="c1">; exponent : offset=rbp-16, size=8</span>
 
     <span class="c1">; storing the base parameter</span>
-    <span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span>
-    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rbx</span>
-
-    <span class="c1">; storing the exponent parameter</span>
-    <span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">+</span><span class="mi">16</span><span class="p">]</span>
-    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">],</span> <span class="nb">rbx</span>
-
-    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
-    <span class="nf">ret</span>
-</code></pre></div></div>
-
-<h4 id="our-first-recursive-function">Our first recursive function</h4>
-
-<p>Now we can now write the recursion, the central part of our algorithm.
-Our program will first accumulate the function calls on the stack until the exponent <em>0</em> is reached.
-Once it is done, the function can return 1 (x^0 = 1 for all x) without any additional recursive call.
-After that, the function calls would be unstacked and each time, as the results of the previous call would be multiplied by the base.</p>
-
-<p>To implement this, we separate the base case, when the exponent is 0, from the general case :</p>
-
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">_pow_rec:</span>
-    
-    <span class="c1">; saving the stack register and allocating memory</span>
-    <span class="c1">; ...</span>
-
-    <span class="c1">; storing the parameters on the stack</span>
-    <span class="c1">; ...</span>
-
-    <span class="c1">; compare the exponent to 0</span>
-    <span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
-    <span class="nf">test</span> <span class="nb">rbx</span><span class="p">,</span> <span class="nb">rbx</span>
-    <span class="nf">jnz</span> <span class="nv">else_exponent_not_0</span>
-
-    <span class="nl">.L_if_exponent_0:</span>
-
-        <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
-        <span class="nf">jmp</span> <span class="nv">endif</span>
-
-    <span class="nl">.L_else_exponent_not_0:</span>
-
-        <span class="nf">dec</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
-
-        <span class="c1">; store the left and right parameters for the next recursive call</span>
-        <span class="nf">push</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
-        <span class="nf">push</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
-
-        <span class="nf">call</span> <span class="nv">_pow_rec</span> <span class="c1">; the recursive call</span>
-        <span class="nf">imul</span> <span class="nb">rax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; compute the result</span>
-
-        <span class="nf">add</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">16</span>
-
-    <span class="nl">.L_endif:</span>
-
-    <span class="c1">; restoring the stack pointer and returning</span>
-    <span class="c1">; ...</span>
-
-</code></pre></div></div>
-
-<p>The first part of the algorithm is the comparison of the exponent value with 0, indirectly done through the <code class="language-plaintext highlighter-rouge">rbx</code> register.
-Here this comparison is performed with the <code class="language-plaintext highlighter-rouge">test</code> <a href="https://en.wikipedia.org/wiki/TEST_(x86_instruction)">instruction</a> that performs a logical and operation and sets an internal flag depending on the result.
-The <code class="language-plaintext highlighter-rouge">jnz</code> instruction (jump if not zero) will be triggered if the tested value (<code class="language-plaintext highlighter-rouge">rbx</code> here) is not equal to zero, as the instruction says.</p>
-
-<p>The following instructions emulate an if..else.. statement, where the first condition corresponds to the base equal to 0.
-In this example, we choose to put the return value of the function in the <code class="language-plaintext highlighter-rouge">rax</code> register, which is handled in these two different conditions without using additional memory.
-In the first case, the value 1 is simply moved to the register and the program jumps to the end of the function, to skip the second case’s instructions.
-In the second case, the base variable is first decremented and the recursive call is performed after pushing the parameters to the stack.</p>
-
-<h4 id="preserving-the-stack-pointers-across-function-calls">Preserving the stack pointers across function calls</h4>
-
-<p>If you test the complete function by adding the remaining instructions from the previous code snippet, you would observe an infinite loop!
-There is one crucial missing step in our code that handles the stack pointers.
-For now we had only performed function calls from the main function.</p>
-
-<p>We have seen how to save the stack pointer and restore it at the end of the function but we did not do anything for the base pointer.
-That is the issue here : the base pointer is modified in each sub call.
-Hence, when returning in the function, the base pointer which is then written in <code class="language-plaintext highlighter-rouge">rsp</code> is no longer valid, causing the function to return in the wrong place.
-In this situation, since the sub-calls are recursive calls, the function actually returns inside itself, just after the recursive call.</p>
-
-<p>We will now change the function’s base code to :</p>
-
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">_my_function_base:</span>
-    
-    <span class="nf">push</span> <span class="nb">rbp</span>
-    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
-
-    <span class="c1">; allocate memory</span>
-    <span class="c1">; ...</span>
-    <span class="c1">; compute stuff</span>
-    <span class="c1">; ...</span>
-
-    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
-    <span class="nf">pop</span> <span class="nb">rbp</span>
-    <span class="nf">ret</span>
-</code></pre></div></div>
-
-<p>The two additional <code class="language-plaintext highlighter-rouge">push</code> instructions here make sure that the <code class="language-plaintext highlighter-rouge">rbp</code> register is saved and restore at each function call.
-This is handled in the called function directly, which is convenient for readability as these instructions would always be the at the beginning and at the end the our functions.</p>
-
-<p>We can now add the first instructions of the functions (indicated by comments in the previous snippet) :</p>
-
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">push</span> <span class="nb">rbp</span>
-    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
-
-    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">16</span>
-    <span class="c1">; rbp-8 : base (8 bytes)</span>
-    <span class="c1">; rbp-16 : exponent (8 bytes)</span>
-
-    <span class="c1">; store the local variables</span>
     <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">+</span><span class="mi">24</span><span class="p">]</span>
     <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rax</span>
+
+    <span class="c1">; storing the exponent parameter</span>
     <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">+</span><span class="mi">16</span><span class="p">]</span>
     <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">],</span> <span class="nb">rax</span>
-</code></pre></div></div>
 
-<p>Note that since the stack now contains one more 8-byte value, the addresses of the parameters, relative to <code class="language-plaintext highlighter-rouge">rbp</code>, should be changed by subtracting 8 additional bytes hence the modification.</p>
+    <span class="c1">; instructions that follow do not change</span>
+    <span class="c1">; ...</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>And here is how the function is exited :</p>
+<p>The only difference with the previous version is where the parameters’ values are taken from.
+Counterintuitively, we get access to the values by navigating backward in the stack, adding  a positive offset to the <code class="language-plaintext highlighter-rouge">rbp</code> register instead of a negative one.
+This is because our parameters were stored in the previous stack frame (the stack frame of the calling function).</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
-    <span class="nf">pop</span> <span class="nb">rbp</span>
-    <span class="nf">ret</span>
-</code></pre></div></div>
+<p>When the function starts, the <code class="language-plaintext highlighter-rouge">rsp</code> register points toward the return address as we saw previously.
+Since the <code class="language-plaintext highlighter-rouge">rbp</code> register is also pushed to the stack, this means that two registers are already present between the start of our stack frame and our function parameters.
+For this reason, the parameters are being picked from above in the stack addresses : the exponent parameter being that last to be pushed, it is accessed at offset <em>16</em> from the <code class="language-plaintext highlighter-rouge">rbp</code> register.
+On the other hand, the base parameter is accessed from above, at offset <em>24</em>.</p>
 
-<h4 id="memory-usage-with-recursion">Memory usage with recursion</h4>
-
-<h2 id="writing-a-recursive-fibonacci-function">Writing a recursive Fibonacci function</h2>
-
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; compute a fibonacci number recursively</span>
-<span class="nl">_compute_fibonacci_rec:</span>
-    
-    <span class="nf">push</span> <span class="nb">rbp</span>
-    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
-
-    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">18</span>
-    <span class="c1">; local variables:</span>
-    <span class="c1">; rbp-18 : sequence index, 2 bytes</span>
-    <span class="c1">; rbp-16 : f_(n-2), 8 bytes</span>
-    <span class="c1">; rbp-8 : f_(n-1), 8 bytes</span>
-
-    <span class="c1">; fibonacci sequence :</span>
-    <span class="c1">; f_0 = 0</span>
-    <span class="c1">; f_1 = 1</span>
-    <span class="c1">; f_n = f_(n-1) + f_(n-2)</span>
-
-    <span class="c1">; store the index parameter in the stack</span>
-    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">18</span><span class="p">],</span> <span class="nb">si</span>
-
-    <span class="c1">; test the index value</span>
-    <span class="nf">cmp</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">18</span><span class="p">],</span> <span class="mi">1</span>
-    <span class="nf">je</span> <span class="nv">.L_if_n_1</span>
-    <span class="nf">jg</span> <span class="nv">.L_else_n_gt1</span>
-    
-    <span class="nl">.L_if_n_0:</span> <span class="c1">; special case when n is 0, return 0</span>
-        <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="mi">0</span>
-        <span class="nf">jmp</span> <span class="nv">end_if_n</span>
-
-    <span class="nl">.L_if_n_1:</span> <span class="c1">; special case when n is 1, return 1</span>
-        <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="mi">1</span>
-        <span class="nf">jmp</span> <span class="nv">end_if_n</span>
-
-    <span class="nl">.L_else_n_gt1:</span> <span class="c1">; recursive case : compute f_(n-2) + f_(n-1)</span>
-
-        <span class="c1">; compute f_(n-2)</span>
-        <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">18</span><span class="p">]</span>
-        <span class="nf">sub</span> <span class="nb">si</span><span class="p">,</span> <span class="mi">2</span>
-        <span class="nf">call</span> <span class="nv">_compute_fibonacci_rec</span>
-        <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">],</span> <span class="nb">rax</span>
-
-        <span class="c1">; compute f_(n-1)</span>
-        <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">18</span><span class="p">]</span>
-        <span class="nf">dec</span> <span class="nb">si</span>
-        <span class="nf">call</span> <span class="nv">_compute_fibonacci_rec</span>
-        <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rax</span>
-
-        <span class="c1">; compute f_n = f_(n-2)+f_(n-1) in the rax register</span>
-        <span class="nf">xor</span> <span class="nb">rax</span><span class="p">,</span> <span class="nb">rax</span>
-        <span class="nf">add</span> <span class="nb">rax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span>
-        <span class="nf">add</span> <span class="nb">rax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
-
-    <span class="nl">.L_end_if_n:</span>
-
-    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
-    <span class="nf">pop</span> <span class="nb">rbp</span>
-
-    <span class="nf">ret</span>
-
-<span class="nl">_start:</span>
-
-    <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="mi">17</span>
-    <span class="nf">call</span> <span class="nv">_compute_fibonacci_rec</span>
-
-    <span class="c1">; exit</span>
-    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
-    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
-    <span class="nf">syscall</span>
-</code></pre></div></div>
+<p>I find it useful to take some time to apprehend how the stack is being used here.
+The best way to organize our code for the function calls is to carefully respect the stack frame from each function call and refrain from interfering with the frame of another function.</p>
 
 <h2 id="whats-next-">What’s next ?</h2>
+
+<p>This one was pretty dense!
+Correctly manipulating the stack with function calls is certainly an important step toward the ability to program in assembly.
+I hope this post was not too technical.
+The good news is : this is I think the most technical content to digest before advancing to more practical exercises 🥳.
+The next part will be about interfacing our code with C programs : calling functions from the C standard library for instance.
+This will allow us to perform higher level operations without requiring any single line of C.</p>
+
+<p>Before that, I invite you to continue practicing 🧑‍💻 from the different codes realized here.
+For instance, you may create a program that computes the multiplication of two numbers recursively, similarly to what we saw with the pow function.
+You may also try more complex recursions such as writing a function that computes the Fibonacci series.
+As previously, I put the codes from this post as well as bonus ones (the Fibonacci function for instance) at this following <a href="https://github.com/smbct/x86-64_101_linux/tree/main/pt4_recursive_power">link</a>.</p>
 
 
     
