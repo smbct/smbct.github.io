@@ -25,5 +25,16 @@ This series will be written as I learn on the topic, with potential mistakes and
 I take some time to write about it as a ways to compile knowledge that can be sometimes difficult to find on the web, and also to rise the interest in this approach.
 The series would be more adapted to someone already familiar with programming, preferably with a low level language like C.
 
-The first few posts of this series are available at this [link](/series/x86_64_assembly/headline). Enjoy!
+The first few posts of this series are available in this [page](/series/x86_64_assembly/headline).
+I will also update the links directly here :
+
+* [part 1 : Hello, world!](/series/x86_64_assembly/pt1)
+
+* [Part 2 : drawing a square](/series/x86_64_assembly/pt2)
+
+* [Part 3 : drawing a circle](/series/x86_64_assembly/pt3)
+
+* [Part 4 : recursive power](/series/x86_64_assembly/pt4)
+
+Enjoy!
 
