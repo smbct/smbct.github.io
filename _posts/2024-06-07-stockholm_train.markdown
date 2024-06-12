@@ -2,7 +2,8 @@
 title:  Un Paris - Stockholm en train 🚆
 author: smbct
 date:   2024-06-07 10:00:00 +0200
-categories: voyage train climat
+categories: society
+tags: voyage train climat
 comments: true
 layout: post
 ---

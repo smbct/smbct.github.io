@@ -2,7 +2,8 @@
 title:  Programmation linéaire
 author: smbct
 date:   2016-04-16 21:20:33 +0200
-categories: optimisation
+categories: optimisation IA
+categories: vulgarisation IA
 comments: true
 layout: post
 ---

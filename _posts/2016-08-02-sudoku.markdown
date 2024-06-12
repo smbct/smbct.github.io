@@ -2,7 +2,8 @@
 title: Optimisation et sudoku
 author: smbct
 date:   2016-08-02 15:20:33 +0200
-categories: optimisation IA jeux
+categories: vulgarisation IA
+tags: optimisation IA jeux
 comments: true
 layout: post
 ---

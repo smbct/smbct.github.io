@@ -2,7 +2,8 @@
 title:  Solving a pokemon puzzle with SAT solvers
 author: smbct
 date:   2023-05-15 10:00:00 +0200
-categories: SAT logic puzzle games model-checking
+categories: AI puzzle
+tags: SAT logic puzzle games model-checking
 comments: true
 layout: post
 ---
