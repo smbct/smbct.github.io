@@ -2,7 +2,8 @@
 title:  Can deep neural networks learn the rules of chess ?
 author: smbct
 date:   2022-05-30 10:00:00 +0200
-categories: deep-learning chess games combinatorics
+categories: AI 
+tags: deep-learning chess games combinatorics
 comments: true
 layout: post
 ---
@@ -29,8 +30,9 @@ Since I needed a dataset for this project, I used this *csv* of [chess games](ht
 
 At this stage, I decided to simplify the learning task because predicting the possible (legal) moves from a board configuration implies using a model with a **varying output size**, something difficult to achieve with deep neural nets. I choose to **simplify** the problem by predicting only the possible destinations for a given pieces, ignoring the interaction with the other pieces (which is quite cheating considering the initial idea, but interesting as a first step). I made a **second simplification** assuming that all the possible moves from the board position are known (which is not the case in my previous description since only one possible move can be seen when someone plays).
 
-> To sum up, if we take the illustration above, our main goal here is to produce a model able to predict a list of moves (the blue arrows) from a given board configuration (position of the pieces), assuming that from a given board configuration in the dataset, all the arrows are known.
-{: .prompt-info }
+<p class="message">
+To sum up, if we take the illustration above, our main goal here is to produce a model able to predict a list of moves (the blue arrows) from a given board configuration (position of the pieces), assuming that from a given board configuration in the dataset, all the arrows are known.
+</p>
 
 ## Fetching the model inputs/outputs
 

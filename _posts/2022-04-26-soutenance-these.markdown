@@ -2,7 +2,8 @@
 title:  Soutenir sa thèse en comodal en 2022
 author: smbct
 date:   2022-04-26 18:00:00 +0200
-categories: these doctorat covid comodal
+categories: astuces
+tags: these doctorat covid comodal
 comments: true
 layout: post
 ---
