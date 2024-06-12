@@ -253,37 +253,7 @@
       
 
       
-        deep-learning
-      
-    
-      &bull;
-
-      
-      
-      
-
-      
-        chess
-      
-    
-      &bull;
-
-      
-      
-      
-
-      
-        games
-      
-    
-      &bull;
-
-      
-      
-      
-
-      
-        combinatorics
+        AI
       
     
   </span>
@@ -311,9 +281,9 @@
 
 <p>At this stage, I decided to simplify the learning task because predicting the possible (legal) moves from a board configuration implies using a model with a <strong>varying output size</strong>, something difficult to achieve with deep neural nets. I choose to <strong>simplify</strong> the problem by predicting only the possible destinations for a given pieces, ignoring the interaction with the other pieces (which is quite cheating considering the initial idea, but interesting as a first step). I made a <strong>second simplification</strong> assuming that all the possible moves from the board position are known (which is not the case in my previous description since only one possible move can be seen when someone plays).</p>
 
-<blockquote class="prompt-info">
-  <p>To sum up, if we take the illustration above, our main goal here is to produce a model able to predict a list of moves (the blue arrows) from a given board configuration (position of the pieces), assuming that from a given board configuration in the dataset, all the arrows are known.</p>
-</blockquote>
+<p class="message">
+To sum up, if we take the illustration above, our main goal here is to produce a model able to predict a list of moves (the blue arrows) from a given board configuration (position of the pieces), assuming that from a given board configuration in the dataset, all the arrows are known.
+</p>
 
 <h2 id="fetching-the-model-inputsoutputs">Fetching the model inputs/outputs</h2>
 
@@ -435,6 +405,50 @@ Please feel free to re-use and improve the model (and let me know if you are abl
 
 
 <div class="post-tags">
+  
+    
+    <a href="/tags.html#deep-learning">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">deep-learning</span>
+    </a>
+  
+    
+    <a href="/tags.html#chess">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">chess</span>
+    </a>
+  
+    
+    <a href="/tags.html#games">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">games</span>
+    </a>
+  
+    
+    <a href="/tags.html#combinatorics">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">combinatorics</span>
+    </a>
   
 </div>
   </div>
