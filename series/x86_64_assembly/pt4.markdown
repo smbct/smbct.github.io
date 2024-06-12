@@ -4,7 +4,8 @@ author: smbct
 date:   2024-05-14 10:00:00 +0200
 categories: low-level programming assembly
 comments: true
-layout: post
+layout: series_article
+back_page: headline.md
 ---
 
 In the last post of the assembly x86 series, we have seen how to manipulate the stack in order to store local variables.

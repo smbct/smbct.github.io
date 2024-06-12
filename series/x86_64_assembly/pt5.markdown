@@ -4,7 +4,8 @@ author: smbct
 date:   2024-05-21 10:00:00 +0200
 categories: low-level programming assembly
 comments: true
-layout: post
+layout: series_article
+back_page: headline.md
 ---
 
 and also how to interact with C functions in our program!

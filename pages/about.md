@@ -1,9 +1,9 @@
 ---
 layout: category
 title: About
+back_page: test
 ---
 
-## About
 
 Welcome to my blog. I have been in the research / computing industry for few years now. I have a background in computer science and some experience in its interface with biology and I hope to use this blog as a place to keep notes and discuss various topics.
 
