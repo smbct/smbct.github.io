@@ -1,0 +1,16 @@
+---
+title:  test
+date:   2024-06-07 10:00:00 +0200
+categories: test
+tags: test
+comments: true
+layout: post
+---
+
+{% for p in site.pages %}
+{% if p.name == "headline.md" and p.dir == "/series/x86_64_assembly/" %}
+    {% assign target = p %}
+{% endif %}
+{% endfor %}
+
+{{ target.content }}

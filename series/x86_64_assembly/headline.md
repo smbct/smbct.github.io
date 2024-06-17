@@ -18,3 +18,5 @@ This series covers x86 assembly programming.
 * [Part 3 : drawing a circle](pt3)
 
 * [Part 4 : recursive power](pt4)
+
+* [Part 5 : printing arrays](pt5)
