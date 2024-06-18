@@ -111,6 +111,10 @@
   
 
   
+    
+  
+
+  
 
   
     
@@ -145,6 +149,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -276,33 +284,52 @@
 
 
   <div class="post-body">
-    <p>and also how to interact with C functions in our program!
-We will use these new notions to print the content of an integer array in assembly.</p>
+    <p>The last post taught us how to write functions in x68 assembly.
+The interesting thing is that now we can interact with compiled libraries from other languages.
+This will allow us to perform higher level tasks such as opening windows, networking, etc…
+In this post, we will start by looking at how to <strong>call C functions</strong>.
+We will first see how to use the <code class="language-plaintext highlighter-rouge">printf</code> function in order to print variables 🖨️.
+This will let us print the content of an integer array in assembly.
+We will also see how to create a function that can be called from a C program 🔄!</p>
 
-<h2 id="calling-the-c-printf-functions">Calling the C printf functions</h2>
+<h2 id="calling-the-c-printf-functions">Calling the C <code class="language-plaintext highlighter-rouge">printf</code> functions</h2>
 
-<p>One dimension that function calls bring to our program is not only the ability to structure it, but also the opportunity to call higher level libraries that would perform more advanced operations like opening windows, networking, etc..
-However, although we previously had the freedom to decide our own convention for parameters and return value, calling a function from a library requires us to follow the library’s convention.
-We will see how to do so by calling the “printf” function from the standard C library.</p>
+<p>Although we previously had the freedom to decide our own convention about functions parameters and return value, calling a function from an external library requires us to follow the library’s convention.
+We will see how to do so by calling the <code class="language-plaintext highlighter-rouge">printf</code> function from the C standard library.</p>
 
 <h4 id="using-the-c-standard-lib-in-our-program">Using the C standard lib in our program</h4>
 
 <p>Our program’s compilation will now change a bit.
-Previously, we created executables from assembly code by using nothing more than systems calls to interact with a user.
-Now, the idea is to interface the program with the C standard library.</p>
+Previously, we created executables that did not rely on any external library.
+We will now need to link the standard library from C to be able to use <code class="language-plaintext highlighter-rouge">printf</code>.</p>
 
-<p>Adding the C standard library to our program’s is simply done by removing the option <code class="language-plaintext highlighter-rouge">-nostdlib</code> when linking the executable with gcc.
-However, the C library adds a lot more features to our program : it defines the _start function (program’s entry point) by itself.
-For this reason, our program’s first function will now be the classical <code class="language-plaintext highlighter-rouge">main</code> function.
-The “hello world” code now becomes :</p>
+<p>Adding the C standard library to our programs is simply done by removing the option <code class="language-plaintext highlighter-rouge">-nostdlib</code> when linking the executable with gcc, as it is actually linked by default.
+However, the C library adds a lot more features to our program : it defines the <code class="language-plaintext highlighter-rouge">_start</code> function (our program’s entry point) by itself.
+For this reason, our program’s first function will now be the classical <code class="language-plaintext highlighter-rouge">main</code> function.</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">.global</span> <span class="nv">main</span>
+<p>The “hello world” code becomes :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">main</span>
 <span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
 
 <span class="nl">main:</span>
-
-    <span class="nf">push</span> <span class="nb">rbp</span>
-    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
 
     <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
     <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
@@ -310,192 +337,483 @@ The “hello world” code now becomes :</p>
     <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
     <span class="nf">syscall</span>
 
-    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
-    <span class="nf">pop</span> <span class="nb">rbp</span>
-
     <span class="c1">; return</span>
     <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">42</span>
-    
     <span class="nf">ret</span>
 
 <span class="nl">hello_world:</span>
     <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>There are two changes regarding the previous hello_world : our function is now called main and it will be automatically be called by the <code class="language-plaintext highlighter-rouge">_start</code> function defined in the cstdlib ; and since it is now a called function, the <code class="language-plaintext highlighter-rouge">ret</code> instruction is now called at its end.
-The compilation is done as previously, except for the second command that now becomes <code class="language-plaintext highlighter-rouge">gcc -static my_program.o -o my_program</code>.</p>
+<p>There are two changes regarding the previous “hello_world” program : our function is now named <code class="language-plaintext highlighter-rouge">main</code> and it will be automatically be called by the <code class="language-plaintext highlighter-rouge">_start</code> function defined in the libc (C standard library) ; and since it is now a called function, the <code class="language-plaintext highlighter-rouge">ret</code> instruction is necessary at its end.
+Also note that contrarily to what we saw previously, since our function does not use the stack 🥞 we do not need to save and restore the <code class="language-plaintext highlighter-rouge">rsp</code> and <code class="language-plaintext highlighter-rouge">rbp</code> registers here.</p>
 
-<p>You can verify that the program’s output is actually <em>42</em>, which is given as the main’s return value : <code class="language-plaintext highlighter-rouge">./my_program ; echo $?</code>.
-Now if you try to compile our first hello_world program with this same command, so that it is linked with the c standard library, this would not work since the program’s entry point <code class="language-plaintext highlighter-rouge">_start</code> would be defined twice : once in the code and another time in the library.
-If you want a more precise idea of the additional material added by the standard libc, you might check this <a href="http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html">interesting article</a>!</p>
+<p>The compilation is done as previously, except for the second command that becomes <code class="language-plaintext highlighter-rouge">gcc -static my_program.o -o my_program</code> (the <code class="language-plaintext highlighter-rouge">-nostdlib</code> option has been removed).
+You can verify that the program’s output is actually <em>42</em>, which is indeed <code class="language-plaintext highlighter-rouge">main</code>’s return value : <code class="language-plaintext highlighter-rouge">./my_program ; echo $?</code>.</p>
 
-<h4 id="passing-parameters-to-printf">Passing parameters to printf</h4>
+<p>Note that if you try to compile any of our previous programs without the <code class="language-plaintext highlighter-rouge">-nostdlib</code> option, it would not work because the <code class="language-plaintext highlighter-rouge">_start</code> function would be defined twice.
+If you want a more precise idea of the additional elements added to our programs by the standard libc, you might check this <a href="http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html">interesting article</a> 💡!</p>
 
-<p>Now that everything is in place, let’s call the printf function.
-Know that since the standard libc is now linked, the <code class="language-plaintext highlighter-rouge">printf</code> symbol will be known by the linker.
-Now the important thing is to see how to pass parameters to the “printf” functions.
+<h4 id="passing-parameters-to-printf">Passing parameters to <code class="language-plaintext highlighter-rouge">printf</code></h4>
+
+<p>Now that our code’s backbone is in place, let’s call the <code class="language-plaintext highlighter-rouge">printf</code> function.
+Since the standard libc (C standard library) is now linked to our program, the <code class="language-plaintext highlighter-rouge">printf</code> symbol will be known by the linker.
+Now the important thing is to see how to pass parameters to the <code class="language-plaintext highlighter-rouge">printf</code> functions.
 That part is tricky : the (calling) convention used by Linux is called the <strong>AMD64 System V ABI</strong>.</p>
 
 <p>Documentation is sometimes hard to find and I personally learned this from this <a href="https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler">stackoverflow post</a>.
-You can see in the post that parameters are in part passed by registers : <code class="language-plaintext highlighter-rouge">rdi</code> for the first one, <code class="language-plaintext highlighter-rouge">rsi</code> for the second one, <code class="language-plaintext highlighter-rouge">rdx</code> for the third etc.. 
-They also indicate that the <code class="language-plaintext highlighter-rouge">al</code> (the 8 bits version of <code class="language-plaintext highlighter-rouge">rax</code> register) register must be set to 0 since “printf” has a variable number of arguments.</p>
+You can see that in this convention, registers are used for arguments and return values that are not <em>composed</em> data types.</p>
 
-<p>Following the convention, our printf call to print “hello world” now becomes :</p>
+<p>Here is a summary of the order :</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span> <span class="c1">; al is set to 0</span>
+<ul>
+  <li>1st argument : <code class="language-plaintext highlighter-rouge">rdi</code></li>
+  <li>2nd argument : <code class="language-plaintext highlighter-rouge">rsi</code></li>
+  <li>3rd argument : <code class="language-plaintext highlighter-rouge">rdx</code></li>
+  <li>4th argument : <code class="language-plaintext highlighter-rouge">rcx</code></li>
+  <li>5th argument : <code class="language-plaintext highlighter-rouge">r8</code></li>
+  <li>6th argument : <code class="language-plaintext highlighter-rouge">r9</code></li>
+  <li>1st return value : <code class="language-plaintext highlighter-rouge">rax</code></li>
+  <li>2nd return value : <code class="language-plaintext highlighter-rouge">rdx</code></li>
+</ul>
+
+<p>We can also learn that since <code class="language-plaintext highlighter-rouge">printf</code> has a variable number of arguments, the <code class="language-plaintext highlighter-rouge">al</code> register (the 8 bits version of <code class="language-plaintext highlighter-rouge">rax</code> register) must be set in order to give information about the use of specific registers.
+In our case, we will only have to set it to <em>0</em>.</p>
+
+<p>Following the convention, our <code class="language-plaintext highlighter-rouge">printf</code> call to print “hello world” now becomes :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span> <span class="c1">; al is set to 0</span>
     <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span> <span class="c1">; 1st argument passed to register</span>
     <span class="nf">call</span> <span class="nv">printf</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>If you try this, you would normally see a segmentation fault :(</p>
+<p>If you try this, you would normally see a segmentation fault 🙁</p>
 
-<h4 id="one-more-requirement--stack-pointer-alignment">One more requirement : stack pointer alignment</h4>
+<h4 id="one-more-requirement--stack-pointer-alignment-">One more requirement : stack pointer alignment 🥞</h4>
 
-<p>By further reading the stackoverflow post that I linked above, we learn that there is on more condition that needs to be met when calling functions in the <strong>AMD64 System V ABI</strong> convention : the stack pointer must be aligned to 16 bytes, meaning its value must be a multiple of 16.</p>
+<p>By further reading the stackoverflow post that I linked above, we learn that there is one more condition that needs to be met when calling C functions in the <strong>AMD64 System V ABI</strong> convention : the stack pointer must be aligned to 16 bytes, meaning its value must be a multiple of 16.</p>
 
-<p>You can run gdb on your program and check the value of <code class="language-plaintext highlighter-rouge">rsp</code> before calling “printf” : <code class="language-plaintext highlighter-rouge">breakpoint main</code> followed by <code class="language-plaintext highlighter-rouge">print $rsp</code>.
-It gives <em>0x7fffffffdbd8</em> for me and <em>0x7fffffffdbd8 modulo 0x10 = 0x8</em> (where <em>0x10</em> is 16 in hexadecimal).
-We see that there is an 8 bytes shift of the <code class="language-plaintext highlighter-rouge">rsp</code> value.
-This shift comes from the fact that the <code class="language-plaintext highlighter-rouge">call</code> instruction pushes the return address (8 bytes) to the stack, as we saw previously.
-As a result the stack pointer is misaligned by 8 bytes.
-This will be fixes by simply re-aligning the stack pointer before starting the call, which can be done by “allocating” 8 additional bytes (unused) :</p>
+<p>We can run gdb on your program and check the value of <code class="language-plaintext highlighter-rouge">rsp</code> after entering the main function by adding a breakpoint in debug mode.
+In my case, the value of <code class="language-plaintext highlighter-rouge">rsp</code> is <em>0x7fffffffdbb8</em>.
+We then compute <code class="language-plaintext highlighter-rouge">print 0x7fffffffdbb8 % 0x10</code> (where <em>0x10</em> is 16 in hexadecimal).
+The result should be <em>8</em> : hence we see that there is an 8 bytes misalignment of the <code class="language-plaintext highlighter-rouge">rsp</code> value.</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
+<p>This misalignment comes from the fact that the <code class="language-plaintext highlighter-rouge">call</code> instruction that actually triggers the execution of <code class="language-plaintext highlighter-rouge">main</code> pushes the return address (8 bytes) to the stack, as we saw in the last part.
+As a result the stack pointer is then misaligned by 8 bytes.
+This can be fixed by simply re-aligning the stack pointer before starting the call, which can be done by “allocating” 8 additional bytes (unused) :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
+
     <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span> <span class="c1">; al is set to 0</span>
     <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span> <span class="c1">; 1st argument passed to register</span>
     <span class="nf">call</span> <span class="nv">printf</span>
-    <span class="nf">add</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
-</code></pre></div></div>
 
-<p>This should now work as expected!
-Note that since our string is zero terminated (it ends by ‘\0’, as defined by the .asci<strong>z</strong> type with the gnu assembler), it is not necessary to specify its length to printf.</p>
+    <span class="nf">add</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">8</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This should now work as expected! 🥳
+Note that since our string is zero terminated (it ends by ‘\0’, as defined by the .asci<strong>z</strong> type with the gnu assembler), it is not necessary to specify its length to <code class="language-plaintext highlighter-rouge">printf</code>.</p>
 
 <p>In our following codes, we will now make sure the stack pointer is well aligned before starting any operation in our functions.
-A proper place to do it is when the local variables are allocated, as we saw in the previous post of the series.
-This may also be done automatically by subtracting the offset : <code class="language-plaintext highlighter-rouge">rsp</code> modulo 8, which can be performed by “anding” 15 to the value of <code class="language-plaintext highlighter-rouge">rsp</code>: <code class="language-plaintext highlighter-rouge">and rsp, 15</code> (recall that a modulo operation on a power of two can be obtained by directly looking at the right number of bits in the binary representation).</p>
+A proper place to do it is when the local variables are allocated, as we saw in the previous post of the series.</p>
+
+<p>This operation can also be done automatically by subtracting the offset : <code class="language-plaintext highlighter-rouge">rsp</code> modulo <em>8</em>, which can be performed by “anding” <em>15</em> to the value of <code class="language-plaintext highlighter-rouge">rsp</code>: <code class="language-plaintext highlighter-rouge">and rsp, 15</code> (recall that a modulo operation on a power of two can be obtained by directly looking at the right number of bits in the binary representation).</p>
 
 <h4 id="printing-integers-with-printf">Printing integers with printf</h4>
 
-<p>Calling a C function was not easy!
-The good thing is now it will be much easier to bring concrete features to our programs.
-Let’s start by accomplishing a task that was previously much harder : printing integer values.</p>
+<p>Calling a C function is not easy!
+The good thing is this is going to help us to bring concrete features to our programs.
+Let’s start by accomplishing a task that was previously much harder : printing integer values!</p>
 
-<p>To print a value in the terminal, we can use the printf function with its formatting ability : the value would be passed as a parameter, as well as a string indicating how to format it.
-We can have a look at the <a href="https://cplusplus.com/reference/cstdio/printf/">documentation</a> of “printf” to choose the correct formatter.
-We start by defining the formatter as a constant string in our program (this does not change) :</p>
+<p>To print a value in the terminal, we can use the <code class="language-plaintext highlighter-rouge">printf</code> function with its formatting abilities.
+In our setup, <code class="language-plaintext highlighter-rouge">printf</code> would take as argument a string containing a formatter (which decides how the value is displayed) and the value to be printed.
+We can have a look at the <a href="https://cplusplus.com/reference/cstdio/printf/">documentation</a> of <code class="language-plaintext highlighter-rouge">printf</code> to choose the correct formatter.
+In C, this would look like :</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">integer_formatter:</span>
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>To do so in assembly, we start by defining a string that contains a formatter :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nl">integer_formatter:</span>
     <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">integer</span> <span class="nv">value</span><span class="p">:</span> <span class="o">%</span><span class="nv">i</span><span class="err">\</span><span class="nv">n</span><span class="err">"</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>The  “%i” formatter is used in order to print a decimal integer.
-We will then call printf and pass this string as well as the register value.
-For this, we will use the <code class="language-plaintext highlighter-rouge">rsi</code> register, as it is specified to pass the second argument in Linux.</p>
+<p>The  “%i” formatter is used to print a decimal integer.
+We then call <code class="language-plaintext highlighter-rouge">printf</code> and pass this string as well as the value to be printed.
+For this, we will use the <code class="language-plaintext highlighter-rouge">rsi</code> register, as it is dedicated to the second argument in the calling convention.</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre>    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
     <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">integer_formatter</span><span class="p">]</span>
     <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="mi">42</span>
     <span class="nf">call</span> <span class="nv">printf</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>The program should now print: “integer value: 42”.
-This adds a lot more possibilities to interact with the user!</p>
+This now adds a lot more possibilities to interact with the user!</p>
 
 <h2 id="printing-an-array">Printing an array</h2>
 
-<p>Now that we know how to call printf, we will perform a useful task for the future post : printing an array!
-We will start by defining a constant array in the program’s memory :</p>
+<p>Now that we know how to call <code class="language-plaintext highlighter-rouge">printf</code>, we will create a function that will be useful for the future post : printing an array!
+We start by defining a constant array in the program’s memory :</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">my_array:</span>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="nl">my_array:</span>
     <span class="nf">.byte</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">14</span>
 <span class="nl">my_array_length:</span>
     <span class="nf">.word</span> <span class="mi">9</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>In this case, the array elements will be stored as bytes (8 bits long, integer values between -128 and 127).
-We also define a constant for its size as a word (2 bytes).
-That will eventually be helpful.</p>
+<p>In this case, the array elements are stored as bytes (8 bits long, coding integer values between -128 and 127).
+We also define a constant indicating its size as a word (2 bytes).</p>
 
-<p>Now we may define our strings constants to be used by printf :</p>
+<p>We may now define our strings constants to be used by <code class="language-plaintext highlighter-rouge">printf</code> :</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">array_elt_formatter:</span>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="nl">array_elt_formatter:</span>
     <span class="nf">.asciz</span> <span class="s">"%hhd "</span>
 <span class="nl">new_line:</span>
     <span class="nf">.asciz</span> <span class="err">"\</span><span class="nv">n</span><span class="s">"
 my_array_str:
     .asciz "</span><span class="nv">My</span> <span class="nv">array</span> <span class="p">:</span> <span class="err">"</span>
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>The “array_elt_formatter” is used to format a single byte as an integer with printf, followed by a space.
-We also define the new_line string that only prints the return character for convenience, as well as a string announcing the array to be printed.</p>
+<p>The <code class="language-plaintext highlighter-rouge">array_elt_formatter</code> is used to format a single byte as an integer with <code class="language-plaintext highlighter-rouge">printf</code>, followed by a space.
+We also define the <code class="language-plaintext highlighter-rouge">new_line</code> string that only prints the return character for convenience, as well as a string announcing the array to be printed.</p>
 
 <h4 id="the-local-variables">The local variables</h4>
 
-<p>We will need 2 local variables in our code : an 8 bytes variable to store the array address and a 2 bytes variable to an index for iterating over the array.
-This results in 10 bytes allocated on the stack.
-With the 8 bytes already present to store the return address of the main function, the stack pointer would be aligned to 26 bytes.
-Hence, 6 additional bytes are necessary for a 16 bytes alignment (<em>32=2x16</em>).</p>
+<p>We will need 2 local variables in our <code class="language-plaintext highlighter-rouge">print_array</code> function : an 8-bytes variable to store the array address and a 2-bytes variable to store an index for iterating over the array.
+This results in 10 bytes allocated on the stack 🥞.
+With the 8 bytes already present to store the return address of the <code class="language-plaintext highlighter-rouge">main</code> function, the stack pointer would be aligned to 18 bytes.
+Hence, 6 additional bytes are necessary to reach 32 bytes, for a 16 bytes alignment requirement (<em>32=2x16</em>).
+This gives a total of 24 bytes to allocate.</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">; storing the rsp value before local variables definition</span>
-<span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
-<span class="c1">; rbp - 8 : array pointer, 8 bytes</span>
-<span class="c1">; rbp - 10 : array index, 2 bytes</span>
-<span class="c1">; 6 padding bytes</span>
-<span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">24</span>
-</code></pre></div></div>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="nl">print_array:</span>
+
+    <span class="c1">; storing the rsp value before local variables definition</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+    <span class="c1">; rbp - 8 : array pointer, 8 bytes</span>
+    <span class="c1">; rbp - 10 : array index, 2 bytes</span>
+    <span class="c1">; 6 padding bytes</span>
+    <span class="nf">sub</span> <span class="nb">rsp</span><span class="p">,</span> <span class="mi">24</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
 <p>The local variables are then initialized, and the first string announcing the array can be printed :</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="mi">0</span> <span class="c1">; array_index &lt;- 0</span>
-<span class="c1">; loading the array pointer</span>
-<span class="nf">lea</span> <span class="nb">rax</span><span class="p">,</span> <span class="nv">my_array</span>
-<span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rax</span>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="mi">0</span> <span class="c1">; array_index &lt;- 0</span>
+    <span class="c1">; loading the array pointer</span>
+    <span class="nf">lea</span> <span class="nb">rax</span><span class="p">,</span> <span class="nv">my_array</span>
+    <span class="nf">mov</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">],</span> <span class="nb">rax</span>
 
-<span class="c1">; printing the "my_array_str" string</span>
-<span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
-<span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">my_array_str</span><span class="p">]</span>
-<span class="nf">call</span> <span class="nv">printf</span>
-</code></pre></div></div>
+    <span class="c1">; printing the "my_array_str" string</span>
+    <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">my_array_str</span><span class="p">]</span>
+    <span class="nf">call</span> <span class="nv">printf</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h4 id="writing-the-main-loop">Writing the main loop</h4>
 
-<p>The main scheme here is similar to our print_square and print_circle programs.
-What changes is the call to printf and the array manipulation in order to extract its values.
-Accessing the values of the array is performed by increasing the array address.
-Indeed, the address accessed through the label “my_array” actually points toward the first value of the array in the program’s memory.
-Since are the values are contiguous, and since they are coded on 1 byte, accessing the next value is performed by increasing the address by one (recall that the addresses are expressed as bytes).</p>
+<p>The main scheme here is similar to our <code class="language-plaintext highlighter-rouge">print_square</code> and <code class="language-plaintext highlighter-rouge">print_circle</code> programs from previous posts.
+What changes is the call to <code class="language-plaintext highlighter-rouge">printf</code> and the array manipulation in order to extract its values.</p>
+
+<p>Accessing the values of the array is performed by increasing 🔼 the array address.
+Indeed, the address accessed through the label <code class="language-plaintext highlighter-rouge">my_array</code> actually points toward the first value of the array in the program’s memory.
+Since the values are contiguous in memory, and since they are coded on 1 byte each, accessing the next value is performed by increasing the address by one (recall that the addresses are expressed as bytes).</p>
 
 <p>Our main loop is as follows :</p>
 
-<div class="language-nasm highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">for_loop_writing:</span>
-    <span class="c1">; printing the "my_array_str" string</span>
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre>    <span class="nl">.L_for_loop_writing:</span>
+        <span class="c1">; printing the "my_array_str" string</span>
+        <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
+        <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">array_elt_formatter</span><span class="p">]</span>
+        <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; load the array pointer</span>
+        <span class="nf">mov</span> <span class="nb">si</span><span class="nv">l</span><span class="p">,</span> <span class="p">[</span><span class="nb">rsi</span><span class="p">]</span> <span class="c1">; load the value stored at the address</span>
+        <span class="nf">call</span> <span class="nv">printf</span>
+
+        <span class="nf">inc</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; increase the array pointer</span>
+        <span class="nf">inc</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span> <span class="c1">; increase the array index</span>
+        <span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
+        <span class="nf">cmp</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nv">my_array_length</span><span class="p">]</span>
+        <span class="nf">jne</span> <span class="nv">for_loop_writing</span> <span class="c1">; test if all elements have been printed</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>You may notice that two steps are necessary to load a value from the array before calling <code class="language-plaintext highlighter-rouge">printf</code> : the address of the array must first be retrieved from the stack and then, the <code class="language-plaintext highlighter-rouge">mov</code> instruction is used to load the value coded at the address.
+Note that the 1-byte register <code class="language-plaintext highlighter-rouge">sil</code> is used here to store the array values since they are encoded as single bytes.
+These two steps cannot be concatenated into a single one since an instruction can have a memory reference in only one of its operand.</p>
+
+<p>After the call to <code class="language-plaintext highlighter-rouge">printf</code>, the array index is increased as well as the array address.
+Note the different prefixes as these two values are not coded on the same number of bytes.
+Then, the index is compared to the array size, which is performed on two steps for the reason evoked just before.</p>
+
+<p>Out <code class="language-plaintext highlighter-rouge">printing_array</code> function can be completed by printing a new line and then restoring the stack registers and exiting :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre>    <span class="c1">; printing a new line</span>
     <span class="nf">xor</span> <span class="nb">eax</span><span class="p">,</span> <span class="nb">eax</span>
-    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">array_elt_formatter</span><span class="p">]</span>
-    <span class="nf">mov</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; load the array pointer</span>
-    <span class="nf">mov</span> <span class="nb">si</span><span class="nv">l</span><span class="p">,</span> <span class="p">[</span><span class="nb">rsi</span><span class="p">]</span> <span class="c1">; load the value stored at the address</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">new_line</span><span class="p">]</span>
     <span class="nf">call</span> <span class="nv">printf</span>
 
-    <span class="nf">inc</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; increase the array pointer</span>
-    <span class="nf">inc</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span> <span class="c1">; increase the array index</span>
-    <span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
-    <span class="nf">cmp</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nv">my_array_length</span><span class="p">]</span>
-    <span class="nf">jne</span> <span class="nv">for_loop_writing</span> <span class="c1">; test if all characters have been printed</span>
-</code></pre></div></div>
+    <span class="c1">; restoring the stack registers</span>
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">pop</span> <span class="nb">rbp</span>
+    <span class="nf">ret</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>You may notice that two steps are necessary to load a value from the array before calling printf : the address of the array must first be retrieved from the stack and then, the <code class="language-plaintext highlighter-rouge">mov</code> instruction is used to load the value coded at the address.
-Note that the 1-byte register <code class="language-plaintext highlighter-rouge">sil</code> is used here to store the array values since the array values are encoded on single bytes.
-These two steps cannot be concatenated into a sigle one since an instruction can have a memory reference in only one of its operand.</p>
+<p>This is it for printing the array!
+We can execute this function from our <code class="language-plaintext highlighter-rouge">main</code> with a simple <code class="language-plaintext highlighter-rouge">call</code> instruction.</p>
 
-<p>After the call to printf, the array index is increased as well as the array address.
-Note the different prefixes as these two values are not coded on the same number of bytes.
-Then, the index is compared to the array size, which is performed on two steps for the reasons evoked just before.</p>
+<p>The next step for this code would be to give the array address and its size as parameters to the function : for instance using <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">si</code> (<code class="language-plaintext highlighter-rouge">rsi</code>) to pass the array pointer (namely the address) and the array length respectively.
+I will leave it as an exercise and put the solution in the code repository.</p>
 
-<p>This is it for printing the array !
-The next step for this code would be to encapsulate it as a function.
-This time, we may use the “Linux calling convention” to pass the parameters : for instance using <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">si</code> (<code class="language-plaintext highlighter-rouge">rsi</code>) to pass the array pointer and the array length respectively.
-I will leave it as an exercise and put the solution in the repository.</p>
+<h2 id="calling-a-custom-c-function">Calling a custom C function</h2>
+
+<p>We will now see how we can write ✍️ our own C functions and call them from our assembly code.
+This can be useful for instance to add functionalities to our assembly programs from external libraries.</p>
+
+<p>We will start by writing a C function to print arrays, as we previously did in assembly :</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="code"><pre><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span>
+<span class="kt">int</span> <span class="nf">print_array_c</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">array</span><span class="p">,</span> <span class="kt">short</span> <span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+    
+    <span class="k">for</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">length</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"%d "</span><span class="p">,</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">printf</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">42</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>I added a return value to this function in order to test its interface with our assembly program.
+In terms of calling convention, we have already seen that C functions use registers to pass some of the parameters.
+Hence we can simply follow the register order given earlier in this post.</p>
+
+<p>In this code, we choose the types <code class="language-plaintext highlighter-rouge">char</code> and <code class="language-plaintext highlighter-rouge">short</code> to store our data.
+That is because in our assembly program, our array elements will be encoded on 1 byte each and the array size will be encoded on two bytes.
+The size in bytes of the C variables types can be found <a href="https://en.wikipedia.org/wiki/C_data_types">online</a>.</p>
+
+<p>We can then write our main function in assembly :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">main</span>
+<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+<span class="nl">main:</span>
+
+    <span class="nf">push</span> <span class="nb">rbp</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="c1">; printing an array</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="nv">my_array</span>
+    <span class="nf">mov</span> <span class="nb">si</span><span class="p">,</span> <span class="nv">my_array_length</span>
+    <span class="nf">call</span> <span class="nv">print_array_c</span>
+
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">pop</span> <span class="nb">rbp</span>
+
+    <span class="c1">; return</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">ret</span>
+
+<span class="nl">my_array:</span>
+    <span class="nf">.byte</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">14</span>
+
+<span class="nl">my_array_length:</span>
+    <span class="nf">.word</span> <span class="mi">9</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>That’s it! There are no extra steps required to call the C functions.
+The <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">si</code> registers are used to pass parameters following the order of the convention given earlier.
+Since the array length is encoded as a <code class="language-plaintext highlighter-rouge">word</code>, the 2-bytes version <code class="language-plaintext highlighter-rouge">si</code> of the <code class="language-plaintext highlighter-rouge">rsi</code> register is used.</p>
+
+<p>To compile the program, we can first use the command <code class="language-plaintext highlighter-rouge">as assembly_code.s -o assembly_code.o</code> for the assembly code, then the command <code class="language-plaintext highlighter-rouge">gcc c_code.c -c -o c_code.o</code> for the C code.
+We can finally create the final executable with the command <code class="language-plaintext highlighter-rouge">gcc -static assembly_code.o c_code.o -o my_program</code>, which should produce a working program!</p>
+
+<p>You can test the presence of the symbols associated with our C functions in the executable : <code class="language-plaintext highlighter-rouge">strings my_program | grep print_array_c</code> should now return the name of our C function, showing that it is present in the final executable.
+You can also compile in debug mode and set a breakpoint just after the return value to verify that the return value is correctly stored in the <code class="language-plaintext highlighter-rouge">ax</code> register.</p>
+
+<h2 id="using-our-code-in-a-c-function">Using our code in a C function</h2>
+
+<p>Our last part in this post is to go the other way around : calling an assembly function from a C program, a simple “hello word” function in this case.
+Once again, we will apply the calling convention for C programs.</p>
+
+<p>We start by writing an assembly function that displays the “Hello, World!” string thanks to a system call :</p>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">_hello_world_assembly</span>
+<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+
+<span class="nl">_hello_world_assembly:</span>
+
+    <span class="nf">push</span> <span class="nb">rbp</span>
+    <span class="nf">mov</span> <span class="nb">rbp</span><span class="p">,</span> <span class="nb">rsp</span>
+
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world_str</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
+    <span class="nf">syscall</span>
+
+    <span class="nf">mov</span> <span class="nb">rsp</span><span class="p">,</span> <span class="nb">rbp</span>
+    <span class="nf">pop</span> <span class="nb">rbp</span>
+    <span class="nf">ret</span>
+
+<span class="nl">hello_world_str:</span>
+    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Note that since this code is not the main program, there are no <code class="language-plaintext highlighter-rouge">main</code> or <code class="language-plaintext highlighter-rouge">_start</code> functions.
+We can now write the C <code class="language-plaintext highlighter-rouge">main</code> to call this “hello world” function.
+The only extra step here consists in defining the function before calling it.
+Without the definition, the compiler would complain.</p>
+
+<figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">_hello_world_assembly</span><span class="p">();</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// call an assembly function</span>
+    <span class="n">_hello_world_assembly</span><span class="p">();</span>
+
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This program can be compiled the same away as previously : the assembly code is compiled with <code class="language-plaintext highlighter-rouge">as</code> and the C code is compiled with <code class="language-plaintext highlighter-rouge">gcc</code>.
+Then, the object files are assembled into one executable that produces the intended output!</p>
 
 <h2 id="whats-next-">What’s next ?</h2>
 
+<p>This article is the final one about the basics of assembly.
+Our programs can now perform more advanced functions by using external libraries.
+The following posts will focus on concrete examples on the use of assembly language.</p>
+
+<p>As done before, the codes from this post are available at the following <a href="https://github.com/smbct/x86-64_101_linux/tree/main/pt5_print_array">link</a>.</p>
 
     
 
