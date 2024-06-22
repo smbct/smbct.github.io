@@ -12,7 +12,7 @@ back_page: headline.md
 The last few months, I developed an increasing interest in low level programming and especially in assembly programming.
 What seemed for a long time an obscure and inaccessible hobby to me has become a fascinating and engaging topic as I started digging.
 From someone with a computer science background, learning assembly programming feels like exploring the fundamentals of computing and looking back at the history of modern computers.
-Learning to code in assembly is a way to become better at understanding how computers and programs work and how they can be secured and optimizes.
+Learning to code in assembly is a way to become better at understanding how computers and programs work and how they can be secured and optimized.
 
 This blog post is the first of a series where I would like to introduce the basics of assembly.
 I plan to cover fundamental notions as well as practical development with higher level libraries.
@@ -23,7 +23,7 @@ I will use Linux tools in theses posts but this could probably be adapted to any
 Some notions of "relatively" low level languages such as C would be helpful (but not mandatory) as I will mention mechanisms like the program's stack. 
 
 This first post will give some insights about assembly languages and we will then see how to write a first hello world program.
-Among the ressources that I used for this series, I can recommend the great Youtube channel [Low Level Learning](https://www.youtube.com/@LowLevelLearning), that proposes content about low level programming and security.
+Among the ressources that I used for this series, I can recommend the great Youtube channel [Low Level Learning](https://www.youtube.com/@LowLevelLearning), that offers content about low level programming and security.
 They made few basic [videos](https://www.youtube.com/watch?v=6S5KRJv-7RU) about assembly that hooked my motivation.
 I also really enjoyed playing the video "game" [Human Resource Machine](https://en.wikipedia.org/wiki/Human_Resource_Machine) that proposes to solve several computing tasks by writing programs in a language similar to assembly (although I admit this is not quite the typical game to enjoy at night).
 
@@ -40,8 +40,8 @@ Assembly languages allow us to program by almost directly using the processor's 
 A given assembly language is thus associated to a specific computer architecture such as x86 (desktop and portable computers) or ARM (processors found in smartphones and other mobile devices).
 A program made with an x86 assembly language will be then unable to run on ARM devices for instance.
 In this series, we will only look at **x86-64 assembly** since x86-64, the 64 bits version of x86 processors, is the most common architecture of everyone's personal computers.
-However, learning assembly for other platforms is also possible by using of emulators.
-Architectures other than x86 also quite interesting to study since ARM, for instance, became recently more present in personal computers with the [apple silicons](https://en.wikipedia.org/wiki/Apple_silicon) and is also used in Raspberry Pi boards and Nintendo switch consoles.
+However, learning assembly for other platforms is also possible by using emulators.
+Architectures other than x86 are also quite interesting to study since ARM, for instance, has recently become more present in personal computers with the [apple silicons](https://en.wikipedia.org/wiki/Apple_silicon) and the [Microsoft's copilot+ pc](https://www.microsoft.com/fr-fr/windows/copilot-plus-pcs) and is also used in Raspberry Pi boards and Nintendo switch consoles.
 MIPS is another interesting architecture as it is used in several old generation consoles such as the Nintendo 64 and the first Playstation.
 
 [![The Raspberry Pi model 5](/assets/23551-raspberry-pi-5.jpg)](https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg)
@@ -73,7 +73,8 @@ For instance, Linux systems use the [elf format](https://en.wikipedia.org/wiki/E
 We will start assembly programming by writing a simple program that performs the most basic operations.
 Our tools here will be any text editor supporting x86 assembly syntax, an assembler of x86 assembly code and a linker that produces the final executable.
 Visual Studio Code can be used with the "x86 and x86_64 Assembly" extension for the writing part.
-To translate our code into binary, we will use the [GNU Assembler](https://www.gnu.org/software/binutils/) which is the assembler used by the [GCC](https://gcc.gnu.org/) compiler.
+We will use the **".s"** extension for our code files.
+To translate our code into binary, we will then use the [GNU Assembler](https://www.gnu.org/software/binutils/) which is the assembler used by the [GCC](https://gcc.gnu.org/) compiler.
 GCC will also be our linker in order to produce the executable file (GCC actually calls "ld" for linking).
 Last, but not least, we will rely on the [GNU debugger (GDB)](https://sourceware.org/gdb/) to inspect and debug our programs.
 
@@ -104,7 +105,7 @@ For now the function does nothing, as indicated with a comment.
 #### Compilation and linking
 
 I will use the term *compilation* to designate the process of making an executable file from the assembly code even though this term is more adapted to languages like C.
-To compile this peace of code, we will first execute the `as` command that produces an object file :
+To compile this piece of code, we will first execute the `as` command that produces an object file :
 
 `as hello_world.s -o hello_world.o`
 
@@ -191,7 +192,7 @@ _start:
 
     ; exit
     mov rax, 60
-    mov rdi, 69
+    mov rdi, 42
     syscall
 
 hello_world:
@@ -235,14 +236,14 @@ I find the use of symbols as in-code labels very convenient for debugging.
 For instance you may define several debugging symbols like `debug1`, `debug2`, ... and set breakpoints to them in GDB such that the program execution would stop successively at these different points in the program.
 GDB will be of great use for debugging as we practice assembly so it is worth covering it.
 
-#### Edit from 2024-06-05
+#### Edit from 2024-06-05 ⚠️
 
 This is an edit to the previous statement about using symbols for debugging purposes.
 As I am learning through the making of these posts, I realized that using symbols for debugging actually seems not to be good practice as it may disturb GDB for instance.
 It seems that exported symbols must be only used for function definitions.
 Alternatively, we can inspect our program by adding debugging information during the compilation process with the *-g* option :  `as -g hello_world.s -o hello_world.o`
 
-After that, breakpoints can be added by directly referencing a line number : `b hello_wolrd.s:11` where 11 is the line that follows the instruction `add rax, 12` in my code.
+After that, breakpoints can be added by directly referencing a line number : `b hello_world.s:11` where 11 is the line that follows the instruction `add rax, 12` in my code.
 This would give some higher level information about the code execution :
 
 ```
