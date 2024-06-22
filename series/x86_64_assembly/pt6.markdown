@@ -21,3 +21,5 @@ Although we actually know the size in advance in our case, it could be possible 
 One problem that arises from this design choice is that it is no longer possible to know in advance how to modify the `rsp` pointer to verify the *16* bytes alignment discussed previously.
 This step can however be executed automatically as it is shown just after the stack allocation.
 This code first computes *`rsp` modulo 16* and the **extra bytes** are then subtracted (as the stack grows downward) to achieve the alignement.
+
+## Sorting arrays
