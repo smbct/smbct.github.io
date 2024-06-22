@@ -99,7 +99,7 @@ On the contrary, function names that are part of a library's interface would be 
 Then the definition of our `_start` function begins with its label followed by a colon (:).
 For now the function does nothing, as indicated with a comment.
 
-> Note that the semicolon ";" symbol for comments seems to be unsupported by the GNU assembler.
+> 📝 Note that the semicolon ";" symbol for comments seems to be unsupported by the GNU assembler.
 > I will use it in my examples for the purpose of syntax highlighting but it should be replaced with a hash "#" symbol to work properly with the "as" command.
 
 #### Compilation and linking
@@ -265,5 +265,5 @@ Although writing the hello world is a good success for such a low level language
 In the next post, we will se how to add control flow to our programs so that we can write conditionals and loops.
 In the mean time, you will find the hello world code from this post at the [following link](https://github.com/smbct/x86-64_101_linux/tree/main/pt1_hello_world).
 Feel free to modify it and experiment with registers and simple operations such as `mov`, `add`, `and`, etc...
-Tutorials adn references can usually be found online and I invite you to use GDB (and its documentation) to understand the program. 
+Tutorials and references can usually be found online and I invite you to use GDB (and its documentation) to understand the program. 
 
