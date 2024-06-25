@@ -352,6 +352,8 @@ Last, but not least, we will rely on the <a href="https://sourceware.org/gdb/">G
 
 <p>Let’s write our first lines of x86 assembly :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -401,6 +403,8 @@ These two options are required for now but we will see in another post how to do
 This happens because our program does not actually know how to exit.
 We will add the following lines to solve the issue :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -448,6 +452,8 @@ The <code class="language-plaintext highlighter-rouge">rdi</code> register speci
 There are two other parameters passed by registers : <code class="language-plaintext highlighter-rouge">rsi</code>, the memory address of our “hello world” string and <code class="language-plaintext highlighter-rouge">rdx</code>, the length of the string.
 We can define the string as a constant in our program thanks to a new symbol :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="nl">hello_world:</span>
@@ -457,6 +463,8 @@ We can define the string as a constant in our program thanks to a new symbol :</
 <p>By doing so, the string will be hard coded into the executable and the label <code class="language-plaintext highlighter-rouge">hello_world</code> will allow us to directly refer to it (more especially to its address) in our code.
 You can test the command <code class="language-plaintext highlighter-rouge">strings hello_world</code> on the compiled program to verify that the string is indeed present in the executable.
 We can now complete our code to produce the desired output :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -510,6 +518,8 @@ Here, a sys_write only handles a string and there are no predefined functions to
 <p>Instead of coding our own functions to do it, we can run the GNU debugger for now to inspect our program.
 Let’s add the following lines at the beginning of our function first :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -549,14 +559,23 @@ Alternatively, we can inspect our program by adding debugging information during
 <p>After that, breakpoints can be added by directly referencing a line number : <code class="language-plaintext highlighter-rouge">b hello_world.s:11</code> where 11 is the line that follows the instruction <code class="language-plaintext highlighter-rouge">add rax, 12</code> in my code.
 This would give some higher level information about the code execution :</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(gdb) breakpoint hello_world.s:11
+<div class="code_frame"> GDB</div>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>(gdb) breakpoint hello_world.s:11
 Breakpoint 1 at 0x40100b: file hello_world.s, line 12.
 (gdb) run
 Breakpoint 1, _start () at hello_world.s:12
 12	    mov rax, 1
 (gdb) print $rax
 $1 = 42
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Here gdb directly indicates the line that follows the breakpoint.
 As it has stopped at the expected place, we can now check the value of the rax register and verify that the computation was executed successfully.</p>

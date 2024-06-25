@@ -469,23 +469,51 @@ pre code {
   padding: 0;
 }
 
+.code_frame {
+  border: 1px solid #e5e5e5;
+  border-bottom: 0px;
+  border-collapse: collapse;
+  border-radius: 0.25rem;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background: #f9f9f9;
+  color: #999;
+  font-size: 0.7rem;
+  font-weight: 900;
+  font-family: Menlo, Monaco, "Courier New", monospace;
+  padding: 0rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  margin-bottom: 0rem;
+  width: fit-content;
+}
+
 .highlight {
   background-color: #f9f9f9;
-  border-radius: 0.25rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   font-size: 0.8rem;
   line-height: 1.4;
+  padding: 0rem;
+  margin: 0rem;
   margin-bottom: 1rem;
-  padding: 1rem;
 }
 .highlight pre {
   margin-bottom: 0;
   overflow-x: auto;
 }
+.highlight .gutter.gl {
+  width: 1rem;
+}
+.highlight .rouge-table {
+  margin: 0rem;
+}
 .highlight .lineno {
   color: #999;
   display: inline-block;
-  padding-left: 0.25rem;
-  padding-right: 0.75rem;
   user-select: none;
 }
 

@@ -20,3 +20,5 @@ This series covers x86 assembly programming.
 * [Part 4 : recursive power](pt4)
 
 * [Part 5 : printing arrays](pt5)
+
+* [Part 6 : sorting arrays](pt6)

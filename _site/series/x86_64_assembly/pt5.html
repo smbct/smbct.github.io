@@ -309,6 +309,8 @@ For this reason, our program’s first function will now be the classical <code 
 
 <p>The “hello world” code becomes :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -382,6 +384,8 @@ In our case, we will only have to set it to <em>0</em>.</p>
 
 <p>Following the convention, our <code class="language-plaintext highlighter-rouge">printf</code> call to print “hello world” now becomes :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -404,6 +408,8 @@ The result should be <em>8</em> : hence we see that there is an 8 bytes misalign
 <p>This misalignment comes from the fact that the <code class="language-plaintext highlighter-rouge">call</code> instruction that actually triggers the execution of <code class="language-plaintext highlighter-rouge">main</code> pushes the return address (8 bytes) to the stack, as we saw in the last part.
 As a result the stack pointer is then misaligned by 8 bytes.
 This can be fixed by simply re-aligning the stack pointer before starting the call, which can be done by “allocating” 8 additional bytes (unused) :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -440,6 +446,8 @@ In our setup, <code class="language-plaintext highlighter-rouge">printf</code> w
 We can have a look at the <a href="https://cplusplus.com/reference/cstdio/printf/">documentation</a> of <code class="language-plaintext highlighter-rouge">printf</code> to choose the correct formatter.
 In C, this would look like :</p>
 
+<div class="code_frame"> C language</div>
+
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
@@ -447,6 +455,8 @@ In C, this would look like :</p>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>To do so in assembly, we start by defining a string that contains a formatter :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -457,6 +467,8 @@ In C, this would look like :</p>
 <p>The  “%i” formatter is used to print a decimal integer.
 We then call <code class="language-plaintext highlighter-rouge">printf</code> and pass this string as well as the value to be printed.
 For this, we will use the <code class="language-plaintext highlighter-rouge">rsi</code> register, as it is dedicated to the second argument in the calling convention.</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -476,6 +488,8 @@ This now adds a lot more possibilities to interact with the user!</p>
 <p>Now that we know how to call <code class="language-plaintext highlighter-rouge">printf</code>, we will create a function that will be useful for the future post : printing an array!
 We start by defining a constant array in the program’s memory :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -490,6 +504,8 @@ We start by defining a constant array in the program’s memory :</p>
 We also define a constant indicating its size as a word (2 bytes).</p>
 
 <p>We may now define our strings constants to be used by <code class="language-plaintext highlighter-rouge">printf</code> :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -516,6 +532,8 @@ With the 8 bytes already present to store the return address of the <code class=
 Hence, 6 additional bytes are necessary to reach 32 bytes, for a 16 bytes alignment requirement (<em>32=2x16</em>).
 This gives a total of 24 bytes to allocate.</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -535,6 +553,8 @@ This gives a total of 24 bytes to allocate.</p>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>The local variables are then initialized, and the first string announcing the array can be printed :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -566,6 +586,8 @@ Indeed, the address accessed through the label <code class="language-plaintext h
 Since the values are contiguous in memory, and since they are coded on 1 byte each, accessing the next value is performed by increasing the address by one (recall that the addresses are expressed as bytes).</p>
 
 <p>Our main loop is as follows :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -605,6 +627,8 @@ Then, the index is compared to the array size, which is performed on two steps f
 
 <p>Out <code class="language-plaintext highlighter-rouge">printing_array</code> function can be completed by printing a new line and then restoring the stack registers and exiting :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -637,6 +661,8 @@ I will leave it as an exercise and put the solution in the code repository.</p>
 This can be useful for instance to add functionalities to our assembly programs from external libraries.</p>
 
 <p>We will start by writing a C function to print arrays, as we previously did in assembly :</p>
+
+<div class="code_frame"> C language</div>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -671,6 +697,8 @@ That is because in our assembly program, our array elements will be encoded on 1
 The size in bytes of the C variables types can be found <a href="https://en.wikipedia.org/wiki/C_data_types">online</a>.</p>
 
 <p>We can then write our main function in assembly :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -739,6 +767,8 @@ Once again, we will apply the calling convention for C programs.</p>
 
 <p>We start by writing an assembly function that displays the “Hello, World!” string thanks to a system call :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -781,10 +811,14 @@ Once again, we will apply the calling convention for C programs.</p>
     <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
+<!-- </div> -->
+
 <p>Note that since this code is not the main program, there are no <code class="language-plaintext highlighter-rouge">main</code> or <code class="language-plaintext highlighter-rouge">_start</code> functions.
 We can now write the C <code class="language-plaintext highlighter-rouge">main</code> to call this “hello world” function.
 The only extra step here consists in defining the function before calling it.
 Without the definition, the compiler would complain.</p>
+
+<div class="code_frame"> C language</div>
 
 <figure class="highlight"><pre><code class="language-c" data-lang="c"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

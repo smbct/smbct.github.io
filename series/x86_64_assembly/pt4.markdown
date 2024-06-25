@@ -26,6 +26,7 @@ This instruction will concretely perform two operations :
 `pop` is the reversed instruction : it copies the value from the stack to a register and increases the stack pointer accordingly.
 Let's create a simple example :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _start, debug, debug2
 .intel_syntax noprefix
@@ -60,6 +61,7 @@ Note that the alternative command `x/dg 0x7fffffffdd88` could also be used to pr
 
 Now let's modify this code with the push instruction and let's add a pop instruction afterward :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _start:
     mov rbp, rsp
@@ -102,6 +104,7 @@ Indeed, the functions can be called in other portions of the code or even from e
 
 Let's start with a simple function that prints "hello world" :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
@@ -143,7 +146,8 @@ We add breakpoints at lines 13 and 15 and another one at the `_print_hello_world
 After executing the `run` command in gdb, the program will start and pause just before the `call` instruction.
 To illustrate the `rip` register mentioned before, we can already print the pointed instruction as follows :
 
-{% highlight plain linenos %}
+<div class="code_frame"> GDB </div>
+{% highlight plaintext linenos %}
 (gdb) x/i $rip
 => 0x401020 <_start>:	call   0x401000 <_print_hello_world>
 {% endhighlight %}
@@ -153,7 +157,8 @@ Let's also print our stack pointer address : `print $rsp`, which gives *0x7fffff
 Then, the `continue` command in gdb makes the program stop at the beginning of the `_print_hello_world` function, just after the execution of the `call` instruction.
 We will see what changed on the stack :
 
-{% highlight plain linenos %}
+<div class="code_frame"> GDB </div>
+{% highlight plaintext linenos %}
 Breakpoint 2, _print_hello_world () at hello_world_func.s:9
 9	    mov rax, 1
 (gdb) print $rsp
@@ -169,6 +174,8 @@ We can see that the `rsp` register has changed from *0x7fffffffdd70* to *0x7ffff
 Indeed, by printing the instruction at the corresponding location, we see that it corresponds to the instruction that follows `call` in the `_start` function : `mov $0x3c,%rax` (*0x3c* corresponds to the value 60 in decimal).
 
 We continue the execution to see what happens when returning from the function :
+
+<div class="code_frame"> GDB </div>
 {% highlight plain linenos %}
 Continuing.
 Hello, World!
@@ -204,6 +211,7 @@ There are actually different ways to pass information between the functions : yo
 We will start writing our pow function by passing the two parameters (the base and the exponent) to our function.
 In this example, we pass the two values (the base and the exponent) by using the two registers `rdi` and `rsi` :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _pow_rec:
     mov rbp, rsp
@@ -236,6 +244,7 @@ You can run the program in gdb and verify that the two registers `rdi` and `rsi`
 
 Let's now store the two parameters on the stack by allocating two 8-bytes local variables :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _pow_rec:
     
@@ -261,6 +270,7 @@ After that, the function calls would be unstacked and, at each time, the results
 
 To implement this, we separate the base case, when the exponent is *0*, from the general case :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _pow_rec:
     
@@ -321,6 +331,7 @@ In this situation, since the sub-calls are recursive, the function actually retu
 
 We will now change the function's base code to :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _my_function_base:
     
@@ -343,6 +354,7 @@ This is handled directly by the called function, which is convenient for readabi
 
 We can now write the complete code of our recursive pow function : ✅
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _pow_rec:
     
@@ -401,6 +413,7 @@ To verify this, we can set a breakpoint at the base case of the recursion, just 
 If we now run the program in gdb, the calls will be accumulated until this base case is reached.
 We can then use the `backtrace` (or `bt`) command in gdb to see the different calls present on the stack, namely the stack frames :
 
+<div class="code_frame"> GDB </div>
 {% highlight plain linenos %}
 Breakpoint 1, _pow_rec () at pow_rec.s:31
 31	        mov rax, 1
@@ -421,6 +434,7 @@ gdb allows us to navigate to each of these **stack frames** and explore the memo
 The command `frame 0` for instance will load the first frame.
 This helps us to analyze the evolution the the stack pointer register `rsp` :
 
+<div class="code_frame"> GDB </div>
 {% highlight plain linenos %}
 (gdb) frame 4
 #4  0x0000000000401054 in _start () at pow_rec.s:61
@@ -457,6 +471,7 @@ It is however possible to do it differently, for instance by using the stack.
 We will now write a second version of our algorithm following this new convention.
 We will start from the initial code backbone and modify the `_start` function to pass the parameters on the stack :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _pow_rec:
     push rbp
@@ -495,6 +510,7 @@ However, it is important to place the local variables of our function in their o
 
 The beginning of `_pow_rec` becomes :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _pow_rec:
     push rbp

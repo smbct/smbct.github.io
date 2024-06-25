@@ -303,6 +303,8 @@ This instruction will concretely perform two operations :</p>
 <p><code class="language-plaintext highlighter-rouge">pop</code> is the reversed instruction : it copies the value from the stack to a register and increases the stack pointer accordingly.
 Let’s create a simple example :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -350,6 +352,8 @@ Note that the alternative command <code class="language-plaintext highlighter-ro
 <a href="https://sourceware.org/gdb/current/onlinedocs/gdb.html/Memory.html#Memory">This page</a> shows the different options such as the output format and the number of bytes to read.</p>
 
 <p>Now let’s modify this code with the push instruction and let’s add a pop instruction afterward :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -400,6 +404,8 @@ Indeed, the functions can be called in other portions of the code or even from e
 <h4 id="writing-and-calling-our-first-function">Writing and calling our first function</h4>
 
 <p>Let’s start with a simple function that prints “hello world” :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -463,7 +469,9 @@ We add breakpoints at lines 13 and 15 and another one at the <code class="langua
 After executing the <code class="language-plaintext highlighter-rouge">run</code> command in gdb, the program will start and pause just before the <code class="language-plaintext highlighter-rouge">call</code> instruction.
 To illustrate the <code class="language-plaintext highlighter-rouge">rip</code> register mentioned before, we can already print the pointed instruction as follows :</p>
 
-<figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<div class="code_frame"> GDB </div>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 </pre></td><td class="code"><pre>(gdb) x/i $rip
 =&gt; 0x401020 &lt;_start&gt;:	call   0x401000 &lt;_print_hello_world&gt;
@@ -474,7 +482,9 @@ Let’s also print our stack pointer address : <code class="language-plaintext h
 Then, the <code class="language-plaintext highlighter-rouge">continue</code> command in gdb makes the program stop at the beginning of the <code class="language-plaintext highlighter-rouge">_print_hello_world</code> function, just after the execution of the <code class="language-plaintext highlighter-rouge">call</code> instruction.
 We will see what changed on the stack :</p>
 
-<figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+<div class="code_frame"> GDB </div>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
 4
@@ -497,6 +507,8 @@ $3 = -8
 Indeed, by printing the instruction at the corresponding location, we see that it corresponds to the instruction that follows <code class="language-plaintext highlighter-rouge">call</code> in the <code class="language-plaintext highlighter-rouge">_start</code> function : <code class="language-plaintext highlighter-rouge">mov $0x3c,%rax</code> (<em>0x3c</em> corresponds to the value 60 in decimal).</p>
 
 <p>We continue the execution to see what happens when returning from the function :</p>
+
+<div class="code_frame"> GDB </div>
 
 <figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -539,6 +551,8 @@ There are actually different ways to pass information between the functions : yo
 
 <p>We will start writing our pow function by passing the two parameters (the base and the exponent) to our function.
 In this example, we pass the two values (the base and the exponent) by using the two registers <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">rsi</code> :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -590,6 +604,8 @@ You can run the program in gdb and verify that the two registers <code class="la
 
 <p>Let’s now store the two parameters on the stack by allocating two 8-bytes local variables :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -626,6 +642,8 @@ Once it is done, the function can return 1 (<em>x^0 = 1</em> for all <em>x</em>)
 After that, the function calls would be unstacked and, at each time, the results of the previous call would be multiplied by the base.</p>
 
 <p>To implement this, we separate the base case, when the exponent is <em>0</em>, from the general case :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -717,6 +735,8 @@ In this situation, since the sub-calls are recursive, the function actually retu
 
 <p>We will now change the function’s base code to :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -749,6 +769,8 @@ In this situation, since the sub-calls are recursive, the function actually retu
 This is handled directly by the called function, which is convenient for readability as these instructions would always be placed at the beginning and at the end of our functions.</p>
 
 <p>We can now write the complete code of our recursive pow function : ✅</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -848,6 +870,8 @@ This means that all information required for the function calls are multiplied o
 If we now run the program in gdb, the calls will be accumulated until this base case is reached.
 We can then use the <code class="language-plaintext highlighter-rouge">backtrace</code> (or <code class="language-plaintext highlighter-rouge">bt</code>) command in gdb to see the different calls present on the stack, namely the stack frames :</p>
 
+<div class="code_frame"> GDB </div>
+
 <figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -874,6 +898,8 @@ Since the execution starts with <em>base=3</em>, four calls are required to reac
 <p>gdb allows us to navigate to each of these <strong>stack frames</strong> and explore the memory and registers there.
 The command <code class="language-plaintext highlighter-rouge">frame 0</code> for instance will load the first frame.
 This helps us to analyze the evolution the the stack pointer register <code class="language-plaintext highlighter-rouge">rsp</code> :</p>
+
+<div class="code_frame"> GDB </div>
 
 <figure class="highlight"><pre><code class="language-plain" data-lang="plain"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -921,6 +947,8 @@ It is however possible to do it differently, for instance by using the stack.</p
 
 <p>We will now write a second version of our algorithm following this new convention.
 We will start from the initial code backbone and modify the <code class="language-plaintext highlighter-rouge">_start</code> function to pass the parameters on the stack :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -982,6 +1010,8 @@ I agree that this step seems counterintuitive as the parameters are now already 
 However, it is important to place the local variables of our function in their own stack frame and <strong>not interfere</strong> with the stack frame of the calling function.</p>
 
 <p>The beginning of <code class="language-plaintext highlighter-rouge">_pow_rec</code> becomes :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

@@ -300,6 +300,8 @@ These programming structures as we know it from languages like C or Python can b
 In our code, this can be simply performed by defining a new symbol (with a “label” in our code) and using the <code class="language-plaintext highlighter-rouge">jmp</code> instruction to this symbol.
 Let’s start from the hello world written in the previous post :</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -341,6 +343,8 @@ Let’s start from the hello world written in the previous post :</p>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>We will now add a new symbol after the “write” system call and jump to this symbol from the beginning of the start function:</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -390,6 +394,8 @@ A jump can be performed anywhere in the code, including backward and accros func
 To achieve conditional jumps, we will use the <code class="language-plaintext highlighter-rouge">cmp</code> instruction that performs a numerical comparison between two registers/memory locations.
 The <code class="language-plaintext highlighter-rouge">cmp</code> instruction does not directly produce an output but rather sets internal flags that will be read by the proper jump instructions.
 Starting from the previous code, we will add a conditional jump after comparing two registers :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -443,6 +449,8 @@ Now if we replace the first line by <code class="language-plaintext highlighter-
 The thinking is a be a bit different from more standard programming languages but we can setup an “if..else” by placing proper jumps.
 Here is an example:</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -487,6 +495,8 @@ This is a question of habits and clarity.</p>
 Indeed a loop simply consists in a jump that as conditioned on the loop termination condition.
 Let’s write a simple for loop:</p>
 
+<div class="code_frame"> Assembly x86-64</div>
+
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
 3
@@ -521,6 +531,8 @@ This program will iterate over coordinates of a square of a predefined size.</p>
 
 <p>We will first write the base of our program with the exit system call.
 We can also define the constants of our program and already add some printing calls that will help us for the following.</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -607,6 +619,8 @@ We can then dedicate r8 and r9 to store our variables.</p>
 
 <p>To draw the line, we can re-use the “for” loop structure that we previously implemented in the post.
 The loop will surround the star printing instructions :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -708,6 +722,8 @@ The brackets ‘[ ]’ in the <code class="language-plaintext highlighter-rouge"
 
 <p>Starting from the previous code, printing a square is no more complicated than adding an additional surrounding loop.
 This time, we use the <code class="language-plaintext highlighter-rouge">r9</code> register for our row index variable :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -820,7 +836,29 @@ Hmm… well, if you test it, this looks more like a rectangle.
 In fact, the characters are rectangle hence our square appears deformed.
 We can adjust this without much effort by adding a blank character after each star:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* * * * * * * * * * * * * * * * * * * * 
+<div class="code_frame"> Bash</div>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre>* * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * * 
@@ -840,7 +878,7 @@ We can adjust this without much effort by adding a blank character after each st
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * *
-</code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <h2 id="whats-next-">What’s next ?</h2>
 

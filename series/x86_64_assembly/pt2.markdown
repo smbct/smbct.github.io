@@ -27,6 +27,7 @@ Jumps are instructions that allow to move to a specific point in our program.
 In our code, this can be simply performed by defining a new symbol (with a "label" in our code) and using the `jmp` instruction to this symbol.
 Let's start from the hello world written in the previous post :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .intel_syntax noprefix
 .global _start
@@ -51,6 +52,7 @@ hello_world:
 
 We will now add a new symbol after the "write" system call and jump to this symbol from the beginning of the start function: 
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _start:
 
@@ -84,6 +86,7 @@ To achieve conditional jumps, we will use the `cmp` instruction that performs a 
 The `cmp` instruction does not directly produce an output but rather sets internal flags that will be read by the proper jump instructions.
 Starting from the previous code, we will add a conditional jump after comparing two registers :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _start:
 
@@ -117,6 +120,7 @@ Thanks to jumping instructions we are now able to write conditional statements i
 The thinking is a be a bit different from more standard programming languages but we can setup an "if..else" by placing proper jumps.
 Here is an example:
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 cmp rax, rbx ; compare rax and rbx and set the internal flag
 jg .L_else_label
@@ -149,6 +153,7 @@ Conditional jumps are not only helpful to write conditional statements but they 
 Indeed a loop simply consists in a jump that as conditioned on the loop termination condition.
 Let's write a simple for loop:
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 mov rbx, 0
 
@@ -176,6 +181,7 @@ This program will iterate over coordinates of a square of a predefined size.
 We will first write the base of our program with the exit system call.
 We can also define the constants of our program and already add some printing calls that will help us for the following. 
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
@@ -231,6 +237,7 @@ We can then dedicate r8 and r9 to store our variables.
 To draw the line, we can re-use the "for" loop structure that we previously implemented in the post.
 The loop will surround the star printing instructions : 
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
@@ -289,6 +296,7 @@ The brackets '[ ]' in the `cmp` instructions mean that we consider the value sto
 Starting from the previous code, printing a square is no more complicated than adding an additional surrounding loop.
 This time, we use the `r9` register for our row index variable :  
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
@@ -349,7 +357,8 @@ Hmm... well, if you test it, this looks more like a rectangle.
 In fact, the characters are rectangle hence our square appears deformed.
 We can adjust this without much effort by adding a blank character after each star:
 
-```
+<div class="code_frame"> Bash</div>
+{% highlight plaintext linenos %}
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * * 
@@ -370,7 +379,7 @@ We can adjust this without much effort by adding a blank character after each st
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * * 
 * * * * * * * * * * * * * * * * * * * *
-```
+{% endhighlight %}
 
 ## What's next ?
 

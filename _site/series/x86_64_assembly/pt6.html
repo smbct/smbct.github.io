@@ -11,7 +11,7 @@
 
   <title>
     
-      Assembly x86 programming 101 &#58 part 6, sorting &middot; smbct's blog
+      Assembly x86 programming 101 &#58 part 6, sorting arrays &middot; smbct's blog
     
   </title>
 
@@ -262,7 +262,7 @@
 </p>
 
 
-  <h1 class="post-title">Assembly x86 programming 101 &#58 part 6, sorting</h1>
+  <h1 class="post-title">Assembly x86 programming 101 &#58 part 6, sorting arrays</h1>
 </header>
 <div class="content">
   <div class="post-meta">
@@ -284,7 +284,7 @@
 
 
   <div class="post-body">
-    <h2 id="manipulating-arrays">Manipulating arrays</h2>
+    <h2 id="copying-an-array">Copying an array</h2>
 
 <h4 id="dynamic-allocation-on-the-stack">Dynamic allocation on the stack</h4>
 
@@ -294,9 +294,13 @@ Thus, at the beginning of our program, the stack pointer is decreased accordingl
 You may realize that this kind of operation is actually not allowed in C : arrays that are allocated during the execution of the program must have their size known in advance.
 Although we actually know the size in advance in our case, it could be possible to allocate the array depending on a variable given.</p>
 
+<h4 id="dynamic-stack-alignment">Dynamic stack alignment</h4>
+
 <p>One problem that arises from this design choice is that it is no longer possible to know in advance how to modify the <code class="language-plaintext highlighter-rouge">rsp</code> pointer to verify the <em>16</em> bytes alignment discussed previously.
 This step can however be executed automatically as it is shown just after the stack allocation.
 This code first computes <em><code class="language-plaintext highlighter-rouge">rsp</code> modulo 16</em> and the <strong>extra bytes</strong> are then subtracted (as the stack grows downward) to achieve the alignement.</p>
+
+<h2 id="sorting-arrays">Sorting arrays</h2>
 
     
 

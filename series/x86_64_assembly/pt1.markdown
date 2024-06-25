@@ -80,6 +80,7 @@ Last, but not least, we will rely on the [GNU debugger (GDB)](https://sourceware
 
 Let's write our first lines of x86 assembly :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .intel_syntax noprefix
 .global _start
@@ -123,6 +124,7 @@ When we try to execute this program it results into a *segmentation fault*.
 This happens because our program does not actually know how to exit.
 We will add the following lines to solve the issue :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _start:
 
@@ -167,6 +169,7 @@ The `rdi` register specifies the file descriptor, which will be set to `1` to wr
 There are two other parameters passed by registers : `rsi`, the memory address of our "hello world" string and ``rdx``, the length of the string.
 We can define the string as a constant in our program thanks to a new symbol :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 hello_world:
     .asciz "Hello, World!\n"
@@ -176,7 +179,7 @@ By doing so, the string will be hard coded into the executable and the label `he
 You can test the command `strings hello_world` on the compiled program to verify that the string is indeed present in the executable.
 We can now complete our code to produce the desired output :
 
-
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .intel_syntax noprefix
 .global _start
@@ -211,6 +214,7 @@ Here, a sys_write only handles a string and there are no predefined functions to
 Instead of coding our own functions to do it, we can run the GNU debugger for now to inspect our program.
 Let's add the following lines at the beginning of our function first :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 _start:
 
@@ -246,7 +250,8 @@ Alternatively, we can inspect our program by adding debugging information during
 After that, breakpoints can be added by directly referencing a line number : `b hello_world.s:11` where 11 is the line that follows the instruction `add rax, 12` in my code.
 This would give some higher level information about the code execution :
 
-```
+<div class="code_frame"> GDB</div>
+{% highlight plaintext linenos %}
 (gdb) breakpoint hello_world.s:11
 Breakpoint 1 at 0x40100b: file hello_world.s, line 12.
 (gdb) run
@@ -254,7 +259,7 @@ Breakpoint 1, _start () at hello_world.s:12
 12	    mov rax, 1
 (gdb) print $rax
 $1 = 42
-```
+{% endhighlight %}
 
 Here gdb directly indicates the line that follows the breakpoint.
 As it has stopped at the expected place, we can now check the value of the rax register and verify that the computation was executed successfully.  

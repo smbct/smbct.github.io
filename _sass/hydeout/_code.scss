@@ -30,27 +30,81 @@ pre code {
   padding: 0;
 }
 
+.code_frame {
+
+  border: 1px solid $border-color;
+  border-bottom: 0px;
+  border-collapse: collapse;
+
+  border-radius: 0.25rem;
+  
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+
+  background: #f9f9f9;
+  color: #999;
+  // font-size: 0.8rem;
+  font-size: 0.7rem;
+
+  font-weight: 900;
+  font-family: $code-font-family;
+  
+  padding: 0rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+
+  margin-bottom: 0rem;
+
+  width:fit-content;
+}
+
 // Pygments/Rouge via Jekyll
 .highlight {
   background-color: #f9f9f9;
-  border-radius: 0.25rem;
+
+  // border-radius: 0.25rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+
   font-size: 0.8rem;
   line-height: 1.4;
+  // margin-bottom: 1rem;
+  // padding: 1rem;
+
+  padding: 0rem;
+  margin: 0rem;
+
+  // extra space at the bottom
   margin-bottom: 1rem;
-  padding: 1rem;
 
   pre {
     margin-bottom: 0;
     overflow-x: auto;
   }
 
+
+  .gutter.gl {
+    width: 1rem;
+  }
+
+  // remove the extra space outside the code cell
+  .rouge-table {
+    margin: 0rem;
+  }
+
   .lineno {
+    // width: 5px;
     color: #999;
     display: inline-block; // Ensures the null space also isn't selectable
-    padding-left: 0.25rem;
-    padding-right: 0.75rem;
+    // padding-left: 0.25rem;
+    // padding-right: 0.75rem;
     user-select: none; // Make sure numbers aren't selectable
   }
+  
 }
 
 // Gist via GitHub Pages
