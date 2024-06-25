@@ -362,6 +362,7 @@ Once again, we will apply the calling convention for C programs.
 
 We start by writing an assembly function that displays the "Hello, World!" string thanks to a system call :
 
+<div class="code_frame"> Assembly code</div>
 {% highlight nasm linenos %}
 .global _hello_world_assembly
 .intel_syntax noprefix
@@ -384,6 +385,7 @@ _hello_world_assembly:
 hello_world_str:
     .asciz "Hello, World!\n"
 {% endhighlight %}
+<!-- </div> -->
 
 Note that since this code is not the main program, there are no `main` or `_start` functions.
 We can now write the C `main` to call this "hello world" function.
