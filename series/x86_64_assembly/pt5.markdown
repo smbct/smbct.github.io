@@ -34,6 +34,7 @@ For this reason, our program's first function will now be the classical `main` f
 
 The "hello world" code becomes :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global main
 .intel_syntax noprefix
@@ -89,6 +90,7 @@ In our case, we will only have to set it to *0*.
 
 Following the convention, our `printf` call to print "hello world" now becomes :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
     xor eax, eax ; al is set to 0
     lea rdi, [hello_world] ; 1st argument passed to register
@@ -110,6 +112,7 @@ This misalignment comes from the fact that the `call` instruction that actually 
 As a result the stack pointer is then misaligned by 8 bytes.
 This can be fixed by simply re-aligning the stack pointer before starting the call, which can be done by "allocating" 8 additional bytes (unused) :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
     sub rsp, 8
 
@@ -138,6 +141,8 @@ To print a value in the terminal, we can use the `printf` function with its form
 In our setup, `printf` would take as argument a string containing a formatter (which decides how the value is displayed) and the value to be printed.
 We can have a look at the [documentation](https://cplusplus.com/reference/cstdio/printf/) of `printf` to choose the correct formatter.
 In C, this would look like :
+
+<div class="code_frame"> C language</div>
 {% highlight C linenos %}
 int x = 42;
 printf("%i\n", x);
@@ -145,6 +150,7 @@ printf("%i\n", x);
 
 To do so in assembly, we start by defining a string that contains a formatter :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 integer_formatter:
     .asciz "integer value: %i\n"
@@ -154,6 +160,7 @@ The  "%i" formatter is used to print a decimal integer.
 We then call `printf` and pass this string as well as the value to be printed.
 For this, we will use the `rsi` register, as it is dedicated to the second argument in the calling convention.
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
     xor eax, eax
     lea rdi, [integer_formatter]
@@ -172,6 +179,7 @@ This now adds a lot more possibilities to interact with the user!
 Now that we know how to call `printf`, we will create a function that will be useful for the future post : printing an array!
 We start by defining a constant array in the program's memory :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 my_array:
     .byte 5, 12, 42, 8, 1, 3, 7, 25, 14
@@ -184,6 +192,7 @@ We also define a constant indicating its size as a word (2 bytes).
 
 We may now define our strings constants to be used by `printf` :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 array_elt_formatter:
     .asciz "%hhd "
@@ -204,6 +213,7 @@ With the 8 bytes already present to store the return address of the `main` funct
 Hence, 6 additional bytes are necessary to reach 32 bytes, for a 16 bytes alignment requirement (*32=2x16*).
 This gives a total of 24 bytes to allocate. 
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 print_array:
 
@@ -216,6 +226,7 @@ print_array:
 {% endhighlight %}
 The local variables are then initialized, and the first string announcing the array can be printed :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
     mov [rbp-10], word ptr 0 ; array_index <- 0
     ; loading the array pointer
@@ -239,6 +250,7 @@ Since the values are contiguous in memory, and since they are coded on 1 byte ea
 
 Our main loop is as follows :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
     .L_for_loop_writing:
         ; printing the "my_array_str" string
@@ -265,6 +277,7 @@ Then, the index is compared to the array size, which is performed on two steps f
 
 Out `printing_array` function can be completed by printing a new line and then restoring the stack registers and exiting :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
     ; printing a new line
     xor eax, eax
@@ -292,6 +305,7 @@ This can be useful for instance to add functionalities to our assembly programs 
 
 We will start by writing a C function to print arrays, as we previously did in assembly :
 
+<div class="code_frame"> C language</div>
 {% highlight C linenos %}
 #include <stdio.h>
 
@@ -317,6 +331,7 @@ The size in bytes of the C variables types can be found [online](https://en.wiki
 
 We can then write our main function in assembly :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global main
 .intel_syntax noprefix
@@ -362,7 +377,7 @@ Once again, we will apply the calling convention for C programs.
 
 We start by writing an assembly function that displays the "Hello, World!" string thanks to a system call :
 
-<div class="code_frame"> Assembly code</div>
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _hello_world_assembly
 .intel_syntax noprefix
@@ -392,6 +407,7 @@ We can now write the C `main` to call this "hello world" function.
 The only extra step here consists in defining the function before calling it.
 Without the definition, the compiler would complain.
 
+<div class="code_frame"> C language</div>
 {% highlight C linenos %}
 void _hello_world_assembly();
 

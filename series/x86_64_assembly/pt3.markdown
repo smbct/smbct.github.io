@@ -35,6 +35,7 @@ The stack in x86 assembly grows **downward**, meaning that the address stored in
 
 In the following example, 4 bytes of memory are allocated on the stack by subtracting the value 4 to the stack address (addresses being expressed in bytes):
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
@@ -122,6 +123,7 @@ This time, we will store two 4-bytes values by reserving a total of 8 bytes.
 Then, at the end of the function, the stack will be de-allocated and the previous value of `rbp` will be restored from `rsp`.
 > Keep in mind that registers such as `rsp` and `rbp` are being used by other functions in our program and they should be preserved across function calls.
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 .global _start
 .intel_syntax noprefix
@@ -168,6 +170,7 @@ Now that we are able to define variables and perform control flow in assembly, o
 To demonstrate theses notions, we will modify our square drawing program from the previous post in order to draw a circle.
 We start from the following base (I included only the drawing part for clarity) :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 mov r9, 0
 .L_for_loop_rows:    
@@ -211,6 +214,7 @@ The first step will be to modify the program and store the index variables in th
 We can replace the r8 and r9 registers by allocating two 8-bytes variables in the stack.
 The code is similar to what we saw previously :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 mov rbp, rsp
 sub rsp, 16
@@ -284,6 +288,7 @@ This is performs by calculating the distance between the character's position an
 If the distance is smaller or equal to the radius of the circle, the character can be printed.
 Writing it as a pseudocode first will help in our assembly implementation :
 
+<div class="code_frame"> Pseudocode </div>
 {% highlight plaintext linenos %}
 const square_size
 
@@ -315,6 +320,7 @@ Our last variable is a temporary variable used to store the squared distance, so
 
 Let's write or new stack allocation from this :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 mov rbp, rsp
 sub rsp, 40
@@ -327,6 +333,7 @@ sub rsp, 40
 
 We can then add two lines to assign the square center and radius squared variables at the beginning of our function, as their value won't change :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 ; rax is temporary used to compute square_size/2
 mov rax, [square_size]
@@ -355,6 +362,7 @@ The `imul` instruction is used here to perform an integer multiplication of the 
 
 We can now add the last missing piece of code that compare the distances and decide if the printed character should be a star '*' or a space ' ' :
 
+<div class="code_frame"> Assembly x86-64</div>
 {% highlight nasm linenos %}
 ; compute (row_index - square_center)² into distance_squared
 mov rax, [rbp-8]
@@ -396,6 +404,7 @@ Indeed, the value of the other registers do not change between the two cases.
 
 And voilà, our circle is now printed to the terminal :
 
+<div class="code_frame"> Bash </div>
 {% highlight plaintext linenos %}
                                         
             * * * * * * * * *           
