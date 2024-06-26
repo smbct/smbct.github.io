@@ -27,8 +27,10 @@ This code first computes *`rsp` modulo 16* and the **extra bytes** are then subt
 ## Sorting arrays
 
 <div class="collapse-panel"><div>
-<label for="col1">Uncover </label>
-<input type="checkbox" name="" id="col1"><span></span>
+<label for="code_1">Details</label>
+<input type="checkbox" name="" id="code_1"><span class="collapse-label"></span>
+
+<div class="collapse-content">
 
 <div class="code_frame"> Assembly x86-64 | main.s </div>
 {% highlight nasm linenos %}
@@ -36,7 +38,6 @@ mov [rbp-10], word ptr 0 ; array_index <- 0
 ; loading the array pointer
 lea rax, my_array
 mov [rbp-8], rax
-
 ; printing the "my_array_str" string
 xor eax, eax
 lea rdi, [my_array_str]
@@ -55,5 +56,9 @@ call printf
     lea rdi, [my_array_str]
     call printf
 {% endhighlight %}
-</div></div>
 
+<p>test qzje lt trletjrse</p>
+</div>
+
+</div>
+</div>
