@@ -25,3 +25,35 @@ This step can however be executed automatically as it is shown just after the st
 This code first computes *`rsp` modulo 16* and the **extra bytes** are then subtracted (as the stack grows downward) to achieve the alignement.
 
 ## Sorting arrays
+
+<div class="collapse-panel"><div>
+<label for="col1">Uncover </label>
+<input type="checkbox" name="" id="col1"><span></span>
+
+<div class="code_frame"> Assembly x86-64 | main.s </div>
+{% highlight nasm linenos %}
+mov [rbp-10], word ptr 0 ; array_index <- 0
+; loading the array pointer
+lea rax, my_array
+mov [rbp-8], rax
+
+; printing the "my_array_str" string
+xor eax, eax
+lea rdi, [my_array_str]
+call printf
+{% endhighlight %}
+
+<div class="code_frame"> Assembly x86-64 | test.s </div>
+{% highlight nasm linenos %}
+    mov [rbp-10], word ptr 0 ; array_index <- 0
+    ; loading the array pointer
+    lea rax, my_array
+    mov [rbp-8], rax
+
+    ; printing the "my_array_str" string
+    xor eax, eax
+    lea rdi, [my_array_str]
+    call printf
+{% endhighlight %}
+</div></div>
+
