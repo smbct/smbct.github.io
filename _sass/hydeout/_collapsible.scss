@@ -19,6 +19,9 @@
 .collapse-panel div:last-child{margin-bottom: 0px;}
 .collapse-panel div label{
     padding: 7px 7px 7px 32px;
+
+    padding-left: 2.5rem;
+
     background: #eee;
     display: block;
     user-select: none;
@@ -35,12 +38,18 @@
 }
 
 .collapse-panel div span.collapse-label:before{
-    content: '➕';
-    position: absolute;
+    // content: '➕';
+    // font-size: 15px;
+    // top: 15px;
+    // left: 10px;
+
+    content: '⤵️';
+    font-size: 30px;
     top: 15px;
     left: 10px;
+
+    position: absolute;
     line-height: 15px;
-    font-size: 15px;
     font-weight: bold;
 }
 .collapse-panel div div.collapse-content{
@@ -54,7 +63,9 @@
     display: block;
 }
 .collapse-panel div input:checked ~ span.collapse-label:before{
-    content: '➖';
+    // content: '➖';
+    content: '⤴️';
+    font-size: 30px;
     position: absolute;
     top: 15px;
     left: 10px;
