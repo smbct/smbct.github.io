@@ -51,6 +51,7 @@
     position: absolute;
     line-height: 15px;
     font-weight: bold;
+    pointer-events: none;
 }
 .collapse-panel div div.collapse-content{
     padding: 7px;
@@ -69,4 +70,5 @@
     position: absolute;
     top: 15px;
     left: 10px;
+    pointer-events: none;
 }
