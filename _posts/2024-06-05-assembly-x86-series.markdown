@@ -39,5 +39,7 @@ I will also update the links directly here :
 
 * [Part 5 : printing arrays](/series/x86_64_assembly/pt5)
 
+* [Part 6 : sorting arrays](/series/x86_64_assembly/pt6)
+
 Enjoy!
 
