@@ -44,7 +44,7 @@ However, learning assembly for other platforms is also possible by using emulato
 Architectures other than x86 are also quite interesting to study since ARM, for instance, has recently become more present in personal computers with the [apple silicons](https://en.wikipedia.org/wiki/Apple_silicon) and the [Microsoft's copilot+ pc](https://www.microsoft.com/fr-fr/windows/copilot-plus-pcs) and is also used in Raspberry Pi boards and Nintendo switch consoles.
 MIPS is another interesting architecture as it is used in several old generation consoles such as the Nintendo 64 and the first Playstation.
 
-[![The Raspberry Pi model 5](/assets/23551-raspberry-pi-5.jpg)](https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg)
+[![The Raspberry Pi model 5](/assets/assembly_series/23551-raspberry-pi-5.jpg)](https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg)
 The Raspberry Pi model 5, embedding an ARM processor.
 
 An important note is that while writing assembly really feels like having a precise control on our computer's processor, modern processors are extremely complex and many hidden operations are still happening under the hood, which prevents us from fully apprehending it.

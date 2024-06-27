@@ -39,11 +39,6 @@
     color:rgb(64, 155, 102);
 }
 
-.collapse-panel div input:checked ~ label {
-    color:aqua;
-} 
-
-
 .collapse-panel div input{
     position: absolute;
     top: 0px;
@@ -89,7 +84,7 @@
     color: #555;
     margin: 0px;
     overflow-y: scroll;
-    height: 20rem;
+    height: 10rem;
 }
 .collapse-panel div input:checked ~ div.extensible-content{
     height: fit-content;
