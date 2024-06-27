@@ -111,6 +111,10 @@
   
 
   
+    
+  
+
+  
 
   
     
@@ -145,6 +149,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -258,7 +266,20 @@
 </header>
 <div class="content">
   <div class="post-meta">
-  <span class="post-date">03 May 2024</span>
+  <span class="post-date">📅 03 May 2024</span>
+
+  
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    16 mins
+  
+</span>
+  
+
   <span class="post-categories">
     
       &bull;
@@ -273,6 +294,7 @@
     
   </span>
 </div>
+
 
 
   <div class="post-body">
@@ -309,7 +331,7 @@ However, learning assembly for other platforms is also possible by using emulato
 Architectures other than x86 are also quite interesting to study since ARM, for instance, has recently become more present in personal computers with the <a href="https://en.wikipedia.org/wiki/Apple_silicon">apple silicons</a> and the <a href="https://www.microsoft.com/fr-fr/windows/copilot-plus-pcs">Microsoft’s copilot+ pc</a> and is also used in Raspberry Pi boards and Nintendo switch consoles.
 MIPS is another interesting architecture as it is used in several old generation consoles such as the Nintendo 64 and the first Playstation.</p>
 
-<p><a href="https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg"><img src="/assets/23551-raspberry-pi-5.jpg" alt="The Raspberry Pi model 5" /></a>
+<p><a href="https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg"><img src="/assets/assembly_series/23551-raspberry-pi-5.jpg" alt="The Raspberry Pi model 5" /></a>
 The Raspberry Pi model 5, embedding an ARM processor.</p>
 
 <p>An important note is that while writing assembly really feels like having a precise control on our computer’s processor, modern processors are extremely complex and many hidden operations are still happening under the hood, which prevents us from fully apprehending it.
@@ -372,6 +394,11 @@ For now the function does nothing, as indicated with a comment.</p>
 <blockquote>
   <p>📝 Note that the semicolon “;” symbol for comments seems to be unsupported by the GNU assembler.
 I will use it in my examples for the purpose of syntax highlighting but it should be replaced with a hash “#” symbol to work properly with the “as” command.</p>
+</blockquote>
+
+<blockquote>
+  <p>📝 If you use vscode with the extension I mentioned before and if you want to modify the shortcut comment symbol from “;” to “#”, you can edit the file “language-configuration.json”. 
+In ubuntu, this configuration file would be located in the ~/.vscode/extensions/[…]x86[…] directory (the extension folder should be the only one containing the “x86” name)</p>
 </blockquote>
 
 <h4 id="compilation-and-linking">Compilation and linking</h4>

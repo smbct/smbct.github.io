@@ -1,0 +1,103 @@
+// based on a post from https://stackoverflow.com/questions/40190692/how-to-keep-pure-html-css-collapsible-panels-open-when-another-one-is-opened
+
+.collapse-panel{
+    border: 1px solid #ccc;
+    list-style-type: none;
+    padding-left: 0px;
+    // font-family: "Arial";
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+.collapse-panel div{
+    position: relative;
+    margin-bottom: 1px;
+}
+
+
+.collapse-panel div:last-child{margin-bottom: 0px;}
+.collapse-panel div label{
+    padding: 7px 7px 7px 32px;
+
+    padding-left: 2.5rem;
+
+    background: #eee;
+    display: block;
+    user-select: none;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+
+    font-weight: 900;
+    
+}
+.collapse-panel div label:hover{
+    background: #ddd;
+    color:rgb(64, 155, 102);
+}
+
+.collapse-panel div input{
+    position: absolute;
+    top: 0px;
+    visibility: hidden;
+}
+
+.collapse-panel div span.collapse-label:before{
+    // content: '➕';
+    // font-size: 15px;
+    // top: 15px;
+    // left: 10px;
+
+    content: '⤵️';
+    font-size: 30px;
+    top: 15px;
+    left: 10px;
+
+    position: absolute;
+    line-height: 15px;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+
+
+// collapsible content panel
+.collapse-panel div div.collapse-content{
+    padding: 7px;
+    font-size: 14px;
+    color: #555;
+    margin: 0px;
+    display: none;
+}
+.collapse-panel div input:checked ~ div.collapse-content{
+    display: block;
+}
+
+
+// extensible content panel
+.collapse-panel div div.extensible-content{
+    padding: 7px;
+    font-size: 14px;
+    color: #555;
+    margin: 0px;
+    overflow-y: scroll;
+    height: 10rem;
+}
+.collapse-panel div input:checked ~ div.extensible-content{
+    height: fit-content;
+}
+
+
+
+.collapse-panel div input:checked ~ span.collapse-label:before{
+    // content: '➖';
+    content: '⤴️';
+    font-size: 30px;
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    pointer-events: none;
+}

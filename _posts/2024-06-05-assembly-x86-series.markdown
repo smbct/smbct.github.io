@@ -1,7 +1,7 @@
 ---
 title:  A series on x86 assembly programming
 author: smbct
-date:   2023-05-15 10:00:00 +0200
+date:   2024-06-05 10:00:00 +0200
 categories: programming low-level
 comments: true
 layout: post

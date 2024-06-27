@@ -111,6 +111,10 @@
   
 
   
+    
+  
+
+  
 
   
     
@@ -145,6 +149,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -258,7 +266,20 @@
 </header>
 <div class="content">
   <div class="post-meta">
-  <span class="post-date">21 May 2024</span>
+  <span class="post-date">📅 21 May 2024</span>
+
+  
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    20 mins
+  
+</span>
+  
+
   <span class="post-categories">
     
       &bull;
@@ -273,6 +294,7 @@
     
   </span>
 </div>
+
 
 
   <div class="post-body">
@@ -602,7 +624,7 @@ Since the values are contiguous in memory, and since they are coded on 1 byte ea
         <span class="nf">mov</span> <span class="nb">si</span><span class="nv">l</span><span class="p">,</span> <span class="p">[</span><span class="nb">rsi</span><span class="p">]</span> <span class="c1">; load the value stored at the address</span>
         <span class="nf">call</span> <span class="nv">printf</span>
 
-        <span class="nf">inc</span> <span class="kt">byte</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; increase the array pointer</span>
+        <span class="nf">inc</span> <span class="kt">qword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; increase the array pointer</span>
         <span class="nf">inc</span> <span class="kt">word</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span> <span class="c1">; increase the array index</span>
         <span class="nf">mov</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">10</span><span class="p">]</span>
         <span class="nf">cmp</span> <span class="nb">al</span><span class="p">,</span> <span class="p">[</span><span class="nv">my_array_length</span><span class="p">]</span>

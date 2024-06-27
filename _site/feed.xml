@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2024-06-25T23:09:57+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2024-06-28T00:34:36+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
 Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs.
 L’impacte individuel des déplacements en avion en terme d’émissions CO₂ est énorme.
@@ -264,7 +264,46 @@ Je vois deux alternatives : le Pass Interrail, qui est fait pour ce type de gros
 Il ne nous reste qu’à le réaliser de manière humble et responsable, et à en tirer les meilleures expériences possibles !</p>
 
 <p><img src="/assets/stockholm/suede_3.jpg" alt="Un lac suédois." />
-<!-- <span style="font-size:0.7em;">Un lac suédois.</span> --></p>]]></content><author><name>smbct</name></author><category term="society" /><category term="voyage" /><category term="train" /><category term="climat" /><summary type="html"><![CDATA[Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪. Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique. Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs. L’impacte individuel des déplacements en avion en terme d’émissions CO₂ est énorme. Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressources fragiles, qui souffre énormément de l’activité humaine ?]]></summary></entry><entry><title type="html">Solving a pokemon puzzle with SAT solvers</title><link href="https://smbct.github.io/blog/pokemon-puzzle/" rel="alternate" type="text/html" title="Solving a pokemon puzzle with SAT solvers" /><published>2023-05-15T10:00:00+02:00</published><updated>2023-05-15T10:00:00+02:00</updated><id>https://smbct.github.io/blog/pokemon-puzzle</id><content type="html" xml:base="https://smbct.github.io/blog/pokemon-puzzle/"><![CDATA[<p>I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame.
+<!-- <span style="font-size:0.7em;">Un lac suédois.</span> --></p>]]></content><author><name>smbct</name></author><category term="society" /><category term="voyage" /><category term="train" /><category term="climat" /><summary type="html"><![CDATA[Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪. Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique. Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs. L’impacte individuel des déplacements en avion en terme d’émissions CO₂ est énorme. Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressources fragiles, qui souffre énormément de l’activité humaine ?]]></summary></entry><entry><title type="html">A series on x86 assembly programming</title><link href="https://smbct.github.io/blog/assembly-x86-series/" rel="alternate" type="text/html" title="A series on x86 assembly programming" /><published>2024-06-05T10:00:00+02:00</published><updated>2024-06-05T10:00:00+02:00</updated><id>https://smbct.github.io/blog/assembly-x86-series</id><content type="html" xml:base="https://smbct.github.io/blog/assembly-x86-series/"><![CDATA[<p>This is an announce that I am currently working on a series of posts about assembly programming.
+For this occasion, I created the <strong>series</strong> section in the blog 📑 : a place dedicated to articles that intend to deeply explore 🔎 some specific topics with advanced explanations and hands-on examples.</p>
+
+<p>In my first series, I will hence explore assembly programming : namely programming directly with the processors’ instruction sets 🧑‍💻.
+x86 being the most common processor architecture on desktop and laptop computers 💻, I will solely focus on this platform.
+The idea is to progress step by step toward the goal of being able to implement practical programs directly in assembly.</p>
+
+<p>My interest in assembly programming and more generally in low level programming comes from the impression that modern softwares have a very intensive use of resources for many avoidable tasks ⚡ (as a rebound effect due to the increase of computing power).
+The idea is to understand more deeply how softwares work and apprehend their use of computing resources.
+I am also concerned by planned obsolescence that could come from softwares becoming unusable after system upgrade for instance.
+For this reason, I am also interested in the idea of retro-compatibility and the possibility to patch softwares without any source code by manipulating its assembly instructions 💾.
+For instance, see this <a href="https://www.youtube.com/watch?v=eQOOx4mmY6I">example</a> about patching an old game to make it work on modern operating systems.
+Slowly, theses different concerns got me into the topic of assembly and more generally low level programming.</p>
+
+<p>This series will be written as I learn on the topic, with potential mistakes and imprecisions made along the way 🤐.
+I take some time to write about it as a ways to compile knowledge that can be sometimes difficult to find on the web, and also to rise the interest in this approach.
+The series would be more adapted to someone already familiar with programming, preferably with a low level language like C.</p>
+
+<p>The first few posts of this series are available in this <a href="/series/x86_64_assembly/headline">page</a>.
+I will also update the links directly here :</p>
+
+<ul>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt1">part 1 : Hello, world!</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt2">Part 2 : drawing a square</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt3">Part 3 : drawing a circle</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt4">Part 4 : recursive power</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt5">Part 5 : printing arrays</a></p>
+  </li>
+</ul>
+
+<p>Enjoy!</p>]]></content><author><name>smbct</name></author><category term="programming" /><category term="low-level" /><category term="assembly" /><category term="x86" /><category term="programming" /><category term="low-level" /><summary type="html"><![CDATA[This is an announce that I am currently working on a series of posts about assembly programming. For this occasion, I created the series section in the blog 📑 : a place dedicated to articles that intend to deeply explore 🔎 some specific topics with advanced explanations and hands-on examples.]]></summary></entry><entry><title type="html">Solving a pokemon puzzle with SAT solvers</title><link href="https://smbct.github.io/blog/pokemon-puzzle/" rel="alternate" type="text/html" title="Solving a pokemon puzzle with SAT solvers" /><published>2023-05-15T10:00:00+02:00</published><updated>2023-05-15T10:00:00+02:00</updated><id>https://smbct.github.io/blog/pokemon-puzzle</id><content type="html" xml:base="https://smbct.github.io/blog/pokemon-puzzle/"><![CDATA[<p>I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame.
 As everyone knows, Pokemon is a famous role playing game license from nintendo where your goal is to train small creatures that fight each other.
 While the core of pokemon gameplay is centered toward the training of pokemons, the player would encounter some logic puzzles on his way. For instance, the next image show one of these puzzles taken from pokemon emerald.</p>
 
@@ -517,46 +556,7 @@ This type of algorithms was actually historically used for making AI for chess a
 Indeed mathematical puzzles can emerge from various ideas and topics and it is not possible to know if there is a solution until either one is found or it is proven impossible.
 In this example, it would have been possible to generate the puzzle by starting from the last state and applying reverse operations (as the operations are deterministic).
 However, this seems not to be the origin of this puzzle as discussed in the solution link I mentioned above, and the original story seems more engaging.
-Let’s see what would be my next challenging puzzles!</p>]]></content><author><name>smbct</name></author><category term="AI" /><category term="puzzle" /><category term="SAT" /><category term="logic" /><category term="puzzle" /><category term="games" /><category term="model-checking" /><summary type="html"><![CDATA[I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame. As everyone knows, Pokemon is a famous role playing game license from nintendo where your goal is to train small creatures that fight each other. While the core of pokemon gameplay is centered toward the training of pokemons, the player would encounter some logic puzzles on his way. For instance, the next image show one of these puzzles taken from pokemon emerald.]]></summary></entry><entry><title type="html">A series on x86 assembly programming</title><link href="https://smbct.github.io/blog/assembly-x86-series/" rel="alternate" type="text/html" title="A series on x86 assembly programming" /><published>2023-05-15T10:00:00+02:00</published><updated>2023-05-15T10:00:00+02:00</updated><id>https://smbct.github.io/blog/assembly-x86-series</id><content type="html" xml:base="https://smbct.github.io/blog/assembly-x86-series/"><![CDATA[<p>This is an announce that I am currently working on a series of posts about assembly programming.
-For this occasion, I created the <strong>series</strong> section in the blog 📑 : a place dedicated to articles that intend to deeply explore 🔎 some specific topics with advanced explanations and hands-on examples.</p>
-
-<p>In my first series, I will hence explore assembly programming : namely programming directly with the processors’ instruction sets 🧑‍💻.
-x86 being the most common processor architecture on desktop and laptop computers 💻, I will solely focus on this platform.
-The idea is to progress step by step toward the goal of being able to implement practical programs directly in assembly.</p>
-
-<p>My interest in assembly programming and more generally in low level programming comes from the impression that modern softwares have a very intensive use of resources for many avoidable tasks ⚡ (as a rebound effect due to the increase of computing power).
-The idea is to understand more deeply how softwares work and apprehend their use of computing resources.
-I am also concerned by planned obsolescence that could come from softwares becoming unusable after system upgrade for instance.
-For this reason, I am also interested in the idea of retro-compatibility and the possibility to patch softwares without any source code by manipulating its assembly instructions 💾.
-For instance, see this <a href="https://www.youtube.com/watch?v=eQOOx4mmY6I">example</a> about patching an old game to make it work on modern operating systems.
-Slowly, theses different concerns got me into the topic of assembly and more generally low level programming.</p>
-
-<p>This series will be written as I learn on the topic, with potential mistakes and imprecisions made along the way 🤐.
-I take some time to write about it as a ways to compile knowledge that can be sometimes difficult to find on the web, and also to rise the interest in this approach.
-The series would be more adapted to someone already familiar with programming, preferably with a low level language like C.</p>
-
-<p>The first few posts of this series are available in this <a href="/series/x86_64_assembly/headline">page</a>.
-I will also update the links directly here :</p>
-
-<ul>
-  <li>
-    <p><a href="/series/x86_64_assembly/pt1">part 1 : Hello, world!</a></p>
-  </li>
-  <li>
-    <p><a href="/series/x86_64_assembly/pt2">Part 2 : drawing a square</a></p>
-  </li>
-  <li>
-    <p><a href="/series/x86_64_assembly/pt3">Part 3 : drawing a circle</a></p>
-  </li>
-  <li>
-    <p><a href="/series/x86_64_assembly/pt4">Part 4 : recursive power</a></p>
-  </li>
-  <li>
-    <p><a href="/series/x86_64_assembly/pt5">Part 5 : printing arrays</a></p>
-  </li>
-</ul>
-
-<p>Enjoy!</p>]]></content><author><name>smbct</name></author><category term="programming" /><category term="low-level" /><category term="assembly" /><category term="x86" /><category term="programming" /><category term="low-level" /><summary type="html"><![CDATA[This is an announce that I am currently working on a series of posts about assembly programming. For this occasion, I created the series section in the blog 📑 : a place dedicated to articles that intend to deeply explore 🔎 some specific topics with advanced explanations and hands-on examples.]]></summary></entry><entry><title type="html">Can deep neural networks learn the rules of chess ?</title><link href="https://smbct.github.io/blog/chess-rules/" rel="alternate" type="text/html" title="Can deep neural networks learn the rules of chess ?" /><published>2022-05-30T10:00:00+02:00</published><updated>2022-05-30T10:00:00+02:00</updated><id>https://smbct.github.io/blog/chess-rules</id><content type="html" xml:base="https://smbct.github.io/blog/chess-rules/"><![CDATA[<p>As I recently defended my thesis, and since I am now looking for a job, I decided to dedicate to myself some time to study cutting edge computer science topics. Deep learning is one very famous (and somehow <a href="https://www.youtube.com/watch?v=fe9u6YQTsWY">controversial</a>) topic that I didn’t have the occasion to experiment with so far. Thus I started playing with dl frameworks such as pytorch and recently I decided to implement an old idea that I had back during my thesis: inducing the rules of chess using a machine learning algorithm.</p>
+Let’s see what would be my next challenging puzzles!</p>]]></content><author><name>smbct</name></author><category term="AI" /><category term="puzzle" /><category term="SAT" /><category term="logic" /><category term="puzzle" /><category term="games" /><category term="model-checking" /><summary type="html"><![CDATA[I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame. As everyone knows, Pokemon is a famous role playing game license from nintendo where your goal is to train small creatures that fight each other. While the core of pokemon gameplay is centered toward the training of pokemons, the player would encounter some logic puzzles on his way. For instance, the next image show one of these puzzles taken from pokemon emerald.]]></summary></entry><entry><title type="html">Can deep neural networks learn the rules of chess ?</title><link href="https://smbct.github.io/blog/chess-rules/" rel="alternate" type="text/html" title="Can deep neural networks learn the rules of chess ?" /><published>2022-05-30T10:00:00+02:00</published><updated>2022-05-30T10:00:00+02:00</updated><id>https://smbct.github.io/blog/chess-rules</id><content type="html" xml:base="https://smbct.github.io/blog/chess-rules/"><![CDATA[<p>As I recently defended my thesis, and since I am now looking for a job, I decided to dedicate to myself some time to study cutting edge computer science topics. Deep learning is one very famous (and somehow <a href="https://www.youtube.com/watch?v=fe9u6YQTsWY">controversial</a>) topic that I didn’t have the occasion to experiment with so far. Thus I started playing with dl frameworks such as pytorch and recently I decided to implement an old idea that I had back during my thesis: inducing the rules of chess using a machine learning algorithm.</p>
 
 <p>To be clear, the goal here is not to create an algorithm able to <strong>play</strong> chess such as <a href="https://www.deepmind.com/research/highlighted-research/alphago">alphago</a>, but rather to create an algorithm able to <strong>discover</strong> the rules, and able to propose the next moves from a given board configuration. I got this idea from my PhD work on inductive logic programming, a form of machine learning applied to logical models. For example, imagine that you are looking at two people playing an unknown game: is it possible to understand the rules just by looking people play ?</p>
 
