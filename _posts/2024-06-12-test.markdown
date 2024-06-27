@@ -18,6 +18,8 @@ layout: post
 
 ## test
 
+
+
 <div class="collapse-panel"><div>
 <label for="code_1">Details</label>
 <input type="checkbox" name="" id="code_1"><span class="collapse-label"></span>
@@ -86,6 +88,18 @@ call printf
 
 <p>test qzje lt trletjrse</p>
 </div>
+</div>
+</div>
 
-</div>
-</div>
+<div class="code_frame"> Assembly x86-64 | test.s </div>
+{% highlight nasm linenos %}
+mov [rbp-10], word ptr 0 ; array_index <- 0
+; loading the array pointer
+lea rax, my_array
+mov [rbp-8], rax
+
+; printing the "my_array_str" string
+xor eax, eax
+lea rdi, [my_array_str]
+call printf
+{% endhighlight %}

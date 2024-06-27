@@ -30,6 +30,16 @@ pre code {
   padding: 0;
 }
 
+// small hack to add the horizontal scroll bar on the extensible panel and not on the code content when it is too large 
+div.extensible-content figure.highlight {
+  min-width: fit-content;
+
+  padding-right: 12px;
+  overflow-x: scroll;
+  background-color: rgb(255, 255, 255);
+  border-bottom-left-radius: 0%;
+}
+
 .code_frame {
 
   border: 1px solid $border-color;
