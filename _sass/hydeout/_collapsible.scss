@@ -8,6 +8,9 @@
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
 
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
 }
 
 .collapse-panel div{
@@ -27,10 +30,20 @@
     user-select: none;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+
+    font-weight: 900;
+    
 }
 .collapse-panel div label:hover{
     background: #ddd;
+    color:rgb(64, 155, 102);
 }
+
+.collapse-panel div input:checked ~ label {
+    color:aqua;
+} 
+
+
 .collapse-panel div input{
     position: absolute;
     top: 0px;
@@ -53,6 +66,10 @@
     font-weight: bold;
     pointer-events: none;
 }
+
+
+
+// collapsible content panel
 .collapse-panel div div.collapse-content{
     padding: 7px;
     font-size: 14px;
@@ -63,6 +80,23 @@
 .collapse-panel div input:checked ~ div.collapse-content{
     display: block;
 }
+
+
+// extensible content panel
+.collapse-panel div div.extensible-content{
+    padding: 7px;
+    font-size: 14px;
+    color: #555;
+    margin: 0px;
+    overflow-y: scroll;
+    height: 20rem;
+}
+.collapse-panel div input:checked ~ div.extensible-content{
+    height: fit-content;
+}
+
+
+
 .collapse-panel div input:checked ~ span.collapse-label:before{
     // content: '➖';
     content: '⤴️';
