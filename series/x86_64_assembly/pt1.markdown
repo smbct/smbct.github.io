@@ -103,6 +103,9 @@ For now the function does nothing, as indicated with a comment.
 > 📝 Note that the semicolon ";" symbol for comments seems to be unsupported by the GNU assembler.
 > I will use it in my examples for the purpose of syntax highlighting but it should be replaced with a hash "#" symbol to work properly with the "as" command.
 
+> 📝 If you use vscode with the extension I mentioned before and if you want to modify the shortcut comment symbol from ";" to "#", you can edit the file "language-configuration.json". 
+> In ubuntu, this configuration file would be located in the ~/.vscode/extensions/[...]x86[...] directory (the extension folder should be the only one containing the "x86" name)
+
 #### Compilation and linking
 
 I will use the term *compilation* to designate the process of making an executable file from the assembly code even though this term is more adapted to languages like C.

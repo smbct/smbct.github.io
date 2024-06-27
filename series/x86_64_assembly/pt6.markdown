@@ -118,7 +118,7 @@ print_array:
         mov sil, [rsi] ; load the value stored at the address
         call printf
 
-        inc byte ptr [rbp-8] ; increase the array pointer
+        inc qword ptr [rbp-8] ; increase the array pointer
         inc word ptr [rbp-10] ; increase the array index
         mov ax, [rbp-10]
         cmp ax, [rbp-12]
@@ -370,7 +370,598 @@ mov rdx, [rbp-8]
 call copy_array
 {% endhighlight %}
 
+You can see that the address of the new array is directly obtained from the value of the `rsp` register.
+Indeed, the array was allocated with a `sub` operation on `rsp`.
+Since the stack grows downward ⬇️, this means that the first address of our array is actually the lowest address of the allocated portion of the stack (assuming the array's first element is at the lower address). 
+
+Nothing new however regarding the function call, the addresses of the two arrays are given to the registers that take the parameters, as well as the array length.
+Let's add another printing calls to compare the result.
+The final `main` function should look like this :
 
 
-## Sorting arrays
+<div class="collapse-panel"><div>
+<label for="code_3">Expand</label>
+<input type="checkbox" name="" id="code_3"><span class="collapse-label"></span><div class="extensible-content">
+
+<div class="code_frame"> Assembly x86-64 | main.s </div>
+{% highlight nasm linenos %}
+.global main
+.intel_syntax noprefix
+
+; main function (libc main)
+main:
+    
+    push rbp ; storing the rbp value before manipulation
+    mov rbp, rsp ; storing the rsp register
+
+    ; stack allocation
+    sub rsp, 8 ; store the address of the array copy
+    xor rax, rax
+    mov ax, [my_array_length] ; the length is stored on a word : 4 bytes -> ax registers
+    sub rsp, rax ; store the array
+
+    ; automatic 16 bytes alignement of rsp    
+    mov rax, rsp ; temporary storing the stack pointer
+    and rax, 15 ; computing rsp modulo 16 to compute the misalignment
+    xor rsp, rax ; subtracting byte to align rsp
+
+    ; storing the preserved registers
+    push rdi
+    push rsi
+
+    ; store the address of the array copy
+    xor rax, rax
+    mov ax, [my_array_length]
+    mov rcx, rbp
+    sub rcx, 8
+    sub rcx, rax
+    mov [rbp-8], rcx
+
+    ; copy the array
+    lea rdi, my_array
+    mov si, [my_array_length]
+    mov rdx, [rbp-8]
+    call copy_array
+
+    ; -------------------------------------------------------------
+    ; Print the original array
+
+    ; printing the "My array : " string
+    xor eax, eax
+    lea rdi, [my_array_str]
+    call printf
+
+    ; calling the print_array function
+    lea rdi, [my_array]
+    mov si, [my_array_length]
+    call print_array
+
+    ; printing a new line
+    xor eax, eax
+    lea rdi, [new_line]
+    call printf
+
+    ; -------------------------------------------------------------
+    ; Print the copy array
+
+    ; printing the "My array copy : " string
+    xor eax, eax
+    lea rdi, [my_array_copy_str]
+    call printf
+
+    ; calling the print_array function with parameters
+    mov rdi, [rbp-8]
+    mov si, [my_array_length]
+    call print_array
+
+    ; printing a new line
+    xor eax, eax
+    lea rdi, [new_line]
+    call printf
+
+    ; restoring the preserved registers
+    pop rsi
+    pop rdi
+
+    ; restoring the rsp and rbp registers
+    mov rsp, rbp
+    pop rbp
+
+    ; return
+    mov rax, 0
+    ret
+
+my_array:
+    .byte 5, 12, 42, 8, 1, 3, 7, 25, 14
+my_array_length:
+    .word 9
+
+new_line:
+    .asciz "\n"
+my_array_str:
+    .asciz "My array :      "
+my_array_copy_str:
+    .asciz "My array copy : "
+
+{% endhighlight %}
+</div></div></div>
+
+You should now be able to see the two identical arrays printed in the terminal :
+
+<div class="code_frame"> Bash | main output </div>
+{% highlight plaintext linenos %}
+My array :      5 12 42 8 1 3 7 25 14 
+My array copy : 5 12 42 8 1 3 7 25 14
+{% endhighlight %}
+
+That's great! 👏 We can now add some additional lines to verify that we are indeed able to modify the array.
+To do so, we will load the address of the third element of the copy array and write the value 0 into it : 
+
+<div class="code_frame"> x86-64 assembly </div>
+{% highlight nasm linenos %}
+; modify the copy array
+mov rax, [rbp-8]
+add rax, 2
+mov [rax], byte ptr 0
+{% endhighlight %}
+
+Which gives :
+
+<div class="code_frame"> Bash | main output </div>
+{% highlight plaintext linenos %}
+My array :      5 12 42 8 1 3 7 25 14 
+My array copy : 5 12 0 8 1 3 7 25 14 
+{% endhighlight %}
+
+Perfect! 🥳 We are now able to store and modify arrays in our codes!
+
+## Sorting an array
+
+In this second sub part, we will now implement a sorting algorithm in assembly : the **selection sort** algorithm.
+The idea of the selection sort is to successively compute the minimum of sub-arrays of the input one.
+
+In the first step, the algorithm finds the minimum value of the entire array and stores it at the first position.
+In the second one, the algorithm then looks for the minimum value of the sub-array starting at the second position.
+The algorithm then continues until the sub-array contains only one element.
+
+#### Pseudocode
+
+To simplify the implementation, we will start with a pseudocode of the algorithme.
+This will help define the local variables and the global structure of the function.
+
+<div class="code_frame"> Pseudocode | selection sort </div>
+{% highlight plaintext linenos %}
+
+* Parameters :
+    array : the array (modifiable) to be sorted
+    array_len : length of the array
+
+* Local variables :
+    outer_index : index to iterate over the array
+    inner_index : index to iterate over the sub-arrays
+    min_ind : index of the minimum value of a sub-array
+    temp : a temporary variable to swap two array values
+
+* Algorithm :
+
+    for outer_index in {1,..,array_len-1}
+        
+        // init the min value to the first element
+        min_ind <- out_index
+
+        // iterate over the sub array array[outer_index+1 : array_len-1]
+        for inner_index in {outer_index+1,..,array_len-1}
+
+            if array[inner_index] < array[min_index] then
+                min_index <- inner_index
+            endif
+
+        endfor
+
+        // swap the first value of the sub-array and the min value
+        temp <- array[inner_index]
+        array[inner_index] <- array[min_index]
+        array[min_index] <- temp
+
+    endfor
+{% endhighlight %}
+
+In our code, the two parameters will be turned into local variables in order to free their respective registers.
+You can also see the two nested loops which which allow to iterate respectively over the complete array and the sub-arrays.
+In this configuration, the minimum of each sub-array is recorded through its index.
+
+#### Assembly implementation
+
+We start our implementation by defining our variables and writing the backbone of the function.
+As the pseudocode contains two "for" loops (the inner and the outer loops), we will used two indexes and two array addresses to control the iterations and access the array elements.
+We will also use two additional variables : one to store the min value of the sub arrays in the inner loop, and another one to store a temporary value. (useful for swapping values and storing the min value of sub arrays).
+
+Here is the function's backbone :
+
+<div class="code_frame"> Assembly x86-64 | selection_sort.s </div>
+{% highlight nasm linenos %}
+.global selection_sort
+.intel_syntax noprefix
+
+; Sort an array with the selection sort algorithm
+; rdi : array pointer
+; si : array length
+selection_sort:
+
+    push rbp
+    mov rbp, rsp
+
+    sub rsp, 48 
+    ; rbp-8 : (8 bytes) array address (param)
+    ; rbp-10 : (2 bytes) array length (param)
+    ; rbp-12 : (2 bytes) outer index
+    ; rbp-14 : (2 bytes) inner index
+    ; rbp-22 : (8 bytes) outer array address
+    ; rbp-30 : (8 bytes) inner array address
+    ; rbp-32 : (2 bytes) sub-array min index
+    ; rbp-33 : (1 byte) temp value for swapping
+
+    ; a) first variable initialization
+    ; [...]
+
+    ; ----------------------------------------
+    ; outer loop
+    .L_outer_for:
+
+        ; b) init the inner array index and address
+        ; [...]
+
+        ; e) init the variables to store the sub array min
+        ; [...]
+
+        ; ----------------------------------------
+        ; inner loop
+        .L_inner_for:
+
+            ; f) compare the current value with the min value recorded
+            ; [...]
+
+            ; c) increase the inner index and address
+            ; [...]
+
+        ; ----------------------------------------
+        ; g) swap the first value and the min value
+        ; [...]
+
+        ; d) increase the outer index and address
+        ; [...]
+
+    mov rsp, rbp
+    pop rbp
+
+    ret
+{% endhighlight %}
+
+We can then complete the first initialization of the variables outside of the outer loops.
+This will concern the function parameters and the index and address for the outer loop :
+
+<div class="code_frame"> Assembly x86-64 </div>
+{% highlight nasm linenos %}
+
+; a) first variable initialization
+mov [rbp-8], rdi ; first parameter
+mov [rbp-10], si ; second parameter
+mov [rbp-12], word ptr 0 ; outer loop index
+mov [tbp-22], rdi ; array address for the outer loop
+{% endhighlight %}
+
+We can then put in place the iterations of the two loops by initializing the inner loop variables, increasing the indexes and addresses and testing for loop termination ( b, c, d) :
+
+<div class="code_frame"> Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; ----------------------------------------
+; outer loop
+.L_outer_for:
+
+    ; b) init the inner array index and address
+
+    ; inner array index
+    mov ax, [rbp-12]
+    mov [rbp-14], ax
+    inc word ptr [rbp-14]
+
+    ; inner array address
+    mov rax, [rbp-22]
+    mov [rbp-30], rax
+    inc qword ptr [rbp-30]
+
+    ; e) init the temp value (current min) with the outer current element
+
+    ; ----------------------------------------
+    ; inner loop
+    .L_inner_for:
+
+        ; f) compare the current value with the min value recorded
+        ; [...]
+
+        ; c) increase the inner index and address
+        inc word ptr [rbp-14]
+        inc qword ptr [rbp-30]
+
+        ; compare then inner index with the array length
+        mov ax, [rbp-10]
+        cmp ax, [rbp-14]
+        jne .L_inner_for
+ 
+    ; ----------------------------------------
+    ; g) swap the first value and the min value
+    ; [...]
+
+    ; d) increase the outer index and address
+
+    ; increase the outer index and address
+    inc word ptr [rbp-12]
+    inc qword ptr [rbp-22]
+
+    ; compare the outer index with the array length
+    mov ax, [rbp-12]
+    inc ax
+    cmp ax, [rbp-10]
+    jne .L_outer_for
+
+{% endhighlight %}
+
+These loop controls are very similar to what we did previously.
+Regarding the inner loop, the iteration starts from the array element that follows the one pointed to by the outer loop.
+The sub array is then defined as all the remaining elements to the end of the array.
+
+In this code, the indexes are tested at the end of the iterations and the loop termination occurs when they reach the end of the array.
+You may notice that the outer index actually stops just before reaching the last element of the array (hence the `inc ax` operation).
+Otherwise, the inner loop's first iteration would go beyond the array bounds.
+
+#### Comparing and swapping elements
+
+The central part of our algorithm will be the computation of the minimum values in the sub-arrays as we iterate in the inner loop.
+To do so, we will use two variables to store respectively the array index of the current min and its value.
+
+These variables can be initialized from the position of the outer array index (e) : 
+
+<div class="code_frame"> Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; e) init the temp value (current min) with the outer current element
+
+; init the index of the current min value in the sub array
+mov ax, [rbp-12]
+mov [rbp-32], ax
+
+; init the current min value to the element at the outer loop index
+mov rax, [rbp-22]
+mov al, [rax]
+mov [rbp-33], al
+{% endhighlight %}
+
+We may note that as we already saw, two operations are necessary here to access an element of the array from its address.
+First, the address is stored from the stock to a register.
+Then, the value is taken at the address from the register and is stored in another register.
+These two operations are necessary since two dereferences (namely taking the value stored at a given memory address) occur : one from the stack and another one from the array.
+
+Then, at each inner loop iteration, it is necessary to compare the pointed value to the temporary minimum (f) :
+
+<div class="code_frame"> Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; f) compare the current value with the min value recorded
+
+; compare the two values
+mov rax, [rbp-30]
+mov al, [rax] ; inner array value
+cmp al, [rbp-33] ; current min value
+jge .L_else_not_lower
+
+; .L_if_lower update the min index       
+    mov rax, [rbp-30]  
+    mov al, [rax]
+    Mov [rbp-33], al ; store the current min in the temp variable
+
+    mov ax, [rbp-14]
+    mov [rbp-32], ax ; record the index 
+
+.L_else_not_lower:
+{% endhighlight %}
+
+The first operations consist in comparing the value of the element at the inner loop index to the one temporarily stored as the minimum.
+If the element is smaller, then the two corresponding variables are updated.
+Otherwise, the program jumps to the following instructions (inverted if conditional).
+
+We can now achieve the last part of the function : swapping the element at the outer index with the minimum element found in the sub-array (g);
+In this operation, we will re-use two local variables that are no longer used at this point of the function.
+The address of the inner loop element (`rbp-30`) will be used to store the address of the sub array min value.
+The temp variable (`rbp-33`) will be used to store on of the value to swap the two elements  :
+
+<div class="code_frame"> Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; g) swap the element at the outer loop index with the min value
+
+; mov the address of the min element to the inner address variable
+xor rax, rax
+add al, [rbp-32]
+add rax, [rbp-8]
+mov [rbp-30], rax
+
+; swap the values
+
+; move the value at the outer address to the temp variable 
+mov rax, [rbp-22]
+mov al, [rax]
+mov [rbp-33], al ; the outer element is stored in the temp variable
+
+; move the min element value to the outer element's index 
+mov rax, [rbp-30]
+mov al, [rax]
+mov rcx, [rbp-22]
+mov [rcx], al
+
+; move the temp element (outer address) to the index of the min element
+mov al, [rbp-33] ; get the temp value
+mov rcx, [rbp-30]
+mov [rcx], al ; store it to the inner
+{% endhighlight %}
+
+And voilà!
+For each of these operations sub actions unfortunately, multiple assembly operations are necessary which makes the code less readable. 
+I tried to partition the code as much as possible and decompose it into several simpler parts.
+
+#### Final function
+
+Here is the complete version of our `selection_sort` assembly function :
+
+<div class="collapse-panel"><div>
+<label for="code_4">Expand</label>
+<input type="checkbox" name="" id="code_4"><span class="collapse-label"></span><div class="extensible-content">
+
+<div class="code_frame"> Assembly x86-64 | selection_sort.s </div>
+{% highlight nasm linenos %}
+.global selection_sort
+.intel_syntax noprefix
+
+; Sort an array with the selection sort algorithm
+; rdi : array pointer
+; si : array length
+selection_sort:
+
+    push rbp
+    mov rbp, rsp
+
+    sub rsp, 48 
+    ; rbp-8 : (8 bytes) array address (param)
+    ; rbp-10 : (2 bytes) array length (param)
+    ; rbp-12 : (2 bytes) outer index
+    ; rbp-14 : (2 bytes) inner index
+    ; rbp-22 : (8 bytes) outer array address
+    ; rbp-30 : (8 bytes) inner array address
+    ; rbp-32 : (2 bytes) sub-array min index
+    ; rbp-33 : (1 byte) temp value for swapping
+
+    ; variable initialization
+    mov [rbp-8], rdi ; array address
+    mov [rbp-10], si ; array length
+    
+    mov [rbp-12], word ptr 0 ; init the outer array index
+    mov [rbp-22], rdi ; init the outer array address
+
+    ; ----------------------------------------
+    ; outer loop
+    .L_outer_for:
+
+        ; init the inner array index <- array_index+1
+        mov ax, [rbp-12]
+        mov [rbp-14], ax
+        inc word ptr [rbp-14]
+        
+
+        ; init the sub-array min index
+        mov [rbp-32], ax
+
+        ; init the inner array address
+        mov rax, [rbp-22]
+        mov [rbp-30], rax
+        inc qword ptr [rbp-30]
+
+        ; init the temp value (current min) with the outer current element
+        mov rax, [rbp-22]
+        mov al, [rax]
+        mov [rbp-33], al
+
+        ; ----------------------------------------
+        ; inner loop
+        .L_inner_for:
+
+            mov rax, [rbp-30]
+            mov al, [rax] ; inner array value
+
+            cmp al, [rbp-33] ; current min value
+            
+            jge .L_else_not_lower
+
+            ; .L_if_lower update the min index
+                
+                mov rax, [rbp-30]  
+                mov al, [rax]
+                mov [rbp-33], al ; store the current min in the temp variable
+
+                mov ax, [rbp-14]
+                mov [rbp-32], ax ; record the index 
+
+            .L_else_not_lower:
+
+            ; increase the inner address
+            inc qword ptr [rbp-30]
+
+            ; increase the inner index and compare with the array length
+            inc word ptr [rbp-14]
+            mov ax, [rbp-10]
+            cmp ax, [rbp-14]
+            jne .L_inner_for
+
+        ; ----------------------------------------
+        ; swap the values
+
+        ; move the address of the min element in the inner address variable
+        xor rax, rax
+        add al, [rbp-32]
+        add rax, [rbp-8]
+        mov [rbp-30], rax
+
+        ; move the value at the outer address to the temp variable 
+        mov rax, [rbp-22]
+        mov al, [rax]
+        mov [rbp-33], al ; the outer element is stored in the temp variable
+
+        ; swap the values
+        
+        ; min value to outer element's index
+        mov rax, [rbp-30]
+        mov al, [rax]
+        mov rcx, [rbp-22]
+        mov [rcx], al
+
+        ; temp value to the min element's index
+        mov al, [rbp-33] ; get the temp value
+        mov rcx, [rbp-30]
+        mov [rcx], al ; store it to the inner
+         
+
+        ; increase the outer address
+        inc qword ptr [rbp-22]
+
+        ; increase the outer index and compare with the array length
+        inc word ptr [rbp-12]
+        mov ax, [rbp-12]
+        inc ax
+        cmp ax, [rbp-10]
+        jne .L_outer_for
+
+    mov rsp, rbp
+    pop rbp
+
+    ret
+{% endhighlight %}
+</div></div></div>
+
+You should be able to call the function from the main function on the array stored on the stack and observe such result :
+
+<div class="code_frame"> Bash | main's output </div>
+{% highlight plaintext linenos %}
+My array :        5 12 42 8 1 3 7 25 14 
+My array sorted : 1 3 5 7 8 12 14 25 42
+{% endhighlight %}
+
+Yeee!! 🔥
+
+This version of the selection sort is actually quite long.
+One possibility to improve it is to perform the swap in the inner loop, although it would be a little bit less efficient.
+I encourage you to find possible variations in order to make it as clean as possible.
+
+## What's next ?
+
+I would congratulate you if you made it this far!
+Although this part was more about assembling all the previous notions to solve a concrete problem, it has the advantage to make us develop a organization and abstraction abilities in order to navigate in this nonsense-of-a-code.
+
+You will find the codes from this part at the following [address](https://github.com/smbct/x86-64_101_linux/tree/main/pt6_sorting).
+I will probably write an addition last part to this series in order to produce a more visual program!
+This will however not necessarily be the end of the posts or series about assembly as I have multiple ideas of how to make apply such knowledge on concrete problems.  
 
