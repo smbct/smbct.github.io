@@ -108,6 +108,12 @@ In my case, the value of `rsp` is *0x7fffffffdbb8*.
 We then compute `print 0x7fffffffdbb8 % 0x10` (where *0x10* is 16 in hexadecimal).
 The result should be *8* : hence we see that there is an 8 bytes misalignment of the `rsp` value.
 
+> 📝 An easier way to check the alignment is by directly looking at the binary representation of the `rsp` pointer.
+> To do so, one can use the `p/t rsp` command in GDB.
+> In my case, I obtain : `$2 = [...]111101101110111000`.
+> Since 16 is a power of 2 (*16 = 2^4*), we can directly see if the value is a multiple of 16 by looking at the last 4 bits, which indicate wether there is an extra part between 0 and 15.
+> We can see that it is indeed the case.
+
 This misalignment comes from the fact that the `call` instruction that actually triggers the execution of `main` pushes the return address (8 bytes) to the stack, as we saw in the last part.
 As a result the stack pointer is then misaligned by 8 bytes.
 This can be fixed by simply re-aligning the stack pointer before starting the call, which can be done by "allocating" 8 additional bytes (unused) :

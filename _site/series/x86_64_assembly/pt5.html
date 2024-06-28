@@ -275,7 +275,7 @@
 <span class="reading-time" title="Estimated read time">
   
   
-    20 mins
+    21 mins
   
 </span>
   
@@ -418,6 +418,14 @@ In our case, we will only have to set it to <em>0</em>.</p>
 In my case, the value of <code class="language-plaintext highlighter-rouge">rsp</code> is <em>0x7fffffffdbb8</em>.
 We then compute <code class="language-plaintext highlighter-rouge">print 0x7fffffffdbb8 % 0x10</code> (where <em>0x10</em> is 16 in hexadecimal).
 The result should be <em>8</em> : hence we see that there is an 8 bytes misalignment of the <code class="language-plaintext highlighter-rouge">rsp</code> value.</p>
+
+<blockquote>
+  <p>📝 An easier way to check the alignment is by directly looking at the binary representation of the <code class="language-plaintext highlighter-rouge">rsp</code> pointer.
+To do so, one can use the <code class="language-plaintext highlighter-rouge">p/t rsp</code> command in GDB.
+In my case, I obtain : <code class="language-plaintext highlighter-rouge">$2 = [...]111101101110111000</code>.
+Since 16 is a power of 2 (<em>16 = 2^4</em>), we can directly see if the value is a multiple of 16 by looking at the last 4 bits, which indicate wether there is an extra part between 0 and 15.
+We can see that it is indeed the case.</p>
+</blockquote>
 
 <p>This misalignment comes from the fact that the <code class="language-plaintext highlighter-rouge">call</code> instruction that actually triggers the execution of <code class="language-plaintext highlighter-rouge">main</code> pushes the return address (8 bytes) to the stack, as we saw in the last part.
 As a result the stack pointer is then misaligned by 8 bytes.

@@ -11,10 +11,10 @@ layout: post
 Cette année, mon travail m'a donné la chance d'assister à une conférence de recherche en Suède 🇸🇪.
 Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l'heure de l'urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l'avion pour passer quelques jours seulement à l'étranger (potentiellement à l'autre bout du monde) à écouter des présentations de travaux d'autres chercheurs.
-L'impacte individuel des déplacements en avion en terme d'émissions CO₂ est énorme.
+L'impact individuel des déplacements en avion en terme d'émissions CO₂ est énorme.
 Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressources fragiles, qui souffre énormément de l'activité humaine ?
 
-En tout cas je suis décidé personnellement: aucuns de mes déplacements ne justifient un impact aussi négatif ❌.
+En tout cas je suis décidé personnellement: aucun de mes déplacements ne justifient un impact aussi négatif ❌.
 Je choisis donc de me comporter de manière stricte : soit j'effectue mes déplacements en train ou bus, soit je ne ne me déplace pas !
 Dans ce cas-ci, le laboratoire qui m'emploie n'a pas émis d'objections pour que je m'y rende en train ✅.
 Une aubaine pour moi car ce type de voyage m'intéressait depuis un certain temps ! 
@@ -29,7 +29,7 @@ Plus précisément, ma destination finale dans ce voyage est en fait Uppsala, un
 Ce trajet est particulièrement opportun pour moi car, ayant des amis qui vivent à Stockholm, j'ai décidé de m'y arrêter quelques jours avant la conférence.
 Je pouvais ensuite rejoindre Uppsala en train pour un trajet de 40 minutes environ. 
 
-Le plus directe pour rejoindre Stockholm en train depuis la France est de passer par le Danemark.
+Le plus direct pour rejoindre Stockholm en train depuis la France est de passer par le Danemark.
 En effet, il existe des ponts 🌉 au Danemark et entre le Danemark et la Suède pour connecter les différentes îles, empruntables en voiture mais également [en train](https://fr.wikipedia.org/wiki/Ligne_de_Copenhague_%C3%A0_Malm%C3%B6) !
 
 ![Le pont de l'Øresund entre le Danemark et la Suède.](https://upload.wikimedia.org/wikipedia/commons/0/06/%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg)
@@ -63,7 +63,7 @@ Voyageant dans un cadre professionnel, je suis passé par le prestataire en cont
 Des travaux prévus sur les voies pour le trajet entre Hambourg et Stockholm ont notamment retardé la préparation du voyage car les billets n'étaient pas disponibles à la vente quand j'ai commencé à planifier le voyage. 
 
 Les premiers soucis sur ce voyage se sont par ailleurs présentés peu de temps avant le départ.
-Un mail envoyé un jour plus tôt de la part de la Deutsche Bahn (compagnie ferroviaire allemande) a en effet prévenu que la correspondance du trajet entre Paris et Hambourg ne peut pouvait être assurée et invitait a choisir parmi **3 trajets alternatifs** proposés.
+Un mail envoyé un jour plus tôt de la part de la Deutsche Bahn (compagnie ferroviaire allemande) a en effet prévenu que la correspondance du trajet entre Paris et Hambourg ne pouvait être assurée et invitait a choisir parmi **3 trajets alternatifs** proposés.
 
 ![Le message en question.](/assets/stockholm/db_message.png)
 <span style="font-size:0.7em;">Le message envoyé par la Deutsche Bahn avant le départ.</span>

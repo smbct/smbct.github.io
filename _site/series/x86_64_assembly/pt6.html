@@ -587,7 +587,7 @@ This is in fact a question of convention with the choice of the <a href="https:/
 <p>To compute <em>rsp mod 16</em>, we can simply compute a logical <strong>and</strong> with the binary number <strong>1 1 1 1</strong> (15 in decimal), hence isolating the last four bytes of the number :</p>
 
 <font size="4">  
-<pre style="border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
+<pre style="font-size: 80%; border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
     [...] <span style="color: blue;"> 1 0 1 1 0 1 1 1 1 0 1</span> <strong>1 0 0 1</strong> &lt;- rsp
 and [...] <span style="color: red;"> 0 0 0 0 0 0 0 0 0 0 0</span> <strong>1 1 1 1</strong> &lt;- 15
     ------------------------------------
@@ -598,7 +598,7 @@ and [...] <span style="color: red;"> 0 0 0 0 0 0 0 0 0 0 0</span> <strong>1 1 1 
 <p>We can then use the <code class="language-plaintext highlighter-rouge">xor</code> operation (exclusive or) between our original address and the isolated 4 last bytes in order to turn all these 4 bytes into zeros :</p>
 
 <font size="4">  
-<pre style="border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
+<pre style="font-size: 80%; border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
     [...] <span style="color: blue;"> 1 0 1 1 0 1 1 1 1 0 1</span> <strong>1 0 0 1</strong> &lt;- rsp
 xor [...]  <span style="color: red;">0 0 0 0 0 0 0 0 0 0 0</span> <strong>1 0 0 1</strong> &lt;- rsp mod 16
     ------------------------------------

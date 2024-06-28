@@ -156,7 +156,7 @@ We have just seen the use of registers to pass parameters to the system call.
 Registers are ultra fast memory spots in the processor that are used as **temporary** variables to perform the program's operations.
 This means that these spots will not serve as storing our data, as registers may be used to successively perform operations on unrelated data.
 There are a limited number of registers in the x86-64 architecture and all registers have a name and a more or less specified use.
-A list of registers can be found [online](https://wiki.osdev.org/CPU_Registers_x86-64). 
+A list of registers can be found online, [here](https://wiki.osdev.org/CPU_Registers_x86-64), [here](https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture) and also [there](https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html) for instance. 
 
 It is important to note that registers have various sizes, which is expressed in bits or bytes (recall that 1 byte equals 8 bits).
 In the x86-64 architecture, registers can be up to 64 bits (8 bytes).
