@@ -22,3 +22,5 @@ This series covers x86 assembly programming.
 * [Part 5 : printing arrays](pt5)
 
 * [Part 6 : sorting arrays](pt6)
+
+* [Part 7 : ascii Mandelbrot](pt7)
