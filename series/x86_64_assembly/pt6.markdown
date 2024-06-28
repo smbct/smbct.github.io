@@ -194,7 +194,7 @@ To compute *rsp mod 16*, we can simply compute a logical **and** with the binary
 
 
 <font size="4">  
-<pre style="border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
+<pre style="font-size: 80%; border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
     [...] <span style="color: blue;"> 1 0 1 1 0 1 1 1 1 0 1</span> <strong>1 0 0 1</strong> <- rsp
 and [...] <span style="color: red;"> 0 0 0 0 0 0 0 0 0 0 0</span> <strong>1 1 1 1</strong> <- 15
     ------------------------------------
@@ -208,7 +208,7 @@ and [...] <span style="color: red;"> 0 0 0 0 0 0 0 0 0 0 0</span> <strong>1 1 1 
 We can then use the `xor` operation (exclusive or) between our original address and the isolated 4 last bytes in order to turn all these 4 bytes into zeros : 
 
 <font size="4">  
-<pre style="border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
+<pre style="font-size: 80%; border: solid 1px; padding: 0.3rem; border-radius:0.3rem;">
     [...] <span style="color: blue;"> 1 0 1 1 0 1 1 1 1 0 1</span> <strong>1 0 0 1</strong> <- rsp
 xor [...]  <span style="color: red;">0 0 0 0 0 0 0 0 0 0 0</span> <strong>1 0 0 1</strong> <- rsp mod 16
     ------------------------------------
