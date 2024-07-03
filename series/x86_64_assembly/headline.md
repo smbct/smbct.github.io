@@ -11,16 +11,16 @@ series: x86_assembly
 This series covers x86 assembly programming.
 
 
-* [part 1 : Hello, world!](pt1)
+* [Chapter 1 : Hello, world!](pt1)
 
-* [Part 2 : drawing a square](pt2)
+* [Chapter 2 : drawing a square](pt2)
 
-* [Part 3 : drawing a circle](pt3)
+* [Chapter 3 : drawing a circle](pt3)
 
-* [Part 4 : recursive power](pt4)
+* [Chapter 4 : recursive power](pt4)
 
-* [Part 5 : printing arrays](pt5)
+* [Chapter 5 : printing arrays](pt5)
 
-* [Part 6 : sorting arrays](pt6)
+* [Chapter 6 : sorting arrays](pt6)
 
-* [Part 7 : ascii Mandelbrot](pt7)
+* [Chapter 7 : ASCII Mandelbrot](pt7)

@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 7, ASCII Mandelbrot
+title:  Assembly x86 programming 101 &#58 chapter 7, ASCII Mandelbrot
 author: smbct
 date:   2024-06-28 10:00:00 +0200
 categories: low-level programming assembly
@@ -178,7 +178,7 @@ Then, for each scaled point, the test consists in studying the convergence of a 
 In this algorithm, the number of iteration is used to assign a color to the pixel.
 In our cas, we will simply return a boolean value that indicates if wether the function has converged or not for a given initial value.  
 
-### The drawing function
+### The draw_mandelbrot function
 
 To organize our code, we will proceed similarly to the previous chapter by separating our code into different functions and into different files.
 We will start by writing a function `draw_mandelbrot` that iterate over a grid of characters that tests if the associated point belongs to the Mandelbrot set or not :
@@ -325,8 +325,249 @@ Then, this value can be scaled in order to be lie in the provided bounds ([-1.12
 This step requires to simultaneously interact with floating point values and integer values (the column index in the grid height).
 To convert an integer value into a floating point value, we will used the `cvtsi2sd` instruction which can be compared to a **cast** in C. 
 
+<div class="code_frame"> x86 assembly </div>
+{% highlight nasm linenos %}
+.L_for_row:
 
-### The convergence computation
+    ; compute y0
+    cvtsi2sd xmm1, dword ptr [rbp-12] ; lad the row index as a 8 bytes float
+    dec dword ptr [rbp-8]
+    cvtsi2sd xmm3, dword ptr [rbp-8] ; lad the height as a 8 bytes float
+    inc dword ptr [rbp-8]
+    divsd xmm1, xmm3 ; compute a y position in [0, 1]
+    movsd xmm3, [rip+max_y]
+    subsd xmm3, [rip+min_y]
+    mulsd xmm1, xmm3 ; scale the [0,1] position by (max_y-min-y)
+    addsd xmm1, [rip+min_y] ; add min_y to the position
+    movsd [rbp-32], xmm1 ; store y0
+{% endhighlight %}
+
+The computation of x0 is done similarly :
+
+<div class="code_frame"> x86 assembly </div>
+{% highlight nasm linenos %}
+.L_for_col:
+
+    ; compute x0
+    cvtsi2sd xmm0, dword ptr [rbp-16]
+    dec dword ptr [rbp-4]
+    cvtsi2sd xmm3, dword ptr [rbp-4]
+    inc dword ptr [rbp-4]
+    divsd xmm0, xmm3
+    movsd xmm3, [rip+max_x]
+    subsd xmm3, [rip+min_x]
+    mulsd xmm0, xmm3
+    addsd xmm0, [rip+min_x]
+    movsd [rbp-24], xmm0
+{% endhighlight %}
+
+> 📝 Note the as the function contains 2 nested for loops, the computation of the y0 and x0 are not done at the same place.
+> Indeed, as the first loop concerns the rows, it is not necessary to re-compute the y0 index for each iteration on the columns.
+> Since floating point computation is expensive, this can be further optimized by storing the x0 values in an array.
+
+We can already test this first code by calling printf at each column iteration in order to print our 2 values x0 and y0.
+To do so, we will call define a string with adequate formatters for floating point double precision values and pass parameters to `printf` as we saw previously :
+
+<div class="code_frame"> x86 assembly </div>
+{% highlight nasm linenos %}
+.L_for_col:
+
+    ; compute x0
+    ; [...]
+
+    ; display x0 and y0
+    mov eax, 2
+    lea rdi, [rip+formatter]
+    movsd xmm0, [rbp-24]
+    movsd xmm1, [rbp-32]
+    call printf
+
+; [...]
+
+formatter:
+    .asciz "x0, y0: %f, %f\n"
+
+{% endhighlight %}
+
+Here the values of x0 and y0 are taken from the stack memory.
+You may notice that this time 2 floating point values are passed to printf, hence the value 2 stored in `eax`. 
+
+This code can already be tested to verify that the different values of x0 (in range [-2., 0.47]) and y0 (in range [-1.12, 1.12]) are displayed at each iteration.
+
+### The test_convergence function
+
+Now that the main function is in place, it is time to write the convergence function.
+For each different couple of (x0, y0) values, we will perform some number of iteration in order to decide if the initial values converge or not, indicating whether the initial point belongs to the Mandelbrot set or not.
+
+<div class="code_frame"> x86 assembly | test_convergence function </div>
+{% highlight nasm linenos %}
+; test if a point converge in the mandelbrot set
+; param x0: xmm0
+; param y0: xmm1
+; return a boolean in ax
+test_convergence:
+
+    push rbp
+    mov rbp, rsp
+
+    sub rsp, 56 ; 46 + 10
+    ; x0: rbp-8, 8 bytes
+    ; y0: rbp-16, 8 bytes
+    ; x: rbp-24, 8 bytes
+    ; y: rbp-32, 8 bytes
+    ; xtemp: rbp-40, 8 bytes
+    ; iter, rbp-44, 4 bytes
+    ; return flag, rbp-46, 2 bytes
+
+    ; preserving registers
+    push rdi
+    push rsi
+    push rbx
+
+    ; save the parameters x0 and y0
+    movsd [rbp-8], xmm0
+    movsd [rbp-16], xmm1
+
+    ; init x=0 and y=0
+    xorps xmm0, xmm0
+    movsd [rbp-24], xmm0
+    movsd [rbp-32], xmm0
+
+    ; init the return flag
+    xor ax, ax
+    mov [rbp-46], ax
+
+    ; init the iter variable
+    mov [rbp-44], dword ptr 0
+
+    ; main loop for convergence test
+    .L_for_conv:
+
+        ; test the convergence
+        ; [...]
+
+        ; .L_convergence_verified:
+
+            mov [rbp-46], word ptr 1
+            jmp .L_end_for
+
+        .L_convergence_not_verified:
+
+        ; compute the next iteration
+        ; [...]
+        
+        
+        ; increase the iteration variable and test for the loop termination
+        inc dword ptr [rbp-44]
+        mov eax, [rip+max_iteration]
+        cmp eax, [rbp-44]
+        jne .L_for_conv
+
+    .L_end_for:
+
+    ; set the return flag
+    mov ax, [rbp-46]
+
+    ; restoring the preserved registers
+    pop rbx
+    pop rsi
+    pop rdi
+
+    ; returning
+    mov rsp, rbp
+    pop rbp
+    ret
+
+
+; constants
+max_iteration:
+    .word 500
+double_4_cst:
+    .double 4.
+double_2_cst:
+    .double 2.
+{% endhighlight %}
+
+
+As we previously did, we will define some constants to make the code simplify the code and make it more readable.
+One constant will define the maximum number of iterations as an integer.
+We chose the value `500` here.
+Two other constants define double prevision floating point values that are used in the convergence algorithm : the value `4.`, used to test the convergence, and the value `2.` used to compute the new iteration : 
+
+<div class="code_frame"> x86 assembly | convergence constants </div>
+{% highlight nasm linenos %}
+; constants
+max_iteration:
+    .word 500
+double_4_cst:
+    .double 4.
+double_2_cst:
+    .double 2.
+{% endhighlight %}
+
+#### Computation of the next iteration
+
+We can now write the code to compute the values of *x* and *y* for the next iteration of the convergence test.
+We will follow the pseudocode with 3 different steps : the computation of a temporary value xtemp, then the computation of the next y value and finally the computation of the new x value.
+
+For the first step, we use simultaneously the two vector registers `xmm0` and `xmm1` in order to compute `x*x` and `y*y` without needing additional memory space.
+For the arithmetic and moving operations, the `sd` versions of the instructions are used as we manipulate double precision values :
+
+<div class="code_frame"> x86 assembly | next iteration computation </div>
+{% highlight nasm linenos %}
+; compute the next iteration
+
+; compute x_temp = x*x-y*y + x0
+movsd xmm0, [rbp-24]
+mulsd xmm0, [rbp-24] ; xmm0 = x*x
+movsd xmm1, [rbp-32]
+mulsd xmm1, [rbp-32] ; xmm1 = y*y
+subsd xmm0, xmm1 ; xmm0 = x*x-y*y
+addsd xmm0, [rbp-8] ; xmm0 = x*x-y*y + x0
+movsd [rbp-40], xmm0 ; store x_temp = xmm0 = x*x-y*y + x0
+{% endhighlight %}
+
+The computation of the new y value then uses only the `xmm0` register.
+This is the place where the constant `2.0` defined earlier is used :
+
+{% highlight nasm linenos %}
+; compute ynext = 2*x*y + y0
+movsd xmm0, [rip+double_2_cst] ; xmm0 = 2
+mulsd xmm0, [rbp-24] ; xmm0 = 2*x
+mulsd xmm0, [rbp-32] ; xmm0 = 2*x*y
+addsd xmm0, [rbp-16] ; xmm0 = 2*x*y + y0
+movsd [rbp-32], xmm0 ; store y_next = 2*x*y + y0
+{% endhighlight %}
+
+Finally, the new value of x is copied from the xtemp variable in the stack's memory.
+It was necessary to use a temporary xtemp variable since the computation of the new x value depends on y value :   
+
+{% highlight nasm linenos %}
+; compute x_next = xtemp
+movsd xmm0, [rbp-40]
+movsd [rbp-24], xmm0 ; store x_next = xtemp = x*x-y*y + x0
+{% endhighlight %}
+
+#### Testing the convergence
+
+<div class="code_frame"> x86 assembly | convergence test </div>
+{% highlight nasm linenos %}
+; test for convergence
+
+; computation of x*x + y*y
+movsd xmm0, [rbp-24]
+mulsd xmm0, xmm0
+movsd xmm1, [rbp-32]
+mulsd xmm1, xmm1
+addsd xmm0, xmm1
+
+; comparison of x*x+y*y and cst. 4.
+movsd xmm1, [rip+double_4_cst]
+comisd xmm0, xmm1
+
+; branching if the convergence test is not verified
+jbe  .L_convergence_not_verified
+{% endhighlight %}
 
 #### More on branching : comparing decimal values
 
@@ -338,7 +579,8 @@ Another post on [comparisons](https://stackoverflow.com/questions/7057501/x86-as
 
 [another ressource](http://www.ray.masmcode.com/tutorial/fpuchap7.htm#fcomex)
 
-### Result
+
+### The result
 
 <div class="code_frame"> Bash </div>
 {% highlight plaintext linenos %}
