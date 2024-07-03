@@ -14,7 +14,7 @@ Unfortunately, non-integer values arise in many real world problems hence it is 
 
 In this post, we will write a program that draws an ASCII version of the Mandelbrot set.
 The Mandelbrot set is a famous fractal that has been intensively rendered on computers in all of its shapes : with colors, in 3d, etc..
-Its computation however relies on complex numbers arithmetic, it is hence necessary to manipulate floating point numbers.
+Its computation however relies on complex numbers arithmetic, it is hence necessary to manipulate floating point numbers 🏄.
 We will see here how to draw an [ASCII](https://en.wikipedia.org/wiki/ASCII_art) version of this fractal by relying on some basic floating point number operations in assembly. 
 
 ![The Mandelbrot set](https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1920px-Mandel_zoom_00_mandelbrot_set.jpg)
@@ -133,6 +133,16 @@ Previously, we have seen that the `eax` register must be set to 0 in order to ca
 That is because we did not use any vector registers, as this register actually indicate how many of them are used.
 This time, it is set to the value 1 as we use one of them.
 
+#### Single vs Double precision floats
+
+<div class="code_frame"> C language </div>
+{% highlight C linenos %}
+float nbf = 0.25;
+nbf = nbf * 0.5;
+printf("result: %f\n", nbf);
+{% endhighlight %}
+
+#### Integer to floats
 
 ## The ASCII Mandelbrot set
 
@@ -178,7 +188,7 @@ Then, for each scaled point, the test consists in studying the convergence of a 
 In this algorithm, the number of iteration is used to assign a color to the pixel.
 In our cas, we will simply return a boolean value that indicates if wether the function has converged or not for a given initial value.  
 
-### The draw_mandelbrot function
+### The draw_mandelbrot function ✏️
 
 To organize our code, we will proceed similarly to the previous chapter by separating our code into different functions and into different files.
 We will start by writing a function `draw_mandelbrot` that iterate over a grid of characters that tests if the associated point belongs to the Mandelbrot set or not :
@@ -298,8 +308,13 @@ new_line:
 
 The function takes as parameters the width and the height of the character grids.
 Its structure is similar to what we saw in previous chapters : there are two nested loops to iterate over the rows and the columns respectively.
+
 Then, for each coordinate of the grid, the corresponding x0 and y0 values of the complex plane are computed.
 After that, the algorithm calls a function that tests the convergence of the point and draws a character accordingly.
+Depending on the result, either a star character "*" or a blank character " " is printed in the terminal.
+Here for simplicity we perform the print operation through system calls as we did in the first chapter.
+
+#### Constants definition
 
 Our first step to compute the function is to add as constants the bounds of the complex plane.
 The values are taken from the pseucode of the Wikipedia page.
@@ -322,6 +337,9 @@ We can then implement the computation of the floating points values x0 and y0.
 Starting with y0, what we need is to convert the column index into a decimal value between 0 and 1.
 Then, this value can be scaled in order to be lie in the provided bounds ([-1.12, 1.12]).
 
+#### Computation of x0 and y0
+
+
 This step requires to simultaneously interact with floating point values and integer values (the column index in the grid height).
 To convert an integer value into a floating point value, we will used the `cvtsi2sd` instruction which can be compared to a **cast** in C. 
 
@@ -330,9 +348,9 @@ To convert an integer value into a floating point value, we will used the `cvtsi
 .L_for_row:
 
     ; compute y0
-    cvtsi2sd xmm1, dword ptr [rbp-12] ; lad the row index as a 8 bytes float
+    cvtsi2sd xmm1, dword ptr [rbp-12] ; load the row index as a 8 bytes float
     dec dword ptr [rbp-8]
-    cvtsi2sd xmm3, dword ptr [rbp-8] ; lad the height as a 8 bytes float
+    cvtsi2sd xmm3, dword ptr [rbp-8] ; load the height as a 8 bytes float
     inc dword ptr [rbp-8]
     divsd xmm1, xmm3 ; compute a y position in [0, 1]
     movsd xmm3, [rip+max_y]
