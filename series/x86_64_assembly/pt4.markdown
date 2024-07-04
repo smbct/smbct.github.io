@@ -142,7 +142,7 @@ We will look at this register to understand our program.
 #### How function calls work ⚙️
 
 Let's use gdb on the previous code to see what is happening.
-We add breakpoints at lines 13 and 15 and another one at the `_print_hello_world` symbol (with `breakpoint _print_hello_world`) to see how the stack is manipulated.
+We add breakpoints at lines 13 and 15 and another one at the `_print_hello_world` symbol (with `b _print_hello_world`) to see how the stack is manipulated.
 After executing the `run` command in gdb, the program will start and pause just before the `call` instruction.
 To illustrate the `rip` register mentioned before, we can already print the pointed instruction as follows :
 
