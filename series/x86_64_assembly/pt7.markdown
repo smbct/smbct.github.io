@@ -833,7 +833,8 @@ Perfect! We can clearly see the Mandelbrot set here in our terminal! 🤓
 
 ## What's next ?
 
-Thsi chapter was the occasion to review several technical points in assembly and understand how floating points variables are handled.
+This chapter was the occasion to review several technical points in assembly and understand how floating points variables are handled.
+The codes from the chapter is available at the followink [link](https://github.com/smbct/x86-64_101_linux/tree/main/pt7_ascii_mandelbrot).
 By now, you should be able to implement any type of algorithm that can rely on the stack for its memory.
 One of the most important thing here is the ability to autonomously debug the program, with gdb for instance.
 This skill will help understanding more concepts and progress in assembly.

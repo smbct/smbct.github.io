@@ -33,7 +33,9 @@ Le plus direct pour rejoindre Stockholm en train depuis la France est de passer 
 En effet, il existe des ponts 🌉 au Danemark et entre le Danemark et la Suède pour connecter les différentes îles, empruntables en voiture mais également [en train](https://fr.wikipedia.org/wiki/Ligne_de_Copenhague_%C3%A0_Malm%C3%B6) !
 
 ![Le pont de l'Øresund entre le Danemark et la Suède.](https://upload.wikimedia.org/wikipedia/commons/0/06/%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg)
-<span style="font-size:0.7em;">Le [pont de l'Øresund](https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund) entre le Danemark et la Suède, image empruntée de [Wikipédia](https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund#/media/Fichier:%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg).</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Le [pont de l'Øresund](https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund) entre le Danemark et la Suède, image empruntée de [Wikipédia](https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund#/media/Fichier:%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg).
+</div>
 
 Pour rejoindre le Danemark, il parait évident de passer par Hambourg, une des plus grandes villes d'Allemagne et relativement proche de la frontière avec le Danemark.
 Voulant effectuer le trajet rapidement en évitant au maximum les nuits d'hôtel, j'ai décidé d'effectuer le trajet entre Hambourg et Stockholm de nuit, ce qui est possible grâce à un train de nuit direct opéré par la société ferroviaire suédoise (la ligne complète va en fait de Berlin à Stockholm, et inversement).
@@ -43,7 +45,9 @@ Pour les non parisiens, il faut éventuellement rajouter à cela une étape supp
 Cette étape peut probablement être sautée pour les personnes vivant dans l'est de la France.
 
 ![Carte des chemins de fer en Europe.](https://i.pinimg.com/originals/e3/b3/5c/e3b35c9e96b9c906e0b2c68ec5db783d.gif)
-<span style="font-size:0.7em;">Carte des chemins de fer en Europe, empruntée de [Train World](https://trainmaps.netlify.app/rail-europe-train-maps.html).</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Carte des chemins de fer en Europe, empruntée de [Train World](https://trainmaps.netlify.app/rail-europe-train-maps.html)
+</div>
 
 Pour récapituler, l'idée est donc de partir de Paris au matin pour me rendre à Hambourg en fin d'après-midi.
 Ce trajet était prévu initialement avec une unique correspondance en Allemagne.
@@ -66,7 +70,9 @@ Les premiers soucis sur ce voyage se sont par ailleurs présentés peu de temps 
 Un mail envoyé un jour plus tôt de la part de la Deutsche Bahn (compagnie ferroviaire allemande) a en effet prévenu que la correspondance du trajet entre Paris et Hambourg ne pouvait être assurée et invitait a choisir parmi **3 trajets alternatifs** proposés.
 
 ![Le message en question.](/assets/stockholm/db_message.png)
-<span style="font-size:0.7em;">Le message envoyé par la Deutsche Bahn avant le départ.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Le message envoyé par la Deutsche Bahn avant le départ.
+</div>
 
 J'ai eu de premiers doutes en recevant ce message car les trajets alternatifs proposés impliquaient d'emprunter des trains eurostar (ex [thalys](https://www.eurostar.com/fr-fr/a-propos-deurostar/thalys-devient-eurostar)) à Paris.
 Il me paraissait suspect que mon billet de train allemand soit réellement recevable sur ces trains...
@@ -91,7 +97,9 @@ Après maintes hésitations, il m'a finalement semblé moins risqué d'emprunter
 C'est donc parti pour l'Allemagne !
 
 ![En route vers l'Allemagne !](/assets/stockholm/en_route_allemagne.jpg)
-<span style="font-size:0.7em;">En route vers l'Allemagne ! 🚃 </span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> En route vers l'Allemagne ! 🚃 
+</div>
 
 Arrivé à ma première destination allemande 🇩🇪, je me renseigne donc cette fois-ci auprès d'un agent de la DB au sujet de mon trajet initial prévu.
 J'apprend donc que le trajet est toujours prévu et que la correspondance est possible mais que celui-ci arrive bien plus tard que prévu à Hambourg 😖 ! 
@@ -109,12 +117,16 @@ Le train de nuit, que je j'ai découvert assez récemment en France pour ma part
 Je trouve dommage que ceux de la SNCF relient forcément Paris, mais il s'agit d'une option intéressante pour les longs trajets : cela permet d'économiser à la fois du temps et de l'argent !
 
 ![Un train de nuit vers Innsbruck.](/assets/stockholm/train_innsbruck.jpg)
-<span style="font-size:0.7em;">Un train de nuit vers Innsbruck.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Un train de nuit vers Innsbruck.
+</div>
 
 J'arrive finalement à Hambourg en début de soirée.
 
 ![L'arrivée à Hambourg !](/assets/stockholm/arrivee_hambourg.jpg)
-<span style="font-size:0.7em;">L'arrivée à Hambourg !</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> L'arrivée à Hambourg !
+</div>
 
 #### Une note sur la ponctualité des trains
 
@@ -125,7 +137,9 @@ J'ai pour ma part eu très peu de soucis de retards avec la SNCF alors que j'eff
 On peut trouver des études classant la France dans des positions assez bonnes au niveau européen, comme la suivante sur les TGV (pourcentage des trains à l'heure) :
 
 ![](https://www.epf.eu/wp/wp-content/uploads/2021/01/Picture2.png)
-<span style="font-size:0.7em;">À l'échelle de l'Europe, l’Allemagne est mal classée par rapport à la France en terme de [retards de train longue-distance](https://www.epf.eu/wp/10929-2/).</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> À l'échelle de l'Europe, l’Allemagne est mal classée par rapport à la France en terme de [retards de train longue-distance](https://www.epf.eu/wp/10929-2/).
+</div>
 
 En tout cas, me concernant sur ce trajet j'ai surtout été déçu de la DB pour les informations aussi contradictoires qu'elle envoie aux voyageurs.
 Ce qui me donne envie de rappeler que la SNCF propose une bonne prise en charge des voyageurs en cas de problème, en réservant notamment un hôtel en cas de besoin.
@@ -140,7 +154,9 @@ Bien que le marché du train français soit ouvert à la concurrence depuis [dé
 En faisant une petite recherche, je me rend compte qu'il y a en fait [beaucoup de compagnies](https://rail.cc/fr/compagnie-ferroviaire/allemagne/de) différentes présentes en Allemagne.
 
 ![Un flixtrain à Hambourg.](/assets/stockholm/flix_train.jpg)
-<span style="font-size:0.7em;">Un flixtrain à Hambourg.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Un flixtrain à Hambourg.
+</div>
 
 Je profite également de ma longue correspondance pour faire un ravitaillement en eau avec ma gourde 🚰.
 Malheureusement, impossible de trouver un point d'eau !
@@ -154,7 +170,9 @@ En réalité, ça n'est pas du tout le cas !
 Il s'agit d'un train de nuit type TER que je vois arriver sur le quai.
 
 ![Le train de nuit vers la Suède.](/assets/stockholm/train_nuit_aller.jpg)
-<span style="font-size:0.7em;">Le train de nuit vers la Suède.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Le train de nuit vers la Suède.
+</div>
 
 L'entrée dans le train de nuit se fait comme dans un TER : il n'y a pas de contrôle de billet à l'extérieur comme avec la CNCF, un check-in se fait au contraire à l'intérieur au moment du départ 🛂. 
 Je découvre donc ma couchette 🛏️ dans le compartiment qui est en fait très similaire à ceux qu'on trouve dans les trains de nuits de la SNCF.
@@ -177,7 +195,9 @@ En fait, il faut savoir qu'en Allemagne et dans d'autres pays, contrairement à 
 Le retard étant pris en charge par la compagnie de train, il m'aurait en fait suffit de faire une simple réservation de siège pour avoir ma place (et il restait possible d'emprunter le train sans billet).
 
 ![En route vers Copenhague.](/assets/stockholm/vers_copenhague.jpg)
-<span style="font-size:0.7em;">En route vers Copenhague.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> En route vers Copenhague.
+</div>
 
 Sur le chemin de Copenhague, le train me fait donc traverser un nouveau pays : le Danemark.
 Il faut savoir que c'est l'unique pays de ce trajet susceptible d'effectuer un contrôle d'identité 🪪.
@@ -188,22 +208,30 @@ Une fois à Copenhague, c'est la course pour prendre un second train vers Stockh
 Je suis d'autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d'arriver pour la première fois dans un train Suédois !
 
 ![Le train à destination de Stockholm.](/assets/stockholm/train_copenhague_suede.jpg)
-<span style="font-size:0.7em;">Le train à destination de Stockholm.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Le train à destination de Stockholm.
+</div>
 
 Ça y est, je peux enfin entamer la dernière partie de mon voyage !
 En fait, l'annulation de mon train de nuit a un bon côté : effectuant désormais le trajet de jour, je peux admirer les différentes vues à mesure que je progresse vers Stockholm.
 En particulier, j'étais très enthousiaste à l'idée de passer sur le pont entre le Danemark et la Suède !
 
 ![Passage sur le pont de l'Øresund !](/assets/stockholm/pont_danemark_suede.jpg)
-<span style="font-size:0.7em;">Passage sur le pont de l'Øresund !</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Passage sur le pont de l'Øresund !
+</div>
 
 Je découvre ensuite les paysages suédois : entre lacs, forêts et maisons rouges.
 
 ![Arrivée en Suède.](/assets/stockholm/suede_2.jpg)
-<span style="font-size:0.7em;">Arrivée en Suède.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Arrivée en Suède.
+</div>
 
 ![La campagne suédoise.](/assets/stockholm/campagne_suede.jpg)
-<span style="font-size:0.7em;">La campagne suédoise.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> La campagne suédoise.
+</div>
 
 Dans le train je repère plusieurs français allant également à Stockholm.
 Il ne s'agit pas des premiers que j'aperçois et je suis heureux de voir que tout le monde ne mise pas sur l'avion pour ce genre de voyage !
@@ -213,13 +241,17 @@ L'arrivée à Stockholm se fait finalement en soirée.
 Je suis soulagé en descendant du train après ces différentes mésaventures.
 
 ![Arrivée à Stockholm !](/assets/stockholm/stockholm_central.jpg)
-<span style="font-size:0.7em;">Arrivée à Stockholm !</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Arrivée à Stockholm !
+</div>
 
 Il me reste encore un dernier "petit" train local à emprunter pour rejoindre mes amis et profiter de la destination !
 Les jours suivants me permettent donc de découvrir Stockholm et prendre un peu de repos avant la conférence.
 
 ![Visite de Stockholm.](/assets/stockholm/stockholm.jpg)
-<span style="font-size:0.7em;">Visite de Stockholm.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Visite de Stockholm.
+</div>
 
 
 ## Le retour vers la France
@@ -244,7 +276,9 @@ En l’occurrence, le train que j'ai croisé à ce moment là permettait d'embar
 Plutôt efficace !
 
 ![Le fret ferroviaire.](/assets/stockholm/fret.jpg)
-<span style="font-size:0.7em;">Le fret ferroviaire.</span>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;" markdown="1">
+\> Le fret ferroviaire.
+</div>
 
 J'arrive donc le lendemain matin à Hambourg.
 Concernant le trajet retour de Hambourg à Paris, rebelote !
