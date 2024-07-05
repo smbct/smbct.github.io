@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2024-07-05T15:38:53+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2024-07-05T15:39:21+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
 Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs.
 L’impact individuel des déplacements en avion en terme d’émissions CO₂ est énorme.
@@ -21,8 +21,10 @@ Je pouvais ensuite rejoindre Uppsala en train pour un trajet de 40 minutes envir
 <p>Le plus direct pour rejoindre Stockholm en train depuis la France est de passer par le Danemark.
 En effet, il existe des ponts 🌉 au Danemark et entre le Danemark et la Suède pour connecter les différentes îles, empruntables en voiture mais également <a href="https://fr.wikipedia.org/wiki/Ligne_de_Copenhague_%C3%A0_Malm%C3%B6">en train</a> !</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg" alt="Le pont de l'Øresund entre le Danemark et la Suède." />
-<span style="font-size:0.7em;">Le <a href="https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund">pont de l’Øresund</a> entre le Danemark et la Suède, image empruntée de <a href="https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund#/media/Fichier:%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg">Wikipédia</a>.</span></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg" alt="Le pont de l'Øresund entre le Danemark et la Suède." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Le <a href="https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund">pont de l’Øresund</a> entre le Danemark et la Suède, image empruntée de <a href="https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund#/media/Fichier:%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg">Wikipédia</a>.</p>
+</div>
 
 <p>Pour rejoindre le Danemark, il parait évident de passer par Hambourg, une des plus grandes villes d’Allemagne et relativement proche de la frontière avec le Danemark.
 Voulant effectuer le trajet rapidement en évitant au maximum les nuits d’hôtel, j’ai décidé d’effectuer le trajet entre Hambourg et Stockholm de nuit, ce qui est possible grâce à un train de nuit direct opéré par la société ferroviaire suédoise (la ligne complète va en fait de Berlin à Stockholm, et inversement).
@@ -31,8 +33,10 @@ L’autre partie du trajet consiste donc à effectuer un Paris - Hambourg, ce qu
 <p>Pour les non parisiens, il faut éventuellement rajouter à cela une étape supplémentaire que je ne détaille pas ici pour rejoindre Paris (soit la veille, soit suffisamment tôt).
 Cette étape peut probablement être sautée pour les personnes vivant dans l’est de la France.</p>
 
-<p><img src="https://i.pinimg.com/originals/e3/b3/5c/e3b35c9e96b9c906e0b2c68ec5db783d.gif" alt="Carte des chemins de fer en Europe." />
-<span style="font-size:0.7em;">Carte des chemins de fer en Europe, empruntée de <a href="https://trainmaps.netlify.app/rail-europe-train-maps.html">Train World</a>.</span></p>
+<p><img src="https://i.pinimg.com/originals/e3/b3/5c/e3b35c9e96b9c906e0b2c68ec5db783d.gif" alt="Carte des chemins de fer en Europe." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Carte des chemins de fer en Europe, empruntée de <a href="https://trainmaps.netlify.app/rail-europe-train-maps.html">Train World</a></p>
+</div>
 
 <p>Pour récapituler, l’idée est donc de partir de Paris au matin pour me rendre à Hambourg en fin d’après-midi.
 Ce trajet était prévu initialement avec une unique correspondance en Allemagne.
@@ -51,8 +55,10 @@ Des travaux prévus sur les voies pour le trajet entre Hambourg et Stockholm ont
 <p>Les premiers soucis sur ce voyage se sont par ailleurs présentés peu de temps avant le départ.
 Un mail envoyé un jour plus tôt de la part de la Deutsche Bahn (compagnie ferroviaire allemande) a en effet prévenu que la correspondance du trajet entre Paris et Hambourg ne pouvait être assurée et invitait a choisir parmi <strong>3 trajets alternatifs</strong> proposés.</p>
 
-<p><img src="/assets/stockholm/db_message.png" alt="Le message en question." />
-<span style="font-size:0.7em;">Le message envoyé par la Deutsche Bahn avant le départ.</span></p>
+<p><img src="/assets/stockholm/db_message.png" alt="Le message en question." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Le message envoyé par la Deutsche Bahn avant le départ.</p>
+</div>
 
 <p>J’ai eu de premiers doutes en recevant ce message car les trajets alternatifs proposés impliquaient d’emprunter des trains eurostar (ex <a href="https://www.eurostar.com/fr-fr/a-propos-deurostar/thalys-devient-eurostar">thalys</a>) à Paris.
 Il me paraissait suspect que mon billet de train allemand soit réellement recevable sur ces trains…
@@ -76,8 +82,10 @@ Entre-temps, j’ai été appelé par le prestataire s’occupant de la réserva
 Après maintes hésitations, il m’a finalement semblé moins risqué d’emprunter ce fameux train ICE allemand initialement prévu dans mon trajet.
 C’est donc parti pour l’Allemagne !</p>
 
-<p><img src="/assets/stockholm/en_route_allemagne.jpg" alt="En route vers l'Allemagne !" />
-<span style="font-size:0.7em;">En route vers l’Allemagne ! 🚃 </span></p>
+<p><img src="/assets/stockholm/en_route_allemagne.jpg" alt="En route vers l'Allemagne !" /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; En route vers l’Allemagne ! 🚃</p>
+</div>
 
 <p>Arrivé à ma première destination allemande 🇩🇪, je me renseigne donc cette fois-ci auprès d’un agent de la DB au sujet de mon trajet initial prévu.
 J’apprend donc que le trajet est toujours prévu et que la correspondance est possible mais que celui-ci arrive bien plus tard que prévu à Hambourg 😖 ! 
@@ -94,13 +102,17 @@ Il s’agit d’un équivalent de SNCF connect pour les trains allemands mais qu
 Le train de nuit, que je j’ai découvert assez récemment en France pour ma part, est en fait bien présent en Europe.
 Je trouve dommage que ceux de la SNCF relient forcément Paris, mais il s’agit d’une option intéressante pour les longs trajets : cela permet d’économiser à la fois du temps et de l’argent !</p>
 
-<p><img src="/assets/stockholm/train_innsbruck.jpg" alt="Un train de nuit vers Innsbruck." />
-<span style="font-size:0.7em;">Un train de nuit vers Innsbruck.</span></p>
+<p><img src="/assets/stockholm/train_innsbruck.jpg" alt="Un train de nuit vers Innsbruck." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Un train de nuit vers Innsbruck.</p>
+</div>
 
 <p>J’arrive finalement à Hambourg en début de soirée.</p>
 
-<p><img src="/assets/stockholm/arrivee_hambourg.jpg" alt="L'arrivée à Hambourg !" />
-<span style="font-size:0.7em;">L’arrivée à Hambourg !</span></p>
+<p><img src="/assets/stockholm/arrivee_hambourg.jpg" alt="L'arrivée à Hambourg !" /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; L’arrivée à Hambourg !</p>
+</div>
 
 <h4 id="une-note-sur-la-ponctualité-des-trains">Une note sur la ponctualité des trains</h4>
 
@@ -110,8 +122,10 @@ J’ai pour ma part eu très peu de soucis de retards avec la SNCF alors que j�
 
 <p>On peut trouver des études classant la France dans des positions assez bonnes au niveau européen, comme la suivante sur les TGV (pourcentage des trains à l’heure) :</p>
 
-<p><img src="https://www.epf.eu/wp/wp-content/uploads/2021/01/Picture2.png" alt="" />
-<span style="font-size:0.7em;">À l’échelle de l’Europe, l’Allemagne est mal classée par rapport à la France en terme de <a href="https://www.epf.eu/wp/10929-2/">retards de train longue-distance</a>.</span></p>
+<p><img src="https://www.epf.eu/wp/wp-content/uploads/2021/01/Picture2.png" alt="" /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; À l’échelle de l’Europe, l’Allemagne est mal classée par rapport à la France en terme de <a href="https://www.epf.eu/wp/10929-2/">retards de train longue-distance</a>.</p>
+</div>
 
 <p>En tout cas, me concernant sur ce trajet j’ai surtout été déçu de la DB pour les informations aussi contradictoires qu’elle envoie aux voyageurs.
 Ce qui me donne envie de rappeler que la SNCF propose une bonne prise en charge des voyageurs en cas de problème, en réservant notamment un hôtel en cas de besoin.</p>
@@ -124,8 +138,10 @@ Ce qui me donne envie de rappeler que la SNCF propose une bonne prise en charge 
 Bien que le marché du train français soit ouvert à la concurrence depuis <a href="https://www.radiofrance.fr/franceinter/l-ouverture-du-rail-a-la-concurrence-une-realite-qui-peine-a-se-mettre-en-place-2085650">décembre 2020</a>, les concurrents émergent lentement.
 En faisant une petite recherche, je me rend compte qu’il y a en fait <a href="https://rail.cc/fr/compagnie-ferroviaire/allemagne/de">beaucoup de compagnies</a> différentes présentes en Allemagne.</p>
 
-<p><img src="/assets/stockholm/flix_train.jpg" alt="Un flixtrain à Hambourg." />
-<span style="font-size:0.7em;">Un flixtrain à Hambourg.</span></p>
+<p><img src="/assets/stockholm/flix_train.jpg" alt="Un flixtrain à Hambourg." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Un flixtrain à Hambourg.</p>
+</div>
 
 <p>Je profite également de ma longue correspondance pour faire un ravitaillement en eau avec ma gourde 🚰.
 Malheureusement, impossible de trouver un point d’eau !
@@ -138,8 +154,10 @@ Je ne mesure à ce moment là pas très bien le type de trajet que je vais effec
 En réalité, ça n’est pas du tout le cas !
 Il s’agit d’un train de nuit type TER que je vois arriver sur le quai.</p>
 
-<p><img src="/assets/stockholm/train_nuit_aller.jpg" alt="Le train de nuit vers la Suède." />
-<span style="font-size:0.7em;">Le train de nuit vers la Suède.</span></p>
+<p><img src="/assets/stockholm/train_nuit_aller.jpg" alt="Le train de nuit vers la Suède." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Le train de nuit vers la Suède.</p>
+</div>
 
 <p>L’entrée dans le train de nuit se fait comme dans un TER : il n’y a pas de contrôle de billet à l’extérieur comme avec la CNCF, un check-in se fait au contraire à l’intérieur au moment du départ 🛂. 
 Je découvre donc ma couchette 🛏️ dans le compartiment qui est en fait très similaire à ceux qu’on trouve dans les trains de nuits de la SNCF.
@@ -161,8 +179,10 @@ Je comprend mal l’annonce et prend un billet de train supplémentaire pour êt
 En fait, il faut savoir qu’en Allemagne et dans d’autres pays, contrairement à la France, un trajet peut être réservé sans siège et vice-versa 🎫.
 Le retard étant pris en charge par la compagnie de train, il m’aurait en fait suffit de faire une simple réservation de siège pour avoir ma place (et il restait possible d’emprunter le train sans billet).</p>
 
-<p><img src="/assets/stockholm/vers_copenhague.jpg" alt="En route vers Copenhague." />
-<span style="font-size:0.7em;">En route vers Copenhague.</span></p>
+<p><img src="/assets/stockholm/vers_copenhague.jpg" alt="En route vers Copenhague." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; En route vers Copenhague.</p>
+</div>
 
 <p>Sur le chemin de Copenhague, le train me fait donc traverser un nouveau pays : le Danemark.
 Il faut savoir que c’est l’unique pays de ce trajet susceptible d’effectuer un contrôle d’identité 🪪.
@@ -172,23 +192,31 @@ Dans mon cas, le train s’arrête effectivement durant le trajet avec une annon
 <p>Une fois à Copenhague, c’est la course pour prendre un second train vers Stockholm cette fois-ci 🏃‍♂️.
 Je suis d’autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d’arriver pour la première fois dans un train Suédois !</p>
 
-<p><img src="/assets/stockholm/train_copenhague_suede.jpg" alt="Le train à destination de Stockholm." />
-<span style="font-size:0.7em;">Le train à destination de Stockholm.</span></p>
+<p><img src="/assets/stockholm/train_copenhague_suede.jpg" alt="Le train à destination de Stockholm." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Le train à destination de Stockholm.</p>
+</div>
 
 <p>Ça y est, je peux enfin entamer la dernière partie de mon voyage !
 En fait, l’annulation de mon train de nuit a un bon côté : effectuant désormais le trajet de jour, je peux admirer les différentes vues à mesure que je progresse vers Stockholm.
 En particulier, j’étais très enthousiaste à l’idée de passer sur le pont entre le Danemark et la Suède !</p>
 
-<p><img src="/assets/stockholm/pont_danemark_suede.jpg" alt="Passage sur le pont de l'Øresund !" />
-<span style="font-size:0.7em;">Passage sur le pont de l’Øresund !</span></p>
+<p><img src="/assets/stockholm/pont_danemark_suede.jpg" alt="Passage sur le pont de l'Øresund !" /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Passage sur le pont de l’Øresund !</p>
+</div>
 
 <p>Je découvre ensuite les paysages suédois : entre lacs, forêts et maisons rouges.</p>
 
-<p><img src="/assets/stockholm/suede_2.jpg" alt="Arrivée en Suède." />
-<span style="font-size:0.7em;">Arrivée en Suède.</span></p>
+<p><img src="/assets/stockholm/suede_2.jpg" alt="Arrivée en Suède." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Arrivée en Suède.</p>
+</div>
 
-<p><img src="/assets/stockholm/campagne_suede.jpg" alt="La campagne suédoise." />
-<span style="font-size:0.7em;">La campagne suédoise.</span></p>
+<p><img src="/assets/stockholm/campagne_suede.jpg" alt="La campagne suédoise." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; La campagne suédoise.</p>
+</div>
 
 <p>Dans le train je repère plusieurs français allant également à Stockholm.
 Il ne s’agit pas des premiers que j’aperçois et je suis heureux de voir que tout le monde ne mise pas sur l’avion pour ce genre de voyage !
@@ -197,14 +225,18 @@ Je comprend alors que beaucoup doivent être en train de voyager avec <a href="h
 <p>L’arrivée à Stockholm se fait finalement en soirée.
 Je suis soulagé en descendant du train après ces différentes mésaventures.</p>
 
-<p><img src="/assets/stockholm/stockholm_central.jpg" alt="Arrivée à Stockholm !" />
-<span style="font-size:0.7em;">Arrivée à Stockholm !</span></p>
+<p><img src="/assets/stockholm/stockholm_central.jpg" alt="Arrivée à Stockholm !" /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Arrivée à Stockholm !</p>
+</div>
 
 <p>Il me reste encore un dernier “petit” train local à emprunter pour rejoindre mes amis et profiter de la destination !
 Les jours suivants me permettent donc de découvrir Stockholm et prendre un peu de repos avant la conférence.</p>
 
-<p><img src="/assets/stockholm/stockholm.jpg" alt="Visite de Stockholm." />
-<span style="font-size:0.7em;">Visite de Stockholm.</span></p>
+<p><img src="/assets/stockholm/stockholm.jpg" alt="Visite de Stockholm." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Visite de Stockholm.</p>
+</div>
 
 <h2 id="le-retour-vers-la-france">Le retour vers la France</h2>
 
@@ -227,8 +259,10 @@ Je le vois rarement en France donc j’ai été surpris de le voir aussi présen
 En l’occurrence, le train que j’ai croisé à ce moment là permettait d’embarquer directement les remorques des camions. 🚛
 Plutôt efficace !</p>
 
-<p><img src="/assets/stockholm/fret.jpg" alt="Le fret ferroviaire." />
-<span style="font-size:0.7em;">Le fret ferroviaire.</span></p>
+<p><img src="/assets/stockholm/fret.jpg" alt="Le fret ferroviaire." /></p>
+<div style="font-size:0.8rem; margin-top:-15px; margin-bottom:1rem; color:grey;">
+  <p>&gt; Le fret ferroviaire.</p>
+</div>
 
 <p>J’arrive donc le lendemain matin à Hambourg.
 Concernant le trajet retour de Hambourg à Paris, rebelote !
