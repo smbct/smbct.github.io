@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 6, sorting arrays
+title:  Assembly x86 programming 101 &#58 chapter 6, sorting arrays
 author: smbct
 date:   2024-06-20 10:00:00 +0200
 categories: low-level programming assembly
@@ -14,7 +14,7 @@ This will be the occasion to further manipulate the stack and to work on the mod
 
 ## Modular assembly programs
 
-We will start this part with our code from the previous part that prints arrays.
+We will start this chapter with our code from the previous chapter that prints arrays.
 This time, we are going to separate our code in different files to organize our different functions.
 We start with two different files : a first one containing the `print_array` function and a second one containing the main function (we will continue using the standard libc here).
 Here are our two code files :
@@ -143,7 +143,7 @@ You may notice that for the two files, the function's symbols have been defined 
 
 Regarding the `main` function, we also cautiously save the `rdi` and `rsi` registers in the stack as they are overwritten in our function.
 They are indeed supposed to be **preserved** registers in the C language and since these registers are used in our function to pass parameters, it is necessary to save them.
-You may refer to the [table](https://i.sstatic.net/j8hpC.png) given in the [stackoverflow](https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler) post that was already linked in the previous part for the other registers to preserve.
+You may refer to the [table](https://i.sstatic.net/j8hpC.png) given in the [stackoverflow](https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler) post that was already linked in the previous chapter for the other registers to preserve.
 
 To compile (assemble) this program, we first assemble separately our two code files : `as main.s -o main.o && as print_array.s -o print_array.o`.
 Then, we combine the files with gcc to create the final executable : `gcc -static main.o print_array.o -o main`.
@@ -959,9 +959,9 @@ I encourage you to find possible variations in order to make it as clean as poss
 ## What's next ?
 
 I would congratulate you if you made it this far!
-Although this part was more about assembling all the previous notions to solve a concrete problem, it has the advantage to make us develop a organization and abstraction abilities in order to navigate in this nonsense-of-a-code.
+Although this chapter was more about assembling all the previous notions to solve a concrete problem, it has the advantage to make us develop a organization and abstraction abilities in order to navigate in this nonsense-of-a-code.
 
-You will find the codes from this part at the following [address](https://github.com/smbct/x86-64_101_linux/tree/main/pt6_sorting).
-I will probably write an addition last part to this series in order to produce a more visual program!
+You will find the codes from this chapter at the following [address](https://github.com/smbct/x86-64_101_linux/tree/main/pt6_sorting).
+I will probably write an addition last chapter to this series in order to produce a more visual program!
 This will however not necessarily be the end of the posts or series about assembly as I have multiple ideas of how to make apply such knowledge on concrete problems.  
 

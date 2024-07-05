@@ -11,7 +11,7 @@
 
   <title>
     
-      Assembly x86 programming 101 &#58 part 6, sorting arrays &middot; smbct's blog
+      Assembly x86 programming 101 &#58 chapter 6, sorting arrays &middot; smbct's blog
     
   </title>
 
@@ -115,6 +115,10 @@
   
 
   
+    
+  
+
+  
 
   
     
@@ -149,6 +153,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -262,7 +270,7 @@
 </p>
 
 
-  <h1 class="post-title">Assembly x86 programming 101 &#58 part 6, sorting arrays</h1>
+  <h1 class="post-title">Assembly x86 programming 101 &#58 chapter 6, sorting arrays</h1>
 </header>
 <div class="content">
   <div class="post-meta">
@@ -304,7 +312,7 @@ This will be the occasion to further manipulate the stack and to work on the mod
 
 <h2 id="modular-assembly-programs">Modular assembly programs</h2>
 
-<p>We will start this part with our code from the previous part that prints arrays.
+<p>We will start this chapter with our code from the previous chapter that prints arrays.
 This time, we are going to separate our code in different files to organize our different functions.
 We start with two different files : a first one containing the <code class="language-plaintext highlighter-rouge">print_array</code> function and a second one containing the main function (we will continue using the standard libc here).
 Here are our two code files :</p>
@@ -529,7 +537,7 @@ You may notice that for the two files, the function’s symbols have been define
 
 <p>Regarding the <code class="language-plaintext highlighter-rouge">main</code> function, we also cautiously save the <code class="language-plaintext highlighter-rouge">rdi</code> and <code class="language-plaintext highlighter-rouge">rsi</code> registers in the stack as they are overwritten in our function.
 They are indeed supposed to be <strong>preserved</strong> registers in the C language and since these registers are used in our function to pass parameters, it is necessary to save them.
-You may refer to the <a href="https://i.sstatic.net/j8hpC.png">table</a> given in the <a href="https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler">stackoverflow</a> post that was already linked in the previous part for the other registers to preserve.</p>
+You may refer to the <a href="https://i.sstatic.net/j8hpC.png">table</a> given in the <a href="https://stackoverflow.com/questions/38335212/calling-printf-in-x86-64-using-gnu-assembler">stackoverflow</a> post that was already linked in the previous chapter for the other registers to preserve.</p>
 
 <p>To compile (assemble) this program, we first assemble separately our two code files : <code class="language-plaintext highlighter-rouge">as main.s -o main.o &amp;&amp; as print_array.s -o print_array.o</code>.
 Then, we combine the files with gcc to create the final executable : <code class="language-plaintext highlighter-rouge">gcc -static main.o print_array.o -o main</code>.
@@ -1855,10 +1863,10 @@ I encourage you to find possible variations in order to make it as clean as poss
 <h2 id="whats-next-">What’s next ?</h2>
 
 <p>I would congratulate you if you made it this far!
-Although this part was more about assembling all the previous notions to solve a concrete problem, it has the advantage to make us develop a organization and abstraction abilities in order to navigate in this nonsense-of-a-code.</p>
+Although this chapter was more about assembling all the previous notions to solve a concrete problem, it has the advantage to make us develop a organization and abstraction abilities in order to navigate in this nonsense-of-a-code.</p>
 
-<p>You will find the codes from this part at the following <a href="https://github.com/smbct/x86-64_101_linux/tree/main/pt6_sorting">address</a>.
-I will probably write an addition last part to this series in order to produce a more visual program!
+<p>You will find the codes from this chapter at the following <a href="https://github.com/smbct/x86-64_101_linux/tree/main/pt6_sorting">address</a>.
+I will probably write an addition last chapter to this series in order to produce a more visual program!
 This will however not necessarily be the end of the posts or series about assembly as I have multiple ideas of how to make apply such knowledge on concrete problems.</p>
 
 

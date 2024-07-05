@@ -11,7 +11,7 @@
 
   <title>
     
-      Assembly x86 programming 101 &#58 part 3, drawing a circle &middot; smbct's blog
+      Assembly x86 programming 101 &#58 chapter 3, drawing a circle &middot; smbct's blog
     
   </title>
 
@@ -115,6 +115,10 @@
   
 
   
+    
+  
+
+  
 
   
     
@@ -149,6 +153,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -262,7 +270,7 @@
 </p>
 
 
-  <h1 class="post-title">Assembly x86 programming 101 &#58 part 3, drawing a circle</h1>
+  <h1 class="post-title">Assembly x86 programming 101 &#58 chapter 3, drawing a circle</h1>
 </header>
 <div class="content">
   <div class="post-meta">
@@ -371,7 +379,7 @@ The stack in x86 assembly grows <strong>downward</strong>, meaning that the addr
     <span class="nf">syscall</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
-<p>Let’s compile and analyse the code with GDB, as we did in the first part of the assembly series.
+<p>Let’s compile and analyse the code with GDB, as we did in the first chapter of the assembly series.
 We will start by compiling the code in debug mode (-g option) and by adding breakpoints at three different places in the code: <code class="language-plaintext highlighter-rouge">b code.s:5</code> (before the allocation), <code class="language-plaintext highlighter-rouge">b code.s:8</code> (after the allocation) and <code class="language-plaintext highlighter-rouge">b code.s:14</code> (after writing in the stack).
 Here “code.s” corresponds to the name of our assembly file.</p>
 
@@ -933,7 +941,7 @@ Indeed, the value of the other registers do not change between the two cases.</p
 
 <p>By interacting with the stack to store our variables, our program is now much cleaner.
 There is still a lot to say about the stack, in particular how to properly use it when calling function.
-We will discuss function calls in details in the next part of the series.</p>
+We will discuss function calls in details in the next chapter of the series.</p>
 
 <p>By the time, you will find the complete code for drawing the circle at <a href="https://github.com/smbct/x86-64_101_linux/tree/main/pt3_draw_circle">that address</a>.
 Many improvements are still possible such as defining a circle radius that is different from the size of the square.

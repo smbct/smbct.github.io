@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 3, drawing a circle
+title:  Assembly x86 programming 101 &#58 chapter 3, drawing a circle
 author: smbct
 date:   2024-05-09 10:00:00 +0200
 categories: low-level programming assembly
@@ -60,7 +60,7 @@ _start:
     syscall
 {% endhighlight %}
 
-Let's compile and analyse the code with GDB, as we did in the first part of the assembly series.
+Let's compile and analyse the code with GDB, as we did in the first chapter of the assembly series.
 We will start by compiling the code in debug mode (-g option) and by adding breakpoints at three different places in the code: `b code.s:5` (before the allocation), `b code.s:8` (after the allocation) and `b code.s:14` (after writing in the stack).
 Here "code.s" corresponds to the name of our assembly file.
 
@@ -432,7 +432,7 @@ And voilà, our circle is now printed to the terminal :
 
 By interacting with the stack to store our variables, our program is now much cleaner.
 There is still a lot to say about the stack, in particular how to properly use it when calling function.
-We will discuss function calls in details in the next part of the series.
+We will discuss function calls in details in the next chapter of the series.
 
 By the time, you will find the complete code for drawing the circle at [that address](https://github.com/smbct/x86-64_101_linux/tree/main/pt3_draw_circle).
 Many improvements are still possible such as defining a circle radius that is different from the size of the square.

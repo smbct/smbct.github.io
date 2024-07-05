@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 5, printing arrays
+title:  Assembly x86 programming 101 &#58 chapter 5, printing arrays
 author: smbct
 date:   2024-05-21 10:00:00 +0200
 categories: low-level programming assembly
@@ -114,7 +114,7 @@ The result should be *8* : hence we see that there is an 8 bytes misalignment of
 > Since 16 is a power of 2 (*16 = 2^4*), we can directly see if the value is a multiple of 16 by looking at the last 4 bits, which indicate wether there is an extra part between 0 and 15.
 > We can see that it is indeed the case.
 
-This misalignment comes from the fact that the `call` instruction that actually triggers the execution of `main` pushes the return address (8 bytes) to the stack, as we saw in the last part.
+This misalignment comes from the fact that the `call` instruction that actually triggers the execution of `main` pushes the return address (8 bytes) to the stack, as we saw in the last chapter.
 As a result the stack pointer is then misaligned by 8 bytes.
 This can be fixed by simply re-aligning the stack pointer before starting the call, which can be done by "allocating" 8 additional bytes (unused) :
 
@@ -378,7 +378,7 @@ You can also compile in debug mode and set a breakpoint just after the return va
 
 ## Using our code in a C function
 
-Our last part in this post is to go the other way around : calling an assembly function from a C program, a simple "hello word" function in this case.
+Our last part in this chapter is to go the other way around : calling an assembly function from a C program, a simple "hello word" function in this case.
 Once again, we will apply the calling convention for C programs.
 
 We start by writing an assembly function that displays the "Hello, World!" string thanks to a system call :

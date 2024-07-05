@@ -11,14 +11,26 @@ series: x86_assembly
 This series covers x86 assembly programming.
 
 
-* [part 1 : Hello, world!](pt1)
+* [Chapter 1 : Hello, world!](pt1)
 
-* [Part 2 : drawing a square](pt2)
+Keypoints : registers, system calls, command line and gdb, 
 
-* [Part 3 : drawing a circle](pt3)
+* [Chapter 2 : drawing a square](pt2)
 
-* [Part 4 : recursive power](pt4)
+Keypoints : control flow, branching, conditional and loops
 
-* [Part 5 : printing arrays](pt5)
+* [Chapter 3 : drawing a circle](pt3)
 
-* [Part 6 : sorting arrays](pt6)
+* [Chapter 4 : recursive power](pt4)
+
+* [Chapter 5 : printing arrays](pt5)
+
+Keypoints : functions, calling conventions
+
+* [Chapter 6 : sorting arrays](pt6)
+
+Keypoints : code modularity, algorithmic, memory usage
+
+* [Chapter 7 : ASCII Mandelbrot](pt7)
+
+Keypoints : flags register and branching, floating points numbers and operations,  

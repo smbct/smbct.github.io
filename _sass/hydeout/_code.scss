@@ -107,6 +107,8 @@ div.extensible-content figure.highlight {
   }
 
   .lineno {
+    padding-top: 0.4rem; // fix
+
     // width: 5px;
     color: #999;
     display: inline-block; // Ensures the null space also isn't selectable

@@ -41,5 +41,7 @@ I will also update the links directly here :
 
 * [Part 6 : sorting arrays](/series/x86_64_assembly/pt6)
 
+* [Chapter 7 : ASCII Mandelbrot](/series/x86_64_assembly/pt7)
+
 Enjoy!
 

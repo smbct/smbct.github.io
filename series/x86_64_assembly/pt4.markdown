@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 4, recursive power
+title:  Assembly x86 programming 101 &#58 chapter 4, recursive power
 author: smbct
 date:   2024-05-14 10:00:00 +0200
 categories: low-level programming assembly
@@ -142,7 +142,7 @@ We will look at this register to understand our program.
 #### How function calls work ⚙️
 
 Let's use gdb on the previous code to see what is happening.
-We add breakpoints at lines 13 and 15 and another one at the `_print_hello_world` symbol (with `breakpoint _print_hello_world`) to see how the stack is manipulated.
+We add breakpoints at lines 13 and 15 and another one at the `_print_hello_world` symbol (with `b _print_hello_world`) to see how the stack is manipulated.
 After executing the `run` command in gdb, the program will start and pause just before the `call` instruction.
 To illustrate the `rip` register mentioned before, we can already print the pointed instruction as follows :
 
@@ -198,7 +198,7 @@ We will now study more complex functions to gain a deeper understanding of how t
 A good exercise for this is recursion : a recursive function (a function that calls itself) must pay attention to preserve the stack in a coherent state, in order to avoid unpredicted behaviors.
 This is in fact an obligation for every function call but errors become easily fatal for our programs in the recursive case 💀.
 
-In this part, we will write a function that computes the exponentiation of a number recursively, by performing successive multiplications.
+In this chapter, we will write a function that computes the exponentiation of a number recursively, by performing successive multiplications.
 Such an operation would easily be done iteratively with a simple loop but the recursive way is going to be more instructive. 
 
 
@@ -551,7 +551,7 @@ This one was pretty dense!
 Correctly manipulating the stack with function calls is certainly an important step toward the ability to program in assembly.
 I hope this post was not too technical.
 The good news is : this is I think the most technical content to digest before advancing to more practical exercises 🥳.
-The next part will be about interfacing our code with C programs : calling functions from the C standard library for instance.
+The next chapter will be about interfacing our code with C programs : calling functions from the C standard library for instance.
 This will allow us to perform higher level operations without requiring any single line of C. 
 
 Before that, I invite you to continue practicing 🧑‍💻 from the different codes realized here.

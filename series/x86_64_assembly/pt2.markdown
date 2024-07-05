@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 part 2, drawing a square
+title:  Assembly x86 programming 101 &#58 chapter 2, drawing a square
 author: smbct
 date:   2024-05-04 10:00:00 +0200
 categories: low-level programming assembly

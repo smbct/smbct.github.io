@@ -11,7 +11,7 @@
 
   <title>
     
-      Assembly x86 programming 101 &#58 part 4, recursive power &middot; smbct's blog
+      Assembly x86 programming 101 &#58 chapter 4, recursive power &middot; smbct's blog
     
   </title>
 
@@ -115,6 +115,10 @@
   
 
   
+    
+  
+
+  
 
   
     
@@ -149,6 +153,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -262,7 +270,7 @@
 </p>
 
 
-  <h1 class="post-title">Assembly x86 programming 101 &#58 part 4, recursive power</h1>
+  <h1 class="post-title">Assembly x86 programming 101 &#58 chapter 4, recursive power</h1>
 </header>
 <div class="content">
   <div class="post-meta">
@@ -479,7 +487,7 @@ We will look at this register to understand our program.</p>
 <h4 id="how-function-calls-work-️">How function calls work ⚙️</h4>
 
 <p>Let’s use gdb on the previous code to see what is happening.
-We add breakpoints at lines 13 and 15 and another one at the <code class="language-plaintext highlighter-rouge">_print_hello_world</code> symbol (with <code class="language-plaintext highlighter-rouge">breakpoint _print_hello_world</code>) to see how the stack is manipulated.
+We add breakpoints at lines 13 and 15 and another one at the <code class="language-plaintext highlighter-rouge">_print_hello_world</code> symbol (with <code class="language-plaintext highlighter-rouge">b _print_hello_world</code>) to see how the stack is manipulated.
 After executing the <code class="language-plaintext highlighter-rouge">run</code> command in gdb, the program will start and pause just before the <code class="language-plaintext highlighter-rouge">call</code> instruction.
 To illustrate the <code class="language-plaintext highlighter-rouge">rip</code> register mentioned before, we can already print the pointed instruction as follows :</p>
 
@@ -554,7 +562,7 @@ We additionally print the value of the <code class="language-plaintext highlight
 A good exercise for this is recursion : a recursive function (a function that calls itself) must pay attention to preserve the stack in a coherent state, in order to avoid unpredicted behaviors.
 This is in fact an obligation for every function call but errors become easily fatal for our programs in the recursive case 💀.</p>
 
-<p>In this part, we will write a function that computes the exponentiation of a number recursively, by performing successive multiplications.
+<p>In this chapter, we will write a function that computes the exponentiation of a number recursively, by performing successive multiplications.
 Such an operation would easily be done iteratively with a simple loop but the recursive way is going to be more instructive.</p>
 
 <h4 id="passing-parameters-by-registers">Passing parameters by registers</h4>
@@ -1083,7 +1091,7 @@ The best way to organize our code for the function calls is to carefully respect
 Correctly manipulating the stack with function calls is certainly an important step toward the ability to program in assembly.
 I hope this post was not too technical.
 The good news is : this is I think the most technical content to digest before advancing to more practical exercises 🥳.
-The next part will be about interfacing our code with C programs : calling functions from the C standard library for instance.
+The next chapter will be about interfacing our code with C programs : calling functions from the C standard library for instance.
 This will allow us to perform higher level operations without requiring any single line of C.</p>
 
 <p>Before that, I invite you to continue practicing 🧑‍💻 from the different codes realized here.

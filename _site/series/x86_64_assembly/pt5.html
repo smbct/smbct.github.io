@@ -11,7 +11,7 @@
 
   <title>
     
-      Assembly x86 programming 101 &#58 part 5, printing arrays &middot; smbct's blog
+      Assembly x86 programming 101 &#58 chapter 5, printing arrays &middot; smbct's blog
     
   </title>
 
@@ -115,6 +115,10 @@
   
 
   
+    
+  
+
+  
 
   
     
@@ -149,6 +153,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -262,7 +270,7 @@
 </p>
 
 
-  <h1 class="post-title">Assembly x86 programming 101 &#58 part 5, printing arrays</h1>
+  <h1 class="post-title">Assembly x86 programming 101 &#58 chapter 5, printing arrays</h1>
 </header>
 <div class="content">
   <div class="post-meta">
@@ -427,7 +435,7 @@ Since 16 is a power of 2 (<em>16 = 2^4</em>), we can directly see if the value i
 We can see that it is indeed the case.</p>
 </blockquote>
 
-<p>This misalignment comes from the fact that the <code class="language-plaintext highlighter-rouge">call</code> instruction that actually triggers the execution of <code class="language-plaintext highlighter-rouge">main</code> pushes the return address (8 bytes) to the stack, as we saw in the last part.
+<p>This misalignment comes from the fact that the <code class="language-plaintext highlighter-rouge">call</code> instruction that actually triggers the execution of <code class="language-plaintext highlighter-rouge">main</code> pushes the return address (8 bytes) to the stack, as we saw in the last chapter.
 As a result the stack pointer is then misaligned by 8 bytes.
 This can be fixed by simply re-aligning the stack pointer before starting the call, which can be done by “allocating” 8 additional bytes (unused) :</p>
 
@@ -784,7 +792,7 @@ You can also compile in debug mode and set a breakpoint just after the return va
 
 <h2 id="using-our-code-in-a-c-function">Using our code in a C function</h2>
 
-<p>Our last part in this post is to go the other way around : calling an assembly function from a C program, a simple “hello word” function in this case.
+<p>Our last part in this chapter is to go the other way around : calling an assembly function from a C program, a simple “hello word” function in this case.
 Once again, we will apply the calling convention for C programs.</p>
 
 <p>We start by writing an assembly function that displays the “Hello, World!” string thanks to a system call :</p>

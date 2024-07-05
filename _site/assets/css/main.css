@@ -521,6 +521,7 @@ div.extensible-content figure.highlight {
   margin: 0rem;
 }
 .highlight .lineno {
+  padding-top: 0.4rem;
   color: #999;
   display: inline-block;
   user-select: none;
