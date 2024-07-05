@@ -1079,7 +1079,7 @@ button.disqus-load {
 
 .collapse-panel div div.collapse-content {
   padding: 7px;
-  font-size: 14px;
+  font-size: 17px;
   color: #555;
   margin: 0px;
   display: none;
@@ -1097,7 +1097,7 @@ button.disqus-load {
   margin: 0px;
   overflow-y: scroll;
   overflow-x: scroll;
-  height: 10rem;
+  height: 17rem;
 }
 
 .collapse-panel div input:checked ~ div.extensible-content {
@@ -1122,6 +1122,15 @@ div.series {
 
 div.series:hover {
   background-color: rgb(233, 233, 233);
+}
+
+div.series_keypoints {
+  margin-top: -0.8rem;
+  margin-bottom: 1.3rem;
+  padding-left: 3rem;
+}
+div.series_keypoints ul {
+  list-style-type: "🔓 ";
 }
 
 /*# sourceMappingURL=main.css.map */

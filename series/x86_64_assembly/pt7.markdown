@@ -18,7 +18,7 @@ Its computation however relies on complex numbers arithmetic, it is hence necess
 We will see here how to draw an [ASCII](https://en.wikipedia.org/wiki/ASCII_art) version of this fractal by relying on some basic floating point number operations in assembly. 
 
 ![The Mandelbrot set](https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1920px-Mandel_zoom_00_mandelbrot_set.jpg)
-<span style="font-size:0.7em;">A colorized version of the Mandelbrot set.</span>
+<div style="font-size:0.7em; margin-top:-15px; margin-bottom:1rem;">A colorized version of the Mandelbrot set.</div>
 
 ## More on branching
 
@@ -93,11 +93,15 @@ If we modify our program again to set `al` to `41` and `bl` to `b42`, we can see
 If we print the `$eflags` register as previously we obtain : `$1 = [ CF PF AF SF IF ]`.
 We can see that `CF` (carry flag) is set to 1, which triggers the jump.
 
-> TLDR  
-> The `cmp` instruction performs comparison with subtractions (and discards the result).
-> We can see with the print command the list of flags that are set in our code.
-> `OF` is the [overflow flag](https://en.wikipedia.org/wiki/FLAGS_register), meaning that the subtraction causes an overflow.
-> Indeed, if we interpret the values as signed, `al-bl = -106-42=-148` which is lower than `-128` meaning that the result is positive because the number of bits is not enough to code `-148`.
+<div class="collapse-panel" markdown="1"><div>
+<label for="TLDR_1">Technical note 📝</label>
+<input type="checkbox" name="" id="TLDR_1"><span class="collapse-label"></span>
+<div class="collapse-content" markdown="1">
+The `cmp` instruction performs comparison with subtractions (and discards the result).
+We can see with the print command the list of flags that are set in our code.
+`OF` is the [overflow flag](https://en.wikipedia.org/wiki/FLAGS_register), meaning that the subtraction causes an overflow.
+Indeed, if we interpret the values as signed, `al-bl = -106-42=-148` which is lower than `-128` meaning that the result is positive because the number of bits is not enough to code `-148`.
+</div></div></div>
 
 
 
@@ -112,7 +116,10 @@ The mantissa is an integer that is to be multiplied (scaled) by a negative power
 Usually, as numbers are coded in binary, the base 2 is used for the exponent.
 
 ![A visualisation of how decimal numbers are represented.](https://numeral-systems.com/media/ieee-754/ieee-754-floating-point.webp)
-<span style="font-size:0.7em;">A visualisation of how decimal numbers are represented. Image coming from [this site](https://numeral-systems.com/ieee-754-converter/).</span>
+<div style="font-size:0.7em; margin-top:-15px; margin-bottom:1rem;" markdown="1">
+A visualisation of how decimal numbers are represented. Image coming from [this site](https://numeral-systems.com/ieee-754-converter/).
+</div>
+
 
 Floating points operations in processors are performed by a dedicated component called the [**F**loating **P**oint **U**nit](https://en.wikipedia.org/wiki/Floating-point_unit) (FPU).
 Hence, the assembly arithmetic instructions are completely separated from their analog integer ones. 
@@ -593,6 +600,10 @@ This code can already be tested to verify that the different values of `x0` (in 
 Now that the main function is in place, it is time to write the convergence function.
 For each different couple of (x0, y0) values, this function will perform some number of iterations in order to decide if, for the initial values, it converges or not, indicating whether the initial point belongs to the Mandelbrot set.
 
+<div class="collapse-panel"><div>
+<label for="code_2">Expand</label>
+<input type="checkbox" name="" id="code_2"><span class="collapse-label"></span>
+<div class="extensible-content">
 <div class="code_frame"> x86 assembly | test_convergence function </div>
 {% highlight nasm linenos %}
 ; test if a point converges in the Mandelbrot set
@@ -673,6 +684,7 @@ test_convergence:
     ret
 
 {% endhighlight %}
+</div></div></div>
 
 
 As we previously did, we will define some constants to make the code simplify the code and make it more readable.

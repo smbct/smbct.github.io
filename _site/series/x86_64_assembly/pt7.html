@@ -315,8 +315,8 @@ The Mandelbrot set is a famous fractal that has been intensively rendered on com
 Its computation however relies on complex numbers arithmetic, it is hence necessary to manipulate floating point numbers 🏄.
 We will see here how to draw an <a href="https://en.wikipedia.org/wiki/ASCII_art">ASCII</a> version of this fractal by relying on some basic floating point number operations in assembly.</p>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1920px-Mandel_zoom_00_mandelbrot_set.jpg" alt="The Mandelbrot set" />
-<span style="font-size:0.7em;">A colorized version of the Mandelbrot set.</span></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1920px-Mandel_zoom_00_mandelbrot_set.jpg" alt="The Mandelbrot set" /></p>
+<div style="font-size:0.7em; margin-top:-15px; margin-bottom:1rem;">A colorized version of the Mandelbrot set.</div>
 
 <h2 id="more-on-branching">More on branching</h2>
 
@@ -410,13 +410,17 @@ If we modify our program again to set <code class="language-plaintext highlighte
 If we print the <code class="language-plaintext highlighter-rouge">$eflags</code> register as previously we obtain : <code class="language-plaintext highlighter-rouge">$1 = [ CF PF AF SF IF ]</code>.
 We can see that <code class="language-plaintext highlighter-rouge">CF</code> (carry flag) is set to 1, which triggers the jump.</p>
 
-<blockquote>
-  <p>TLDR<br />
-The <code class="language-plaintext highlighter-rouge">cmp</code> instruction performs comparison with subtractions (and discards the result).
+<div class="collapse-panel">
+  <div>
+<label for="TLDR_1">Technical note 📝</label>
+<input type="checkbox" name="" id="TLDR_1" /><span class="collapse-label"></span>
+<div class="collapse-content">
+      <p>The <code class="language-plaintext highlighter-rouge">cmp</code> instruction performs comparison with subtractions (and discards the result).
 We can see with the print command the list of flags that are set in our code.
 <code class="language-plaintext highlighter-rouge">OF</code> is the <a href="https://en.wikipedia.org/wiki/FLAGS_register">overflow flag</a>, meaning that the subtraction causes an overflow.
 Indeed, if we interpret the values as signed, <code class="language-plaintext highlighter-rouge">al-bl = -106-42=-148</code> which is lower than <code class="language-plaintext highlighter-rouge">-128</code> meaning that the result is positive because the number of bits is not enough to code <code class="language-plaintext highlighter-rouge">-148</code>.</p>
-</blockquote>
+    </div></div>
+</div>
 
 <h2 id="floating-point-operations-in-x86-assembly">Floating point operations in x86 assembly</h2>
 
@@ -425,8 +429,10 @@ Indeed, these numbers are coded as “floating points” (<strong>floats</strong
 The mantissa is an integer that is to be multiplied (scaled) by a negative power, hence the exponent.
 Usually, as numbers are coded in binary, the base 2 is used for the exponent.</p>
 
-<p><img src="https://numeral-systems.com/media/ieee-754/ieee-754-floating-point.webp" alt="A visualisation of how decimal numbers are represented." />
-<span style="font-size:0.7em;">A visualisation of how decimal numbers are represented. Image coming from <a href="https://numeral-systems.com/ieee-754-converter/">this site</a>.</span></p>
+<p><img src="https://numeral-systems.com/media/ieee-754/ieee-754-floating-point.webp" alt="A visualisation of how decimal numbers are represented." /></p>
+<div style="font-size:0.7em; margin-top:-15px; margin-bottom:1rem;">
+  <p>A visualisation of how decimal numbers are represented. Image coming from <a href="https://numeral-systems.com/ieee-754-converter/">this site</a>.</p>
+</div>
 
 <p>Floating points operations in processors are performed by a dedicated component called the <a href="https://en.wikipedia.org/wiki/Floating-point_unit"><strong>F</strong>loating <strong>P</strong>oint <strong>U</strong>nit</a> (FPU).
 Hence, the assembly arithmetic instructions are completely separated from their analog integer ones.</p>
@@ -1155,6 +1161,10 @@ You may notice that this time 2 floating point values are passed to <code class=
 <p>Now that the main function is in place, it is time to write the convergence function.
 For each different couple of (x0, y0) values, this function will perform some number of iterations in order to decide if, for the initial values, it converges or not, indicating whether the initial point belongs to the Mandelbrot set.</p>
 
+<div class="collapse-panel"><div>
+<label for="code_2">Expand</label>
+<input type="checkbox" name="" id="code_2" /><span class="collapse-label"></span>
+<div class="extensible-content">
 <div class="code_frame"> x86 assembly | test_convergence function </div>
 
 <figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
@@ -1310,6 +1320,8 @@ For each different couple of (x0, y0) values, this function will perform some nu
     <span class="nf">pop</span> <span class="nb">rbp</span>
     <span class="nf">ret</span>
 </pre></td></tr></tbody></table></code></pre></figure>
+
+</div></div></div>
 
 <p>As we previously did, we will define some constants to make the code simplify the code and make it more readable.
 One integer constant will define the maximum number of iterations : <code class="language-plaintext highlighter-rouge">500</code>.
