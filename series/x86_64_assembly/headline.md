@@ -13,7 +13,11 @@ This series covers x86 assembly programming.
 
 * [Chapter 1 : Hello, world!](pt1)
 
+Keypoints : registers, system calls, command line and gdb, 
+
 * [Chapter 2 : drawing a square](pt2)
+
+Keypoints : control flow, branching, conditional and loops
 
 * [Chapter 3 : drawing a circle](pt3)
 
@@ -21,6 +25,12 @@ This series covers x86 assembly programming.
 
 * [Chapter 5 : printing arrays](pt5)
 
+Keypoints : functions, calling conventions
+
 * [Chapter 6 : sorting arrays](pt6)
 
+Keypoints : code modularity, algorithmic, memory usage
+
 * [Chapter 7 : ASCII Mandelbrot](pt7)
+
+Keypoints : flags register and branching, floating points numbers and operations,  
