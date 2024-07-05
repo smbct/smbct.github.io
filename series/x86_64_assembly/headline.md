@@ -13,24 +13,72 @@ This series covers x86 assembly programming.
 
 * [Chapter 1 : Hello, world!](pt1)
 
-Keypoints : registers, system calls, command line and gdb, 
+<div class="series_keypoints">
+<ul>
+<li>registers</li> 
+<li>system calls</li>
+<li>command line and gdb</li>
+</ul>
+</div>
+
 
 * [Chapter 2 : drawing a square](pt2)
 
-Keypoints : control flow, branching, conditional and loops
+<div class="series_keypoints">
+<ul>
+<li>control flow</li> 
+<li>branching</li>
+<li>conditional and loops</li>
+</ul>
+</div>
 
 * [Chapter 3 : drawing a circle](pt3)
 
+<div class="series_keypoints">
+<ul>
+<li>control flow</li> 
+<li>memory and stack</li>
+</ul>
+</div>
+
 * [Chapter 4 : recursive power](pt4)
+
+<div class="series_keypoints">
+<ul>
+<li>functions</li> 
+<li>stack frame</li>
+<li>recursion</li>
+</ul>
+</div>
 
 * [Chapter 5 : printing arrays](pt5)
 
-Keypoints : functions, calling conventions
+<div class="series_keypoints">
+<ul>
+<li>function parameters</li> 
+<li>calling conventions</li>
+<li>C interoperability</li>
+</ul>
+</div>
 
 * [Chapter 6 : sorting arrays](pt6)
 
-Keypoints : code modularity, algorithmic, memory usage
+
+<div class="series_keypoints">
+<ul>
+<li>algorithmic</li>
+<li>memory usage</li> 
+<li>code modularity</li>
+</ul>
+</div>
 
 * [Chapter 7 : ASCII Mandelbrot](pt7)
 
-Keypoints : flags register and branching, floating points numbers and operations,  
+<div class="series_keypoints">
+<ul>
+<li>flags register and branching</li>
+<li>floating points numbers</li> 
+<li>floating points operations</li>
+</ul>
+</div>
+
