@@ -5,6 +5,7 @@ branch_name=$(git branch --show-current)
 if [ $branch_name = deploy ]; then
 	echo "bulding the site with jekyll before deployment"
 	bundle exec jekyll build
+	wait
 	git add _site
 fi
 
