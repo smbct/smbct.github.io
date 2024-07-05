@@ -1045,8 +1045,9 @@ button.disqus-load {
 }
 
 .collapse-panel div label {
-  padding: 7px 7px 7px 32px;
   padding-left: 2.5rem;
+  height: 1.7rem;
+  padding-top: 0.085rem;
   background: #eee;
   display: block;
   user-select: none;
@@ -1068,11 +1069,10 @@ button.disqus-load {
 
 .collapse-panel div span.collapse-label:before {
   content: "⤵️";
-  font-size: 1.5rem;
-  top: 0.75rem;
-  left: 0.5rem;
+  font-size: 1rem;
+  top: 0.1rem;
+  left: 0.7rem;
   position: absolute;
-  line-height: 15px;
   font-weight: bold;
   pointer-events: none;
 }
@@ -1106,9 +1106,9 @@ button.disqus-load {
 
 .collapse-panel div input:checked ~ span.collapse-label:before {
   content: "⤴️";
-  font-size: 1.5rem;
-  top: 0.75rem;
-  left: 0.5rem;
+  font-size: 1rem;
+  top: 0.1rem;
+  left: 0.7rem;
   position: absolute;
   pointer-events: none;
 }
@@ -1131,6 +1131,14 @@ div.series_keypoints {
 }
 div.series_keypoints ul {
   list-style-type: "🔓 ";
+}
+
+div.custom_caption {
+  font-size: 0.8rem;
+  margin-top: -15px;
+  margin-bottom: 1rem;
+  color: rgb(139, 139, 139);
+  font-weight: 500;
 }
 
 /*# sourceMappingURL=main.css.map */
