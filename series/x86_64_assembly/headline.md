@@ -57,7 +57,7 @@ This series covers x86 assembly programming.
 <ul>
 <li>function parameters</li> 
 <li>calling conventions</li>
-<li>C interoperability</li>
+<li>interoperability with C</li>
 </ul>
 </div>
 

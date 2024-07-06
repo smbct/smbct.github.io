@@ -18,7 +18,9 @@ Its computation however relies on complex numbers arithmetic, it is hence necess
 We will see here how to draw an [ASCII](https://en.wikipedia.org/wiki/ASCII_art) version of this fractal by relying on some basic floating point number operations in assembly. 
 
 ![The Mandelbrot set](https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1920px-Mandel_zoom_00_mandelbrot_set.jpg)
-<div style="font-size:0.7em; margin-top:-15px; margin-bottom:1rem;">A colorized version of the Mandelbrot set.</div>
+<div class="custom_caption" markdown="1">
+\> A colorized version of the Mandelbrot set.
+</div>
 
 ## More on branching
 
@@ -116,8 +118,8 @@ The mantissa is an integer that is to be multiplied (scaled) by a negative power
 Usually, as numbers are coded in binary, the base 2 is used for the exponent.
 
 ![A visualisation of how decimal numbers are represented.](https://numeral-systems.com/media/ieee-754/ieee-754-floating-point.webp)
-<div style="font-size:0.7em; margin-top:-15px; margin-bottom:1rem;" markdown="1">
-A visualisation of how decimal numbers are represented. Image coming from [this site](https://numeral-systems.com/ieee-754-converter/).
+<div class="custom_caption" markdown="1">
+\> A visualisation of how decimal numbers are represented. Image coming from [this site](https://numeral-systems.com/ieee-754-converter/).
 </div>
 
 

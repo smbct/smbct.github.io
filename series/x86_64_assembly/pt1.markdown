@@ -45,8 +45,9 @@ Architectures other than x86 are also quite interesting to study since ARM, for 
 MIPS is another interesting architecture as it is used in several old generation consoles such as the Nintendo 64 and the first Playstation.
 
 [![The Raspberry Pi model 5](/assets/assembly_series/23551-raspberry-pi-5.jpg)](https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg)
-<div style="font-size:0.7em; margin-top:-15px; margin-bottom:1rem;">The Raspberry Pi model 5, embedding an ARM processor.</div>
-
+<div class="custom_caption" markdown="1">
+\> The Raspberry Pi model 5, embedding an ARM processor.
+</div>
 
 An important note is that while writing assembly really feels like having a precise control on our computer's processor, modern processors are extremely complex and many hidden operations are still happening under the hood, which prevents us from fully apprehending it.
 Learning assembly remains an important step to better understand how computers work.
