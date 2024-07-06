@@ -14,5 +14,8 @@ div.series_keypoints {
     margin-top: -0.8rem;
     margin-bottom: 1.3rem;
     padding-left: 3rem;
-    ul { list-style-type: "🔓 "; }
+    ul {
+        list-style-type: "✅ ";
+        opacity: 0.4;
+    }
 }
