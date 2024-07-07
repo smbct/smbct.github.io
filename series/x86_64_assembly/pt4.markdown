@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 chapter 4, recursive power
+title:  Assembly x86-64 programming 101 &#58 chapter 4, recursive power
 author: smbct
 date:   2024-05-14 10:00:00 +0200
 categories: low-level programming assembly
@@ -8,7 +8,7 @@ layout: series_article
 back_page: headline.md
 ---
 
-In the last post of the assembly x86 series, we have seen how to manipulate the stack in order to store local variables.
+In the last post of the assembly x86-64 series, we have seen how to manipulate the stack in order to store local variables.
 The stack is also essential for **calling functions** : it is used to store information such as the return instruction address.
 In this post, we will see how to write and call functions, and also how to interact with C functions in our program!
 We will apply these new notions to write a recursive function that computes the power of a number.

@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 chapter 1, Hello, world!
+title:  Assembly x86-64 programming 101 &#58 chapter 1, Hello, world!
 author: smbct
 date:   2024-05-03 10:00:00 +0200
 categories: low-level programming assembly

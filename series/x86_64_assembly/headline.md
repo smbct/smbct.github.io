@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101
+title:  Assembly x86-64 programming 101
 author: smbct
 date:   2024-05-09 10:00:00 +0200
 categories: low-level programming assembly
@@ -8,7 +8,7 @@ layout: series
 series: x86_assembly
 ---
 
-This series covers x86 assembly programming.
+This series covers x86-64 assembly programming.
 
 
 * [Chapter 1 : Hello, world!](pt1)

@@ -154,7 +154,7 @@ This command allows to create an assembly source file by using the same syntax a
 
 Without going into all the details of the resulting file, we can have a look at the sections where the comments refer to the 3 lines of our `main` function :
 
-<div class="code_frame"> assembly x86 | floating_points.s </div>
+<div class="code_frame"> Assembly x86-64 | floating_points.s </div>
 {% highlight nasm linenos %}
 ; floating_points.c:9:     double nbfd = 0.25;
     .loc 1 9 12
@@ -210,7 +210,7 @@ One interesting aspect of the previous code is that it helps understanding how f
 To see this, we can look at line 2 where the decimal value (*0.25*) is loaded from memory to the `xmm0` register.
 This redirect us to the symbol `.LC0` in the generated file `floating_points.s`, where the value is defined :
 
-<div class="code_frame"> assembly x86 | floating_points.s </div>
+<div class="code_frame"> Assembly x86-64 | floating_points.s </div>
 {% highlight nasm linenos %}
 .LC0:
   .long	0
@@ -380,7 +380,7 @@ We will start by writing a function `draw_mandelbrot` that iterates over the gri
 <label for="code_1">Expand</label>
 <input type="checkbox" name="" id="code_1"><span class="collapse-label"></span>
 <div class="extensible-content">
-<div class="code_frame"> x86 assembly | draw_mandelbrot </div>
+<div class="code_frame"> Assembly x86-64 | draw_mandelbrot </div>
 {% highlight nasm linenos %}
 ; draw the ascii mandelbrot set
 ; edi: width
@@ -504,7 +504,7 @@ Our first step to compute the function is to add as constants the bounds of the 
 The values are taken from the pseucode of the Wikipedia page.
 They can be defined directly as floating point values the following way :
 
-<div class="code_frame"> x86 assembly </div>
+<div class="code_frame"> Assembly x86-64 </div>
 {% highlight nasm linenos %}
 ; complex plane bounds
 min_x:
@@ -528,7 +528,7 @@ This step requires to simultaneously interact with floating point values and int
 To convert an integer value into a floating point value, we will used the `cvtsi2sd` instruction which can be compared to a **cast** in C. 
 This first part in the code loads the grid coordinate and the grid height as 8 bytes floats in the vector registers and then performs necessary arithmetic operations to scale the value :
 
-<div class="code_frame"> x86 assembly </div>
+<div class="code_frame"> Assembly x86-64 </div>
 {% highlight nasm linenos %}
 .L_for_row:
 
@@ -547,7 +547,7 @@ This first part in the code loads the grid coordinate and the grid height as 8 b
 
 The computation of x0 is done similarly :
 
-<div class="code_frame"> x86 assembly </div>
+<div class="code_frame"> Assembly x86-64 </div>
 {% highlight nasm linenos %}
 .L_for_col:
 
@@ -571,7 +571,7 @@ The computation of x0 is done similarly :
 We can already test this first code by calling `printf` at each column iteration in order to print our the two values `x0` and `y0`.
 To do so, we will define a string with adequate formatters for floating point double precision values and pass parameters to `printf` as we saw previously :
 
-<div class="code_frame"> x86 assembly </div>
+<div class="code_frame"> Assembly x86-64 </div>
 {% highlight nasm linenos %}
 .L_for_col:
 
@@ -606,7 +606,7 @@ For each different couple of (x0, y0) values, this function will perform some nu
 <label for="code_2">Expand</label>
 <input type="checkbox" name="" id="code_2"><span class="collapse-label"></span>
 <div class="extensible-content">
-<div class="code_frame"> x86 assembly | test_convergence function </div>
+<div class="code_frame"> Assembly x86-64 | test_convergence function </div>
 {% highlight nasm linenos %}
 ; test if a point converges in the Mandelbrot set
 ; param x0: xmm0
@@ -693,7 +693,7 @@ As we previously did, we will define some constants to make the code simplify th
 One integer constant will define the maximum number of iterations : `500`.
 Two other constants define double precision floats that are used in the convergence algorithm : the value `4.`, to test the convergence, and the value `2.` to compute the new iteration :
 
-<div class="code_frame"> x86 assembly | convergence constants </div>
+<div class="code_frame"> Assembly x86-64 | convergence constants </div>
 {% highlight nasm linenos %}
 ; constants
 max_iteration:
@@ -711,7 +711,7 @@ We will follow the pseudocode with 3 different steps : the computation of a temp
 
 For the first step, we use simultaneously the two vector registers `xmm0` and `xmm1` in order to compute `x*x` and `y*y` without needing additional memory space :
 
-<div class="code_frame"> x86 assembly | next iteration computation </div>
+<div class="code_frame"> Assembly x86-64 | next iteration computation </div>
 {% highlight nasm linenos %}
 ; compute the next iteration
 
@@ -752,7 +752,7 @@ Finally, we can write the convergence test that allows to exit the convergence l
 The first part consists in computing `x*x+y*y`, which as done similarly to the computation of the next iteration values.
 The comparison with the convergence constant `4.` is then performed by the (double precision) floating point instruction `comisd`:
 
-<div class="code_frame"> x86 assembly | convergence test </div>
+<div class="code_frame"> Assembly x86-64 | convergence test </div>
 {% highlight nasm linenos %}
 ; test for convergence
 
@@ -779,7 +779,7 @@ According to what we saw in this chapter, the `jle` instruction would not trigge
 
 The last missing part of our code is the call to the `test_convergence` function in the `draw_mandelbrot` function :
 
-<div class="code_frame"> x86 assembly </div>
+<div class="code_frame"> Assembly x86-64 </div>
 {% highlight nasm linenos %}
 draw_mandelbrot:
 

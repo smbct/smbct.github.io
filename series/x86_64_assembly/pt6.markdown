@@ -1,5 +1,5 @@
 ---
-title:  Assembly x86 programming 101 &#58 chapter 6, sorting arrays
+title:  Assembly x86-64 programming 101 &#58 chapter 6, sorting arrays
 author: smbct
 date:   2024-06-20 10:00:00 +0200
 categories: low-level programming assembly
