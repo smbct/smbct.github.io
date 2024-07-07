@@ -16,6 +16,14 @@ div.series_keypoints {
     padding-left: 3rem;
     ul {
         list-style-type: "✅ ";
-        opacity: 0.4;
+        opacity: 0.6;
+        padding-left: 3rem;
     }
+    user-select: none; // Make sure numbers aren't selectable
+}
+
+p.series_keypoints {
+    font-weight: 700;
+    margin-bottom: 0rem;
+    // opacity:0.8;
 }
