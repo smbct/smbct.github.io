@@ -5,7 +5,11 @@
 
   <body class="{{ page.layout }}{% if page.url == '/' %} home{% endif %}">
 
+    {% if page.lang == "fr" %}
+    {% include sidebar_fr.html %}
+    {% else %}
     {% include sidebar.html %}
+    {% endif %}
 
     <main class="container">
       {{ content }}

@@ -1,11 +1,12 @@
 ---
-title:  Assembly x86 programming 101 &#58 chapter 5, printing arrays
+title:  Assembly x86-64 programming 101 &#58 chapter 5, printing arrays
 author: smbct
 date:   2024-05-21 10:00:00 +0200
 categories: low-level programming assembly
 comments: true
 layout: series_article
 back_page: headline.md
+lang: en
 ---
 
 The last post taught us how to write functions in x68 assembly.

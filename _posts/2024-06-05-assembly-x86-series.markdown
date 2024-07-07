@@ -6,6 +6,8 @@ categories: programming low-level
 comments: true
 layout: post
 tags: assembly x86 programming low-level
+lang: en
+back_page: /index.html
 ---
 
 This is an announce that I am currently working on a series of posts about assembly programming.
@@ -29,19 +31,13 @@ The series would be more adapted to someone already familiar with programming, p
 The first few posts of this series are available in this [page](/series/x86_64_assembly/headline).
 I will also update the links directly here :
 
-* [part 1 : Hello, world!](/series/x86_64_assembly/pt1)
+{% for p in site.pages %}
+{% if p.name == "headline.md" and p.dir == "/series/x86_64_assembly/" %}
+    {% assign target = p %}
+{% endif %}
+{% endfor %}
 
-* [Part 2 : drawing a square](/series/x86_64_assembly/pt2)
-
-* [Part 3 : drawing a circle](/series/x86_64_assembly/pt3)
-
-* [Part 4 : recursive power](/series/x86_64_assembly/pt4)
-
-* [Part 5 : printing arrays](/series/x86_64_assembly/pt5)
-
-* [Part 6 : sorting arrays](/series/x86_64_assembly/pt6)
-
-* [Chapter 7 : ASCII Mandelbrot](/series/x86_64_assembly/pt7)
+{{ target.content }}
 
 Enjoy!
 

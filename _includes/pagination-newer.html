@@ -2,7 +2,11 @@
 <div class="pagination">
   <a class="pagination-item newer"
      href="{{ paginator.previous_page_path | relative_url }}">
+    {% if page.lang == "en" %}
     Newer
+    {% else if page.lang == "fr" %}
+    Plus récents
+    {% endif %}
   </a>
 </div>
 {% endif %}
