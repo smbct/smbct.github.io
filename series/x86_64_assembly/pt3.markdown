@@ -406,7 +406,6 @@ And voilà, our circle is now printed to the terminal :
 
 <div class="code_frame"> Bash </div>
 {% highlight plaintext linenos %}
-                                        
             * * * * * * * * *           
           * * * * * * * * * * *         
       * * * * * * * * * * * * * * *     

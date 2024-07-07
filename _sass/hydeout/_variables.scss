@@ -31,7 +31,9 @@ $heading-spacing: 0.5rem !default;
 $section-spacing: 2rem !default;
 $sidebar-width: 18rem !default;
 
-$large-breakpoint: 49rem !default;
+// $large-breakpoint: 49rem !default;
+$large-breakpoint: 68rem !default; // side bar was too big, the post text no more than half the screen 
+
 $large-font-size: 1.25rem !default;
 
 $box-shadow-size: 1px !default;

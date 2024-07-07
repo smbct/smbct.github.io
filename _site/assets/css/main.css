@@ -18,7 +18,7 @@ html {
   font-size: 1rem;
   line-height: 1.5;
 }
-@media (min-width: 49rem) {
+@media (min-width: 68rem) {
   html {
     font-size: 1.25rem;
   }
@@ -637,7 +637,7 @@ body {
 /* -----------------------------------------------------------
   Tablet / Desktop view
 ----------------------------------------------------------- */
-@media (min-width: 49rem) {
+@media (min-width: 68rem) {
   body {
     flex-direction: row;
     min-height: 100vh;
@@ -753,7 +753,7 @@ body {
   margin-top: 1rem;
   max-width: 100%;
 }
-@media (min-width: 49rem) {
+@media (min-width: 68rem) {
   #sidebar-icon-links {
     justify-content: flex-start;
     margin-left: -0.25em;
@@ -936,7 +936,7 @@ button.disqus-load {
   padding-bottom: 2rem;
 }
 
-@media (min-width: 49rem) {
+@media (min-width: 68rem) {
   .pagination > a {
     box-shadow: none;
   }
@@ -1128,9 +1128,17 @@ div.series_keypoints {
   margin-top: -0.8rem;
   margin-bottom: 1.3rem;
   padding-left: 3rem;
+  user-select: none;
 }
 div.series_keypoints ul {
-  list-style-type: "🔓 ";
+  list-style-type: "✅ ";
+  opacity: 0.6;
+  padding-left: 3rem;
+}
+
+p.series_keypoints {
+  font-weight: 700;
+  margin-bottom: 0rem;
 }
 
 div.custom_caption {
