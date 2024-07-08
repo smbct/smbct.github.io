@@ -8,6 +8,11 @@ layout: default
   {{ content }}
 
   {% for post in paginator.posts %}
+
+  {% if page.lang == "fr" and post.lang != "fr" %}
+    test
+  {% endif %}
+
   <article class="post-body">
     <h2 class="post-title">
       <a href="{{ post.url | relative_url }}">
@@ -33,7 +38,7 @@ layout: default
 
       {% if content_words != excerpt_words %}
         <a href="{{ post.url | relative_url }}">
-        {% if post.lang == "fr" %}
+        {% if post.lang == "fr" or page.lang == "fr" %}
           Plus &hellip;
         {% else %}
           More &hellip;

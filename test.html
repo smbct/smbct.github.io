@@ -1,9 +1,12 @@
 ---
-layout: index
+layout: default
 title: My Blog
+paginate: true
 ---
 
-abcd test
+abcd
+
+{{ paginator.next_page }}
 
 <!-- This loops through the paginated posts -->
 {% for post in paginator.posts %}
