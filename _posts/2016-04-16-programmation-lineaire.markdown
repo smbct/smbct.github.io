@@ -7,6 +7,7 @@ categories: vulgarisation IA
 comments: true
 layout: post
 lang: fr
+back_page: /fr/index.html
 ---
 
 

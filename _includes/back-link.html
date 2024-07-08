@@ -1,6 +1,6 @@
 {% if page.back_page != null %}
 {% for p in site.pages %}
-    {% if p.dir == page.dir and p.name == page.back_page %}
+    {% if p.url == page.back_page or p.name == page.back_page %}
         {% assign back_page = p %}    
     {% endif %}
 {% endfor %}

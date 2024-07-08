@@ -5,8 +5,18 @@ categories: test
 tags: test
 comments: true
 layout: post
-# lang: en
+lang: en
+back_page: /index.html
 ---
+
+abcd
+
+{% for p in site.pages %}
+    {{ p.url }}
+    {{ p.dir }}
+    {{ p.name }}
+{% endfor %}
+
 
 {% for p in site.pages %}
 {% if p.name == "headline.md" and p.dir == "/series/x86_64_assembly/" %}

@@ -7,6 +7,7 @@ tags: voyage train climat
 comments: true
 layout: post
 lang: fr
+back_page: /fr/index.html
 ---
 
 Cette année, mon travail m'a donné la chance d'assister à une conférence de recherche en Suède 🇸🇪.

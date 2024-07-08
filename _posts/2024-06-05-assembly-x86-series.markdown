@@ -7,6 +7,7 @@ comments: true
 layout: post
 tags: assembly x86 programming low-level
 lang: en
+back_page: /index.html
 ---
 
 This is an announce that I am currently working on a series of posts about assembly programming.

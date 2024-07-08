@@ -7,6 +7,7 @@ tags: SAT logic puzzle games model-checking
 comments: true
 layout: post
 lang: en
+back_page: /index.html
 ---
 
 I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame.
