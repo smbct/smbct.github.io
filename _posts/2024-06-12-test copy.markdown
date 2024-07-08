@@ -5,6 +5,7 @@ categories: test
 tags: test
 comments: true
 layout: post
+# lang: en
 ---
 
 {% for p in site.pages %}

@@ -6,6 +6,7 @@ categories: astuces
 tags: these doctorat covid comodal
 comments: true
 layout: post
+lang: fr
 ---
 
 Une soutenance de thèse est un évènement particulier que l'on ne veut absolument pas louper en tant que doctorant/futur docteur. Il s'agit en effet de convaincre le jury de thèse de la qualité de ses contributions scientifiques, mais également de faire bonne figure devant sa famille et ses amis ! Des répétitions sont évidemment au programme afin de proposer la présentation de ses travaux la plus claire et fluide possible, tout en respectant les 45 minutes qui nous sont accordées pour la présentation.

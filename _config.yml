@@ -3,9 +3,15 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Setup
-title:            smbct's blog
+title:            "smbct's blog"
 tagline:          'blog'
+
 description:      'Notes on computer science, programming, society and more.'
+
+description_fr: "Notes sur l'informatique, la programmation, la société et plus."
+title_fr: "blog de smbct"
+
+
 url:              https://smbct.github.io
 
 # baseurl:          '/hydeout'
@@ -14,6 +20,9 @@ url:              https://smbct.github.io
                   # If you want to move just the blog index pages but keep
                   # other pages at root, see the paginate_path and
                   # sidebar_blog_link below.
+
+# baseurl:          '/blog'
+
 
 author:
   name:           'smbct'
@@ -38,9 +47,13 @@ sidebar_home_link:  true
                                 # set this to the root of the paginate_path
                                 # to enable a separate blog link.
 defaults:
-  -
-    scope:
+  - scope:
       type: posts
       path: _posts
     values:
       permalink: /blog/:title/
+  - scope:
+      type: posts
+      path: ../_posts
+    values:
+      permalink: '/fr/'

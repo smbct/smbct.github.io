@@ -6,6 +6,7 @@ categories: AI puzzle
 tags: SAT logic puzzle games model-checking
 comments: true
 layout: post
+lang: en
 ---
 
 I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame.

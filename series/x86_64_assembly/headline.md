@@ -10,8 +10,10 @@ series: x86_assembly
 
 This series covers x86-64 assembly programming.
 
+* [Intro : Why this series.](/blog/assembly-x86-series)
 
-* [Chapter 1 : Hello, world!](pt1)
+
+* [Chapter 1 : Hello, world!](/series/x86_64_assembly/pt1)
 
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
@@ -23,7 +25,7 @@ This series covers x86-64 assembly programming.
 </div>
 
 
-* [Chapter 2 : drawing a square](pt2)
+* [Chapter 2 : drawing a square](/series/x86_64_assembly/pt2)
 
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
@@ -34,7 +36,7 @@ This series covers x86-64 assembly programming.
 </ul>
 </div>
 
-* [Chapter 3 : drawing a circle](pt3)
+* [Chapter 3 : drawing a circle](/series/x86_64_assembly/pt3)
 
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
@@ -44,7 +46,7 @@ This series covers x86-64 assembly programming.
 </ul>
 </div>
 
-* [Chapter 4 : recursive power](pt4)
+* [Chapter 4 : recursive power](/series/x86_64_assembly/pt4)
 
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
@@ -55,7 +57,7 @@ This series covers x86-64 assembly programming.
 </ul>
 </div>
 
-* [Chapter 5 : printing arrays](pt5)
+* [Chapter 5 : printing arrays](/series/x86_64_assembly/pt5)
 
 <div class="series_keypoints">
 <p class="series_keypoints">🔑 &nbsp;Key points:</p>
@@ -66,7 +68,7 @@ This series covers x86-64 assembly programming.
 </ul>
 </div>
 
-* [Chapter 6 : sorting arrays](pt6)
+* [Chapter 6 : sorting arrays](/series/x86_64_assembly/pt6)
 
 
 <div class="series_keypoints">
@@ -78,7 +80,7 @@ This series covers x86-64 assembly programming.
 </ul>
 </div>
 
-* [Chapter 7 : ASCII Mandelbrot](pt7)
+* [Chapter 7 : ASCII Mandelbrot](/series/x86_64_assembly/pt7)
 
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>

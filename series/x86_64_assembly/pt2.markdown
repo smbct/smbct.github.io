@@ -7,6 +7,7 @@ comments: true
 layout: series_article
 series: x86_assembly
 back_page: headline.md
+language: en
 ---
 
 

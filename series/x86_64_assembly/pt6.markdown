@@ -6,6 +6,7 @@ categories: low-level programming assembly
 comments: true
 layout: series_article
 back_page: headline.md
+language: en
 ---
 
 Having covered the basics of assembly programming, we can now put some knowledge into practice by writing concrete algorithms.

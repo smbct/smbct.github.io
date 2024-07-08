@@ -6,6 +6,7 @@ categories: optimisation IA
 categories: vulgarisation IA
 comments: true
 layout: post
+lang: fr
 ---
 
 

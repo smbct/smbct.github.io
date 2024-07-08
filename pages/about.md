@@ -2,11 +2,10 @@
 layout: category
 title: About
 back_page: test
+lang: en
 ---
 
-
 Welcome to my blog. I have been in the research / computing industry for few years now. I have a background in computer science and some experience in its interface with biology and I hope to use this blog as a place to keep notes and discuss various topics.
-
 
 My current interests gravitate around science, computing technologies and their current use in society.
 I am also mainly concerned about the climate crisis as well as social and international inequalities.

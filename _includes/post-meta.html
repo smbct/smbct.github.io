@@ -5,6 +5,12 @@
   • ⏲️
   {% include read-time.html %}
   {% endunless %}
+  •
+  {% if include.post.lang == "fr" %}
+  🇫🇷
+  {% else %}
+  🇬🇧
+  {% endif %}
 
   <span class="post-categories">
     {% for category in include.post.categories %}

@@ -2,10 +2,11 @@
 title:  Un Paris - Stockholm en train 🚆
 author: smbct
 date:   2024-06-07 10:00:00 +0200
-categories: society
+categories: société
 tags: voyage train climat
 comments: true
 layout: post
+lang: fr
 ---
 
 Cette année, mon travail m'a donné la chance d'assister à une conférence de recherche en Suède 🇸🇪.

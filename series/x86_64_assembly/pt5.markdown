@@ -6,6 +6,7 @@ categories: low-level programming assembly
 comments: true
 layout: series_article
 back_page: headline.md
+language: en
 ---
 
 The last post taught us how to write functions in x68 assembly.

@@ -6,6 +6,7 @@ categories: low-level programming assembly
 comments: true
 layout: series_article
 back_page: headline.md
+language: en
 ---
 
 Although we already covered numerous basics in x86 assembly so far, one thing that has not been discussed yet is the use of **floating point** computation : namely numbers with a **decimal** part.
@@ -36,7 +37,7 @@ The reason why several instructions exist is that some of them perform **signed*
 Internally, the use of the comparison instructions such as `cmp` and `test` set internal flags that dictate the behavior of the branching instructions. 
 To see that in practice, let's create a simple example :
 
-<div class="code_frame"> assembly x86 </div>
+<div class="code_frame">Assembly x86-64</div>
 {% highlight nasm linenos %}
 mov al, 43
 mov bl, 42
@@ -258,7 +259,7 @@ printf("result: %f\n", nbf);
 
 And re-generate the corresponding assembly code :
 
-<div class="code_frame"> assembly </div>
+<div class="code_frame">Assembly x86-64</div>
 {% highlight nasm linenos %}
 ; floating_points.c:9:     float nbfd = -0.25;
     .loc 1 9 11
@@ -306,7 +307,7 @@ float val_float = (float)val_int;
 
 This compiles to the following assembly instructions :
 
-<div class="code_frame"> assembly </div>
+<div class="code_frame">Assembly x86-64</div>
 {% highlight nasm linenos %}
 ; floating_points.c:17:     int val_int = 42;
     .loc 1 17 9
