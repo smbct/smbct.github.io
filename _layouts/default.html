@@ -3,7 +3,7 @@
 
   {% include head.html %}
 
-  <body class="{{ page.layout }}{% if page.url == '/' %} home{% endif %}">
+  <body class="{{ page.layout }}{% if page.url == '/index.html' or page.url == '/fr/index.html' %} home{% endif %}">
 
     {% if page.lang == "fr" %}
     {% include sidebar_fr.html %}
