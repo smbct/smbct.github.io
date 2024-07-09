@@ -5,6 +5,7 @@ date:   2024-05-21 10:00:00 +0200
 categories: low-level programming assembly
 comments: true
 layout: series_article
+series: x86_assembly
 back_page: headline.md
 lang: en
 ---
