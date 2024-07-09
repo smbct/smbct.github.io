@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Solving a pokemon puzzle with SAT solvers &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="24" width="28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     href="/">
+     🇬🇧 <div></div>
+  </a>
+
+  <a id="icon_flag"
+  class="icon_flag"
+  href="/fr/">
+    🇫🇷 <div></div>
+  </a>
+
+</nav>
+
+  <p>
+  &copy; 2024.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/index.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Blog</a>
+</p>
+
+
+  <h1 class="post-title">Solving a pokemon puzzle with SAT solvers</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      15 May 2023
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    16 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        AI
+      
+    
+      &bull;
+
+      
+      
+      
+
+      
+        puzzle
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame.
+As everyone knows, Pokemon is a famous role playing game license from nintendo where your goal is to train small creatures that fight each other.
+While the core of pokemon gameplay is centered toward the training of pokemons, the player would encounter some logic puzzles on his way. For instance, the next image show one of these puzzles taken from pokemon emerald.</p>
+
+<p><img src="https://lparchive.org/Pokemon-Emerald-(by-Crosspeice)/Update%2025/8-e23009.png" alt="A puzzle from the pokemon game emerald." /></p>
+
+<p>While these puzzles are usually relatively simple and solvable by everyone, it is possible to find much more challenging ones in unofficial games.
+The puzzle I am interesting in takes place in <a href="https://www.rebornevo.com/pr/index.html/">pokemon reborn</a>.
+This particular puzzle caught my attention as it is similar to constraint problems in computer science.
+I decided to apply techniques that I studied during my master degree to solve it.</p>
+
+<hr />
+
+<h1 id="the-puzzle">The puzzle</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>The puzzle in question is represented by two 3x3 grids of digits, as it is shown below.
+The goal of the puzzle is to manipulate the grids throw a set of operations so that you end up with a sum of digits equal to 15 for each rows, each columns and each diagonal of the grids (these grids are called <a href="https://en.wikipedia.org/wiki/Magic_square">Magic Squares</a>).</p>
+
+<p><img src="/assets/pokemon_puzzle.png" alt="The puzzle ingame." /></p>
+
+<p>There are two type of operations in the grids.
+First, it is possible to move a column down or up.
+All the columns can be moved independently and when a digit is on the border of the grid, moving the olumn places it at the other extremity.
+Second, it is possible to move the rows left or right.
+For this operation, the two grids are connected together and when a digit leaves one grid, it appears on the second one.
+This interconnection between the grids make the puzzle challenging as trying to satisfy one of the row or column on one grid may perturb the other one.
+Here is one example for each operation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 9 6  .  1 2 5                                         5 9 6  .  1 2 5
+5 8 3  .  7 7 9   Move First Column Left Grid Up -&gt;     2 8 3  .  7 7 9
+2 4 1  .  6 3 8                                         4 4 1  .  6 3 8
+
+-----------------------------------------------------------------------
+
+5 9 6  .  1 2 5                                         5 9 6  .  1 2 5
+2 8 3  .  7 7 9   Move Second Row Left -&gt;               8 3 7  .  7 9 2
+4 4 1  .  6 3 8                                         4 4 1  .  6 3 8
+
+</code></pre></div></div>
+
+<h2 id="how-i-solve-it">How I solve it</h2>
+
+<p>To solve this puzzle, I decided to use a type of program called <a href="https://en.wikipedia.org/wiki/SAT_solver">SAT Solvers</a>.
+These programs are made to automatically solve logic formula: they search for <strong>true/false</strong> values for logic variables to make the formula true.
+For instance, if the formula is <code class="language-plaintext highlighter-rouge">(a =&gt; b) and c</code>, this formula would be true when <code class="language-plaintext highlighter-rouge">a = false, b = false or true, c = true</code> or <code class="language-plaintext highlighter-rouge">a = true, b = true, c = true</code>. 
+Finding the right values for the variables so that the formula is true is actually the goal of the so called SAT problem.</p>
+
+<p>For this method, our goal is to create an <em>encoding</em> of the puzzle, in this case define a logic formula that is true when a solution of the puzzle is found.</p>
+
+<hr />
+
+<h1 id="encoding-the-puzzle-into-a-logic-formula">Encoding the puzzle into a logic formula</h1>
+
+<p>The encoding of the problem consists in representing the sequence of operations performed on the grids with logic operations on logic variables, and ensuring that after the last operations the sums are verified on the rows and columns.
+There are two parts in this step.
+The first part is to decide what are the logic variables and how they represent the problem.
+Once it is decided, the variables need to be linked between each other through logic operations, which is the second part.</p>
+
+<h2 id="encoding-the-grids">Encoding the grids</h2>
+
+<p>The main variables of the problem will represent its <strong>states</strong>.
+In this context, the states of the puzzle are the two grids at different step of evolution.
+Indeed, we need to keep track of each evolution of the grid in the formula to make sure that every transformation is valid.</p>
+
+<p>To represent one grid in this problem, we can use 3*3 sets of 9 variables. For each cell of a grid, the 9 variables will represent all the digits, assuming the digit showing up in that cell will have its corresponding variable <strong>true</strong>.
+This representation can be used to encode the two grids at each step of the operations.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+-------------------------------
+|         |         |         |
+| v_0_0_k | v_0_1_k | v_0_2_k |
+|         |         |         |
+-------------------------------   k = {1,..,9}
+|         |         |         |
+| v_1_0_k | v_1_1_k | v_1_2_k |             / true if the cell at row i and column j = k 
+|         |         |         |   v_i_j_k =    
+-------------------------------             \ false if the cell at row i and column j != k 
+|         |         |         |
+| v_2_0_k | v_2_1_k | v_2_2_k |
+|         |         |         |
+-------------------------------
+
+</code></pre></div></div>
+
+<p>In order to represent multiple operations performed on the grids, we will need more than one state.
+Thus, we will decide a number <strong>n</strong> of states for our encoding, and create in total <strong>n</strong> group of state variables.
+The first state will then represent the initial grids (as seen on the in game picture), and the n-th state will be the two grids verifying the sum constraints.</p>
+
+<p>We will additionally add variables to represent the different operations performed on the grid.
+There will be in total 18 variables for each step (6 * 2 variables for the columns operations (column index, Up Down) and 3*2 variables for the rows (row index and Left/Right)).
+Hence, we will have (n-1) group of variables for the operations, one between each consecutive states:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (state_1, operations_1) -&gt; (state_2, operations_2) -&gt; ... -&gt; (state_n, operations_n)
+</code></pre></div></div>
+
+<h2 id="encoding-the-operations">Encoding the operations</h2>
+
+<p>Once the variables are decided, we need to link them with logic operations into a formula that would be true only if the values of the variables correspond to a solution of the puzzle.
+This step can be interpreted as adding <strong>constraints</strong> to our formula. The different constraints will be linked with a <strong>And</strong> operation so that they will be all satisfied when the formula is true.</p>
+
+<p>One way of looking at it this modeling task is to consider that with an empty formula, the values of the variables can be anything, it will always be true.
+However, this will not likely correctly represent the states of our puzzle (for instance we may have two digits true in the same cell).
+Hence, the logic operations will make sure that the representation is consistent.
+The constraints needed here can be divided into thee parts: 1) setting the initial state of the puzzle, 2) imposing the sum constraints on the last state and 3) creating the transitions between each state.</p>
+
+<h3 id="1-first-state-constraint">1) First state constraint</h3>
+
+<p>The first step is straightforward. Given the initial grids shown in the game (see picture), we will create a <strong>And</strong> operation between the digits that needs to be true and the negation of the digits that need to be false.
+For instance, for the upper left corner of the first grid, there is a 4, thus:
+ <code class="language-plaintext highlighter-rouge">v_0_0_4 = true and v_0_0_1 = false and v_0_0_2 = false and v_0_0_3 = false and v_0_0_5 = false and .. and v_0_0_9 = false</code> will be our constraint for this first cell.
+Since the variables are joined using a And, it is not necessary to make the true/false appear here, which gives:
+<code class="language-plaintext highlighter-rouge">v_0_0_4 and (not v_0_0_1) and (not v_0_0_2) and (not v_0_0_3) and (not v_0_0_5) and .. and (not v_0_0_9)</code> as a final constraint.
+This step can be repeated for all the cells of the initial state.</p>
+
+<h3 id="2-last-state-constraints">2) Last state constraints</h3>
+
+<p>For this last step, one difficulty is the translation of the numerical sum into a logic constraint. To simplify this step, we can introduce for each row, column and diagonal a set of 9 digit variables that will be independent from their position in the grid.
+From this, it is possible to enumerate all the subsets of 3 digits that sum up to 15 and proceed similarly to step 1) to enforce one of this sum to be verified.
+The digit variables can be linked to the grids from the last state by adding implications. For example <code class="language-plaintext highlighter-rouge">digit_5_row_0 =&gt; v_0_1_5 or v_0_2_5 or v_0_3_5</code>.</p>
+
+<h3 id="3-transition-constraints">3) Transition constraints</h3>
+
+<p>The last step is trickier.
+Here, we need to somehow verify through logic constraints that any modification occurring on the grids between two states is consistent regarding the puzzle’s rules.
+For this step we will once agin use implications, between consecutive states this time.
+For instance, taking the upper left corner cell of the first grid, we need to verify that the digit that is true at state i+1 is either the result of an operation or was already true at state i.
+In case the digit was true at state i, we also need to check that no operation was performed on the same row or column.</p>
+
+<p>For example, having a 3 in the cell at row 1 and column 0 implies either:</p>
+
+<ul>
+  <li>there was already a 3 and the second row and the first column did not move</li>
+  <li>the column moved and there was a 3 below or above</li>
+  <li>the row moved and there was a three before or after this position</li>
+</ul>
+
+<p>Encoding the column move would be done as following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                           -------------                 
+                           | 3 | _ | _ |                                  
+                           -------------                                   
+                           | _ | _ | _ |   and column operation Down               
+                           -------------
+-------------              | _ | _ | _ |
+| _ | _ | _ |              -------------     
+-------------               
+| 3 | _ | _ |    Implies        or
+-------------               
+| _ | _ | _ |              ------------- 
+-------------              | _ | _ | _ |
+                           -------------                               
+                           | _ | _ | _ |   and column operation Up    
+                           -------------    
+                           | 3 | _ | _ |      
+                           -------------    
+                               
+State n                     State n-1
+</code></pre></div></div>
+
+<p>For the operations on the row, we will see something like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                                        -------------   -------------
+                                        | _ | _ | _ |   | _ | _ | _ |
+                                        -------------   -------------
+                                        | _ | 3 | _ |   | _ | _ | _ |  and row operation Left
+                                        -------------   -------------
+-------------   -------------           | _ | _ | _ |   | _ | _ | _ |
+| _ | _ | _ |   | _ | _ | _ |           -------------   -------------
+-------------   -------------             
+| 3 | _ | _ |   | _ | _ | _ |  Implies                or
+-------------   -------------            
+| _ | _ | _ |   | _ | _ | _ |           -------------   ------------- 
+-------------   -------------           | _ | _ | _ |   | _ | _ | _ |
+                                        -------------   -------------
+                                        | _ | _ | _ |   | _ | _ | 3 |  and row operation Right
+                                        -------------   ------------- 
+                                        | _ | _ | _ |   | _ | _ | _ |   
+                                        -------------   ------------- 
+                               
+           State n                                State n-1
+</code></pre></div></div>
+
+<h1 id="lets-code-the-program">Let’s code the program</h1>
+
+<p>Now that the encoding is ready to be implemented, the last part consists in putting all the pieces together into one final program. 
+The program will take as input the digits in the two cells and a number of steps to solve the puzzle.
+From these data, it will automatically create the logic formula corresponding to the puzzle and will call a SAT solver to solve the formula.
+Once it is done, the program can extract the solution and display it in a human readable form.
+Without detailing everything in the implementations, I will still give few precisions.</p>
+
+<h2 id="writing-the-automatic-encoding">Writing the automatic encoding</h2>
+
+<p>Usually, the code necessary to implement an encoding is not the easiest to read and interpret.
+Nonetheless, having well documented data structure really helps in the process.
+The final goal of this task is the creation of the logic formula to be sent to the SAT solver.
+One important thing is that SAT solvers usually take as input a specific form of logic formulas called <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">Conjunctive Normal Form</a>.
+Luckily, it is always possible to introduce new variable to transform any formula into this type.
+For this project, I used a piece of code that I wrote during my studies that specifically perform this transformation.
+It is based on that (approach)[https://en.wikipedia.org/wiki/Tseytin_transformation].</p>
+
+<h2 id="finding-a-suitable-sat-solver">Finding a suitable SAT solver</h2>
+
+<p>Finding a SAT solver able to solve the formula is not an easy task either.
+I first started to experiment with a number of state equals to 20 in the encoding.
+The resulting formula ends up having a very large number for logical variables, make it solution difficult to find.
+It is although good to know that SAT competitions take place every year to encourage the development of performent SAT solvers.
+I started looking at state of the art solvers from <a href="https://satcompetition.github.io/2022/">the 2022 edition</a> and I ended up selecting a solver called <a href="https://github.com/arminbiere/kissat">Kissat</a>. Kissat was able to solve the puzzle whin few minutes on my laptot.</p>
+
+<h2 id="final-code-and-solution">Final code and solution</h2>
+
+<p>The code that I wrote for this program is available on <a href="https://github.com/smbct/blog_code/tree/master/pokemon">github</a>.
+The folder contains a c++ program creating the encoding with a sequence of 20 states and calling the sat solver to solve the formula.
+It also contains an installation script which download the SAT solver and compile the program with gcc.</p>
+
+<p>Here is a solution I found with kissat (states only):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 9 6     1 2 5         4 4 6     1 2 5         4 4 1     1 2 5        4 4 1     1 2 5        4 4 1     7 2 5         4 1 7     2 5 4        4 1 6     2 5 4        4 1 6     2 5 4 
+5 8 3     7 7 9   -&gt;    5 9 3     7 7 9   -&gt;    5 9 6     7 7 9   -&gt;   5 9 6     7 7 9   -&gt;   5 9 6     3 7 9    -&gt;   5 9 6     3 7 9   -&gt;   5 9 7     3 7 9   -&gt;   9 5 9     7 3 7    -&gt;   
+2 4 1     6 3 8         2 8 1     6 3 8         2 8 3     6 3 8        8 3 6     3 8 2        8 3 6     1 8 2         8 3 6     1 8 2        8 3 6     1 8 2        8 3 6     1 8 2 
+
+
+4 5 6     2 5 4         4 5 6     2 5 4         4 4 5     6 2 5        4 4 9     6 2 5        4 4 9     6 8 5         4 4 9     6 8 5        4 4 9     2 8 5        4 5 9     2 8 5 
+9 3 9     7 3 7    -&gt;   9 3 6     7 3 7   -&gt;    9 3 6     7 3 7   -&gt;   9 3 5     7 3 7   -&gt;   9 3 5     7 2 7    -&gt;   3 5 7     2 7 9   -&gt;   3 5 7     1 7 9   -&gt;   3 1 7     1 7 9    -&gt;
+8 1 6     1 8 2         8 1 9     1 8 2         8 1 9     1 8 2        8 1 6     1 8 2        8 1 6     1 3 2         8 1 6     1 3 2        8 1 6     6 3 2        8 4 6     6 3 2 
+
+
+4 4 9     2 8 5         4 9 2     8 5 4         4 9 2     8 3 4 
+3 5 7     1 7 9    -&gt;   3 5 7     1 7 9   -&gt;    3 5 7     1 5 9 
+8 1 6     6 3 2         8 1 6     6 3 2         8 1 6     6 7 2
+
+</code></pre></div></div>
+
+<p>This solution contains 18 states and has been found in 145 seconds on my laptop by the kissat solver.</p>
+
+<h1 id="final-word">Final word</h1>
+
+<p>We can see that tools such as SAT solvers are available for automatic reasoning and hard problem solving.
+Although this might not work all the time, having a try may usually be a (relatively fast) solution to obtain first hints into some problem.
+In this case, the encoding aspect is not easy as SAT solvers speak a relatively basic language (logic formulas) and are not the most suitable tools for reasoning with numbers and spatial data (such as grids).</p>
+
+<p>By searching on the internet it is possible to find much more elegant <a href="https://www.rebornevo.com/forums/topic/48625-magic-square-puzzle-guide/">solutions</a> to this problem.
+The fact that this problem ends up being quite challenging for SAT solvers is a interesting.
+The solving time may be improved by trying to reduce the size of the encoding.
+However, using solvers more expressive than SAT (for example linear programming) may help on this puzzle as it is not easy to be expressed in pure logic.
+There are also other automatic ways of solving it such as tree search algorithms like A* or Monte Carlo Tree Search.
+This type of algorithms was actually historically used for making AI for chess and alike games.</p>
+
+<p>A later interesting aspect of this puzzle is the process of its creation.
+Indeed mathematical puzzles can emerge from various ideas and topics and it is not possible to know if there is a solution until either one is found or it is proven impossible.
+In this example, it would have been possible to generate the puzzle by starting from the last state and applying reverse operations (as the operations are deterministic).
+However, this seems not to be the origin of this puzzle as discussed in the solution link I mentioned above, and the original story seems more engaging.
+Let’s see what would be my next challenging puzzles!</p>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#sat">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">SAT</span>
+    </a>
+  
+    
+    <a href="/tags.html#logic">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">logic</span>
+    </a>
+  
+    
+    <a href="/tags.html#puzzle">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">puzzle</span>
+    </a>
+  
+    
+    <a href="/tags.html#games">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">games</span>
+    </a>
+  
+    
+    <a href="/tags.html#model-checking">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">model-checking</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+  <section class="related">
+  
+  <h2>Related Posts</h2>
+  
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/stockholm_train/">
+            Un Paris - Stockholm en train 🚆
+            <small>07 Jun 2024</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/assembly-x86-series/">
+            A series on x86 assembly programming
+            <small>05 Jun 2024</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/chess-rules/">
+            Can deep neural networks learn the rules of chess ?
+            <small>30 May 2022</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+
+
+<p class="back-link">
+    <a href="/index.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Blog</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

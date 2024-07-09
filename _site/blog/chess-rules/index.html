@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Can deep neural networks learn the rules of chess ? &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="post">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="24" width="28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     href="/">
+     🇬🇧 <div></div>
+  </a>
+
+  <a id="icon_flag"
+  class="icon_flag"
+  href="/fr/">
+    🇫🇷 <div></div>
+  </a>
+
+</nav>
+
+  <p>
+  &copy; 2024.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/index.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Blog</a>
+</p>
+
+
+  <h1 class="post-title">Can deep neural networks learn the rules of chess ?</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      30 May 2022
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    10 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        AI
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>As I recently defended my thesis, and since I am now looking for a job, I decided to dedicate to myself some time to study cutting edge computer science topics. Deep learning is one very famous (and somehow <a href="https://www.youtube.com/watch?v=fe9u6YQTsWY">controversial</a>) topic that I didn’t have the occasion to experiment with so far. Thus I started playing with dl frameworks such as pytorch and recently I decided to implement an old idea that I had back during my thesis: inducing the rules of chess using a machine learning algorithm.</p>
+
+<p>To be clear, the goal here is not to create an algorithm able to <strong>play</strong> chess such as <a href="https://www.deepmind.com/research/highlighted-research/alphago">alphago</a>, but rather to create an algorithm able to <strong>discover</strong> the rules, and able to propose the next moves from a given board configuration. I got this idea from my PhD work on inductive logic programming, a form of machine learning applied to logical models. For example, imagine that you are looking at two people playing an unknown game: is it possible to understand the rules just by looking people play ?</p>
+
+<hr />
+
+<h1 id="introduction">Introduction</h1>
+
+<p>For this project, I decided to use the deep learning framework <a href="https://pytorch.org/">pytorch</a>. I started by creating a python program that is able to show a board in different configurations using <a href="https://matplotlib.org/">matplotlib</a> with these <a href="https://commons.wikimedia.org/wiki/Category:PNG_chess_pieces/Standard_transparent">images</a>. I used the very nice <a href="https://python-chess.readthedocs.io/en/latest/">python-chess</a> package as a chess engine to simplify the work. With these elements, I was already able to visualize all the board configuration form a given game, with the possible moves for each piece (see below).</p>
+
+<p><img src="/assets/chess_rules/chess_interface.png" alt="The chess interface" /></p>
+
+<p>The chess interface.</p>
+
+<h2 id="the-dataset">The dataset</h2>
+
+<p>Since I needed a dataset for this project, I used this <em>csv</em> of <a href="https://www.kaggle.com/datasets/datasnaek/chess">chess games</a>, where the games are given in the form of lists of moves (easy to process with python-chess).</p>
+
+<p>At this stage, I decided to simplify the learning task because predicting the possible (legal) moves from a board configuration implies using a model with a <strong>varying output size</strong>, something difficult to achieve with deep neural nets. I choose to <strong>simplify</strong> the problem by predicting only the possible destinations for a given pieces, ignoring the interaction with the other pieces (which is quite cheating considering the initial idea, but interesting as a first step). I made a <strong>second simplification</strong> assuming that all the possible moves from the board position are known (which is not the case in my previous description since only one possible move can be seen when someone plays).</p>
+
+<p class="message">
+To sum up, if we take the illustration above, our main goal here is to produce a model able to predict a list of moves (the blue arrows) from a given board configuration (position of the pieces), assuming that from a given board configuration in the dataset, all the arrows are known.
+</p>
+
+<h2 id="fetching-the-model-inputsoutputs">Fetching the model inputs/outputs</h2>
+
+<p>In order to obtain a usable dataset for fitting the model, I generated all the board configurations from the moves of all the games in the csv. I then generated all the possible moves from these configurations and I subsampled the data to limit its size.</p>
+
+<hr />
+
+<h1 id="encoding-the-data">Encoding the data</h1>
+
+<p>A very important aspect of a deep learning application is the encoding of the data.
+More precisely, neural networks would not be able to process high level information such as a list of moves and a board configuration with piece types.
+For this reason, it is necessary to encode the data in such a way that the model will be able to link the input and the output through its complex computations.
+For instance, coding the piece type on the board with an integer won’t be efficient since it would be too difficult for the model to decompose the integer.</p>
+
+<h2 id="encoding-the-input">Encoding the input</h2>
+
+<p>In our case, the input consists in a board configuration plus a piece to move.
+An important aspect of chess is that the board is two-dimensional.
+This means that the moves of one piece depend on the content of its surrounding squares.
+For this reason, we are going to use <a href="https://deepai.org/machine-learning-glossary-and-terms/convolutional-neural-network">convolutional layers</a> for the model architecture, a type of function that is efficient for treating spatial data such as images (more on the model architecture below).
+This implies that the encoding should conserve the spatial organisation of the board (with two dimensional data structures).</p>
+
+<p>The input of the model is the hardest element to encode. As I said previously, piece types cannot be encoded as simple numbers, as they represent categorical variables.
+One popular way to encode categorical variables in deep learning is the <a href="https://deepai.org/machine-learning-glossary-and-terms/one-hot-encoding">one hot encoding</a>, consisting in a vector of 0 and 1, with only one index equal to one depending on the class that is coded.
+Our encoding here will be based on same principle, inspired from the encoding used in existing <a href="https://erikbern.com/2014/11/29/deep-learning-for-chess.html">chess AI’s</a> (including the alphazero model).
+The categorical input will be implemented as a spatial dimension of the board in order to help the model consider several piece types at the same time.
+Thus, the final encoding of a board will be a 3d array, where the depth dimension (depth = 2*6) represents the type of piece.
+By doing so, the model will be able to perform computations involving different types of pieces at the same time.
+You can visualize the idea of the board encoding on the figure below, where the first board layers have been shown for the white pieces.</p>
+
+<p><img src="/assets/chess_rules/chess_encoding.png" alt="The input encoding." /></p>
+
+<p>Additionally to the board, we will also represent as input the piece to move.
+This will be encoded as a two dimensional 0/1 8x8 array, where the unique value 1 corresponds to the piece to move.
+At the end, the input is a 3 dimensional array containing 8x8x(6+6+1) = 832 values.
+This seems expensive but this representation is really important for the model.</p>
+
+<h2 id="encoding-the-output">Encoding the output</h2>
+
+<p>Our model output consists in all the possible moves for the piece given as input.
+Since we are not considering encoding information such as piece capture, the output will simply consist of a 0/1 8x8 array with a 1 value for each possible destination of the piece.</p>
+
+<hr />
+
+<h1 id="creating-the-model-architecture">Creating the model architecture</h1>
+
+<p>The model architecture is another crucial step here.
+Once again, I took inspiration from existing models such as <a href="https://www.deepmind.com/blog/alphazero-shedding-new-light-on-chess-shogi-and-go">alphazero</a> for this design.
+The first layer is a 3d convolutional layer applied to the input, with a kernel size equal to 13x3x3 so that all the depth layers are considered.
+After that, the model contains 4 successive 2d convolutional modules, with a convolutional layer, a batch normalization layer and a zero padding layer.
+This way, all the intermediate inputs are 8*8 arrays, and I also introduced residual connections between the these modules.
+Finally, there are two transposed convolutional layers to obtain a final 8x8 output.</p>
+
+<p><img src="/assets/chess_rules/chess_model.jpg" alt="The model architecture." /></p>
+
+<hr />
+
+<h1 id="testing-the-model">Testing the model</h1>
+
+<p>Once the architecture is decided, it is time to fit the model on our dataset.
+In this case, I used the cross entropy loss function which is usually applied to classification problems.
+I then used the default stochastic gradient descent algorithm for the optimization of the model, with a batch size equal to 150.</p>
+
+<h2 id="model-training">Model training</h2>
+
+<p>Training the model was a little bit fastidious due to some bugs in the input encoding.
+I finally obtained a working version achieving an accuracy of 97% on the test set, which is quite satisfying (the accuracy was computed as the number of correct values in the output).
+I experimented with several parameters such as the number of outputs in the convolutional layers, the loss function, the optimization algorithm, and so on…
+Initially, the dataset was composed of only the boards from the first games of the <em>csv</em> files, but I realized that it was not diverse enough since a board configuration would not evolve much from few moves
+For the other parameters, I did not find any big differences between the trainings.</p>
+
+<h2 id="model-testing">Model testing</h2>
+
+<p>For testing the trained model, I selected a game and plotted both the moves proposed from the rules (blue arrows) and the moves proposed by the deep neural network (red arrows).
+You can find a first comparison on the image below.
+The result is quite satisfying, although it is not perfect.
+It really gives the impression that the model learnt something, and that it is able to generalize on the data.</p>
+
+<p><img src="/assets/chess_rules/chess_comp2.png" alt="First comparison between predicted moves versus legal moves." /></p>
+
+<h2 id="observations">Observations</h2>
+
+<p>You will find below few board comparisons from one particular game.
+It is interesting to notice several particularities.
+For instance the model allows pawns to move diagonally, which has been probably inferred from the captures.
+The moves from the rooks are partially well predicted, but these seem difficult to compute
+We can also see that illegal moves are not managed at all by the model.</p>
+
+<p><img src="/assets/chess_rules/chess_comp1.png" alt="Second comparison between predicted moves versus legal moves." /></p>
+
+<hr />
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>To conclude on this deep learning application, I find it interesting to see the good accuracy of the model at the end, and I am confident that the model can be further improved.
+It will be for instance interesting to find a way to encode the capture and to infer the rules only from the moves of a set of games (instead of using the rules to generate all the moves each time).
+Although this particular application does not seem to be really practically useful, it is still interesting to see what these models are capable of.
+I personally find it fascinating that deep learning models are somehow able to make sense of very complex patterns such as board configurations.
+This latter point was already shown by the unreasonable efficiency of the alphago model for the game of go.
+Indeed, looking for the best move for a board game was a problem traditionally treated with tree search approaches.
+Seeing the efficiency of neural nets makes me think we are far from understanding the possible connections between continuous models and symbolic computations.</p>
+
+<h2 id="related-works">Related works</h2>
+
+<p>Following this project, was curious to see if such problem has already been treated. So I searched for similar attempts online, even if my initial goal was to become more familiar with deep learning.
+We may compare this task to the <a href="https://www.deepmind.com/blog/alphazero-shedding-new-light-on-chess-shogi-and-go">alphazero</a> algorithm which is able to learn playing a game board from scratch.
+However, this is somehow different because alphazero is not designed to output a <a href="https://stackoverflow.com/questions/47847461/how-to-enforce-rules-like-move-legality-in-chess-at-the-output-of-a-neural-netwo">list of moves</a>.
+So we may still think that from its playing, this type of model is somehow able to understand the rules, but whether it may output them remains unclear.
+I found this <a href="https://www.reddit.com/r/chess/comments/p7gpgg/can_a_modern_machine_learning_algorithm_learn_the/">discussion</a> on the topic, and that <a href="https://softwareengineering.stackexchange.com/questions/92189/learning-the-rules-of-chess">one</a>, but no other deep learning model for the rules of chess.</p>
+
+<h2 id="source-code">Source code</h2>
+
+<p>The source code of this project is available on <a href="https://github.com/smbct/blog_code.git">github</a> (folder <code class="language-plaintext highlighter-rouge">chess_rules</code>).
+The code includes the assets used for the graphical interface and the trained model with the selected architecture.
+Please feel free to re-use and improve the model (and let me know if you are able to improve the result and get new ideas) !</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#deep-learning">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">deep-learning</span>
+    </a>
+  
+    
+    <a href="/tags.html#chess">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">chess</span>
+    </a>
+  
+    
+    <a href="/tags.html#games">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">games</span>
+    </a>
+  
+    
+    <a href="/tags.html#combinatorics">
+    
+      <span class="icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+      </span>&nbsp;<span class="tag-name">combinatorics</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+  <section class="related">
+  
+  <h2>Related Posts</h2>
+  
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/stockholm_train/">
+            Un Paris - Stockholm en train 🚆
+            <small>07 Jun 2024</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/assembly-x86-series/">
+            A series on x86 assembly programming
+            <small>05 Jun 2024</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/pokemon-puzzle/">
+            Solving a pokemon puzzle with SAT solvers
+            <small>15 May 2023</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+
+
+<p class="back-link">
+    <a href="/index.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Blog</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

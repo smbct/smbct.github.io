@@ -1,0 +1,1837 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2024-07-09T23:44:36+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry xml:lang="fr"><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
+Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique.
+Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs.
+L’impact individuel des déplacements en avion en terme d’émissions CO₂ est énorme.
+Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressources fragiles, qui souffre énormément de l’activité humaine ?</p>
+
+<p>En tout cas je suis décidé personnellement: aucun de mes déplacements ne justifient un impact aussi négatif ❌.
+Je choisis donc de me comporter de manière stricte : soit j’effectue mes déplacements en train ou bus, soit je ne ne me déplace pas !
+Dans ce cas-ci, le laboratoire qui m’emploie n’a pas émis d’objections pour que je m’y rende en train ✅.
+Une aubaine pour moi car ce type de voyage m’intéressait depuis un certain temps !</p>
+
+<p><img src="/assets/stockholm/suede_1.jpg" alt="Un chemin de fer." /></p>
+
+<h2 id="mon-plan-de-voyage">Mon plan de voyage</h2>
+
+<p>J’ai donc planifié mon Paris-Stockholm en train.
+Plus précisément, ma destination finale dans ce voyage est en fait Uppsala, une petite ville un peu plus au nord par rapport à Stockholm.
+Ce trajet est particulièrement opportun pour moi car, ayant des amis qui vivent à Stockholm, j’ai décidé de m’y arrêter quelques jours avant la conférence.
+Je pouvais ensuite rejoindre Uppsala en train pour un trajet de 40 minutes environ.</p>
+
+<p>Le plus direct pour rejoindre Stockholm en train depuis la France est de passer par le Danemark.
+En effet, il existe des ponts 🌉 au Danemark et entre le Danemark et la Suède pour connecter les différentes îles, empruntables en voiture mais également <a href="https://fr.wikipedia.org/wiki/Ligne_de_Copenhague_%C3%A0_Malm%C3%B6">en train</a> !</p>
+
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/0/06/%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg" alt="Le pont de l'Øresund entre le Danemark et la Suède." /></p>
+<div class="custom_caption">
+  <p>&gt; Le <a href="https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund">pont de l’Øresund</a> entre le Danemark et la Suède, image empruntée de <a href="https://fr.wikipedia.org/wiki/Pont_de_l%27%C3%98resund#/media/Fichier:%C3%96resundsbron_fr%C3%A5n_Lernacken.jpg">Wikipédia</a>.</p>
+</div>
+
+<p>Pour rejoindre le Danemark, il parait évident de passer par Hambourg, une des plus grandes villes d’Allemagne et relativement proche de la frontière avec le Danemark.
+Voulant effectuer le trajet rapidement en évitant au maximum les nuits d’hôtel, j’ai décidé d’effectuer le trajet entre Hambourg et Stockholm de nuit, ce qui est possible grâce à un train de nuit direct opéré par la société ferroviaire suédoise (la ligne complète va en fait de Berlin à Stockholm, et inversement).
+L’autre partie du trajet consiste donc à effectuer un Paris - Hambourg, ce qui est faisable à la journée.</p>
+
+<p>Pour les non parisiens, il faut éventuellement rajouter à cela une étape supplémentaire que je ne détaille pas ici pour rejoindre Paris (soit la veille, soit suffisamment tôt).
+Cette étape peut probablement être sautée pour les personnes vivant dans l’est de la France.</p>
+
+<p><img src="https://i.pinimg.com/originals/e3/b3/5c/e3b35c9e96b9c906e0b2c68ec5db783d.gif" alt="Carte des chemins de fer en Europe." /></p>
+<div class="custom_caption">
+  <p>&gt; Carte des chemins de fer en Europe, empruntée de <a href="https://trainmaps.netlify.app/rail-europe-train-maps.html">Train World</a></p>
+</div>
+
+<p>Pour récapituler, l’idée est donc de partir de Paris au matin pour me rendre à Hambourg en fin d’après-midi.
+Ce trajet était prévu initialement avec une unique correspondance en Allemagne.
+Après cela, le train de nuit au départ d’Hambourg me permet d’arriver à Stockholm dans la matinée de la journée suivante.
+<strong>Plutôt simple, n’est-ce pas ?</strong></p>
+
+<h4 id="les-premiers-soucis-avant-le-départ">Les premiers soucis avant le départ</h4>
+
+<p>J’étais évidemment conscient avant de partir qu’un tel trajet en train est assez risqué : il suffit qu’un train saute ou qu’une correspondance ne soit pas possible pour que cela se répercute sur tous les autres trains 🀟.
+Pire encore, le trajet étant composé par mes soins avec deux parties distinctes, les différentes compagnies ferroviaires n’ont aucune obligation d’assurer les correspondances entre ces deux parties et de nous assister en cas de problèmes.</p>
+
+<p>Pour anticiper les problèmes, j’ai effectué les réservations le plus tôt possible et de manière flexible, permettant d’échanger les billets tardivement en cas de besoin.
+Voyageant dans un cadre professionnel, je suis passé par le prestataire en contrat avec mon employeur ce qui a un peu ralenti et compliqué le processus car les informations étaient transmises de manière indirecte.
+Des travaux prévus sur les voies pour le trajet entre Hambourg et Stockholm ont notamment retardé la préparation du voyage car les billets n’étaient pas disponibles à la vente quand j’ai commencé à planifier le voyage.</p>
+
+<p>Les premiers soucis sur ce voyage se sont par ailleurs présentés peu de temps avant le départ.
+Un mail envoyé un jour plus tôt de la part de la Deutsche Bahn (compagnie ferroviaire allemande) a en effet prévenu que la correspondance du trajet entre Paris et Hambourg ne pouvait être assurée et invitait a choisir parmi <strong>3 trajets alternatifs</strong> proposés.</p>
+
+<p><img src="/assets/stockholm/db_message.png" alt="Le message en question." /></p>
+<div class="custom_caption">
+  <p>&gt; Le message envoyé par la Deutsche Bahn avant le départ.</p>
+</div>
+
+<p>J’ai eu de premiers doutes en recevant ce message car les trajets alternatifs proposés impliquaient d’emprunter des trains eurostar (ex <a href="https://www.eurostar.com/fr-fr/a-propos-deurostar/thalys-devient-eurostar">thalys</a>) à Paris.
+Il me paraissait suspect que mon billet de train allemand soit réellement recevable sur ces trains…
+Peu importe, le trajet était prévu donc je décidai de voir sur place à Paris le lendemain !</p>
+
+<h2 id="le-voyage-allée-et-ses-galères">Le voyage allée et ses galères</h2>
+
+<p>Le jour de mon voyage Paris-Hambourg, j’arrive donc à Paris avec comme premier objectif d’éclaircir cette histoire de correspondance d’un trajet Deutsche Bahn (DB) sur un eurostar.
+Cependant, le trajet initial était prévu gare de l’est alors que les trajets alternatifs proposés sont au départ de la gare du nord.
+Ces gares étant toutes proches, commence alors pour moi une série d’allers-retours à pied entre les deux gares avec mes bagages pour éclaircir la situation 🎒 !</p>
+
+<h4 id="laventure-avec-la-deutsche-bahn">L’aventure avec la Deutsche Bahn</h4>
+
+<p>Après renseignement auprès d’eurostar en gare du Nord, j’apprend alors qu’en effet mon billet de train allemand n’est pas censé être utilisé sur ce train (je m’en doutais un peu).
+J’en profite pour me renseigner auprès d’agents SNCF en gare de l’est : le train que je devais prendre est bien prévu à l’heure et eux ne savent pas pour la suite du trajet.
+Malheureusement, personne de la DB n’est présent sur place.</p>
+
+<p>Il m’a alors fallu décider si je tentais de prendre un billet pour l’eurostar ou bien si je prenais le train allemand prévu initialement avec le risque de ne pas pouvoir continuer au moment de la correspondance.
+L’eurostar cependant n’était plus réservable mais la personne du guichet m’a quand même autorisé à aller voir la chef de bord avant le départ pour expliquer la situation.
+Entre-temps, j’ai été appelé par le prestataire s’occupant de la réservation de mon trajet qui m’a donné des informations supplémentaires : le trajet initialement prévu avec la DB était en fait encore réservable.
+Après maintes hésitations, il m’a finalement semblé moins risqué d’emprunter ce fameux train ICE allemand initialement prévu dans mon trajet.
+C’est donc parti pour l’Allemagne !</p>
+
+<p><img src="/assets/stockholm/en_route_allemagne.jpg" alt="En route vers l'Allemagne !" /></p>
+<div class="custom_caption">
+  <p>&gt; En route vers l’Allemagne ! 🚃</p>
+</div>
+
+<p>Arrivé à ma première destination allemande 🇩🇪, je me renseigne donc cette fois-ci auprès d’un agent de la DB au sujet de mon trajet initial prévu.
+J’apprend donc que le trajet est toujours prévu et que la correspondance est possible mais que celui-ci arrive bien plus tard que prévu à Hambourg 😖 ! 
+Il me propose donc un trajet alternatif arrivant plus tôt, avec une correspondance ultra-tendue mais qui devrait être tout de même possible car se faisant sur la voie en face de celle de mon arrivée.
+La politique de la DB en cas de problème est donc : si il y a une perturbation sur votre trajet, vous pouvez prendre n’importe quel autre train permettant d’arriver à destination (et même ceux d’autres compagnies même si ça n’est pas une bone idée 😅) !
+Je décide de tenter cette correspondance.</p>
+
+<p>Et c’est finalement une correspondance réussie 🕓 !
+Une fois le stresse évacué, je peux enfin me poser dans le train suivant pour plusieurs heures, tapoter un peu sur l’ordinateur et suivre assidûment le défilement des noms de grandes villes dont j’ai déjà entendu parler pour la plupart, pendant que le train effectue sa traversée de l’Allemagne.
+J’en profite alors pour installer une superbe appli qui m’aurait été bien utile avant : <a href="https://int.bahn.de/fr/informations-reservation/application-db-navigator">DB Navigator</a> 📱 !
+Il s’agit d’un équivalent de SNCF connect pour les trains allemands mais qui donne plus d’informations sur les correspondances, notamment le numéro de voie à l’avance pour n’importe quel trajet et le temps des correspondances à jour en fonction des retards.</p>
+
+<p>Sur le chemin, je remarque notamment un train de nuit à destination d’Innsbruck en Autriche ⛰️ ! 
+Le train de nuit, que je j’ai découvert assez récemment en France pour ma part, est en fait bien présent en Europe.
+Je trouve dommage que ceux de la SNCF relient forcément Paris, mais il s’agit d’une option intéressante pour les longs trajets : cela permet d’économiser à la fois du temps et de l’argent !</p>
+
+<p><img src="/assets/stockholm/train_innsbruck.jpg" alt="Un train de nuit vers Innsbruck." /></p>
+<div class="custom_caption">
+  <p>&gt; Un train de nuit vers Innsbruck.</p>
+</div>
+
+<p>J’arrive finalement à Hambourg en début de soirée.</p>
+
+<p><img src="/assets/stockholm/arrivee_hambourg.jpg" alt="L'arrivée à Hambourg !" /></p>
+<div class="custom_caption">
+  <p>&gt; L’arrivée à Hambourg !</p>
+</div>
+
+<h4 id="une-note-sur-la-ponctualité-des-trains">Une note sur la ponctualité des trains</h4>
+
+<p>Au sujet de la ponctualité des trains en Europe, des articles <a href="https://www.lesechos.fr/industrie-services/tourisme-transport/ponctualite-des-trains-la-france-a-toujours-du-retard-1367996">de presse</a> ont circulé pointant du doigt la France.
+J’entend aussi beaucoup de personnes se plaindre (parfois avec raison) de retards ou d’annulation très contraignantes sur des trajets en train.
+J’ai pour ma part eu très peu de soucis de retards avec la SNCF alors que j’effectue la quasi intégralité de mes trajets longue distance en train.</p>
+
+<p>On peut trouver des études classant la France dans des positions assez bonnes au niveau européen, comme la suivante sur les TGV (pourcentage des trains à l’heure) :</p>
+
+<p><img src="https://www.epf.eu/wp/wp-content/uploads/2021/01/Picture2.png" alt="" /></p>
+<div class="custom_caption">
+  <p>&gt; À l’échelle de l’Europe, l’Allemagne est mal classée par rapport à la France en terme de <a href="https://www.epf.eu/wp/10929-2/">retards de train longue-distance</a>.</p>
+</div>
+
+<p>En tout cas, me concernant sur ce trajet j’ai surtout été déçu de la DB pour les informations aussi contradictoires qu’elle envoie aux voyageurs.
+Ce qui me donne envie de rappeler que la SNCF propose une bonne prise en charge des voyageurs en cas de problème, en réservant notamment un hôtel en cas de besoin.</p>
+
+<h4 id="la-partie-2-du-voyage">La partie 2 du voyage</h4>
+
+<p>Me voilà donc à Hambourg prêt à emprunter le train de nuit vers Stockholm !</p>
+
+<p>À la gare d’Hambourg, j’aperçois quelque chose que je n’ai jamais vu en France : un flixtrain !
+Bien que le marché du train français soit ouvert à la concurrence depuis <a href="https://www.radiofrance.fr/franceinter/l-ouverture-du-rail-a-la-concurrence-une-realite-qui-peine-a-se-mettre-en-place-2085650">décembre 2020</a>, les concurrents émergent lentement.
+En faisant une petite recherche, je me rend compte qu’il y a en fait <a href="https://rail.cc/fr/compagnie-ferroviaire/allemagne/de">beaucoup de compagnies</a> différentes présentes en Allemagne.</p>
+
+<p><img src="/assets/stockholm/flix_train.jpg" alt="Un flixtrain à Hambourg." /></p>
+<div class="custom_caption">
+  <p>&gt; Un flixtrain à Hambourg.</p>
+</div>
+
+<p>Je profite également de ma longue correspondance pour faire un ravitaillement en eau avec ma gourde 🚰.
+Malheureusement, impossible de trouver un point d’eau !
+Je me renseigne auprès d’un agent en gare et il m’invite à tester dans les toilettes.
+Je suis un peu déçu de devoir payer 1€ pour y accéder et remplir ma gourde, les gares parisiennes ayant généralement en comparaison des points d’eau en libre accès (bien que parfois difficiles à trouver) !</p>
+
+<p>J’attend ensuite avec impatience l’arrivée de mon train de nuit pour la Suède !
+Je ne mesure à ce moment là pas très bien le type de trajet que je vais effectuer.
+Étant donné la distance, je me dis que ce trajet de 12h ne peut se faire qu’avec un train type TGV, et je me demande alors ce que ça fait de passer une nuit dans un TGV en couchette !
+En réalité, ça n’est pas du tout le cas !
+Il s’agit d’un train de nuit type TER que je vois arriver sur le quai.</p>
+
+<p><img src="/assets/stockholm/train_nuit_aller.jpg" alt="Le train de nuit vers la Suède." /></p>
+<div class="custom_caption">
+  <p>&gt; Le train de nuit vers la Suède.</p>
+</div>
+
+<p>L’entrée dans le train de nuit se fait comme dans un TER : il n’y a pas de contrôle de billet à l’extérieur comme avec la CNCF, un check-in se fait au contraire à l’intérieur au moment du départ 🛂. 
+Je découvre donc ma couchette 🛏️ dans le compartiment qui est en fait très similaire à ceux qu’on trouve dans les trains de nuits de la SNCF.
+Par contre, pas de kit de nuit contrairement à ces derniers.
+Je découvre une unique briquette d’eau 💧 à destination des voyageurs.
+C’est donc à nous de prévoir un supplément eau (pour 12h !), des bouchons d’oreille et autres instruments indispensables pour la survie de nuit en train.</p>
+
+<p>Je suis alors convaincu que je vais me réveiller le lendemain en Suède et que mon trajet aller sera fini.
+Mais… ça aurait été trop simple !
+Une annonce 📢 intervient peu de temps après notre entrée dans le train : le train ne circulera pas cette nuit entre Hambourg et Stockholm à cause d’une panne ! 😱 😭
+On nous invite tout de même à rester dans le train pour y passer la nuit… dans la gare ! Concept étrange 🤷‍♂️
+Je termine donc cette journée à l’arrêt, dans l’attente d’une prochaine annonce proposant une solution à ce trajet annulé.</p>
+
+<h4 id="la-partie-3-en-bonus">La partie 3 en bonus</h4>
+
+<p>Le lendemain, je suis donc parti pour une journée de voyage bonus vers Stockholm.
+Une annonce très matinale nous invite à prendre un train pour aller jusqu’à Copenhague.
+Je comprend mal l’annonce et prend un billet de train supplémentaire pour être certain d’avoir une place.
+En fait, il faut savoir qu’en Allemagne et dans d’autres pays, contrairement à la France, un trajet peut être réservé sans siège et vice-versa 🎫.
+Le retard étant pris en charge par la compagnie de train, il m’aurait en fait suffit de faire une simple réservation de siège pour avoir ma place (et il restait possible d’emprunter le train sans billet).</p>
+
+<p><img src="/assets/stockholm/vers_copenhague.jpg" alt="En route vers Copenhague." /></p>
+<div class="custom_caption">
+  <p>&gt; En route vers Copenhague.</p>
+</div>
+
+<p>Sur le chemin de Copenhague, le train me fait donc traverser un nouveau pays : le Danemark.
+Il faut savoir que c’est l’unique pays de ce trajet susceptible d’effectuer un contrôle d’identité 🪪.
+Il me semble que cela n’est pas censé être le cas à l’intérieur de l’<a href="https://fr.wikipedia.org/wiki/Espace_Schengen">espace Schengen</a> mais en pratique, les voyageurs m’apprennent que les contrôles sont toutefois de mise.
+Dans mon cas, le train s’arrête effectivement durant le trajet avec une annonce de contrôle mais finalement nous repartons sans voir un seul agent dans notre voiture.</p>
+
+<p>Une fois à Copenhague, c’est la course pour prendre un second train vers Stockholm cette fois-ci 🏃‍♂️.
+Je suis d’autres personnes ayant eu les mêmes soucis que moi avec le train de nuit de la veille, ce qui me permet d’arriver pour la première fois dans un train Suédois !</p>
+
+<p><img src="/assets/stockholm/train_copenhague_suede.jpg" alt="Le train à destination de Stockholm." /></p>
+<div class="custom_caption">
+  <p>&gt; Le train à destination de Stockholm.</p>
+</div>
+
+<p>Ça y est, je peux enfin entamer la dernière partie de mon voyage !
+En fait, l’annulation de mon train de nuit a un bon côté : effectuant désormais le trajet de jour, je peux admirer les différentes vues à mesure que je progresse vers Stockholm.
+En particulier, j’étais très enthousiaste à l’idée de passer sur le pont entre le Danemark et la Suède !</p>
+
+<p><img src="/assets/stockholm/pont_danemark_suede.jpg" alt="Passage sur le pont de l'Øresund !" /></p>
+<div class="custom_caption">
+  <p>&gt; Passage sur le pont de l’Øresund !</p>
+</div>
+
+<p>Je découvre ensuite les paysages suédois : entre lacs, forêts et maisons rouges.</p>
+
+<p><img src="/assets/stockholm/suede_2.jpg" alt="Arrivée en Suède." /></p>
+<div class="custom_caption">
+  <p>&gt; Arrivée en Suède.</p>
+</div>
+
+<p><img src="/assets/stockholm/campagne_suede.jpg" alt="La campagne suédoise." /></p>
+<div class="custom_caption">
+  <p>&gt; La campagne suédoise.</p>
+</div>
+
+<p>Dans le train je repère plusieurs français allant également à Stockholm.
+Il ne s’agit pas des premiers que j’aperçois et je suis heureux de voir que tout le monde ne mise pas sur l’avion pour ce genre de voyage !
+Je comprend alors que beaucoup doivent être en train de voyager avec <a href="https://www.interrail.eu/fr">l’Interrail</a>, ce qui j’imagine rend le trajet plus fiable et moins cher cat il peut être prévu au dernier moment !</p>
+
+<p>L’arrivée à Stockholm se fait finalement en soirée.
+Je suis soulagé en descendant du train après ces différentes mésaventures.</p>
+
+<p><img src="/assets/stockholm/stockholm_central.jpg" alt="Arrivée à Stockholm !" /></p>
+<div class="custom_caption">
+  <p>&gt; Arrivée à Stockholm !</p>
+</div>
+
+<p>Il me reste encore un dernier “petit” train local à emprunter pour rejoindre mes amis et profiter de la destination !
+Les jours suivants me permettent donc de découvrir Stockholm et prendre un peu de repos avant la conférence.</p>
+
+<p><img src="/assets/stockholm/stockholm.jpg" alt="Visite de Stockholm." /></p>
+<div class="custom_caption">
+  <p>&gt; Visite de Stockholm.</p>
+</div>
+
+<h2 id="le-retour-vers-la-france">Le retour vers la France</h2>
+
+<p>Après une semaine de conférence, le moment est venu de retourner en France en train.
+Mon trajet retour est vraiment similaire au trajet aller : je rejoins Stockholm en train, j’emprunte le train de nuit vers Hambourg et ensuite je fais un Hambourg-Paris à la journée.
+Avec les soucis de l’aller, j’appréhende un peu ce retour mais je rêve déjà de me retrouver chez moi et de profiter d’un peu de repos.</p>
+
+<p>Le trajet vers Stockholm ne pose pas de problème particulier.
+En gare de Stockholm, j’effectue un ravitaillement en eau 🚰 : toujours pas de point d’eau mais la personne qui gère l’entrée des toilettes me donne l’accès sans payer.</p>
+
+<p>J’entre donc dans le train de nuit pour Hambourg en espérant vivement que celui-ci circule bien.
+Il y a cependant une différence avec le trajet aller : les places en couchettes n’étaient pas disponibles, et c’est donc une place assise 💺 qui est indiquée sur mon billet.
+Or, surprise à mon entrée : la place assise est en fait une place dans un compartiment couchette avec les couchettes du milieu abaissées
+En me renseignant, je comprend alors que nous sommes libres d’installer les couchettes si les autres occupants du compartiment sont d’accord !
+Je finis donc par dormir sur une des couchettes supérieures 🛏️ !
+C’est donc une bonne surprise sur ce retour, malgré l’absence de couverture par rapport aux places en couchette qui m’a donné un peu froid, j’ai tout de même probablement bien mieux dormi que prévu.</p>
+
+<p>Pendant ce trajet, j’ai l’occasion d’apercevoir le fret ferroviaire que j’avais déjà remarqué auparavant.
+Je le vois rarement en France donc j’ai été surpris de le voir aussi présent en Allemagne, au Danemark et en Suède.
+En l’occurrence, le train que j’ai croisé à ce moment là permettait d’embarquer directement les remorques des camions. 🚛
+Plutôt efficace !</p>
+
+<p><img src="/assets/stockholm/fret.jpg" alt="Le fret ferroviaire." /></p>
+<div class="custom_caption">
+  <p>&gt; Le fret ferroviaire.</p>
+</div>
+
+<p>J’arrive donc le lendemain matin à Hambourg.
+Concernant le trajet retour de Hambourg à Paris, rebelote !
+La DB envoie un second message indiquant que le train prévu au départ de Hambourg part une heure plus tôt que prévu pour cause de travaux !
+Il s’agit décidément de la première fois pour moi que mon train part plus tôt que prévu 🤷‍♀️ !
+Je commence donc mon trajet avec une nouvelle source de stresse par rapport à une correspondance qui s’annonce tendue.
+Heureusement, mon changement de train se passe finalement sans problèmes et je finis par arriver tranquillement à Paris à l’heure prévue.
+Ouf 🥳 !</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Un mot de fin sur cette aventure à travers l’Europe 🇪🇺.
+Dans l’ensemble, bien que cette expérience m’ait épuisé, je suis très heureux d’avoir eu l’occasion de la réaliser !
+En particulier, je suis reconnaissant envers mon employeur de m’avoir autorisé à réaliser ce trajet en train et de m’avoir accordé des jours de repos en compensation à mon retour (il s’agit d’une formalité prévue pour les déplacements professionnels mais celle-ci n’avait pas été confrontée à un voyage aussi complexe).
+Je déplore tout de même de voir aussi peu de chercheurs conscientisé par l’impact du transport ✈️ étant donné l’urgence climatique.</p>
+
+<p>Vient donc la question finale : referais-je un tel trajet ?
+Oui évidemment !
+Pour rappeler ma position initiale : l’urgence climatique me semble telle que pour moi c’est soit un déplacement bas carbone, soit pas de déplacement !
+En terme d’émissions CO₂, le <a href="https://impactco2.fr/transport?km=2032">calculateur de l’ADEME</a> indique que ce trajet aller-retour en train a émis dans les <strong>46 kg</strong> de CO₂, contre environ <strong>950 kg</strong> pour un avion !
+Il y a par ailleurs plusieurs bénéfices à ce type de trajet.
+Il s’agit d’une expérience suffisamment intense pour qu’elle nous limite naturellement en terme de fréquence, limitant par conséquent notre impact climatique individuel.
+De plus, ce type de déplacement donne <strong>vraiment</strong> l’impression de voyager : on peut assister au changement des paysages, des maisons, au passage d’île en île, etc…</p>
+
+<p>Il y a tout de même certaines choses que je ferais différemment pour un tel trajet.
+Tout d’abord, pour un trajet plus long je choisirais probablement de m’arrêter en chemin et ne pas tenter les nuits successives en train.
+Bien qu’on puisse dormir en couchette, il s’agit d’un trajet autrement plus épuisant qu’une nuit en hôtel 😴 !
+En comparaison, je trouve cette <a href="https://www.youtube.com/watch?v=r1i6hMQbkx8">vidéo</a> (en anglais) très intéressante à propos d’un trajet encore plus long à travers l’Europe, sur plusieurs jours.
+Ensuite, le train est connu pour être particulièrement cher.
+Je vois deux alternatives : le Pass Interrail, qui est fait pour ce type de gros trajets, et l’alternance entre trains et bus de voyages 🚍 qui sont eux moins chers et qui restent raisonnables du point de vue des <a href="https://impactco2.fr/transport?km=2032">émissions CO₂</a>.</p>
+
+<p>Dans tous les cas, le voyage reste un loisir privilégié et je pense qu’il est bon de se rappeler que tout le monde n’a pas les moyens d’en profiter.
+Il ne nous reste qu’à le réaliser de manière humble et responsable, et à en tirer les meilleures expériences possibles !</p>
+
+<p><img src="/assets/stockholm/suede_3.jpg" alt="Un lac suédois." />
+<!-- <span style="font-size:0.7em;">Un lac suédois.</span> --></p>]]></content><author><name>smbct</name></author><category term="société" /><category term="voyage" /><category term="train" /><category term="climat" /><summary type="html"><![CDATA[Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪. Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique. Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs. L’impact individuel des déplacements en avion en terme d’émissions CO₂ est énorme. Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressources fragiles, qui souffre énormément de l’activité humaine ?]]></summary></entry><entry xml:lang="en"><title type="html">A series on x86 assembly programming</title><link href="https://smbct.github.io/blog/assembly-x86-series/" rel="alternate" type="text/html" title="A series on x86 assembly programming" /><published>2024-06-05T10:00:00+02:00</published><updated>2024-06-05T10:00:00+02:00</updated><id>https://smbct.github.io/blog/assembly-x86-series</id><content type="html" xml:base="https://smbct.github.io/blog/assembly-x86-series/"><![CDATA[<p>This is an announce that I am currently working on a series of posts about assembly programming.
+For this occasion, I created the <strong>series</strong> section in the blog 📑 : a place dedicated to articles that intend to deeply explore 🔎 some specific topics with advanced explanations and hands-on examples.</p>
+
+<p>In my first series, I will hence explore assembly programming : namely programming directly with the processors’ instruction sets 🧑‍💻.
+x86 being the most common processor architecture on desktop and laptop computers 💻, I will solely focus on this platform.
+The idea is to progress step by step toward the goal of being able to implement practical programs directly in assembly.</p>
+
+<p>My interest in assembly programming and more generally in low level programming comes from the impression that modern softwares have a very intensive use of resources for many avoidable tasks ⚡ (as a rebound effect due to the increase of computing power).
+The idea is to understand more deeply how softwares work and apprehend their use of computing resources.
+I am also concerned by planned obsolescence that could come from softwares becoming unusable after system upgrade for instance.
+For this reason, I am also interested in the idea of retro-compatibility and the possibility to patch softwares without any source code by manipulating its assembly instructions 💾.
+For instance, see this <a href="https://www.youtube.com/watch?v=eQOOx4mmY6I">example</a> about patching an old game to make it work on modern operating systems.
+Slowly, theses different concerns got me into the topic of assembly and more generally low level programming.</p>
+
+<p>This series will be written as I learn on the topic, with potential mistakes and imprecisions made along the way 🤐.
+I take some time to write about it as a ways to compile knowledge that can be sometimes difficult to find on the web, and also to rise the interest in this approach.
+The series would be more adapted to someone already familiar with programming, preferably with a low level language like C.</p>
+
+<p>The first few posts of this series are available in this <a href="/series/x86_64_assembly/headline">page</a>.
+I will also update the links directly here :</p>
+
+<p>This series covers x86-64 assembly programming.</p>
+
+<ul>
+  <li>
+    <p><a href="/blog/assembly-x86-series">Intro : Why this series.</a></p>
+  </li>
+  <li>
+    <p><a href="/series/x86_64_assembly/pt1">Chapter 1 : Hello, world!</a></p>
+  </li>
+</ul>
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑&nbsp;Key points</p>
+<ul>
+<li>Registers</li> 
+<li>System calls</li>
+<li>Command line and gdb</li>
+</ul>
+</div>
+
+<ul>
+  <li><a href="/series/x86_64_assembly/pt2">Chapter 2 : drawing a square</a></li>
+</ul>
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑&nbsp;Key points</p>
+<ul>
+<li>Control flow</li> 
+<li>Branching</li>
+<li>Conditional and loops</li>
+</ul>
+</div>
+
+<ul>
+  <li><a href="/series/x86_64_assembly/pt3">Chapter 3 : drawing a circle</a></li>
+</ul>
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑&nbsp;Key points</p>
+<ul>
+<li>Control flow</li> 
+<li>Memory and stack</li>
+</ul>
+</div>
+
+<ul>
+  <li><a href="/series/x86_64_assembly/pt4">Chapter 4 : recursive power</a></li>
+</ul>
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑&nbsp;Key points</p>
+<ul>
+<li>Functions</li> 
+<li>Stack frame</li>
+<li>Recursion</li>
+</ul>
+</div>
+
+<ul>
+  <li><a href="/series/x86_64_assembly/pt5">Chapter 5 : printing arrays</a></li>
+</ul>
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑 &nbsp;Key points:</p>
+<ul>
+<li>Function parameters</li> 
+<li>Calling conventions</li>
+<li>Interoperability with C</li>
+</ul>
+</div>
+
+<ul>
+  <li><a href="/series/x86_64_assembly/pt6">Chapter 6 : sorting arrays</a></li>
+</ul>
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑&nbsp;Key points</p>
+<ul>
+<li>Algorithmic</li>
+<li>Memory usage</li> 
+<li>Code modularity</li>
+</ul>
+</div>
+
+<ul>
+  <li><a href="/series/x86_64_assembly/pt7">Chapter 7 : ASCII Mandelbrot</a></li>
+</ul>
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑&nbsp;Key points</p>
+<ul>
+<li>Flags register and branching</li>
+<li>Floating points numbers</li> 
+<li>Floating points operations</li>
+</ul>
+</div>
+
+<p>Enjoy!</p>]]></content><author><name>smbct</name></author><category term="programming" /><category term="low-level" /><category term="assembly" /><category term="x86" /><category term="programming" /><category term="low-level" /><summary type="html"><![CDATA[This is an announce that I am currently working on a series of posts about assembly programming. For this occasion, I created the series section in the blog 📑 : a place dedicated to articles that intend to deeply explore 🔎 some specific topics with advanced explanations and hands-on examples.]]></summary></entry><entry xml:lang="en"><title type="html">Solving a pokemon puzzle with SAT solvers</title><link href="https://smbct.github.io/blog/pokemon-puzzle/" rel="alternate" type="text/html" title="Solving a pokemon puzzle with SAT solvers" /><published>2023-05-15T10:00:00+02:00</published><updated>2023-05-15T10:00:00+02:00</updated><id>https://smbct.github.io/blog/pokemon-puzzle</id><content type="html" xml:base="https://smbct.github.io/blog/pokemon-puzzle/"><![CDATA[<p>I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame.
+As everyone knows, Pokemon is a famous role playing game license from nintendo where your goal is to train small creatures that fight each other.
+While the core of pokemon gameplay is centered toward the training of pokemons, the player would encounter some logic puzzles on his way. For instance, the next image show one of these puzzles taken from pokemon emerald.</p>
+
+<p><img src="https://lparchive.org/Pokemon-Emerald-(by-Crosspeice)/Update%2025/8-e23009.png" alt="A puzzle from the pokemon game emerald." /></p>
+
+<p>While these puzzles are usually relatively simple and solvable by everyone, it is possible to find much more challenging ones in unofficial games.
+The puzzle I am interesting in takes place in <a href="https://www.rebornevo.com/pr/index.html/">pokemon reborn</a>.
+This particular puzzle caught my attention as it is similar to constraint problems in computer science.
+I decided to apply techniques that I studied during my master degree to solve it.</p>
+
+<hr />
+
+<h1 id="the-puzzle">The puzzle</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>The puzzle in question is represented by two 3x3 grids of digits, as it is shown below.
+The goal of the puzzle is to manipulate the grids throw a set of operations so that you end up with a sum of digits equal to 15 for each rows, each columns and each diagonal of the grids (these grids are called <a href="https://en.wikipedia.org/wiki/Magic_square">Magic Squares</a>).</p>
+
+<p><img src="/assets/pokemon_puzzle.png" alt="The puzzle ingame." /></p>
+
+<p>There are two type of operations in the grids.
+First, it is possible to move a column down or up.
+All the columns can be moved independently and when a digit is on the border of the grid, moving the olumn places it at the other extremity.
+Second, it is possible to move the rows left or right.
+For this operation, the two grids are connected together and when a digit leaves one grid, it appears on the second one.
+This interconnection between the grids make the puzzle challenging as trying to satisfy one of the row or column on one grid may perturb the other one.
+Here is one example for each operation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 9 6  .  1 2 5                                         5 9 6  .  1 2 5
+5 8 3  .  7 7 9   Move First Column Left Grid Up -&gt;     2 8 3  .  7 7 9
+2 4 1  .  6 3 8                                         4 4 1  .  6 3 8
+
+-----------------------------------------------------------------------
+
+5 9 6  .  1 2 5                                         5 9 6  .  1 2 5
+2 8 3  .  7 7 9   Move Second Row Left -&gt;               8 3 7  .  7 9 2
+4 4 1  .  6 3 8                                         4 4 1  .  6 3 8
+
+</code></pre></div></div>
+
+<h2 id="how-i-solve-it">How I solve it</h2>
+
+<p>To solve this puzzle, I decided to use a type of program called <a href="https://en.wikipedia.org/wiki/SAT_solver">SAT Solvers</a>.
+These programs are made to automatically solve logic formula: they search for <strong>true/false</strong> values for logic variables to make the formula true.
+For instance, if the formula is <code class="language-plaintext highlighter-rouge">(a =&gt; b) and c</code>, this formula would be true when <code class="language-plaintext highlighter-rouge">a = false, b = false or true, c = true</code> or <code class="language-plaintext highlighter-rouge">a = true, b = true, c = true</code>. 
+Finding the right values for the variables so that the formula is true is actually the goal of the so called SAT problem.</p>
+
+<p>For this method, our goal is to create an <em>encoding</em> of the puzzle, in this case define a logic formula that is true when a solution of the puzzle is found.</p>
+
+<hr />
+
+<h1 id="encoding-the-puzzle-into-a-logic-formula">Encoding the puzzle into a logic formula</h1>
+
+<p>The encoding of the problem consists in representing the sequence of operations performed on the grids with logic operations on logic variables, and ensuring that after the last operations the sums are verified on the rows and columns.
+There are two parts in this step.
+The first part is to decide what are the logic variables and how they represent the problem.
+Once it is decided, the variables need to be linked between each other through logic operations, which is the second part.</p>
+
+<h2 id="encoding-the-grids">Encoding the grids</h2>
+
+<p>The main variables of the problem will represent its <strong>states</strong>.
+In this context, the states of the puzzle are the two grids at different step of evolution.
+Indeed, we need to keep track of each evolution of the grid in the formula to make sure that every transformation is valid.</p>
+
+<p>To represent one grid in this problem, we can use 3*3 sets of 9 variables. For each cell of a grid, the 9 variables will represent all the digits, assuming the digit showing up in that cell will have its corresponding variable <strong>true</strong>.
+This representation can be used to encode the two grids at each step of the operations.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+-------------------------------
+|         |         |         |
+| v_0_0_k | v_0_1_k | v_0_2_k |
+|         |         |         |
+-------------------------------   k = {1,..,9}
+|         |         |         |
+| v_1_0_k | v_1_1_k | v_1_2_k |             / true if the cell at row i and column j = k 
+|         |         |         |   v_i_j_k =    
+-------------------------------             \ false if the cell at row i and column j != k 
+|         |         |         |
+| v_2_0_k | v_2_1_k | v_2_2_k |
+|         |         |         |
+-------------------------------
+
+</code></pre></div></div>
+
+<p>In order to represent multiple operations performed on the grids, we will need more than one state.
+Thus, we will decide a number <strong>n</strong> of states for our encoding, and create in total <strong>n</strong> group of state variables.
+The first state will then represent the initial grids (as seen on the in game picture), and the n-th state will be the two grids verifying the sum constraints.</p>
+
+<p>We will additionally add variables to represent the different operations performed on the grid.
+There will be in total 18 variables for each step (6 * 2 variables for the columns operations (column index, Up Down) and 3*2 variables for the rows (row index and Left/Right)).
+Hence, we will have (n-1) group of variables for the operations, one between each consecutive states:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (state_1, operations_1) -&gt; (state_2, operations_2) -&gt; ... -&gt; (state_n, operations_n)
+</code></pre></div></div>
+
+<h2 id="encoding-the-operations">Encoding the operations</h2>
+
+<p>Once the variables are decided, we need to link them with logic operations into a formula that would be true only if the values of the variables correspond to a solution of the puzzle.
+This step can be interpreted as adding <strong>constraints</strong> to our formula. The different constraints will be linked with a <strong>And</strong> operation so that they will be all satisfied when the formula is true.</p>
+
+<p>One way of looking at it this modeling task is to consider that with an empty formula, the values of the variables can be anything, it will always be true.
+However, this will not likely correctly represent the states of our puzzle (for instance we may have two digits true in the same cell).
+Hence, the logic operations will make sure that the representation is consistent.
+The constraints needed here can be divided into thee parts: 1) setting the initial state of the puzzle, 2) imposing the sum constraints on the last state and 3) creating the transitions between each state.</p>
+
+<h3 id="1-first-state-constraint">1) First state constraint</h3>
+
+<p>The first step is straightforward. Given the initial grids shown in the game (see picture), we will create a <strong>And</strong> operation between the digits that needs to be true and the negation of the digits that need to be false.
+For instance, for the upper left corner of the first grid, there is a 4, thus:
+ <code class="language-plaintext highlighter-rouge">v_0_0_4 = true and v_0_0_1 = false and v_0_0_2 = false and v_0_0_3 = false and v_0_0_5 = false and .. and v_0_0_9 = false</code> will be our constraint for this first cell.
+Since the variables are joined using a And, it is not necessary to make the true/false appear here, which gives:
+<code class="language-plaintext highlighter-rouge">v_0_0_4 and (not v_0_0_1) and (not v_0_0_2) and (not v_0_0_3) and (not v_0_0_5) and .. and (not v_0_0_9)</code> as a final constraint.
+This step can be repeated for all the cells of the initial state.</p>
+
+<h3 id="2-last-state-constraints">2) Last state constraints</h3>
+
+<p>For this last step, one difficulty is the translation of the numerical sum into a logic constraint. To simplify this step, we can introduce for each row, column and diagonal a set of 9 digit variables that will be independent from their position in the grid.
+From this, it is possible to enumerate all the subsets of 3 digits that sum up to 15 and proceed similarly to step 1) to enforce one of this sum to be verified.
+The digit variables can be linked to the grids from the last state by adding implications. For example <code class="language-plaintext highlighter-rouge">digit_5_row_0 =&gt; v_0_1_5 or v_0_2_5 or v_0_3_5</code>.</p>
+
+<h3 id="3-transition-constraints">3) Transition constraints</h3>
+
+<p>The last step is trickier.
+Here, we need to somehow verify through logic constraints that any modification occurring on the grids between two states is consistent regarding the puzzle’s rules.
+For this step we will once agin use implications, between consecutive states this time.
+For instance, taking the upper left corner cell of the first grid, we need to verify that the digit that is true at state i+1 is either the result of an operation or was already true at state i.
+In case the digit was true at state i, we also need to check that no operation was performed on the same row or column.</p>
+
+<p>For example, having a 3 in the cell at row 1 and column 0 implies either:</p>
+
+<ul>
+  <li>there was already a 3 and the second row and the first column did not move</li>
+  <li>the column moved and there was a 3 below or above</li>
+  <li>the row moved and there was a three before or after this position</li>
+</ul>
+
+<p>Encoding the column move would be done as following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                           -------------                 
+                           | 3 | _ | _ |                                  
+                           -------------                                   
+                           | _ | _ | _ |   and column operation Down               
+                           -------------
+-------------              | _ | _ | _ |
+| _ | _ | _ |              -------------     
+-------------               
+| 3 | _ | _ |    Implies        or
+-------------               
+| _ | _ | _ |              ------------- 
+-------------              | _ | _ | _ |
+                           -------------                               
+                           | _ | _ | _ |   and column operation Up    
+                           -------------    
+                           | 3 | _ | _ |      
+                           -------------    
+                               
+State n                     State n-1
+</code></pre></div></div>
+
+<p>For the operations on the row, we will see something like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                                        -------------   -------------
+                                        | _ | _ | _ |   | _ | _ | _ |
+                                        -------------   -------------
+                                        | _ | 3 | _ |   | _ | _ | _ |  and row operation Left
+                                        -------------   -------------
+-------------   -------------           | _ | _ | _ |   | _ | _ | _ |
+| _ | _ | _ |   | _ | _ | _ |           -------------   -------------
+-------------   -------------             
+| 3 | _ | _ |   | _ | _ | _ |  Implies                or
+-------------   -------------            
+| _ | _ | _ |   | _ | _ | _ |           -------------   ------------- 
+-------------   -------------           | _ | _ | _ |   | _ | _ | _ |
+                                        -------------   -------------
+                                        | _ | _ | _ |   | _ | _ | 3 |  and row operation Right
+                                        -------------   ------------- 
+                                        | _ | _ | _ |   | _ | _ | _ |   
+                                        -------------   ------------- 
+                               
+           State n                                State n-1
+</code></pre></div></div>
+
+<h1 id="lets-code-the-program">Let’s code the program</h1>
+
+<p>Now that the encoding is ready to be implemented, the last part consists in putting all the pieces together into one final program. 
+The program will take as input the digits in the two cells and a number of steps to solve the puzzle.
+From these data, it will automatically create the logic formula corresponding to the puzzle and will call a SAT solver to solve the formula.
+Once it is done, the program can extract the solution and display it in a human readable form.
+Without detailing everything in the implementations, I will still give few precisions.</p>
+
+<h2 id="writing-the-automatic-encoding">Writing the automatic encoding</h2>
+
+<p>Usually, the code necessary to implement an encoding is not the easiest to read and interpret.
+Nonetheless, having well documented data structure really helps in the process.
+The final goal of this task is the creation of the logic formula to be sent to the SAT solver.
+One important thing is that SAT solvers usually take as input a specific form of logic formulas called <a href="https://en.wikipedia.org/wiki/Conjunctive_normal_form">Conjunctive Normal Form</a>.
+Luckily, it is always possible to introduce new variable to transform any formula into this type.
+For this project, I used a piece of code that I wrote during my studies that specifically perform this transformation.
+It is based on that (approach)[https://en.wikipedia.org/wiki/Tseytin_transformation].</p>
+
+<h2 id="finding-a-suitable-sat-solver">Finding a suitable SAT solver</h2>
+
+<p>Finding a SAT solver able to solve the formula is not an easy task either.
+I first started to experiment with a number of state equals to 20 in the encoding.
+The resulting formula ends up having a very large number for logical variables, make it solution difficult to find.
+It is although good to know that SAT competitions take place every year to encourage the development of performent SAT solvers.
+I started looking at state of the art solvers from <a href="https://satcompetition.github.io/2022/">the 2022 edition</a> and I ended up selecting a solver called <a href="https://github.com/arminbiere/kissat">Kissat</a>. Kissat was able to solve the puzzle whin few minutes on my laptot.</p>
+
+<h2 id="final-code-and-solution">Final code and solution</h2>
+
+<p>The code that I wrote for this program is available on <a href="https://github.com/smbct/blog_code/tree/master/pokemon">github</a>.
+The folder contains a c++ program creating the encoding with a sequence of 20 states and calling the sat solver to solve the formula.
+It also contains an installation script which download the SAT solver and compile the program with gcc.</p>
+
+<p>Here is a solution I found with kissat (states only):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4 9 6     1 2 5         4 4 6     1 2 5         4 4 1     1 2 5        4 4 1     1 2 5        4 4 1     7 2 5         4 1 7     2 5 4        4 1 6     2 5 4        4 1 6     2 5 4 
+5 8 3     7 7 9   -&gt;    5 9 3     7 7 9   -&gt;    5 9 6     7 7 9   -&gt;   5 9 6     7 7 9   -&gt;   5 9 6     3 7 9    -&gt;   5 9 6     3 7 9   -&gt;   5 9 7     3 7 9   -&gt;   9 5 9     7 3 7    -&gt;   
+2 4 1     6 3 8         2 8 1     6 3 8         2 8 3     6 3 8        8 3 6     3 8 2        8 3 6     1 8 2         8 3 6     1 8 2        8 3 6     1 8 2        8 3 6     1 8 2 
+
+
+4 5 6     2 5 4         4 5 6     2 5 4         4 4 5     6 2 5        4 4 9     6 2 5        4 4 9     6 8 5         4 4 9     6 8 5        4 4 9     2 8 5        4 5 9     2 8 5 
+9 3 9     7 3 7    -&gt;   9 3 6     7 3 7   -&gt;    9 3 6     7 3 7   -&gt;   9 3 5     7 3 7   -&gt;   9 3 5     7 2 7    -&gt;   3 5 7     2 7 9   -&gt;   3 5 7     1 7 9   -&gt;   3 1 7     1 7 9    -&gt;
+8 1 6     1 8 2         8 1 9     1 8 2         8 1 9     1 8 2        8 1 6     1 8 2        8 1 6     1 3 2         8 1 6     1 3 2        8 1 6     6 3 2        8 4 6     6 3 2 
+
+
+4 4 9     2 8 5         4 9 2     8 5 4         4 9 2     8 3 4 
+3 5 7     1 7 9    -&gt;   3 5 7     1 7 9   -&gt;    3 5 7     1 5 9 
+8 1 6     6 3 2         8 1 6     6 3 2         8 1 6     6 7 2
+
+</code></pre></div></div>
+
+<p>This solution contains 18 states and has been found in 145 seconds on my laptop by the kissat solver.</p>
+
+<h1 id="final-word">Final word</h1>
+
+<p>We can see that tools such as SAT solvers are available for automatic reasoning and hard problem solving.
+Although this might not work all the time, having a try may usually be a (relatively fast) solution to obtain first hints into some problem.
+In this case, the encoding aspect is not easy as SAT solvers speak a relatively basic language (logic formulas) and are not the most suitable tools for reasoning with numbers and spatial data (such as grids).</p>
+
+<p>By searching on the internet it is possible to find much more elegant <a href="https://www.rebornevo.com/forums/topic/48625-magic-square-puzzle-guide/">solutions</a> to this problem.
+The fact that this problem ends up being quite challenging for SAT solvers is a interesting.
+The solving time may be improved by trying to reduce the size of the encoding.
+However, using solvers more expressive than SAT (for example linear programming) may help on this puzzle as it is not easy to be expressed in pure logic.
+There are also other automatic ways of solving it such as tree search algorithms like A* or Monte Carlo Tree Search.
+This type of algorithms was actually historically used for making AI for chess and alike games.</p>
+
+<p>A later interesting aspect of this puzzle is the process of its creation.
+Indeed mathematical puzzles can emerge from various ideas and topics and it is not possible to know if there is a solution until either one is found or it is proven impossible.
+In this example, it would have been possible to generate the puzzle by starting from the last state and applying reverse operations (as the operations are deterministic).
+However, this seems not to be the origin of this puzzle as discussed in the solution link I mentioned above, and the original story seems more engaging.
+Let’s see what would be my next challenging puzzles!</p>]]></content><author><name>smbct</name></author><category term="AI" /><category term="puzzle" /><category term="SAT" /><category term="logic" /><category term="puzzle" /><category term="games" /><category term="model-checking" /><summary type="html"><![CDATA[I recently came across an interesting logic puzzle found in a pokemon (unofficial) fangame. As everyone knows, Pokemon is a famous role playing game license from nintendo where your goal is to train small creatures that fight each other. While the core of pokemon gameplay is centered toward the training of pokemons, the player would encounter some logic puzzles on his way. For instance, the next image show one of these puzzles taken from pokemon emerald.]]></summary></entry><entry xml:lang="en"><title type="html">Can deep neural networks learn the rules of chess ?</title><link href="https://smbct.github.io/blog/chess-rules/" rel="alternate" type="text/html" title="Can deep neural networks learn the rules of chess ?" /><published>2022-05-30T10:00:00+02:00</published><updated>2022-05-30T10:00:00+02:00</updated><id>https://smbct.github.io/blog/chess-rules</id><content type="html" xml:base="https://smbct.github.io/blog/chess-rules/"><![CDATA[<p>As I recently defended my thesis, and since I am now looking for a job, I decided to dedicate to myself some time to study cutting edge computer science topics. Deep learning is one very famous (and somehow <a href="https://www.youtube.com/watch?v=fe9u6YQTsWY">controversial</a>) topic that I didn’t have the occasion to experiment with so far. Thus I started playing with dl frameworks such as pytorch and recently I decided to implement an old idea that I had back during my thesis: inducing the rules of chess using a machine learning algorithm.</p>
+
+<p>To be clear, the goal here is not to create an algorithm able to <strong>play</strong> chess such as <a href="https://www.deepmind.com/research/highlighted-research/alphago">alphago</a>, but rather to create an algorithm able to <strong>discover</strong> the rules, and able to propose the next moves from a given board configuration. I got this idea from my PhD work on inductive logic programming, a form of machine learning applied to logical models. For example, imagine that you are looking at two people playing an unknown game: is it possible to understand the rules just by looking people play ?</p>
+
+<hr />
+
+<h1 id="introduction">Introduction</h1>
+
+<p>For this project, I decided to use the deep learning framework <a href="https://pytorch.org/">pytorch</a>. I started by creating a python program that is able to show a board in different configurations using <a href="https://matplotlib.org/">matplotlib</a> with these <a href="https://commons.wikimedia.org/wiki/Category:PNG_chess_pieces/Standard_transparent">images</a>. I used the very nice <a href="https://python-chess.readthedocs.io/en/latest/">python-chess</a> package as a chess engine to simplify the work. With these elements, I was already able to visualize all the board configuration form a given game, with the possible moves for each piece (see below).</p>
+
+<p><img src="/assets/chess_rules/chess_interface.png" alt="The chess interface" /></p>
+
+<p>The chess interface.</p>
+
+<h2 id="the-dataset">The dataset</h2>
+
+<p>Since I needed a dataset for this project, I used this <em>csv</em> of <a href="https://www.kaggle.com/datasets/datasnaek/chess">chess games</a>, where the games are given in the form of lists of moves (easy to process with python-chess).</p>
+
+<p>At this stage, I decided to simplify the learning task because predicting the possible (legal) moves from a board configuration implies using a model with a <strong>varying output size</strong>, something difficult to achieve with deep neural nets. I choose to <strong>simplify</strong> the problem by predicting only the possible destinations for a given pieces, ignoring the interaction with the other pieces (which is quite cheating considering the initial idea, but interesting as a first step). I made a <strong>second simplification</strong> assuming that all the possible moves from the board position are known (which is not the case in my previous description since only one possible move can be seen when someone plays).</p>
+
+<p class="message">
+To sum up, if we take the illustration above, our main goal here is to produce a model able to predict a list of moves (the blue arrows) from a given board configuration (position of the pieces), assuming that from a given board configuration in the dataset, all the arrows are known.
+</p>
+
+<h2 id="fetching-the-model-inputsoutputs">Fetching the model inputs/outputs</h2>
+
+<p>In order to obtain a usable dataset for fitting the model, I generated all the board configurations from the moves of all the games in the csv. I then generated all the possible moves from these configurations and I subsampled the data to limit its size.</p>
+
+<hr />
+
+<h1 id="encoding-the-data">Encoding the data</h1>
+
+<p>A very important aspect of a deep learning application is the encoding of the data.
+More precisely, neural networks would not be able to process high level information such as a list of moves and a board configuration with piece types.
+For this reason, it is necessary to encode the data in such a way that the model will be able to link the input and the output through its complex computations.
+For instance, coding the piece type on the board with an integer won’t be efficient since it would be too difficult for the model to decompose the integer.</p>
+
+<h2 id="encoding-the-input">Encoding the input</h2>
+
+<p>In our case, the input consists in a board configuration plus a piece to move.
+An important aspect of chess is that the board is two-dimensional.
+This means that the moves of one piece depend on the content of its surrounding squares.
+For this reason, we are going to use <a href="https://deepai.org/machine-learning-glossary-and-terms/convolutional-neural-network">convolutional layers</a> for the model architecture, a type of function that is efficient for treating spatial data such as images (more on the model architecture below).
+This implies that the encoding should conserve the spatial organisation of the board (with two dimensional data structures).</p>
+
+<p>The input of the model is the hardest element to encode. As I said previously, piece types cannot be encoded as simple numbers, as they represent categorical variables.
+One popular way to encode categorical variables in deep learning is the <a href="https://deepai.org/machine-learning-glossary-and-terms/one-hot-encoding">one hot encoding</a>, consisting in a vector of 0 and 1, with only one index equal to one depending on the class that is coded.
+Our encoding here will be based on same principle, inspired from the encoding used in existing <a href="https://erikbern.com/2014/11/29/deep-learning-for-chess.html">chess AI’s</a> (including the alphazero model).
+The categorical input will be implemented as a spatial dimension of the board in order to help the model consider several piece types at the same time.
+Thus, the final encoding of a board will be a 3d array, where the depth dimension (depth = 2*6) represents the type of piece.
+By doing so, the model will be able to perform computations involving different types of pieces at the same time.
+You can visualize the idea of the board encoding on the figure below, where the first board layers have been shown for the white pieces.</p>
+
+<p><img src="/assets/chess_rules/chess_encoding.png" alt="The input encoding." /></p>
+
+<p>Additionally to the board, we will also represent as input the piece to move.
+This will be encoded as a two dimensional 0/1 8x8 array, where the unique value 1 corresponds to the piece to move.
+At the end, the input is a 3 dimensional array containing 8x8x(6+6+1) = 832 values.
+This seems expensive but this representation is really important for the model.</p>
+
+<h2 id="encoding-the-output">Encoding the output</h2>
+
+<p>Our model output consists in all the possible moves for the piece given as input.
+Since we are not considering encoding information such as piece capture, the output will simply consist of a 0/1 8x8 array with a 1 value for each possible destination of the piece.</p>
+
+<hr />
+
+<h1 id="creating-the-model-architecture">Creating the model architecture</h1>
+
+<p>The model architecture is another crucial step here.
+Once again, I took inspiration from existing models such as <a href="https://www.deepmind.com/blog/alphazero-shedding-new-light-on-chess-shogi-and-go">alphazero</a> for this design.
+The first layer is a 3d convolutional layer applied to the input, with a kernel size equal to 13x3x3 so that all the depth layers are considered.
+After that, the model contains 4 successive 2d convolutional modules, with a convolutional layer, a batch normalization layer and a zero padding layer.
+This way, all the intermediate inputs are 8*8 arrays, and I also introduced residual connections between the these modules.
+Finally, there are two transposed convolutional layers to obtain a final 8x8 output.</p>
+
+<p><img src="/assets/chess_rules/chess_model.jpg" alt="The model architecture." /></p>
+
+<hr />
+
+<h1 id="testing-the-model">Testing the model</h1>
+
+<p>Once the architecture is decided, it is time to fit the model on our dataset.
+In this case, I used the cross entropy loss function which is usually applied to classification problems.
+I then used the default stochastic gradient descent algorithm for the optimization of the model, with a batch size equal to 150.</p>
+
+<h2 id="model-training">Model training</h2>
+
+<p>Training the model was a little bit fastidious due to some bugs in the input encoding.
+I finally obtained a working version achieving an accuracy of 97% on the test set, which is quite satisfying (the accuracy was computed as the number of correct values in the output).
+I experimented with several parameters such as the number of outputs in the convolutional layers, the loss function, the optimization algorithm, and so on…
+Initially, the dataset was composed of only the boards from the first games of the <em>csv</em> files, but I realized that it was not diverse enough since a board configuration would not evolve much from few moves
+For the other parameters, I did not find any big differences between the trainings.</p>
+
+<h2 id="model-testing">Model testing</h2>
+
+<p>For testing the trained model, I selected a game and plotted both the moves proposed from the rules (blue arrows) and the moves proposed by the deep neural network (red arrows).
+You can find a first comparison on the image below.
+The result is quite satisfying, although it is not perfect.
+It really gives the impression that the model learnt something, and that it is able to generalize on the data.</p>
+
+<p><img src="/assets/chess_rules/chess_comp2.png" alt="First comparison between predicted moves versus legal moves." /></p>
+
+<h2 id="observations">Observations</h2>
+
+<p>You will find below few board comparisons from one particular game.
+It is interesting to notice several particularities.
+For instance the model allows pawns to move diagonally, which has been probably inferred from the captures.
+The moves from the rooks are partially well predicted, but these seem difficult to compute
+We can also see that illegal moves are not managed at all by the model.</p>
+
+<p><img src="/assets/chess_rules/chess_comp1.png" alt="Second comparison between predicted moves versus legal moves." /></p>
+
+<hr />
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>To conclude on this deep learning application, I find it interesting to see the good accuracy of the model at the end, and I am confident that the model can be further improved.
+It will be for instance interesting to find a way to encode the capture and to infer the rules only from the moves of a set of games (instead of using the rules to generate all the moves each time).
+Although this particular application does not seem to be really practically useful, it is still interesting to see what these models are capable of.
+I personally find it fascinating that deep learning models are somehow able to make sense of very complex patterns such as board configurations.
+This latter point was already shown by the unreasonable efficiency of the alphago model for the game of go.
+Indeed, looking for the best move for a board game was a problem traditionally treated with tree search approaches.
+Seeing the efficiency of neural nets makes me think we are far from understanding the possible connections between continuous models and symbolic computations.</p>
+
+<h2 id="related-works">Related works</h2>
+
+<p>Following this project, was curious to see if such problem has already been treated. So I searched for similar attempts online, even if my initial goal was to become more familiar with deep learning.
+We may compare this task to the <a href="https://www.deepmind.com/blog/alphazero-shedding-new-light-on-chess-shogi-and-go">alphazero</a> algorithm which is able to learn playing a game board from scratch.
+However, this is somehow different because alphazero is not designed to output a <a href="https://stackoverflow.com/questions/47847461/how-to-enforce-rules-like-move-legality-in-chess-at-the-output-of-a-neural-netwo">list of moves</a>.
+So we may still think that from its playing, this type of model is somehow able to understand the rules, but whether it may output them remains unclear.
+I found this <a href="https://www.reddit.com/r/chess/comments/p7gpgg/can_a_modern_machine_learning_algorithm_learn_the/">discussion</a> on the topic, and that <a href="https://softwareengineering.stackexchange.com/questions/92189/learning-the-rules-of-chess">one</a>, but no other deep learning model for the rules of chess.</p>
+
+<h2 id="source-code">Source code</h2>
+
+<p>The source code of this project is available on <a href="https://github.com/smbct/blog_code.git">github</a> (folder <code class="language-plaintext highlighter-rouge">chess_rules</code>).
+The code includes the assets used for the graphical interface and the trained model with the selected architecture.
+Please feel free to re-use and improve the model (and let me know if you are able to improve the result and get new ideas) !</p>]]></content><author><name>smbct</name></author><category term="AI" /><category term="deep-learning" /><category term="chess" /><category term="games" /><category term="combinatorics" /><summary type="html"><![CDATA[As I recently defended my thesis, and since I am now looking for a job, I decided to dedicate to myself some time to study cutting edge computer science topics. Deep learning is one very famous (and somehow controversial) topic that I didn’t have the occasion to experiment with so far. Thus I started playing with dl frameworks such as pytorch and recently I decided to implement an old idea that I had back during my thesis: inducing the rules of chess using a machine learning algorithm.]]></summary></entry><entry xml:lang="fr"><title type="html">Soutenir sa thèse en comodal en 2022</title><link href="https://smbct.github.io/blog/soutenance-these/" rel="alternate" type="text/html" title="Soutenir sa thèse en comodal en 2022" /><published>2022-04-26T18:00:00+02:00</published><updated>2022-04-26T18:00:00+02:00</updated><id>https://smbct.github.io/blog/soutenance-these</id><content type="html" xml:base="https://smbct.github.io/blog/soutenance-these/"><![CDATA[<p>Une soutenance de thèse est un évènement particulier que l’on ne veut absolument pas louper en tant que doctorant/futur docteur. Il s’agit en effet de convaincre le jury de thèse de la qualité de ses contributions scientifiques, mais également de faire bonne figure devant sa famille et ses amis ! Des répétitions sont évidemment au programme afin de proposer la présentation de ses travaux la plus claire et fluide possible, tout en respectant les 45 minutes qui nous sont accordées pour la présentation.</p>
+
+<p>Cependant, covid oblige, les soutenances ont quelque peu évolué depuis 2020. Par chance, ma soutenance ayant eu lieu en mars 2022, j’ai eu la possibilité de la réaliser dans un amphithéâtre contrairement à d’autres qui ont été contraint de la faire depuis leur maison… Celle-ci était ouverte au public, à l’instar de la quasi totalité des soutenances. Par ailleurs, comme presque tous les doctorants qui soutiennent désormais, j’ai dû  m’adapter à la présence de 2 membres de mon jury (sur 6) en distanciel. Cela m’a donné l’occasion de réfléchir avec plusieurs amis à une installation garantissant la meilleure expérience possible. Voici donc quelques pistes pour soutenir sa thèse à l’ère covid.</p>
+
+<h1 id="organisation-de-la-soutenance">Organisation de la soutenance</h1>
+
+<p>Les soutenance de thèse suivent généralement la même organisation. Le doctorant défend son travail devant un public composé du jury, dans les premiers rangs, et de personnes extérieures. La soutenance se déroule en deux parties. La première partie consiste en une présentation de 45 minutes sur les travaux réalisés et la deuxième partie, qui enchaîne directement et pouvant durer plusieurs heures, consiste en une série de questions posées par chacun des membres du jury. Suite à ces questions a lieu la délibération du jury. Dans mon cas, la délibération a eu lieu dans l’amphithéâtre ce qui a contraint toutes les personnes extérieures au jury à le quitter. Enfin, lorsque la délibération est terminée, toutes les personnes retournent dans l’amphithéâtre pour l’annonce des résultats.</p>
+
+<p>Au niveau du co-modal, il y a donc plusieurs précautions à prendre. Dans un premier temps pour la présentation, il faut un moyen de filmer le doctorant et d’en capter le son pour les personnes à distance. Mais ce n’est pas tout. Puisque le jury participe également à la soutenance, il est nécessaire de capter le son et la vidéo des membres du jury en présentiel pour les personnes à distance. Enfin, il est nécessaire de retransmettre dans l’amphithéâtre le son et la vidéo des membres du jury en distanciel. Pour l’annonce des résultats à la fin de la délibération, il peut également être intéressant de filmer le jury et le doctorant en même temps. De manière générale, l’organisation entre le jury et le doctorant demande ainsi d’être capable de filmer et capter le son à deux endroits différents dans l’amphithéâtre, et à retransmettre dans tout l’amphithéâtre le son et la vidéo des membres à distance.</p>
+
+<h1 id="matériel-disponible-et-installation-générale">Matériel disponible et installation générale</h1>
+
+<p>Ma soutenance de thèse s’est déroulée dans un amphithéâtre dans lequel il y avait un peu de matériel à disposition. Au niveau du matériel, l’amphithéâtre était équipé avec un vidéoprojecteur, des enceintes et plusieurs micros. Il était possible d’utiliser les enceintes et le vidéoprojecteur à partir d’un pc via un câble HDMI. Par ailleurs, il n’y avait pas la possibilité de récupérer le signal des micros en entrée dans un ordinateur car celui-ci était simplement envoyé dans les enceintes de l’amphi. Enfin, il y avait également un système de vidéo-conférence nomade avec un écran, une caméra, un micro et une enceinte.</p>
+
+<h1 id="solution-mise-en-place">Solution mise en place</h1>
+
+<p>La solution mise en place a le défaut d’être complexe mais celle-ci a relativement bien fonctionné le jour de la soutenance. Je vais découper les différents aspects en plusieurs parties, et j’ai ajouté un schéma récapitulatif de l’installation à la fin du billet. Pour commencer, j’ai effectué ma présentation de soutenance sur un pc portable équipé d’ubuntu, avec un support de présentation pdf généré par beamer (powerpoint version LaTex). Pour la partie distanciel, j’ai créé une réunion Zoom gérée sur mon ordinateur de présentation.</p>
+
+<h2 id="privilèges-zoom">Privilèges Zoom</h2>
+
+<p>Premier détail important, il a fallu trouver un moyen d’empêcher les personnes extérieures au jury d’activer micro ou caméra pendant la présentation. Par chance, une option permettait de le faire dans la réunion Zoom avec le compte Zoom utilisé (option sécurité). Malheureusement cette option empêche tout le monde d’activer son son/image, y compris le jury. Pour y remédier, nous avons fait passé les 2 membres à distance en co-hôtes afin qu’ils soient les seuls à pouvoir communiquer. Par sécurité, une personne supplémentaire m’avait aidé en gardant un œil sur le Zoom durant toute la soutenance.</p>
+
+<h2 id="le-son">Le son</h2>
+
+<p>Concernant le son, je n’ai pas eu besoin de micro pour amplifier la voix. La difficulté principale consistait par ailleurs à capter à la fois mon son et celui du jury à l’intérieur de l’amphi. Le plus simple est d’utiliser deux micros via deux ordinateurs connectés à la même réunion Zoom (ou en utilisant le système de vidéoconférence nomade disponible dans l’amphhi), mais lors des tests, cette solution conduisait à un echo et un effet larsen très nuisible. Pour y remédier, j’ai décidé d’utiliser deux micros usb connectés sur mon pc, et mixés au niveau logiciel. Pour la partie logiciel, j’ai trouvé la solution <a href="https://askubuntu.com/questions/868817/collecting-and-mixing-sound-input-from-different-microphones">ici</a>. Par contre, cette solution est valable uniquement si le jury n’est pas trop éloigné, car les câbles usb sont limités à 5m (on pourrait aussi utiliser un micro sans fil ceci dit). Au niveau de la retransmission dans l’amphithéâtre, le son du Zoom était directement envoyé par mon pc dans les enceintes en HDMI.</p>
+
+<h2 id="limage">L’image</h2>
+
+<p>Concernant la retransmission de l’image, j’ai utilisé deux caméras : une pour moi et une pour le jury. Me concernant, j’avais prévu d’utiliser un appareil photo réflexe en tant que webcam pour la présentation (car la batterie ne tient pas beaucoup plus de 45 minutes), et de switcher sur la webcam du pc ensuite. La solution logicielle est <a href="https://maximevaillancourt.com/blog/canon-dslr-webcam-debian-ubuntu">ici</a>. Pour le jury, c’est la webcam du système Zoom nomade qui a été utilisée (le système était donc connecté à la réunion Zoom de la soutenance). Cette caméra s’est révélée pratique car elle se contrôlait via une télécommande gérée par la personne qui s’occupait également du Zoom. Concernant les membres à distance, l’image était envoyée sur le système Zoom nomade. Les personnes à distance n’étaient donc pas visibles pour tout le monde dans l’amphi mais nous avions considéré que ce n’était pas essentiel car ils étaient entendus à partir des enceintes.</p>
+
+<p>Enfin, ma présentation pdf était projetée via le vidéoprojecteur et partagée via le partage d’écran Zoom. J’ai utilisé le super programme <a href="https://github.com/Cimbali/pympress">pympress</a> afin de dupliquer les slides sur mon écran de pc, pour ne pas avoir à me retourner. Ce programme permet notamment d’avoir un timer, de visualiser les slides suivantes et d’utiliser un pointeur virtuel. Au niveau du pointeur, c’est justement celui de pympress que j’ai utilisé car un pointeur laser physique n’aurait pas été visible pour les personnes à distance. Pour ce faire, j’ai utilisé un clavier et une souris posés sur une table haute juste devant moi, ce qui me permettait de rester un minimum mobile (contrairement à si j’avais été assis). J’ai par ailleurs également réalisé un petit <a href="https://github.com/smbct/pympress.git">fork</a> de pympress après coup afin de rajouter une fonctionnalité intéressante pour les animations beamer.</p>
+
+<p><img src="/assets/schema_soutenance.png" alt="Schéma de la soutenance" />
+Schéma de l’installation de ma soutenance.</p>
+
+<h1 id="bilan-et-améliorations-possibles">Bilan et améliorations possibles</h1>
+
+<p>De manière général, j’ai été très content de cette installation, et la soutenance s’est très bien déroulée. J’ai seulement eu quelque soucis au début car je n’arrivais pas réaliser le mixage des deux micros (un reboot a résolu le problème), et l’appareil photo réflexe n’a pas fonctionné (j’ignore pourquoi et je suis donc passé à la webcam du pc directement). Ces désagréments m’ont malheureusement fait oublier d’activer le partage d’écran via Zoom au début de la soutenance, ce qui a vite été corrigé grâce à la manifestation d’une personne du jury à distance. J’avais par ailleurs prévu d’enregistrer la présentation en utilisant la fonction de Zoom mais ces soucis techniques m’ont également fait oublier de lancer l’enregistrement.</p>
+
+<p>Au niveau des améliorations, je pense que la partie logicielle est trop sensible car le moindre soucis technique peut rendre la soutenance infaisable. Le plus intéressant me semble l’utilisation des deux micros, même si nous avons également testé la soutenance à un seul micro qui pouvait fonctionner également. Pour améliorer l’installation, on peut imaginer utiliser une table de mixage à laquelle serait relié les différents micros, et même avoir un micro cravate pour gagner en mobilité, mais cela demande plus de matériel. Il serait également intéressant d’avoir un pointeur laser à la fois physique et numérique mais cela semble compliqué à mettre en place en pratique.</p>
+
+<p>Évidemment, une soutenance plus simple aurait largement été possible mais je dois avouer que nous avons été pris au jeu de proposer le mise en place la plus intéressante possible. Dans tous les cas, pensez à privilégier la simplicité afin d’éviter les pannes de dernière minute. La répétition de son installation permet également de ne pas avoir à réfléchir aux aspects techniques le jour de la soutenance, afin de se concentrer sur le contenu de la présentation.</p>]]></content><author><name>smbct</name></author><category term="astuces" /><category term="these" /><category term="doctorat" /><category term="covid" /><category term="comodal" /><summary type="html"><![CDATA[Une soutenance de thèse est un évènement particulier que l’on ne veut absolument pas louper en tant que doctorant/futur docteur. Il s’agit en effet de convaincre le jury de thèse de la qualité de ses contributions scientifiques, mais également de faire bonne figure devant sa famille et ses amis ! Des répétitions sont évidemment au programme afin de proposer la présentation de ses travaux la plus claire et fluide possible, tout en respectant les 45 minutes qui nous sont accordées pour la présentation.]]></summary></entry><entry xml:lang="fr"><title type="html">SAT, un problème de logique</title><link href="https://smbct.github.io/blog/SAT-logique/" rel="alternate" type="text/html" title="SAT, un problème de logique" /><published>2018-03-04T17:00:00+01:00</published><updated>2018-03-04T17:00:00+01:00</updated><id>https://smbct.github.io/blog/SAT-logique</id><content type="html" xml:base="https://smbct.github.io/blog/SAT-logique/"><![CDATA[<p>Afin de pouvoir parler un peu plus en détails de mon stage, je voulais aujourd’hui présenter un problème très connu en info. Ce problème, SAT de son petit nom, tente de répondre à la question suivante : pour une formule logique donnée, existe-il une affectation des variables de cette formule permettant de la rendre vraie ?</p>
+
+<p>Quelques explications s’imposent…</p>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<h1 id="logique-maths-et-info">Logique, Maths et Info</h1>
+
+<p>Il peut paraître un peu bizarre de parler de logique sur un blog d’informatique. En info, on essaie de résoudre des problèmes de calculs divers, allant du calcul de plus courts chemins à l’analyse d’avis clients sur les réseaux sociaux.</p>
+
+<p>Seulement, les problèmes de logiques sont également des problèmes calculatoires. La logique à laquelle on s’intéresse ici est la logique propositionnelle. Elle comprend un ensemble de règles qui nous permettent de définir ces problèmes de calcul.</p>
+
+<blockquote class="prompt-info">
+  <p>L’intérêt dans tout ça ?</p>
+</blockquote>
+
+<p>L’intérêt d’étudier ce genre de problème est multiple. Tout d’abord, d’un point de vue théorique, ce sont les premiers problèmes que l’on a démontré comme étant “difficiles”. Cela signifie qu’on sait ces problèmes particulièrement compliqués à résoudre. Tellement compliqués que si quelqu’un trouvait une méthode extrêmement rapide pour y arriver, cela aurait un impacte majeur dans le monde, mais ça c’est un autre sujet.</p>
+
+<p>Cela rejoint le côté pratique de la chose. On est capable de montrer que SAT est équivalent à beaucoup d’autres problèmes, il s’agit juste d’une histoire de transformation. Le problème à beau être difficile à résoudre, des chercheurs ont tout de même créé des méthodes <strong>très</strong> efficaces pour les résoudre. Tellement efficaces qu’il peut être intéressant de les utiliser afin de résoudre ces autres problèmes. Et c’est justement <strong>ça</strong> qui nous intéresse ici !</p>
+
+<h1 id="sat--mode-demplois">SAT : mode d’emplois</h1>
+
+<p>Entrons dans le vif de sujet. SAT s’intéresse à ce qu’on appelle la logique propositionnelle, une des formes de logique les plus simples et brutes. J’ai parlé plus haut de formule et il faut bien comprendre par là formule au sens mathématique. Voici donc les différents ingrédients de ces formules.</p>
+
+<h2 id="les-variables">Les variables</h2>
+
+<p>Qui dit formule dit variable, et on va commencer par ça. Une variable logique est donc une variable au sens mathématique. Sa particularité est qu’elle peut prendre deux valeurs : <em>Vrai</em> ou <em>Faux</em>. Une variable logique représente donc un fait, dont on ne sait pas encore si il est avéré ou non. Par exemple, on pourrait définir une variable <strong>sport</strong> qui vaudrait <em>vraie</em> si on a prévu une séance de sport, et <em>faux</em> sinon. On peut de la même manière avoir une variable <strong>restau</strong> qui vaudrait <em>vraie</em> si on a prévu d’aller manger dans un restaurant.</p>
+
+<h2 id="les-opérateurs">Les opérateurs</h2>
+
+<p>La deuxième chose que l’on trouve dans une formule, ce sont les opérateurs, qui vont entre autre lier les variables entre elles. Des opérateurs logiques, il en existe énormément. Cependant, pour la logique propositionnelle, on va se limiter à 3 : le <strong>non</strong>, le <strong>et</strong> et le <strong>ou</strong>.</p>
+
+<p>Les résultat de l’application d’un opérateur logique peut être représenté par une <strong>table de vérité</strong>. Cette table indique les valeurs possibles pour les variables et le résultat de l’opération correspondant aux variables. Ces ce que l’on va utiliser pour expliquer la sémantique des opérateurs.</p>
+
+<ul>
+  <li>
+    <h3 id="le-non">Le <strong>non</strong></h3>
+  </li>
+</ul>
+
+<p>L’opérateur <strong>non</strong> (noté \(\neg\)) est l’opérateur de négation. Cet opérateur s’applique a une seule variable (il est unaire). Il a pour but d’exprimer la négation de la variable. La formule logique sera donc vrai uniquement si la variable est fausse. La table de vérité de cet opérateur est donc :</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>\(a\)</td>
+      <td>\(\neg a\)</td>
+    </tr>
+    <tr>
+      <td>\(0\)</td>
+      <td>\(1\)</td>
+    </tr>
+    <tr>
+      <td>\(1\)</td>
+      <td>\(0\)</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <h3 id="le-et">Le <strong>et</strong></h3>
+  </li>
+</ul>
+
+<p>L’opérateur <strong>et</strong> (noté \(\land\)) indique une conjonction entre deux variable. Il exprime le fait que les deux variables doivent avoir la valeur <em>vraie</em>. La formule \(sport \land restau\) modélise le fait d’aller à la fois au sport et au restau. La table de vérité est alors :</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>\(sport\)</td>
+      <td>\(restau\)</td>
+      <td>\(sport \land restau\)</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <h3 id="le-ou">Le <strong>ou</strong></h3>
+  </li>
+</ul>
+
+<p>L’opérateur <strong>ou</strong> (noté \(\lor\)) modélise une disjonction. Il représente le fait que l’une des deux variables peut être vraie pas pas nécessairement les deux en même temps. Cela donne :</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>\(sport\)</td>
+      <td>\(restau\)</td>
+      <td>\(sport \lor restau\)</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote class="prompt-info">
+  <p>Notez bien que le ou que l’on décrit ici n’a pas le même sens que celui que l’on utilise quotidiennement. En effet, si je pose la question : “tu vas au sport ou au resto ?” on ne s’attend pas à ce que les deux faits soit avérés, mais seulement un des deux. Il s’agit d’un ou “exclusif”.</p>
+</blockquote>
+
+<ul>
+  <li>
+    <h3 id="limplication">L’implication</h3>
+  </li>
+</ul>
+
+<p>L’implication (\(\rightarrow\)) est un opérateur également très utile qui permet de modéliser une conéquence. Il signifie que si la fait correspondant à la cause est <em>vrai</em>, alors celui correspondant à la conséquence est <em>vrai</em> aussi. Par exemple, si je veux représenter le fait que je ne veuille pas aller au restau après le sport, je peux utiliser la formule : \(sport \rightarrow \neg restau\). Pour que la formule soit <em>vraie</em> dans le cas ou sport est <em>vrai</em>, il faudra donc que \(\neg restau\) soit <em>vrai</em>, ce qui revient à \(restau\) <em>faux</em>. La table de cette opérateur donne :</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>\(a\)</td>
+      <td>\(b\)</td>
+      <td>\(a \rightarrow b\)</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>L’implication peut ne pas être considérée comme un ingrédient de base du calcul propositionnel. En effet, il s’exprime très simplement à l’aide des autres opérations. Par exemple, \(a \rightarrow b\) peut être réécrit en \(\neg a \lor b\) (on peut le vérifier facilement avec une table de vérité). De la même manière, on peut se passer de <strong>et</strong> en utilisant uniquement des <strong>ou</strong> et des <strong>non</strong> et inversement pour les <strong>ou</strong>. Cependant, considérer touts ces opérateurs à la fois facilite les modélisation.</p>
+
+<h1 id="ecrire-et-manipuler-des-formules-sat">Ecrire et manipuler des formules SAT</h1>
+
+<p>Maintenant que nous savons de quoi est constituée une formule SAT, on va pouvoir regarder comment faire des calculs dessus en pratique.</p>
+
+<p>Pour les exemples suivants, on peut définir les variables logiques $a$, $b$, $c$, $d$ et $e$.</p>
+
+<h2 id="vérifier-la-validité-dune-formule">Vérifier la validité d’une formule</h2>
+
+<p>Une première chose que l’on peut faire est vérifiée si une formule est vraie étant donné une affectation pour ses variables. Partons par exemple de la formule : \(((a \land \neg b) \rightarrow c) \lor d\)</p>
+
+<p>Si je fixe \(a = Faux\), \(b = Vrai\), \(c = Vrai\) et \(d = Vrai\), qu’obtient-on ?</p>
+
+<p>Pour répondre à cette question on peut procéder par étape. Tout d’abord, on peut remplacer les variables par leurs valeurs dans la formule : \(((F \land \neg V) \rightarrow V) \lor V\)</p>
+
+<p>Ensuite, on va évaluer chacune des opérations en partant des opérations les plus <em>à l’intérieur</em> de la formule, c’est à dire celles dont les opérandes ne sont pas composées de sous-opérations. Pour savoir comment évaluer, il suffit de regarder les tables de vérité. La première chose à évaluer est donc \(\neg V\) qui est égale à \(F\). On se retrouver ensuite avec \(F \land F\) que l’on peut replacer par \(F\).</p>
+
+<p>A ce stade, la formule a la forme : \((F \rightarrow V) \lor V\). On poursuit donc en évaluant \(F \rightarrow V\) qui est vrai. Il reste enfin la dernière opération à évaluer : \(V \lor V\) qui est Vraie. On a donc montré que la formule était vraie pour cette affectation de variable.</p>
+
+<p>Vous pouvez noter que cette vérification est très simple à faire. Elle peut aisément être implémentée dans une programme et ce n’est pas cet aspect qui rend le problème difficile.</p>
+
+<h2 id="trouver-des-affectations-satisfaisantes">Trouver des affectations satisfaisantes</h2>
+
+<p>Une autre chose que l’on cherche souvent à faire est trouver les affectations de variables pour lesquelles la formule est vraie.</p>
+
+<p>Vous avez peut-être remarqué dans la vérification précédente qu’on aurait pu répondre Vrai directement en regardant simplement la valeur de \(d\) dès le début. On va se servir de ça ici pour trouver déjà affirmer que peu importe la valeur des autres variables, à partir du moment où \(d\) est vraie, la formule sera vraie.</p>
+
+<blockquote class="prompt-info">
+  <p>Et si d est faux, ça donne quoi ?</p>
+</blockquote>
+
+<p>Venons-en justement. Il lorsque \(d\) est faux, la partie droite de a formule : \((a \land \neg b) \rightarrow c\) doit être vraie. On peut reprendre la table de vérité de l’implication pour se rendre compte que lorsque la partie gauche est fausse, la formule est vraie. La formule sera donc vérifiée lorsque \(a \land \neg b\) est faux, c’est à dire lorsque \(a\) est faux ou \(b\) est vrai (vous pouvez vérifier par vous-même !).</p>
+
+<p>Enfin, si la partie gauche de la dernière implication est vraie, alors $c$ doit être vraie, ce qui nous donne la dernière affectation : \(a = V\), \(b = F\), \(c = V\) et \(d = F\). Et c’est tout, on a énuméré de manière implicite chaque affectation permettant de rendre la formule vraie.</p>
+
+<h2 id="résolution-de-sat">Résolution de SAT</h2>
+
+<p>Dans la partie précédente, on a vu comment procéder de manière méthodologique pour satisfaire la formule. C’est justement ce calcul qui nous intéresse en pratique. Cependant, il y a des cas où cette méthodologie se ramène à tester toutes les affectations possibles de variables. C’est particulièrement embêtant car des affectations possibles, il y en a trop. Pour \(n\) variables, elles sont au nombre de \(2^n\). Cela signifie qu’a partir de 20 variables, on dépasse déjà le million d’affectation (et je peux vous assurer que 20 variables, c’est très peu !).</p>
+
+<p>Heureusement, les cas problématiques sont très difficiles à rencontrer en pratique. En effet, la modélisation en SAT des problèmes que l’on cherche à résoudre donne à la formule une structure particulière qui est en général plus facile à résoudre. Il faut aussi compte sur le fait que les solveurs SAT ont a la réputation d’être très très efficaces et permettent de résoudre en pratique des formules énormes. C’est d’ailleurs la raison pour laquelle on transforme nos problèmes en problèmes SAT.</p>
+
+<h1 id="sat-pour-résoudre-des-problèmes">SAT pour résoudre des problèmes</h1>
+
+<p>J’en parle depuis le début, ce qui nous intéresse avec SAT, c’est la possibilité de l’utiliser pour résoudre d’autres problèmes. On appel cela un <em>encodage SAT du problème</em>. Pour illustrer cela, je vous propose de résoudre la petite énigme <a href="http://matoumatheux.ac-rennes.fr/tous/qui/possede.htm">suivante</a>.</p>
+
+<h2 id="les-variables-1">Les variables</h2>
+
+<p>La première étape pour faire un encodage SAT est de déterminer les variables. Il n’y a en général pas qu’une bonne réponse et trouver les bonnes variables est une affaire de savoir faire.</p>
+
+<p>Pour définir les variables ici, on peut étudier les différents <em>choix</em> ou <em>possibilités</em> de réponse que nous avons face au problème. La difficulté de se problème réside dans sa combinatoire, c’est à dire le nombre de combinaisons d’éléments de réponse. Un élément de réponse dans ce cas-ci est une proposition de la forme : tel objet va avec telle personne. C’est justement ça que l’on va utiliser comme variable.</p>
+
+<p>Les variables que l’on peut définir sont donc :</p>
+
+<ul>
+  <li>\(v_g\) valant vraie si Valérie possède la guitare</li>
+  <li>\(s_g\) valant vraie si Sylvie possède la guitare</li>
+  <li>\(v_l\) valant vraie si Valérie possède le luth</li>
+  <li>\(s_l\) valant vraie si Sylvie possède le luth</li>
+  <li>\(v_f\) valant vraie si Valérie possède le ballon de foot</li>
+  <li>\(s_f\) valant vraie si Sylvie possède le ballon de foot</li>
+  <li>\(v_t\) valant vraie si Valérie possède la balle de tennis</li>
+  <li>\(s_t\) valant vraie si Sylvie possède la balle de tennis</li>
+  <li>\(v_{cn}\) valant vraie si Valérie possède le chien</li>
+  <li>\(s_{cn}\) valant vraie si Sylvie possède le chien</li>
+  <li>\(v_{ct}\) valant vraie si Valérie possède le chat</li>
+  <li>\(s_{ct}\) valant vraie si Sylvie possède le chat</li>
+</ul>
+
+<p>On pourrait ici se passer de certaines variables (je vous laisse trouver comment) mais les expliciter toutes dans le modèle rend la modélisation plus claire.</p>
+
+<h2 id="contraintes-du-problème">Contraintes du problème</h2>
+
+<p>Un peu comme en programmation linéaire, on retrouve une partie que j’appelle <em>contrainte</em> dans la modélisation. Ici, ce sont des formules logiques qui vont lier les variables entre elles et faire respecter les conditions du problème.</p>
+
+<h3 id="contrainte-1">Contrainte 1</h3>
+
+<p>La première contrainte nous apprend que si Valérie possède la guitare, le chat doit être avec la balle de tennis, c’est à dire qu’ils sont possédés par la même personne. La forme “Si… alors…” est typiquement une implication. En effet, la seule chose qui ne sera pas possible dans cette indication est que Valérie possède la guitare et que le chat ne soit pas avec la balle de tennis (une seule possibilité d’obtenir faux avec l’implication, cf tables de vérités).</p>
+
+<p>Pour représenter cette contrainte avec une formule logique, on peut d’abord voir comment écrire la partie droite : le chat est avec la balle de tennis. Avec nos variables, deux possibilités s’offrent à nous : \(v_{ch}\) et \(v_t\) sont vraies en même temps ou bien \(s_{ch}\) et \(s_t\) sont vraies en même temps. On va donc modéliser cette partie par : \((v_{ch} \land v_t) \lor (s_{ch} \land s_t)\).</p>
+
+<p>Le reste de la formule est facile à modéliser car il s’exprimer facilement à partir des variables définies. On obtient donc :</p>
+
+\[v_g \rightarrow ((v_{ct} \land v_t) \lor (s_{ct} \land s_t))\]
+
+<h3 id="contrainte-2">Contrainte 2</h3>
+
+<p>On remarque que la contraint 2 a la même forme que la première. Cela nous permet d’écrire les formules sans trop de peine. On obtient :</p>
+
+\[s_{ct} \rightarrow ((v_{cn} \land v_t) \lor (s_{cn} \land s_t))\]
+
+<h3 id="contrainte-3">Contrainte 3</h3>
+
+<p>La contrainte 3 est légèrement différente. En effet, la partie gauche de l’implcation est cette fois similaire à la partie droite. Cela tombe bien, on a déjà vu comment la modéliser. On obtient :</p>
+
+\[((v_{cn} \land v_f) \lor (s_{cn} \land s_f)) \rightarrow ((v_t \land v_l) \lor (s_t \land s_l))\]
+
+<h3 id="contrainte-4">Contrainte 4</h3>
+
+<p>La contrainte 4 reprend le même principe que la précédente :</p>
+
+\[((v_{ct} \land v_f) \lor (s_{ct} \land s_f)) \rightarrow ((v_t \land v_g) \lor (s_t \land s_g))\]
+
+<h3 id="contrainte-5">Contrainte 5</h3>
+
+<p>La contrainte 5 apporte une petite différence. Cette fois, la partie droite de l’implication signifie qu’un objet ne doit pas être avec un autre. Pour modéliser cela, rien de plus simple, il suffit de rajouter une négation sur une des deux variables ou encore utiliser la variable correspondant à l’autre personne. On obtient par exemple :</p>
+
+\[((v_g \land v_f) \lor (s_g \land s_f)) \rightarrow ((v_t \land \neg v_{ct}) \lor (s_t \land \neg s_{ct}))\]
+
+<h3 id="contraintes-additionnelles">Contraintes additionnelles</h3>
+
+<p>Il reste encore à ajouter certaines contraintes qui n’apparaissent pas dans l’énoncé. En effet, il  parait évident et ce n’est pas précisé qu’une personne possède un seul des deux objets de chaque type et que les deux personnes ne peuvent pas posséder le même objet. Il n’y a cependant rien qui empêche cela dans les variables. De plus, rien n’oblige les personnes à posséder un des deux objets.</p>
+
+<p>Pour forcer une personne à ne posséder qu’un seul des deux objets, on peut ajouter des contraintes du style :</p>
+
+\[\neg(personne_{objet1} \land personne_{objet2})\]
+
+<p>Pour empêcher un objet d’appartenir à deux personnes, la contrainte est très similaire :</p>
+
+\[\neg(personne1_{objet} \land personne2_{objet})\]
+
+<p>Enfin, pou qu’une personne possède au moins un objet, on ajoute des contraintes du genre :</p>
+
+\[\neg(personne_{objet1} \lor personne_{objet2})\]
+
+<blockquote class="prompt-info">
+  <p>Certaines contraintes sont peut-être redondantes. Cependant, la modélisation n’est pas fait pour être parfait, elle doit seulement décrire de la manière la plus exacte possible le problème.</p>
+</blockquote>
+
+<h2 id="résolution">Résolution</h2>
+
+<p>Nous avons donc tous les éléments pour résoudre le problème. Cependant, vous vous demander ce que l’on va faire de toutes ces formules, car le problème SAT s’exprime avec une seule formule. Et bien ce que l’on cherche à obtenir c’est des valeurs pour nos variables telles que <strong>toutes</strong> les formules soient satisfaites en même temps. Pour les satisfaire, il suffit de les ajouter à la suite en utiliser des <strong>et</strong> logiques. On obtient donc la formule suivante :</p>
+
+\[\begin{align*}
+		&amp;v_g \rightarrow ((v_{ct} \land v_t) \lor (s_{ct} \land s_t)) \land \\
+        &amp;s_{ct} \rightarrow ((v_{cn} \land v_t) \lor (s_{cn} \land s_t)) \land \\
+        &amp;((v_{cn} \land v_f) \lor (s_{cn} \land s_f)) \rightarrow ((v_t \land v_l) \lor (s_t \land s_l)) \land \\
+        &amp;((v_{ct} \land v_f) \lor (s_{ct} \land s_f)) \rightarrow ((v_t \land v_g) \lor (s_t \land s_g)) \land \\
+        &amp;((v_g \land v_f) \lor (s_g \land s_f)) \rightarrow ((v_t \land \neg v_{ct}) \lor (s_t \land \neg s_{ct})) \land \\
+        &amp;\neg(v_{g} \land v_{l}) \land \\
+        &amp;\neg(v_{f} \land v_{t}) \land \\
+        &amp;... \land \\
+        &amp;\neg(v_{g} \land s_{g}) \land \\
+        &amp;\neg(v_{l} \land s_{l}) \land \\
+        &amp;... \land \\
+        &amp;v_g \lor v_l \land \\
+        &amp;s_f \lor s_t \land \\
+        &amp;...
+	\end{align*}\]
+
+<h1 id="sat-dans-mon-stage">SAT dans mon stage</h1>
+
+<p>Pfiuou ! ça fait beaucoup non ? Il y aurait encore énormément de choses à dire sur SAT mais je voulais présenter le principal pour pouvoir parler de ce que je fais en stage.</p>
+
+<p>Je l’annonçais dès le début, on s’intéresse à SAT car les solvers qui permettent de résoudre les formules sont extrêmement efficaces. L’intuition de mes encadrants, derrière la proposition de stage à laquelle j’ai répondue, est qu’en déterminant un encodage SAT intelligent pour les problèmes sur lesquels ils travaillent, ils allaient pouvoir être plus performants et résoudre plus de problèmes.</p>
+
+<p>Justement, ces problèmes je ne les ai pas encore présentés. J’y viendrais la prochaine fois et cela me donnera l’occasion de présenter un peu les travaux de mon équipe. Et je vous promet, ils font des trucs bien stylés!</p>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><category term="stage" /><category term="logique" /><category term="SAT" /><category term="sudoku" /><summary type="html"><![CDATA[Afin de pouvoir parler un peu plus en détails de mon stage, je voulais aujourd’hui présenter un problème très connu en info. Ce problème, SAT de son petit nom, tente de répondre à la question suivante : pour une formule logique donnée, existe-il une affectation des variables de cette formule permettant de la rendre vraie ?]]></summary></entry><entry xml:lang="fr"><title type="html">Plus court chemin et graphe</title><link href="https://smbct.github.io/blog/court-chemin/" rel="alternate" type="text/html" title="Plus court chemin et graphe" /><published>2017-07-12T18:00:00+02:00</published><updated>2017-07-12T18:00:00+02:00</updated><id>https://smbct.github.io/blog/court-chemin</id><content type="html" xml:base="https://smbct.github.io/blog/court-chemin/"><![CDATA[<p>Trouver un chemin, ou même le plus court chemin, est un problème courant en informatique. Parmi les applications concrètes de ce problème, on peut tout d’abord penser à l’itinéraire le plus court, donné par un dispositif GPS. Ce n’est cependant pas la seule application réelle. On peut par exemple chercher un plus court chemin pour une IA dans un jeu ou encore trouver la manière la plus rapide de mettre deux personnes en relation dans un réseau professionnel.</p>
+
+<blockquote class="prompt-info">
+  <p>Un problème facile ?</p>
+</blockquote>
+
+<p>Le problème du plus court chemin est un problème très connu et très étudié. En réalité, il y a pleins de variantes possibles. Certaines peuvent être faciles à résoudre, comme trouver le meilleur itinéraire avec un GPS. D’autres au contraire peuvent être extrêmement difficiles, comme trouver le chemin le plus court passant par un ensemble de villes, pour effectuer des livraisons par exemple (problème du voyageur de commerce/tournées de véhicules). Nous allons voir ici un algorithme simple pour résoudre un problème similaire à celui de l’itinéraire.</p>
+
+<h1 id="présentation-du-problème">Présentation du problème</h1>
+
+<p>Imaginons que nous connaissons certaines personnes qui détiennent une même information cruciale que nous voulons récupérer. Le soucis est que ces personnes ne nous donneront pas ce message directement, par manque de confiance. En effet, elle ne font confiance qu’à leurs amis directs et le confieront seulement à eux.</p>
+
+<p>Si on considère notre cercle d’amis, nous sommes connectés à un certain nombre de personnes qui sont elles-même connectées à d’autres personnes par des relations d’amitié. Notre défi est de récupérer cette information le plus rapidement possible, en la faisant transmettre d’amis en amis. Pour ce faire, nous allons donc demander à nos amis proches de demander a leurs amis de demander à leurs amis etc… jusqu’à ce qu’un personne diffuse l’information dans le sens inverse pour qu’elle revienne vers nous.</p>
+
+<p>L’objectif est donc de trouver le lien le plus court entre nous et l’information, c’est à dire de trouver une suite de personne Alice - Bob - Charles - … la plus courte telle que deux personnes successives sont amies, la première personne de la liste étant nous et la dernière étant une personne qui détient l’info.</p>
+
+<h1 id="détour-par-les-graphes">Détour par les graphes</h1>
+
+<p>Les données de notre problèmes constituent un réseau d’amis. Nous avons les noms des personnes, ainsi que leurs relations, c’est à dire avec quelles autres personnes elle sont amies. Une bonne façon de manipuler nos données est de les représenter sous forme d’un graphe.</p>
+
+<p>Un graphe est un objet mathématique qui peut être utilisé pour manipuler des données comportant une relation.
+Cet objet est constitué de <strong>sommets</strong> (ici les différentes personnes) et d’<strong>arêtes</strong>, qui représentent les liens entre les différents sommets (ici ce sont les liens d’amitié).</p>
+
+<h1 id="algorithme-de-résolution">Algorithme de résolution</h1>
+
+<p>L’algorithme de résolution du problème est un algorithme qui effectue un <strong>parcours en largeur</strong> du graphe. Cela signifie qu’il va parcourir tous les sommets du graphe, en commençant du plus proches du sommet de départ au plus éloignés. Dire que deux sommets sont proches signifie ici qu’ils sont connectés par un petit nombre d’<strong>arêtes</strong>.</p>
+
+<h2 id="déroulement-de-lalgorithme">Déroulement de l’algorithme</h2>
+
+<p>L’algorithme utilise une file d’attente (souvent appelé <strong>file</strong> en info) contenant les sommets (amis) à <em>visiter</em>. Au tout début, cette file d’attente contient le sommet qui nous réprésente dans le graphe. Ensuite, une même étape est répétée tant que la file d’attente n’est pas vide : le <strong>premier</strong> sommet ajouté dans la file est retiré et l’algorithme vérifie si il contient l’info recherchée. Si c’est le cas, il peut s’arrêter, sinon il retire ce sommet et ajoute tous les amis de ce sommet.
+Une seule règle doit être respectée : les amis d’un sommet sont ajoutés à la file uniquement s’ils n’ont pas déjà été visités par l’algorithme.</p>
+
+<p>L’algorithme va donc parcourir progressivement le graphe en partant d’un sommet et en allant vers ses amis. Concrètement, il va d’abord considérer le premier sommet, celui qui nous correspond. Il va ensuite chercher tous les amis de ce sommet et les ajouter à une file d’attente. Ces amis seront ensuite considérés et l’algorithme va vérifier si l’info est détenu par l’un d’eux. Enfin les amis de cet ami considéré seront ajoutés à la file d’attente également.</p>
+
+<p>Il y a encore une chose dont on a pas parlé. Avec les étapes précédentes, on est capable de trouver l’info mais on ne peut pas encore afficher le chemin qui permet de l’atteindre (c’est à dire la liste des personnes). On a cependant déjà fait le plus gros du travail. Pour retrouver le chemin on procède en plusieurs étapes. Dans une premier temps, on indique pour chaque sommet à partir de quel sommet on l’a visité. Par exemple, si on visite le sommet A et on ajoute son ami B à la file, on indique alors que B est obtenu à partir de A. La deuxième étape consiste à prendre le sommet contenant l’info une fois sorti de la boucle, et a remonter successivement vers le sommet d’origine pour finir vers le sommet nous représentant.</p>
+
+<h2 id="un-mot-sur-les-files">Un mot sur les files</h2>
+
+<p>L’algorithme que je propose pour résoudre ce problème utilise une structure de donnée appelée file (la fameuse file d’attente). En quelque mots, une file est une liste d’éléments, ici de sommets ou de personnes. Le premier élément est appelé la tête et le dernier la queue.</p>
+
+<p>Elle respecte deux propriétés :</p>
+
+<ul>
+  <li>lorsqu’un élément est ajouté à la file, il est ajouté à la fin et il devient ainsi la queue</li>
+  <li>le seul élément qui peut être consulté et retiré est le premier élément, c’est à dire la tête.</li>
+</ul>
+
+<p>Cette structure de donnée est généralement appelée FIFO (First In First Out). En effet, dans une telle structure, c’est le premier élément ajouté dans la file qui sera retiré en premier. Pensez donc à la file d’attente de la caisse d’un magasin. On ne peut s’insérer qu’à la fin de la file (en général!) et c’est la première personne arrivée qui est servie en premier.</p>
+
+<p>Créer les mécanismes d’une file est assez simple. Il y a plusieurs façon de le faire et tous les langages de programmation proposent directement ce genre d’outil.</p>
+
+<h2 id="algorithme-en-pseudo-code">Algorithme en pseudo code</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ajout à file du sommet nous correspondant
+
+TANT QUE l'info n'est pas trouvée et que la file n'est pas vide FAIRE
+
+    sommet &lt;- tête de la file
+    retirer la tête de la file
+
+    SI le sommet contient l'info ALORS
+        sortir de la boucle
+    SINON
+        ajouter à la file ses amis non visités
+        indiquer aux sommets amis que leur sommet d'origine est le sommet visité
+    FIN SI
+
+FIN TANT QUE
+
+SI l'info a été trouvée ALORS
+    afficher l'info
+    reconstruire le chemin à partir des sommets d'origines
+FIN SI  
+
+</code></pre></div></div>
+
+<h2 id="explications-sur-lalgorithme">Explications sur l’algorithme</h2>
+
+<p>Il n’est pas forcément évident au premiers abords de comprendre réellement ce que l’algorithme fait. Je rappelle qu’on cherche ici un plus court chemin. Si le chemin trouvé est bien le plus court (ou un des plus court) c’est pour une unique raison. Ce qu’il faut garder à l’esprit, c’est que tous les amis des sommets visités sont ajoutés à la <strong>fin</strong> de la liste d’attente. Cela signifie qu’ils seront visités seulement après tous les sommets présents avant dans la liste. De plus, les sommets ajoutés en fin de liste auront toujours une distance supérieure à ceux ajoutés avant (la distance est le nombre d’amis intermédiaires qui sépare Moi du sommet). De ce fait, lorsqu’un sommet contenant l’info est trouvé, tous les sommets de distance inférieur ont déjà été visités.</p>
+
+<h1 id="exemple-pas-à-pas">Exemple pas à pas</h1>
+
+<p>Voici un exemple de graphe d’amis. Le sommet nous représentant est le sommet <em>Moi</em> et le sommet contenant l’info est le sommet avec la pastille jaune (Jackorah). Nous allons ici dérouler toutes les étapes de la résolution du problème. La liste des sommets d’origines est présente à la fin de l’exemple.</p>
+
+<p><img src="/assets/graphe_exemple.png" alt="Un exemple" /></p>
+
+<p>Comme dit précédemment, un tout début, la file d’attente contient uniquement le sommet nous représentant :</p>
+
+<p>-&gt; Moi</p>
+
+<p>On entre ensuite dans la boucle et on retire ce sommet de la file. Ce sommet n’est pas un sommet contenant l’info, on ne sort donc pas de la boucle. On ajoute donc les sommets amis de ce sommet. On n’oublie pas de préciser pour les amis que Moi est leur sommet d’origine. Cela donne :</p>
+
+<p>-&gt; Ley ; Ricnath ; Joanea</p>
+
+<p>Nouveau tour de boucle, l’algorithme retire le premier sommet de la file (le seul accessible pour cette structure de donnée). Manque de chance, Ley ne détient pas l’info non plus, on ajoute donc ses amis à la fin de la file.</p>
+
+<p>-&gt; Ricnath ; Joenea ; Kimi</p>
+
+<p>On recommence encore une fois, cette fois c’est Ricnath qui est visité, il ne détient pas l’info, ses amis sont ajoutés.</p>
+
+<p>-&gt; Joanea ; Kimi ; Here’chet</p>
+
+<p>Au tour de Jonea désormais. Toujours pas d’info, on ajoute ses amis… Ah mince ! Here’chet a déjà été ou est présent dans la file, on ne l’ajoute donc pas !</p>
+
+<p>-&gt; Kimi ; Here’chet</p>
+
+<p>Au tour de Kimi, pas d’info ni d’amis, on passe vite dessus.</p>
+
+<p>-&gt; Here’chet</p>
+
+<p>Le fameux Here’chet désormais. Ah toujours rien ! Mais il a un amis, on l’ajoute donc à la file.</p>
+
+<p>-&gt; Jackorah</p>
+
+<p>Notre dernière chance, car il n’a pas d’amis et si la liste est vide alors l’algo s’arrête. Ouf ! Il a bien l’info, on peut la récupérer.</p>
+
+<p>Voici le tableau des sommets d’origine :</p>
+
+<hr />
+
+<table style="width:100%">
+ <tr>
+   <th>Sommet</th>
+   <th>Ley</th>
+   <th>Kimi</th>
+   <th>Ricnath</th>
+   <th>Joanea</th>
+   <th>Here'chet</th>
+   <th>Jackorah</th>
+ </tr>
+ <tr>
+   <td>Sommet d'origine</td>
+   <td>Moi</td>
+   <td>Ley</td>
+   <td>Moi</td>
+   <td>Moi</td>
+   <td>Ricnath</td>
+   <td>Here'chet</td>
+ </tr>
+</table>
+
+<hr />
+
+<p>Ceci nous permet donc de reconstruire la liste. On part donc du sommet sur lequel on a trouvé l’info : Jackorah. On remonte vers le sommet d’origine, cela donne Here’chet. On continue avec le sommet d’origine de Here’chet, cela donne Ricnath. Et on termine enfin car le sommet d’origine de Ricnath est Moi.</p>
+
+<p>Finalement on obtient donc la liste : Moi -&gt; Ricnath -&gt; Here’chet -&gt; Jackorah</p>
+
+<p>On a donc une liste de 4 personnes, et il n’est pas possible de faire plus court. On peut néanmoins remarquer qu’il y avait un autre chemin de même longueur possible. Le chemin retourné par l’algorithme dépend en fait de l’ordre dans lequel sont ajouté les amis d’un sommet.</p>
+
+<h1 id="détails-sur-limplémentation">Détails sur l’implémentation</h1>
+
+<p>Certains détails n’ont toujours pas été éclairés dans l’algorithme. Comme précisé précédemment, les files sont présentes dans tous les langages, donc pas besoin de les reprogrammer. Cependant, les graphes sont des structures un peu plus sophistiquées et il y a de nombreuses façon de les implémenter.</p>
+
+<p>Dans l’implémentation que je propose plus bas, j’ai choisi de programmer le graphe en utilisant une <strong>liste de successeurs</strong>. Cela signifie que chaque sommet du graphe contient un lien vers la liste des sommets qui lui sont connectés. En faisant comme ceci, on peut alors accéder facilement aux sommets connectés. Le seul problème est que si on cherche un ami en particulier, il faut parcourir toute la liste d’amis pour le trouver. Avec cette implémentation, il faut également garder à l’esprit que la liste des amis contient uniquement des <strong>liens</strong> vers les sommets amis, et que la mémoire n’est pas recopiées dans toutes les listes.</p>
+
+<p>Il y a beaucoup d’autre façons d’implémenter des graphes. Une autre façon de faire est d’utiliser un tableau indiquant pour chaque couple de sommet si ils sont connectés (ou amis) ou non. Cette façon de faire utilise plus de mémoire car il y a autant de variables que de connexions possibles dans le graphe.</p>
+
+<p>Enfin, concernant l’implémentation, on peut également parler de l’obtention de la liste finale à partir des sommets d’origine. Pour la liste des sommets d’origines, on peut utiliser une liste d’association qui associe à chaque sommet un lien vers un autre sommet qui est son sommet d’origine. Ensuite, pour construire le chemin, il suffit d’écrire une boucle qui bascule vers le sommet d’origine et va cherche son propre sommet d’origine à chaque étape.</p>
+
+<h1 id="code">Code</h1>
+
+<p>Vous pouvez retrouver une implémentation de l’algorithme <a href="https://github.com/smbct/blog_code/tree/master/graphe_secret">ici</a>. L’implémentation a été faite en python. Elle permet de générer aléatoirement un graphe d’amis à partir d’une liste de noms et calcule le plus court chemin pour récupérer l’information dans le graphe. Le code est commenté et le fichier readme donne les détails pour l’exécution du programme.</p>
+
+<h1 id="vers-les-algorithmes-dintelligence-artificielle">Vers les algorithmes d’intelligence artificielle</h1>
+
+<p>En conclusion, nous avons vu ici un algorithme de base mais qui est également fondamental en informatique. On a fait du parcours de graphe, ce que l’on retrouve dans de nombreux problèmes. Il y a beaucoup de façons de parcourir un graphe, par exemple en largeur, ce qui est présenté ici, ou encore en profondeur, en ajoutant les amis en début de liste d’attente. Ces types de parcours peuvent être utilisés dans de nombreux types de graphes. On considère souvent des parcours d’<strong>arbres</strong> lorsqu’un un sommet n’est jamais visité deux fois.</p>
+
+<p>Lorsqu’on essaie de résoudre des problèmes de plus en plus complexes, ce qu’on pourrait appeler intelligence artificielle, ces parcours de graphes reviennent très souvent. Par exemple, si on veut créer un programme jouant aux échecs, on va alors explorer le graphe des coups possibles, et essayer de sélectionner le meilleur coup possible. On ne cherche alors plus une simple information mais on cherche à maximiser le score. Dans ce genre de problème, l’algorithme présenté ici est malheureusement très inefficace à cause de la taille du graphe/de l’arbre considéré. Mais des algorithmes très efficaces existent, dont on aura peut-être l’occasion de reparler.</p>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><category term="optimisation" /><category term="graphes" /><category term="file" /><category term="algorithme" /><summary type="html"><![CDATA[Trouver un chemin, ou même le plus court chemin, est un problème courant en informatique. Parmi les applications concrètes de ce problème, on peut tout d’abord penser à l’itinéraire le plus court, donné par un dispositif GPS. Ce n’est cependant pas la seule application réelle. On peut par exemple chercher un plus court chemin pour une IA dans un jeu ou encore trouver la manière la plus rapide de mettre deux personnes en relation dans un réseau professionnel.]]></summary></entry><entry xml:lang="fr"><title type="html">Optimisation et sudoku</title><link href="https://smbct.github.io/blog/sudoku/" rel="alternate" type="text/html" title="Optimisation et sudoku" /><published>2016-08-02T15:20:33+02:00</published><updated>2016-08-02T15:20:33+02:00</updated><id>https://smbct.github.io/blog/sudoku</id><content type="html" xml:base="https://smbct.github.io/blog/sudoku/"><![CDATA[<p>La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.</p>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<h2 id="présentation-du-problème">Présentation du problème</h2>
+
+<p>La résolution du sudoku consiste à trouver des valeurs pour les cases vides d’une grille de telle sorte que plusieurs contraintes soient respectées. On cherche donc a représenter ce problème sous forme d’un programme linéaire. Plus précisément, on veut trouver un ensemble de de variable traduisant les décisions à prendre pour résoudre le problème. Les décisions sont ici les chiffres à insérer dans les cases vides.</p>
+
+<blockquote class="prompt-info">
+  <p>Et en quoi c’est un problème d’optimisation ?</p>
+</blockquote>
+
+<p>Ce n’est tout simplement pas un problème d’optimisation. On cherche une valeur pour chaque case telle que la grille soit correcte. Cependant, la programmation linéaire peut tout de même nous venir en aide. Même s’il y avait plusieurs solutions possibles, seule une nous intéresse. On peut évidemment définir une fonction objectif pour obtenir des conditions supplémentaires sur le résultat mais ça n’aurait pas d’intérêt pratique. Le fait est que trouver une solution réalisable (c’est à dire une grille valide) est facile à faire lorsqu’on sait trouver la solution optimale d’un problème. Donc bien que l’optimisation n’ait pas vraiment de sens ici, on utilise un outil que l’on sait efficace pour répondre à une question plus facile.</p>
+
+<h2 id="rappels-sur-le-jeu">Rappels sur le jeu</h2>
+
+<p>Le problème consiste donc à remplir la grille de sudoku de taille 9*9 avec des valeurs valides. Les données du problème sont donc un ensemble de valeur comprises entre 1 et 9 et les positions de ces valeurs dans la grille.</p>
+
+<p>Voilà la grille d’exemple que nous allons résoudre :</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>4</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>8</td>
+      <td>7</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>4</td>
+      <td>7</td>
+      <td>*</td>
+      <td> </td>
+      <td>9</td>
+      <td>2</td>
+      <td>*</td>
+      <td> </td>
+      <td>5</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>6</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td> </td>
+      <td>3</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>7</td>
+      <td> </td>
+      <td>*</td>
+      <td>5</td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td>2</td>
+      <td> </td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td> </td>
+      <td>8</td>
+      <td>*</td>
+      <td> </td>
+      <td>2</td>
+      <td>4</td>
+      <td>*</td>
+      <td>7</td>
+      <td> </td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td> </td>
+      <td>4</td>
+      <td>*</td>
+      <td> </td>
+      <td> </td>
+      <td>7</td>
+      <td>*</td>
+      <td> </td>
+      <td>8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>9</td>
+      <td> </td>
+      <td>*</td>
+      <td>3</td>
+      <td> </td>
+      <td>8</td>
+      <td>*</td>
+      <td> </td>
+      <td> </td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>3</td>
+      <td>*</td>
+      <td>2</td>
+      <td>4</td>
+      <td> </td>
+      <td>*</td>
+      <td>1</td>
+      <td>6</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>1</td>
+      <td>2</td>
+      <td>*</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td>*</td>
+      <td> </td>
+      <td>9</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>J’ai rajouter des cases supplémentaires afin de visualiser les différentes zones. On veut donc trouver des valeurs pour les cases vides tout en respectant certaines contraintes :</p>
+
+<ol>
+  <li>Les valeurs des cases sont comprises entre 1 et 9</li>
+  <li>Sur chaque ligne, on ne peut pas trouver plusieurs cases ayant la même valeur</li>
+  <li>Sur chaque colonne, on ne peut pas trouver non plus plusieurs cases ayant la même valeur</li>
+  <li>Dans chaque bloc de 3*3 cases matérialisé dans la grille ci-dessus, on ne peut encore pas trouver plusieurs fois la même valeur</li>
+</ol>
+
+<h2 id="modélisation-du-problème">Modélisation du problème</h2>
+
+<p>Comme pour la modélisation de l’article sur la programmation linéaire, on va procéder par étape. Tout d’abord, on va choisir les variables du problème et ensuite on écrira les différentes contraintes. La modélisation sera ensuite terminés car il n’y a pas de fonction objectif. Il est toutefois possible d’en mettre une quelconque. Cela peut être nécessaire si le solver utilisé (le programme de résolution) ne permet pas de résoudre des problèmes sans fonction objectif. Mais encore une fois, peu importe la fonction objectif. A partir du moment où les contraintes sont respectées et la modélisation est correcte, la résolution donnera une solution correcte à notre problème.</p>
+
+<h3 id="les-variables">Les variables</h3>
+
+<p>Lorsque j’ai commencé à réfléchir au problème, j’ai voulu choisir une variable par case. Comme cela, on obtenait à la fin de la résolution directement la valeur de chaque case. Ce choix me semblait naturel mais la modélisation qui en résultait n’était pas simple. En effet, de cette façon, toutes les contraintes ne sont pas faciles à traduire en terme de programme linéaire. Bien sûr, la contrainte n°1 est très simple mais pour les contraintes suivantes, ce n’est pas la même chose. On veut exprimer le fait qu’une variable ne peut pas être égale à une autre variable ou à une constant.</p>
+
+<p>Par exemple, si on se situe dans la case en haut à gauche de la grille et on considère la première colonne, on ne pourra pas choisir 2, 9, 5 et 6 comme valeur. On voudrait donc écrire quelque chose comme : \(var \neq 2\), \(var \neq 9\), etc…  Ces inégalités ne sont pas valides en programmation linéaire. On pourrait les remplacer par quelque chose comme \(var &lt; 2\) ou \(var &gt; 2\) pour la première. Encore une fois, on se heurte à plusieurs obstacles. Premièrement, les inégalités de programmes linéaires sont seulement des inégalités larges. Ici, comme on ne manipule uniquement des entiers, on peut écrire à la place : \(var \leq 1\) <em>ou</em> \(var \geq 3\). On peut alors sembler être tiré d’affaire mais… toujours pas ! Il faut en effet se rappeler que les contraintes d’un programme linéaire doivent être vérifiée simultanément. C’est donc le <em>ou</em> qui pose problème ici. Enfin, le nombre de contrainte à écrire devient très important. En effet, pour chaque variable, on a besoin de 19 contraintes. Face à tous ces inconvénients, on va donc chercher un meilleur moyen de modéliser le soduko.</p>
+
+<blockquote class="prompt-info">
+  <p>En réalité, il existe une astuce pour modéliser un <em>ou</em>. Celle-ci repose sur l’utilisation d’une variable intermédiaire et la technique utilisée n’est pas forcément élégante. De plus, vu le nombre de contrainte, il est préférable de laisser ça de côté.</p>
+</blockquote>
+
+<p>La modélisation alternative profite d’une particularité du problème : le nombre de valeur que peut prendre chaque case est assez limité. On va utiliser des variables que l’on appelle variables binaires. Contrairement aux variables classiques, celles-ci ne peuvent prendre que deux valeurs possibles : 0 ou 1. Ces variables apparaissent naturellement dans beaucoup de problèmes d’optimisation car elles représentent le fait de prendre ou de ne pas prendre une décision. On peut obtenir le même type de résultat en utilisant des variables entières et en les bornant mais il faut garder à l’esprit qu’il existe des méthodes particulières pour traiter ces variables de manière efficace.</p>
+
+<p>Pour revenir à notre problème, au lieu d’utiliser une variable par case, on va en utiliser 9 ! Pour chaque case, une des 9 variables aura la valeur <em>1</em> et c’est le numéro de cette variable qui sera inséré dans la grille. Par exemple, considérons la 5ième variable de la première case. Elle représente la décision de choisir 5 comme valeur pour la première case. Si cette variable est affectée à 1, on choisit 5, sinon, on ne choisit pas 5.</p>
+
+<blockquote class="prompt-info">
+  <p>Minute ! ça veut dire que pour une même case, on peut choisir plusieurs valeurs en même temps ?</p>
+</blockquote>
+
+<p>Dans l’état oui. Mais on n’a pas encore commencé à écrire les contraintes. C’est justement ce que l’on s’apprête à faire. Et nous allons voir que ça se fait plutôt bien finalement. Pour la suite, on considère que la variable \(x_{i/j_k}\) représente le fait de choisir la valeur k pour la case (i,j). i représente la ligne de la grille et j la colonne. On considère également que la case en haut à gauche a pour coordonnée (0,0) et que les indices sont croissants quand on se déplace vers le bas ou vers la droite.</p>
+
+<h3 id="les-contraintes">Les contraintes</h3>
+
+<p>On peut commencer par remarquer que la première contrainte n’est plus nécessaire. En effet, la nature des variables a une incidence directe sur les contraintes et il n’est plus possible de choisir une valeur non permise pour une case.</p>
+
+<p>La première contrainte qui peut venir à l’esprit concerne le fait de choisir plusieurs valeurs pour une case. Cette contrainte est très simple a écrire. Étant donné que toutes les variables concernant une case ne peuvent avoir pour valeur uniquement 0 ou 1 et qu’une seule de ces variables doit être à 1, il suffit d’écrire \(\sum\limits_{k=1}^9 x_{i,j/k} = 1\).</p>
+
+<p>Ensuite, on veut traduire le fait qu’une valeur ne peut apparaître deux fois dans une ligne. Comme précédemment, il suffit de tester si la somme des variables concernant la <em>même valeur</em> dans une colonne est égale à 1. On obtient \(\sum\limits_{j=0}^8 x_{i,j/k} = 1\).</p>
+
+<p>On veut enfin le faire pour les colonnes et les les blocs 3*3. Pour les colonnes, cela donne \(\sum\limits_{i=0}^8 x_{i,j/k} = 1\). Pour le premier bloc, c’est \(\sum\limits_{i=0}^2 \sum\limits_{j=0}^2 (x_{i,j/k} = 1)\).</p>
+
+<h2 id="le-programme-linéaire">Le programme linéaire</h2>
+
+<p>On peut donc récapituler tout ça sous forme d’un programme linéaire. Une petite réflexion cependant à propos des variables : Pour simplifier l’écriture du programme, on peut décider de définir les 9 variable pour <em>toutes</em> les cases. Or, certaines cases ont une valeur fixée par les données de la grille. Pour ces cases, les contraintes seront donc des égalités qui fixeront les valeurs. Ces variables sont à priori inutiles mais cela permet de gagner du temps sur l’écriture du solver.</p>
+
+<p>On obtient donc finalement le programme linéaire suivant :</p>
+
+\[max \,z = 0\\
+	 \begin{align*}
+		s.c. \sum\limits_{k=1}^9 x_{i,j/k} &amp;= 1, i \in \{0, .., 8\}, j \in \{0, .., 8\} \\
+            \sum\limits_{j=0}^8 x_{i,j/k} &amp;= 1, i \in \{0, .., 8\}, k \in \{1, .., 9\} \\
+            \sum\limits_{i=0}^8 x_{i,j/k} &amp;= 1, j \in \{0, .., 8\}, k \in \{1, .., 9\} \\
+            \sum\limits_{i=l}^{l+2} \sum\limits_{j=m}^{m+2} (x_{i,j/k} &amp;= 1), l, m \in \{0,3,6\}, k \in \{1, .., 9\} \\
+			x_{i,j/k} &amp;\in \{0, 1\}
+	\end{align*}\]
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Cet exemple nous montre donc que la programmation linéaire qui semblait plutôt limitée permet en fait de modéliser un large éventail de problème.
+Plus les problèmes sont complexes, plus il faut avoir recours à des astuces afin de réussir à les modéliser correctement.
+Il faut aussi faire attention à ce que le nombre de contrainte ne soit pas trop important. En effet, cela peut compromettre la résolution car les solvers ne sont pas infaillibles et ces problèmes restent des problèmes difficiles en informatique.
+On peut par exemple citer le problème du voyageur de commerce avec son nombre très important de contrainte qui le rend particulièrement difficile à résoudre.</p>
+
+<p>J’ai créé un programme se basant sur ce billet pour résoudre des grilles de sudoku.
+Le code source est disponible <a href="https://github.com/smbct/blog_code/tree/master/sudoplex">ici</a>.
+Le programme a été écrit en c++ et utilise la bibliothèque <a href="https://www.gnu.org/software/glpk/">glpk</a> pour la résolution du problème.
+Les détails pour le compiler se trouvent dans le readme. On peut remarquer en testant le programme que le temps de résolution est très court, malgré un nombre important de contrainte.</p>
+
+<p>Enfin, il faut tout de même garder à l’esprit que la programmation linéaire n’est pas le seul moyen de résoudre ce problème et qu’il n’est pas le plus adapté.
+Il donne ici un bon exemple de ce qu’il est possibles de faire en modélisation avec des variables binaires mais ce n’est pas forcément la méthode la plus rapide.</p>
+
+<p>Pour finir je vous donne le résultat de la résolution de la grille donnée plus haut.
+Et bien sûr, elle a été résolue avec le programme linéaire !</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>6</td>
+      <td>9</td>
+      <td>*</td>
+      <td>4</td>
+      <td>5</td>
+      <td>3</td>
+      <td>*</td>
+      <td>8</td>
+      <td>7</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>4</td>
+      <td>7</td>
+      <td>*</td>
+      <td>8</td>
+      <td>9</td>
+      <td>2</td>
+      <td>*</td>
+      <td>6</td>
+      <td>5</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>8</td>
+      <td>5</td>
+      <td>*</td>
+      <td>6</td>
+      <td>7</td>
+      <td>1</td>
+      <td>*</td>
+      <td>4</td>
+      <td>3</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>7</td>
+      <td>1</td>
+      <td>*</td>
+      <td>5</td>
+      <td>8</td>
+      <td>6</td>
+      <td>*</td>
+      <td>2</td>
+      <td>4</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>3</td>
+      <td>8</td>
+      <td>*</td>
+      <td>9</td>
+      <td>2</td>
+      <td>4</td>
+      <td>*</td>
+      <td>7</td>
+      <td>1</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>2</td>
+      <td>4</td>
+      <td>*</td>
+      <td>1</td>
+      <td>3</td>
+      <td>7</td>
+      <td>*</td>
+      <td>9</td>
+      <td>8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>9</td>
+      <td>6</td>
+      <td>*</td>
+      <td>3</td>
+      <td>1</td>
+      <td>8</td>
+      <td>*</td>
+      <td>5</td>
+      <td>2</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>5</td>
+      <td>3</td>
+      <td>*</td>
+      <td>2</td>
+      <td>4</td>
+      <td>9</td>
+      <td>*</td>
+      <td>1</td>
+      <td>6</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>1</td>
+      <td>2</td>
+      <td>*</td>
+      <td>7</td>
+      <td>6</td>
+      <td>5</td>
+      <td>*</td>
+      <td>3</td>
+      <td>9</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><category term="optimisation" /><category term="IA" /><category term="jeux" /><summary type="html"><![CDATA[La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.]]></summary></entry><entry xml:lang="fr"><title type="html">Programmation linéaire</title><link href="https://smbct.github.io/blog/programmation-lineaire/" rel="alternate" type="text/html" title="Programmation linéaire" /><published>2016-04-16T21:20:33+02:00</published><updated>2016-04-16T21:20:33+02:00</updated><id>https://smbct.github.io/blog/programmation-lineaire</id><content type="html" xml:base="https://smbct.github.io/blog/programmation-lineaire/"><![CDATA[<p>Pour un premier article, j’ai choisi de parler d’un sujet que je vais avoir probablement l’occasion d’évoquer à nouveau par la suite : la programmation linéaire.
+Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l’on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d’optimisation, et des méthodes efficaces pour les traiter.</p>
+
+<blockquote class="prompt-info">
+  <p>Mais au fait, c’est quoi l’optimisation finalement ?</p>
+</blockquote>
+
+<p>Optimiser, c’est essayer de faire de la meilleure façon possible. Cela peut concerner le fait de partir d’une façon de faire, d’une procédure, d’un plan, et trouver des moyens de l’améliorer pour traiter au mieux une situation. Cela peut aussi concerner le fait de prévoir à l’avance quelle va être la meilleure stratégie pour attaquer un problème. L’améliorer peut alors vouloir dire gagner du temps, réduire des dépenses, maximiser ses chances, etc…</p>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<h2 id="loptimisation-en-maths-et-en-info">L’optimisation en maths et en info</h2>
+
+<p>En mathématiques, l’optimisation est une notion très précise. Optimiser signifie trouver les valeurs maximale et minimale que peut atteindre une fonction.</p>
+
+<blockquote class="prompt-info">
+  <p>Et pourquoi un maximum ou un minimum ?</p>
+</blockquote>
+
+<p>Il n’est pas forcément évident aux premiers abords qu’un problème d’optimisation est un problème de recherche de maximum ou de minimum. Cependant, en y réfléchissant, derrière tout problème d’optimisation se cache un min ou un max. Par exemple, dans certaines situations, on veut optimiser le temps mis pour faire une action. Cela veut alors dire prendre le moins de temps possible. On cherche bien un minimum. Dans d’autres contextes, on peut aussi chercher à optimiser un gain. On cherche alors à obtenir le gain maximum.</p>
+
+<p>Donc si l’on veut traduire un problème d’optimisation naturel en problème mathématique, cela consiste donc à trouver une fonction qui exprime le mieux possible la quantité à optimiser (que ça soit du temps, de l’argent, etc…)</p>
+
+<p>Passer d’un problème réel à un problème mathématique, c’est l’action de modéliser. Une des première chose à faire pour modéliser un problème, c’est identifier les variables. Les variables sont impliquées de le calcul de la fonction à optimiser. Elles correspondent pour le problème réel aux différentes décisions que l’on peut prendre (par exemple, “combien d’unité produire ?” ou encore “doit-on activer cette option ?”).</p>
+
+<p>Une autre chose que l’on doit prendre en compte lorsque l’on optimise est la présence de contraintes. En effet, les variables de notre fonction (que l’on appelle variables de décision) ne peuvent pas prendre n’importe quelles valeurs ! Par exemple, si nos variables concernent un nombre d’unité à produire, on ne peut pas évidemment pas produire en quantité infinie. Les ressources disponibles entre donc en compte dans ce type de problème. Par ailleurs, les contraintes apparaissent parfois de manière plus subtile.</p>
+
+<blockquote class="prompt-info">
+  <p>Mais alors, pourquoi parler d’informatique ?</p>
+</blockquote>
+
+<p>Comme on l’a vu précédemment, les mathématiques nous offrent des outils puissants pour traiter les problèmes d’optimisation. En effet, une fois que le problème est modélisé, on peut appliquer des théorèmes pour calculer le maximum ou le minimum de fonctions.</p>
+
+<p>Cependant, les problèmes que l’on veut résoudre peuvent parfois comporter des milliers de variables. On ne peut donc plus espérer résoudre ces problèmes à la main. C’est pourquoi il a fallut mettre en place des algorithmes capable de calculer ce genre de chose le plus rapidement possible.</p>
+
+<p>Implémenter des méthodes de calculs automatiques ne suffit toutefois pas à résoudre tous les problèmes. Certains problèmes sont en effet par nature très difficiles à résoudre et les algorithmes généraux prennent énormément de temps. Les outils mathématiques sont limités pour ces problèmes. Il est donc nécessaire de les étudier en profondeur afin de trouver des techniques algorithmiques adaptées pour la résolution.</p>
+
+<blockquote class="prompt-info">
+  <p>Une des caractéristiques du domaine est qu’il n’existe pas de méthode générale efficace pour traiter n’importe quel problème.</p>
+</blockquote>
+
+<h2 id="la-programmation-linéaire-dans-tout-ça">La programmation linéaire dans tout ça</h2>
+
+<p>La programmation linéaire désigne un ensemble de règles que l’on se donne pour représenter sous forme mathématique un problème réel. Le but du jeu est de représenter notre problème concret sous forme d’une fonction mathématique et d’un ensemble de contraintes, en respectant ces règles.</p>
+
+<p>En programmation linéaire, on considère donc une fonction à optimiser, sous plusieurs contrainte. La limite imposée est le fait que la fonction et les contraintes doivent être linéaires. Cela signifie que, dans l’expression de la fonction et des contraintes a la forme d’une somme de variables multipliées par de coefficients. On ne peut ainsi pas multiplier deux variables, diviser deux variables, appliquer une racine, etc…</p>
+
+<p>Ces limitations peuvent paraître très contraignantes. Cependant, un très grand nombre de problèmes réels peuvent se modéliser de cette façon. Parfois, il faut avoir recours à certains tricks mais ceux-ci sont facilement intégrés par expérience. Il faut enfin retenir que si l’on se contraint, c’est parceque les méthodes algorithmiques disponibles pour ces problèmes sont très efficaces. Il vaut donc mieux se creuser la tête et trouver une bonne modélisation en programmation linéaire plutôt que d’avoir à résoudre un problème non linéaire.</p>
+
+<h2 id="un-premier-exemple-de-modélisation">Un premier exemple de modélisation</h2>
+
+<p>Prenons un premier exemple de modélisation.</p>
+
+<p><img src="/assets/cookies.jpg" alt="Des cookies !" /></p>
+
+<p>Partons d’une situation simple : nous allons recevoir des invités et nous voulons leur préparer deux types de petits biscuits. Les deux demandent les mêmes ingrédients : de la farine et du sucre.</p>
+
+<p>Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n’ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ? Dans l’exemple présenté, les données sont issues de recettes respectives de madeleines et de biscuits à la cannelle.</p>
+
+<h3 id="les-variables-du-problème">Les variables du problème</h3>
+
+<p>La première étape de la modélisation consiste à trouver les variables du problème. Ici, les variables sont faciles à trouver. La question concerne directement le nombre de biscuit à produire. On définit donc deux variables : \(x_1\) représentant le nombre de biscuit de type 1 que l’on veut créer et \(x_2\) représentant le nombre de biscuit de type 2.</p>
+
+<h3 id="les-contraintes">Les contraintes</h3>
+
+<p>Une fois les variables trouvées, on peut regarder les contraintes. Pour ce problème, il y a deux contraintes liées aux ressources disponible (farine et sucre), une contrainte concernant les convives et enfin des contraintes plus générales, et enfin des contraintes structurelles.</p>
+
+<p>Tout d’abord, on peut définir la contrainte pour la farine. On suppose que l’on dispose d’un kilogramme de farine. La recette nous indique également qu’il faut 4.2 g de farine pour un biscuit de type 1 et 15 g de farine pour les biscuits de type 2. On en déduit donc la contrainte \(4.2 x_1 + 15 x_2 \leq 1000\).</p>
+
+<p>On procède de manière similaire pour le sucre. On obtient : \(5.8 x_1 + 7.5 x_2 \leq 1000\).</p>
+
+<p>La contrainte suivante traduit une préférence des convives. On suppose qu’un quart de invités n’aime pas les biscuits du type 1. Par ailleurs, il n’y a pas de préférence pour ceux du type 2. On en déduit : \(x_1 \leq \frac{1}{4} (x_1 + x_2)\)</p>
+
+<p>Enfin, on ne peut pas produire un nombre négatif de biscuit. On a donc \(x_1, x_2 \geq 0\). De plus, on ne peut pas produire de demi-biscuit. Heureusement, en programmation linéaire, nous pouvons résoudre des problèmes avec des variables dites entières. On a donc comme dernière contrainte : \(x_1, x_2 \in \mathbb{Z}\).</p>
+
+<h3 id="la-fonction-objectif">La fonction objectif</h3>
+
+<p>Il ne reste plus qu’à écrire la fonction à optimiser. Ici, on veut maximiser la nombre de gâteau produit. La fonction est donc \(z = x_1 + x_2\).</p>
+
+<p>On peut donc récapituler le modèle de notre problème :</p>
+
+\[\text{max} \,z = x_{1} + x_{2}\\
+	 \begin{align*}
+		s.c.\quad 4.2 x_1 + 15 x_2 &amp;\leq 1000 \\
+			5.8 x_1 + 7.5 x_2 &amp;\leq 1000 \\
+			x_1 &amp;\leq \frac{1}{4} (x_1 + x_2) \\
+			x_1, x_2 &amp;\in \mathbb{N}
+	\end{align*}\]
+
+<p>Je passe les détails de la résolution de ce problème car cela nécessiterait plusieurs articles. Elle est néanmoins basée sur la méthode du branch and bound et l’algorithme du simplexe. Après résolution, on trouve \(x_1 = 20\) et \(x_2 = 61\). Nous allons donc pouvoir confectionner 81 gâteaux pour nos invités.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La programmation linéaire est donc un outil très intéressant pour l’optimisation. Malheureusement, ce n’est pas un outil infaillible. Même si les algorithmes utilisés pour résoudre ces problèmes sont très efficaces en variable continues (c’est à dire lorsque les variables ne sont pas forcément des entiers), ce n’est pas la même chose pour les variables entières ou binaires. L’idée est alors de profiter de toutes les spécificités du problème que l’on traite afin d’en tirer avantage et de proposer des méthodes de résolution dédiées. Parfois, on décide carrément de quitter le formalisme de la programmation linéaire et de traiter le problème avec un autre outil mieux adapté (ex : les graphes). Les problèmes d’optimisation sont donc loin d’être parfaitement maîtrisés et cet article n’effleure que très légèrement toutes les choses que l’on peut faire en optimisation.</p>
+
+<h2 id="crédit">Crédit</h2>
+
+<p>photo credit: <a href="http://www.flickr.com/photos/7702423@N04/26056556830">297/365/2853 (April 3, 2016) - Chocolate Coconut Cookies</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(license)</a></p>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><summary type="html"><![CDATA[Pour un premier article, j’ai choisi de parler d’un sujet que je vais avoir probablement l’occasion d’évoquer à nouveau par la suite : la programmation linéaire. Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l’on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d’optimisation, et des méthodes efficaces pour les traiter.]]></summary></entry></feed>

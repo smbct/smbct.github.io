@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Assembly x86-64 programming 101 &#58 chapter 2, drawing a square &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="series_article">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="24" width="28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     href="/">
+     🇬🇧 <div></div>
+  </a>
+
+  <a id="icon_flag"
+  class="icon_flag"
+  href="/fr/">
+    🇫🇷 <div></div>
+  </a>
+
+</nav>
+
+  <p>
+  &copy; 2024.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/series/x86_64_assembly/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Assembly x86-64 programming 101</a>
+</p>
+
+
+  <h1 class="post-title">Assembly x86-64 programming 101 &#58 chapter 2, drawing a square</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      04 May 2024
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    13 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        low-level programming assembly
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p>In the previous post, we’ve seen how to write a basic “hello world” program in assembly.
+In this post, we will dive further in assembly by exploring the use of “jump” instructions to perform <strong>conditionals and loops</strong>.
+In this new program, we will draw a square in the terminal with the sys_write system call that we previously used for the “hello world” example.</p>
+
+<h2 id="writing-conditionals-and-loops">Writing conditionals and loops</h2>
+
+<p>An important part of programming languages is the ability to control the execution through conditions.
+Conditions appear not only in conditional statements but also in loops termination.
+These programming structures as we know it from languages like C or Python can be reproduced in assembly by using more rudimentary instructions : jumps and conditional jumps.</p>
+
+<h4 id="jump-instructions">Jump instructions</h4>
+
+<p>Jumps are instructions that allow to move to a specific point in our program.
+In our code, this can be simply performed by defining a new symbol (with a “label” in our code) and using the <code class="language-plaintext highlighter-rouge">jmp</code> instruction to this symbol.
+Let’s start from the hello world written in the previous post :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+<span class="nf">.global</span> <span class="nv">_start</span>
+
+<span class="nl">_start:</span>
+
+    <span class="c1">; printing hello world</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
+    <span class="nf">syscall</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">syscall</span>
+
+<span class="nl">hello_world:</span>
+    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We will now add a new symbol after the “write” system call and jump to this symbol from the beginning of the start function:</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="nl">_start:</span>
+
+    <span class="nf">jmp</span> <span class="nv">.L_after_printing</span>
+
+    <span class="c1">; printing hello world</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
+    <span class="nf">syscall</span>
+
+    <span class="nl">.L_after_printing:</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">syscall</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>In our programs, symbols for loops and conditionals will always be <strong>local</strong> symbols, as opposed to global symbols used to define functions as we will see in future posts.
+These symbols are not exported when the code is compiled.
+This is the reason why their names start with the “<strong>.L</strong>” prefix, telling the compiler that the should be replaced by local references in the code (using program’s code addresses).</p>
+
+<p>When executing this program you will observe that the “hello world” output is gone.
+We have indeed told the program to skip these instructions by directly jumping to the <code class="language-plaintext highlighter-rouge">.L_after_printing</code> symbol.
+A jump can be performed anywhere in the code, including backward and accros functions (we will see in another post that jumping is actually part of function calls).</p>
+
+<p>Jumps becomes more interesting in their conditional form.
+To achieve conditional jumps, we will use the <code class="language-plaintext highlighter-rouge">cmp</code> instruction that performs a numerical comparison between two registers/memory locations.
+The <code class="language-plaintext highlighter-rouge">cmp</code> instruction does not directly produce an output but rather sets internal flags that will be read by the proper jump instructions.
+Starting from the previous code, we will add a conditional jump after comparing two registers :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre><span class="nl">_start:</span>
+
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">43</span>
+    <span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="mi">42</span>
+    <span class="nf">cmp</span> <span class="nb">rax</span><span class="p">,</span> <span class="nb">rbx</span> <span class="c1">; compare rax and rbx and set the internal flag</span>
+    <span class="nf">jg</span> <span class="nv">.L_after_printing</span> <span class="c1">; jump if the internal flag corresponds to "greater"</span>
+
+    <span class="c1">; printing hello world</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
+    <span class="nf">syscall</span>
+
+    <span class="nl">.L_after_printing:</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">syscall</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Here the <code class="language-plaintext highlighter-rouge">jg</code> (jump if greater than) instruction will check wether <code class="language-plaintext highlighter-rouge">rax &gt; rbx</code> from the internal flag set by <code class="language-plaintext highlighter-rouge">cmp</code>.
+Since 43 is greater than 42, our message is not printed to the standard output.
+Now if we replace the first line by <code class="language-plaintext highlighter-rouge">mov rax, 42</code>, the message would be printed as the jump is triggered on a strict inequality.</p>
+
+<h4 id="ifelse-statements">If..else.. statements</h4>
+
+<p>Thanks to jumping instructions we are now able to write conditional statements in our code.
+The thinking is a be a bit different from more standard programming languages but we can setup an “if..else” by placing proper jumps.
+Here is an example:</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="nf">cmp</span> <span class="nb">rax</span><span class="p">,</span> <span class="nb">rbx</span> <span class="c1">; compare rax and rbx and set the internal flag</span>
+<span class="nf">jg</span> <span class="nv">.L_else_label</span>
+
+<span class="nl">.L_if_label:</span> <span class="c1">; entering when "rax &lt;= rbx"</span>
+
+    <span class="c1">; code to perform if condition is not verified</span>
+    <span class="nf">jmp</span> <span class="nv">endif</span> <span class="c1">; skip the "else"</span>
+    
+<span class="nl">.L_else_label:</span> <span class="c1">; executed when "rax &gt; rbx" is true</span>
+    
+    <span class="c1">; condition to perform if the code is verified</span>
+    
+<span class="nl">.L_endif:</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>In this example, we added three different labels to perform an “if..else..” statement.
+When the comparison is true, the program will jump directly to the “else” label, making it skip the “if” part.
+It is an inverse way of thinking compared to classical statements since the condition that is tested with <code class="language-plaintext highlighter-rouge">cmp</code> should be false in order to perform the “if” instructions.
+At the end of the “if” instructions, a jump is necessary to prevent from executing the “else”, hence the presence of an “endif” label.</p>
+
+<p>Note that in this example, the “if_label” is not mandatory as there are no jump to this label, it could be written as a comment.
+Additionally, the indentation is not really a convention in assembly but I found it to help clarify the code.
+In some situations, writing an if-else statement can be simplified.
+This is a question of habits and clarity.</p>
+
+<h4 id="loops">Loops</h4>
+
+<p>Conditional jumps are not only helpful to write conditional statements but they also offer the possibility to write loops.
+Indeed a loop simply consists in a jump that as conditioned on the loop termination condition.
+Let’s write a simple for loop:</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="nf">mov</span> <span class="nb">rbx</span><span class="p">,</span> <span class="mi">0</span>
+
+<span class="nl">.L_for_label:</span>
+
+    <span class="c1">; loop instructions</span>
+
+    <span class="nf">inc</span> <span class="nb">rbx</span> <span class="c1">; increase the loop counter</span>
+        
+    <span class="nf">cmp</span> <span class="nb">rbx</span><span class="p">,</span> <span class="mi">10</span>
+    <span class="nf">jl</span> <span class="nv">.L_for_label</span> <span class="c1">; repeat if the counter is &lt; 10</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Here we repeat the loop instructions for 10 iterations by using the <code class="language-plaintext highlighter-rouge">rbx</code> register as our loop index.
+The comparison is performed at the end of each iteration, meaning that the program will perform at least one iteration (similarly to a do..while loop).
+This behavior may be avoided by adding an additional (unconditional) jump and by performing the comparison before the loop instructions.</p>
+
+<h2 id="drawing-a-square-in-assembly">Drawing a square in assembly</h2>
+
+<p>Now that we are able to define variables and perform control flow in assembly, our programs become more interesting.
+To demonstrate theses notions, we will write a program that draws a square in the console by using the sys_write system call and by writing two nested “for” loops.
+This program will iterate over coordinates of a square of a predefined size.</p>
+
+<p>We will first write the base of our program with the exit system call.
+We can also define the constants of our program and already add some printing calls that will help us for the following.</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">_start</span>
+<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+
+<span class="nl">_start:</span>
+
+    <span class="c1">; printing a star</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">star_character</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">syscall</span>
+
+    <span class="c1">; printing a new line</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">star_character</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">syscall</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">syscall</span>
+
+<span class="nl">square_size:</span>
+    <span class="nf">.quad</span> <span class="mi">20</span>
+
+<span class="nl">star_character:</span>
+    <span class="nf">.word</span> <span class="s">'*'</span>
+
+<span class="nl">new_line:</span>
+    <span class="nf">.word</span> <span class="err">'\</span><span class="nv">n</span><span class="err">'</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>For this program, it will be convenient to hard-code the size of the square with a constant.
+I also added the star character ‘*’ constant and a new line character ‘\n’ constant for convenience.
+Indeed, the sys_write system call requires an address to the character to be printed and saving them as constants allow to directly give their address in the program’s memory.
+As you may notice, the address is given with the <code class="language-plaintext highlighter-rouge">lea</code> instruction, which stands for “Load Effective Address”.</p>
+
+<p>We may notice that different directives are used for defining the constants : <code class="language-plaintext highlighter-rouge">.quad</code> for square_size and <code class="language-plaintext highlighter-rouge">.word</code> for the characters.
+These directives actually specify the size of these constants (2 bytes for <code class="language-plaintext highlighter-rouge">.word</code> and 8 bytes for <code class="language-plaintext highlighter-rouge">.quad</code>).
+We will discuss more about data sizes in the next post of this series.</p>
+
+<h4 id="drawing-a-line">Drawing a line</h4>
+
+<p>To start by drawing a simple line, we need to write a “for” loop that iterates over character positions (or columns).
+We will dedicate a register to storing this column index, but we should care about choosing a register that is not being use elsewhere in the program.
+Otherwise, its value would be lost.
+We can see that rax, rdx, rsi and rdi are already used for the system calls.
+We can then dedicate r8 and r9 to store our variables.</p>
+
+<p>To draw the line, we can re-use the “for” loop structure that we previously implemented in the post.
+The loop will surround the star printing instructions :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">_start</span>
+<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+
+<span class="nl">_start:</span>
+
+    <span class="c1">; init the column counter to 0</span>
+    <span class="nf">mov</span> <span class="nv">r8</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="nl">.L_for_loop_columns:</span>
+
+        <span class="c1">; printing a star</span>
+        <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">star_character</span><span class="p">]</span>
+        <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">syscall</span>
+
+        <span class="c1">; increment the column counter</span>
+        <span class="nf">inc</span> <span class="nv">r8</span>
+
+        <span class="c1">; compare the column counter to the predefined size and jump if required</span>
+        <span class="nf">cmp</span> <span class="nv">r8</span><span class="p">,</span> <span class="p">[</span><span class="nv">square_size</span><span class="p">]</span>
+        <span class="nf">jne</span> <span class="nv">.L_for_loop_columns</span>
+
+    <span class="c1">; printing a new line</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">star_character</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">syscall</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">syscall</span>
+
+<span class="nl">square_size:</span>
+    <span class="nf">.quad</span> <span class="mi">20</span>
+
+<span class="nl">star_character:</span>
+    <span class="nf">.word</span> <span class="s">'*'</span>
+
+<span class="nl">new_line:</span>
+    <span class="nf">.word</span> <span class="err">'\</span><span class="nv">n</span><span class="err">'</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This program behaves similarly to what we previously seen.
+The first action consists in initializing our column index variable in the register <code class="language-plaintext highlighter-rouge">r8</code> to 0.
+Then, we enter the for-loop by passing the “for_loop_columns” label and print a first star character.
+Then, the rbx register is incremented (+1) and its value is compared to the square_size constant.
+The brackets ‘[ ]’ in the <code class="language-plaintext highlighter-rouge">cmp</code> instructions mean that we consider the value stored at the constant “square_size”, and not its memory address.</p>
+
+<h4 id="drawing-a-square">Drawing a square</h4>
+
+<p>Starting from the previous code, printing a square is no more complicated than adding an additional surrounding loop.
+This time, we use the <code class="language-plaintext highlighter-rouge">r9</code> register for our row index variable :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+</pre></td><td class="code"><pre><span class="nf">.global</span> <span class="nv">_start</span>
+<span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+
+<span class="nl">_start:</span>
+
+    <span class="c1">; init the row counter to 0</span>
+    <span class="nf">mov</span> <span class="nv">r9</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="nl">.L_for_loop_rows:</span>
+        
+        <span class="c1">; init the column counter to 0</span>
+        <span class="nf">mov</span> <span class="nv">r8</span><span class="p">,</span> <span class="mi">0</span>
+
+        <span class="nl">.L_for_loop_columns:</span>
+            <span class="c1">; printing a star</span>
+            <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+            <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+            <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">star_character</span><span class="p">]</span>
+            <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">1</span>
+            <span class="nf">syscall</span>
+
+            <span class="nf">inc</span> <span class="nv">r8</span>
+            <span class="nf">cmp</span> <span class="nv">r8</span><span class="p">,</span> <span class="p">[</span><span class="nv">square_size</span><span class="p">]</span>
+            <span class="nf">jne</span> <span class="nv">.L_for_loop_columns</span>
+
+        <span class="c1">; writing a new line</span>
+        <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">new_line</span><span class="p">]</span>
+        <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">1</span>
+        <span class="nf">syscall</span>
+        
+        <span class="nf">inc</span> <span class="nv">r9</span>
+        <span class="nf">cmp</span> <span class="nv">r9</span><span class="p">,</span> <span class="p">[</span><span class="nv">square_size</span><span class="p">]</span>
+        <span class="nf">jne</span> <span class="nv">.L_for_loop_rows</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="nf">syscall</span>
+
+<span class="nl">square_size:</span>
+    <span class="nf">.quad</span> <span class="mi">20</span>
+
+<span class="nl">star_character:</span>
+    <span class="nf">.word</span> <span class="s">'*'</span>
+
+<span class="nl">space_character:</span>
+    <span class="nf">.word</span> <span class="s">' '</span>
+
+<span class="nl">new_line:</span>
+    <span class="nf">.word</span> <span class="err">'\</span><span class="nv">n</span><span class="err">'</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>And here is our square!
+Hmm… well, if you test it, this looks more like a rectangle.
+In fact, the characters are rectangle hence our square appears deformed.
+We can adjust this without much effort by adding a blank character after each star:</p>
+
+<div class="code_frame"> Bash</div>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre></td><td class="code"><pre>* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * * 
+* * * * * * * * * * * * * * * * * * * *
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="whats-next-">What’s next ?</h2>
+
+<p>Alright, jumps are essential instructions that we just added in our assembly knowledge toolbox.
+In our square printing program, we had to look for registers that were not used by our program to store variables.
+Obviously, this is not a proper way to manage local variables in assembly since there are a limited number of registers.
+In the next post, we will see how to use the program’s stack for storing our local variables.</p>
+
+<p>By that time, the square printing code is available at the <a href="https://github.com/smbct/x86-64_101_linux/tree/main/pt2_draw_square">following link</a>.
+As previously, you can experiment by adding complexity to the code.
+For instance, with additional jumps and modulo operations you can try to only fill some of the columns or rows, or even draw sub rectangles.
+Please leave a comment if you have any suggestion or question about this post!</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+
+</div>
+
+
+
+
+<p class="back-link">
+    <a href="/series/x86_64_assembly/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Assembly x86-64 programming 101</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

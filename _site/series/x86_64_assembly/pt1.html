@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Assembly x86-64 programming 101 &#58 chapter 1, Hello, world! &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="series_article">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="24" width="28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  <a id="subscribe-link"
+     class="icon" title="Subscribe" aria-label="Subscribe"
+     href="/feed.xml">
+    <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+  </a>
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     href="/">
+     🇬🇧 <div></div>
+  </a>
+
+  <a id="icon_flag"
+  class="icon_flag"
+  href="/fr/">
+    🇫🇷 <div></div>
+  </a>
+
+</nav>
+
+  <p>
+  &copy; 2024.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/series/x86_64_assembly/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Assembly x86-64 programming 101</a>
+</p>
+
+
+  <h1 class="post-title">Assembly x86-64 programming 101 &#58 chapter 1, Hello, world!</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      03 May 2024
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    15 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        low-level programming assembly
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p>The last few months, I developed an increasing interest in low level programming and especially in assembly programming.
+What seemed for a long time an obscure and inaccessible hobby to me has become a fascinating and engaging topic as I started digging.
+From someone with a computer science background, learning assembly programming feels like exploring the fundamentals of computing and looking back at the history of modern computers.
+Learning to code in assembly is a way to become better at understanding how computers and programs work and how they can be secured and optimized.</p>
+
+<p>This blog post is the first of a series where I would like to introduce the basics of assembly.
+I plan to cover fundamental notions as well as practical development with higher level libraries.
+My goal is to make us feel that it is actually possible to develop modern applications in assembly, although it is much slower and much less convient than using any modern language.
+I should however warn you that I am still very new to the topic and I will probably make some imprecisions and mistakes along the way.
+I will still focus on bringing enough content so that we become autonomous at proof reading and learning more advanced notions.
+I will use Linux tools in theses posts but this could probably be adapted to any other operating system.
+Some notions of “relatively” low level languages such as C would be helpful (but not mandatory) as I will mention mechanisms like the program’s stack.</p>
+
+<p>This first post will give some insights about assembly languages and we will then see how to write a first hello world program.
+Among the ressources that I used for this series, I can recommend the great Youtube channel <a href="https://www.youtube.com/@LowLevelLearning">Low Level Learning</a>, that offers content about low level programming and security.
+They made few basic <a href="https://www.youtube.com/watch?v=6S5KRJv-7RU">videos</a> about assembly that hooked my motivation.
+I also really enjoyed playing the video “game” <a href="https://en.wikipedia.org/wiki/Human_Resource_Machine">Human Resource Machine</a> that proposes to solve several computing tasks by writing programs in a language similar to assembly (although I admit this is not quite the typical game to enjoy at night).</p>
+
+<h2 id="programming-with-assembly">Programming with… Assembly?</h2>
+
+<p>Assembly may be a famous word in the wold of computing, it is still worth researching a little about this term.
+<a href="https://en.wikipedia.org/wiki/Assembly_language">Wikipedia</a> says that assembly actually refers to programming languages that are very close to the real processor’s instructions.
+Assembly languages allow us to program by almost directly using the processor’s instruction, it is a way to program computers at a very low level.</p>
+
+<h4 id="architecture-specific-programming">Architecture specific programming</h4>
+
+<p>A given assembly language is thus associated to a specific computer architecture such as x86 (desktop and portable computers) or ARM (processors found in smartphones and other mobile devices).
+A program made with an x86 assembly language will be then unable to run on ARM devices for instance.
+In this series, we will only look at <strong>x86-64 assembly</strong> since x86-64, the 64 bits version of x86 processors, is the most common architecture of everyone’s personal computers.
+However, learning assembly for other platforms is also possible by using emulators.
+Architectures other than x86 are also quite interesting to study since ARM, for instance, has recently become more present in personal computers with the <a href="https://en.wikipedia.org/wiki/Apple_silicon">apple silicons</a> and the <a href="https://www.microsoft.com/fr-fr/windows/copilot-plus-pcs">Microsoft’s copilot+ pc</a> and is also used in Raspberry Pi boards and Nintendo switch consoles.
+MIPS is another interesting architecture as it is used in several old generation consoles such as the Nintendo 64 and the first Playstation.</p>
+
+<p><a href="https://fr.wikipedia.org/wiki/Raspberry_Pi#/media/Fichier:23551-raspberry-pi-5.jpg"><img src="/assets/assembly_series/23551-raspberry-pi-5.jpg" alt="The Raspberry Pi model 5" /></a></p>
+<div class="custom_caption">
+  <p>&gt; The Raspberry Pi model 5, embedding an ARM processor.</p>
+</div>
+
+<p>An important note is that while writing assembly really feels like having a precise control on our computer’s processor, modern processors are extremely complex and many hidden operations are still happening under the hood, which prevents us from fully apprehending it.
+Learning assembly remains an important step to better understand how computers work.</p>
+
+<h4 id="compilation-of-assembly-programs">Compilation of assembly programs?</h4>
+
+<p>When it comes to programming languages, one may often distinguish compiled langages such as C, C++, Rust, etc..  from interpreted languages like Python or Lua.
+Compilation may be described as the process of translating a program’s code into machine code, an operation after which the original source code is gone.
+Nonetheless, the machine code that is produced is actually nothing more than one of our architecture’s specific assembly language.</p>
+
+<p>This means that assembly code does not need to be compiled : it is already in the form of processor’s instructions.
+It is in fact possible to read the assembly code from any compiled program by <em>disassembling</em> it.
+However, you should not expect to recover a clean, abstract and commented version of the code with variable names and so on, since most information is lost during compilation.
+The ability to read compiled program’s code remains a good motivation to learn assembly.
+Without evoking potential illegal action on proprietary softwares, manipulating binary programs can be used for instance to <a href="https://www.youtube.com/watch?v=cwBoUuy4nGc">patch</a> old and unmaintained softwares that would no longer properly work on recent systems.</p>
+
+<p>Obviously, programming in assembly is performed by writing instructions in a text format, and not by adding an obscure succession of zeroes and ones that would encode the operations in binary.
+Producing an executable program from the assembly code thus requires a translation from the text to a binary form.
+This step is performed by the <em>assembler</em>, a program that creates the actual object code in a proper format.
+For instance, Linux systems use the <a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format">elf format</a> for their executable programs.</p>
+
+<h2 id="a-first-assembly-program">A first assembly program</h2>
+
+<p>We will start assembly programming by writing a simple program that performs the most basic operations.
+Our tools here will be any text editor supporting x86 assembly syntax, an assembler of x86 assembly code and a linker that produces the final executable.
+Visual Studio Code can be used with the “x86 and x86_64 Assembly” extension for the writing part.
+We will use the <strong>“.s”</strong> extension for our code files.
+To translate our code into binary, we will then use the <a href="https://www.gnu.org/software/binutils/">GNU Assembler</a> which is the assembler used by the <a href="https://gcc.gnu.org/">GCC</a> compiler.
+GCC will also be our linker in order to produce the executable file (GCC actually calls “ld” for linking).
+Last, but not least, we will rely on the <a href="https://sourceware.org/gdb/">GNU debugger (GDB)</a> to inspect and debug our programs.</p>
+
+<p>Let’s write our first lines of x86 assembly :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+<span class="nf">.global</span> <span class="nv">_start</span>
+
+<span class="nl">_start:</span>
+
+    <span class="c1">; do nothing</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The first line of the code just specifies the use of the intel syntax with some noprefix mode, a syntax that is more readable for beginners.
+The second line makes sure that the symbol <code class="language-plaintext highlighter-rouge">_start</code> (our function’s name) will be visible from outside the program.
+In general, symbols such as local function names would not be exported when releasing programs as they are not necessary from the outside.
+On the contrary, function names that are part of a library’s interface would be made visible to the users.
+<code class="language-plaintext highlighter-rouge">_start</code> is in fact the name of the program’s entry point (first line to be executed), which is why this symbol must always be known from the outside.</p>
+
+<p>Then the definition of our <code class="language-plaintext highlighter-rouge">_start</code> function begins with its label followed by a colon (:).
+For now the function does nothing, as indicated with a comment.</p>
+
+<blockquote>
+  <p>📝 Note that the semicolon “;” symbol for comments seems to be unsupported by the GNU assembler.
+I will use it in my examples for the purpose of syntax highlighting but it should be replaced with a hash “#” symbol to work properly with the “as” command.</p>
+</blockquote>
+
+<blockquote>
+  <p>📝 If you use vscode with the extension I mentioned before and if you want to modify the shortcut comment symbol from “;” to “#”, you can edit the file “language-configuration.json”. 
+In ubuntu, this configuration file would be located in the ~/.vscode/extensions/[…]x86[…] directory (the extension folder should be the only one containing the “x86” name)</p>
+</blockquote>
+
+<h4 id="compilation-and-linking">Compilation and linking</h4>
+
+<p>I will use the term <em>compilation</em> to designate the process of making an executable file from the assembly code even though this term is more adapted to languages like C.
+To compile this piece of code, we will first execute the <code class="language-plaintext highlighter-rouge">as</code> command that produces an object file :</p>
+
+<p><code class="language-plaintext highlighter-rouge">as hello_world.s -o hello_world.o</code></p>
+
+<p>You may recognize the .o extension that is also used as temporary compiled files when compiling C language.
+You may run command <code class="language-plaintext highlighter-rouge">file hello_world.o</code> on the output to verify that the produced file is a binary code on the “elf” format.</p>
+
+<p>Now we can use GCC to produce an actual executable :</p>
+
+<p><code class="language-plaintext highlighter-rouge">gcc hello_world.o -o hello_world -static -nostdlib</code></p>
+
+<p>Two important options are passed to gcc : <code class="language-plaintext highlighter-rouge">-static</code> to produce a position-dependant executable and <code class="language-plaintext highlighter-rouge">-nostdlib</code> which prevent from using the C standard library in our program.
+These two options are required for now but we will see in another post how to do differently.</p>
+
+<p>When we try to execute this program it results into a <em>segmentation fault</em>.
+This happens because our program does not actually know how to exit.
+We will add the following lines to solve the issue :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="nl">_start:</span>
+
+    <span class="c1">; exiting</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">42</span>
+    <span class="nf">syscall</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The program should now terminate properly.
+In assembly, even simple things such as exiting a program have to be done manually!
+This step is performed by a “system call”, triggered by the last instruction.
+<a href="https://www.geeksforgeeks.org/introduction-of-system-call/">System calls</a> are a way for programs to interact with the operating system. 
+The two instructions preceding the call are used to specify parameters through the two registers <code class="language-plaintext highlighter-rouge">rax</code> and <code class="language-plaintext highlighter-rouge">rdi</code>.
+The first line specify the type of system call to perform, which is sys_exit here (<a href="https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/">tables</a> of Linux system calls can be found online).
+The second line sets the return value of the program, similarly to <code class="language-plaintext highlighter-rouge">return 42;</code> at the end of a C program.</p>
+
+<p>After compiling the program again the execution does not produce a segmentation fault anymore.
+This time we can run it and check its return value in bash :
+<code class="language-plaintext highlighter-rouge">./hello_world ; echo $?</code> which outputs 42!</p>
+
+<h4 id="registers">Registers</h4>
+
+<p>We have just seen the use of registers to pass parameters to the system call.
+Registers are ultra fast memory spots in the processor that are used as <strong>temporary</strong> variables to perform the program’s operations.
+This means that these spots will not serve as storing our data, as registers may be used to successively perform operations on unrelated data.
+There are a limited number of registers in the x86-64 architecture and all registers have a name and a more or less specified use.
+A list of registers can be found online, <a href="https://wiki.osdev.org/CPU_Registers_x86-64">here</a>, <a href="https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture">here</a> and also <a href="https://flint.cs.yale.edu/cs421/papers/x86-asm/asm.html">there</a> for instance.</p>
+
+<p>It is important to note that registers have various sizes, which is expressed in bits or bytes (recall that 1 byte equals 8 bits).
+In the x86-64 architecture, registers can be up to 64 bits (8 bytes).
+Once more, tables can be found online with information on <a href="https://en.wikibooks.org/wiki/X86_Assembly/X86_Architecture">registers sizes</a>.</p>
+
+<h2 id="hello-world">Hello world</h2>
+
+<p>Starting from the previous code, we can now make a program that writes the famous “hello world” in the terminal.
+To do so, we will use the <code class="language-plaintext highlighter-rouge">sys_write</code> system call.
+From the link <a href="https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/">on linux system calls</a>, we see that invoking a “sys_write” system call is performed by setting the <code class="language-plaintext highlighter-rouge">rax</code> register to <code class="language-plaintext highlighter-rouge">1</code>.
+The <code class="language-plaintext highlighter-rouge">rdi</code> register specifies the file descriptor, which will be set to <code class="language-plaintext highlighter-rouge">1</code> to write to the standard output.
+There are two other parameters passed by registers : <code class="language-plaintext highlighter-rouge">rsi</code>, the memory address of our “hello world” string and <code class="language-plaintext highlighter-rouge">rdx</code>, the length of the string.
+We can define the string as a constant in our program thanks to a new symbol :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="nl">hello_world:</span>
+    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>By doing so, the string will be hard coded into the executable and the label <code class="language-plaintext highlighter-rouge">hello_world</code> will allow us to directly refer to it (more especially to its address) in our code.
+You can test the command <code class="language-plaintext highlighter-rouge">strings hello_world</code> on the compiled program to verify that the string is indeed present in the executable.
+We can now complete our code to produce the desired output :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre><span class="nf">.intel_syntax</span> <span class="nv">noprefix</span>
+<span class="nf">.global</span> <span class="nv">_start</span>
+
+<span class="nl">_start:</span>
+
+    <span class="c1">; printing hello world</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="nf">lea</span> <span class="nb">rsi</span><span class="p">,</span> <span class="p">[</span><span class="nv">hello_world</span><span class="p">]</span>
+    <span class="nf">mov</span> <span class="nb">rdx</span><span class="p">,</span> <span class="mi">14</span>
+    <span class="nf">syscall</span>
+
+    <span class="c1">; exit</span>
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">60</span>
+    <span class="nf">mov</span> <span class="nb">rdi</span><span class="p">,</span> <span class="mi">42</span>
+    <span class="nf">syscall</span>
+
+<span class="nl">hello_world:</span>
+    <span class="nf">.asciz</span> <span class="err">"</span><span class="nv">Hello</span><span class="p">,</span> <span class="nv">World</span><span class="err">!\</span><span class="nv">n</span><span class="err">"</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>That’s it! We just created the famous hello world program in x86-64 assembly.</p>
+
+<h2 id="inspecting-our-program-with-gdb">Inspecting our program with gdb</h2>
+
+<p>It might strike us that in assembly, simple operations such as writing to the standard output are already difficult to perform and take several lines of code.
+This makes us realize all the computations performed in background when using higher level programming languages.
+In C, printing the value of a variable, which is essential for debugging, would be as easy as simply calling the “printf” function and passing the variable to it.
+Here, a sys_write only handles a string and there are no predefined functions to output the value of a register.</p>
+
+<p>Instead of coding our own functions to do it, we can run the GNU debugger for now to inspect our program.
+Let’s add the following lines at the beginning of our function first :</p>
+
+<div class="code_frame"> Assembly x86-64</div>
+
+<figure class="highlight"><pre><code class="language-nasm" data-lang="nasm"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="nl">_start:</span>
+
+    <span class="nf">mov</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">30</span>
+    <span class="nf">add</span> <span class="nb">rax</span><span class="p">,</span> <span class="mi">12</span>
+    <span class="nl">debug:</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>You may guess that the first new line assigns the value 30 to the <code class="language-plaintext highlighter-rouge">rax</code> register and the second one adds 12 to it.
+We will verify this behavior with GDB by adding a <em>breakpoint</em>.
+<em>Breakpoints</em> can be used to stop the program during its execution at a specific location.
+Here instead of relying on line numbers, we can tell GDB to stop at a given symbol, which will be “debug” in our case.</p>
+
+<p>We can recompile the program and run GDB by attaching the program to it : <code class="language-plaintext highlighter-rouge">gdb hello_world</code>.
+Then, the breakpoint can be added by referring to the new “debug” symbol : <code class="language-plaintext highlighter-rouge">b debug</code>.
+We now execute the program from the beginning with <code class="language-plaintext highlighter-rouge">start</code>.
+Normally, the program would stop after executing the instruction preceding our label, indicating “Breakpoint 1”.
+From this point, we can verify the register’s value with : <code class="language-plaintext highlighter-rouge">print $rax</code>, which produces the intended output “$1 = 42”.
+We can also obtain information about other registers with the command <code class="language-plaintext highlighter-rouge">info registers</code>.</p>
+
+<p>Great! GDB allows us to debug our program in a much simpler way than having to manually convert our numerical registers into character strings.
+I find the use of symbols as in-code labels very convenient for debugging.
+For instance you may define several debugging symbols like <code class="language-plaintext highlighter-rouge">debug1</code>, <code class="language-plaintext highlighter-rouge">debug2</code>, … and set breakpoints to them in GDB such that the program execution would stop successively at these different points in the program.
+GDB will be of great use for debugging as we practice assembly so it is worth covering it.</p>
+
+<h4 id="edit-from-2024-06-05-️">Edit from 2024-06-05 ⚠️</h4>
+
+<p>This is an edit to the previous statement about using symbols for debugging purposes.
+As I am learning through the making of these posts, I realized that using symbols for debugging actually seems not to be good practice as it may disturb GDB for instance.
+It seems that exported symbols must be only used for function definitions.
+Alternatively, we can inspect our program by adding debugging information during the compilation process with the <em>-g</em> option :  <code class="language-plaintext highlighter-rouge">as -g hello_world.s -o hello_world.o</code></p>
+
+<p>After that, breakpoints can be added by directly referencing a line number : <code class="language-plaintext highlighter-rouge">b hello_world.s:11</code> where 11 is the line that follows the instruction <code class="language-plaintext highlighter-rouge">add rax, 12</code> in my code.
+This would give some higher level information about the code execution :</p>
+
+<div class="code_frame"> GDB</div>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre>(gdb) breakpoint hello_world.s:11
+Breakpoint 1 at 0x40100b: file hello_world.s, line 12.
+(gdb) run
+Breakpoint 1, _start () at hello_world.s:12
+12	    mov rax, 1
+(gdb) print $rax
+$1 = 42
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Here gdb directly indicates the line that follows the breakpoint.
+As it has stopped at the expected place, we can now check the value of the rax register and verify that the computation was executed successfully.</p>
+
+<h2 id="whats-next-">What’s next ?</h2>
+
+<p>Although writing the hello world is a good success for such a low level language, our capabilities remain limited for now.
+In the next post, we will se how to add control flow to our programs so that we can write conditionals and loops.
+In the mean time, you will find the hello world code from this post at the <a href="https://github.com/smbct/x86-64_101_linux/tree/main/pt1_hello_world">following link</a>.
+Feel free to modify it and experiment with registers and simple operations such as <code class="language-plaintext highlighter-rouge">mov</code>, <code class="language-plaintext highlighter-rouge">add</code>, <code class="language-plaintext highlighter-rouge">and</code>, etc…
+Tutorials and references can usually be found online and I invite you to use GDB (and its documentation) to understand the program.</p>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+
+</div>
+
+
+
+
+<p class="back-link">
+    <a href="/series/x86_64_assembly/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Assembly x86-64 programming 101</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
