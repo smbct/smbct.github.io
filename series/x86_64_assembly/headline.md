@@ -6,6 +6,7 @@ categories: low-level programming assembly
 comments: true
 layout: series
 series: x86_assembly
+lang: en
 ---
 
 This series covers x86-64 assembly programming.

@@ -17,8 +17,14 @@
 
   {% include page-links.html %}
 
+  <!-- should be improved -->
+  {% if page.lang == "en" %}
   <a class="category-link {% if page.title == "Series" %} active{% endif %}"
           href="/pages/series.html">Series </a>
+  {% else if page.lang == "fr"%}
+  <a class="category-link {% if page.title == "Séries" %} active{% endif %}"
+      href="/pages/fr_series.html">Séries </a>
+  {% endif %}
 
   {% include category-links.html %}
 
