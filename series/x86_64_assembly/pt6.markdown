@@ -5,8 +5,9 @@ date:   2024-06-20 10:00:00 +0200
 categories: low-level programming assembly
 comments: true
 layout: series_article
+series: x86_assembly
 back_page: headline.md
-language: en
+lang: en
 ---
 
 Having covered the basics of assembly programming, we can now put some knowledge into practice by writing concrete algorithms.
