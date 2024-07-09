@@ -6,7 +6,7 @@ categories: low-level programming assembly
 comments: true
 layout: series_article
 back_page: headline.md
-language: en
+lang: en
 ---
 
 We've previously seen how to code a "hello world" program in assembly and how to perform conditions and loops.

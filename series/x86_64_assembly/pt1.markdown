@@ -7,7 +7,7 @@ comments: true
 layout: series_article
 series: x86_64_assembly
 back_page: headline.md
-language: en
+lang: en
 ---
 
 The last few months, I developed an increasing interest in low level programming and especially in assembly programming.

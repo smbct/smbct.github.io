@@ -1,5 +1,17 @@
 <div class="post-meta">
-  <span class="post-date">📅 {{ include.post.date | date_to_string }}</span>
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    {% if include.post.lang == "en" %}
+      {{ include.post.date | date_to_string }}
+    {% else if include.post.lang == "fr" %}
+      {{ include.post.date | date: "%-d" }}
+      {% assign m = include.post.date | date: "%-m" | minus: 1 %}
+      {{ site.data.fr.months[m] }}
+      {{ include.post.date | date: "%Y" }}
+    {% endif %}
+  </span>
 
   • ⏲️
   {% include read-time.html %}
