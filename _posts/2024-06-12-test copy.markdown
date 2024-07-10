@@ -8,6 +8,14 @@ layout: post
 lang: en
 back_page: /index.html
 ---
+{{ site.data.page_lang[0][0] }}
+{{ site.data.page_lang[0][1] }}
+
+{% assign tr_page = null %}
+
+{% for elt in site.data.page_lang %}
+    {{ elt }}
+{% endfor %}
 
 abcd
 
@@ -15,6 +23,7 @@ abcd
     {{ p.url }}
     {{ p.dir }}
     {{ p.name }}
+    {{ p.title }}
 {% endfor %}
 
 
