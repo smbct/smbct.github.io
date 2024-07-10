@@ -8,7 +8,7 @@
     {% else if include.post.lang == "fr" %}
       {{ include.post.date | date: "%-d" }}
       {% assign m = include.post.date | date: "%-m" | minus: 1 %}
-      {{ site.data.fr.months[m] }}
+      {{ site.data.months_fr.months[m] }}
       {{ include.post.date | date: "%Y" }}
     {% endif %}
   </span>
