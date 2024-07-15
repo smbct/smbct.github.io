@@ -35,6 +35,7 @@
     border-top-right-radius: 0.5rem;
 
     font-weight: 900;
+    cursor:pointer;
     
 }
 .collapse-panel div label:hover{
@@ -83,7 +84,7 @@
 // extensible content panel
 .collapse-panel div div.extensible-content{
     padding: 7px;
-    padding-right: 12px;
+    // padding-right: 12px;
 
     font-size: 14px;
     color: #555;
