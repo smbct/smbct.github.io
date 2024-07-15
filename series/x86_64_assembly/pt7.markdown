@@ -7,7 +7,7 @@ comments: true
 layout: series_article
 series: x86_assembly
 back_page: headline.md
-language: en
+lang: en
 ---
 
 Although we already covered numerous basics in x86 assembly so far, one thing that has not been discussed yet is the use of **floating point** computation : namely numbers with a **decimal** part.
