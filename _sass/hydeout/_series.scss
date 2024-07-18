@@ -3,8 +3,27 @@ div.series {
     border: 1px solid #ccc;
     border-radius: 0.3rem;
     padding: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
 
 }
+
+h2.series {
+    padding:0rem;
+    display: block;
+
+    a.series {
+    display: block;
+    // height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
+    padding: 1rem 3rem;
+    } 
+}
+
+ /* Missing from other answers */
 
 div.series:hover {
     background-color: rgb(233, 233, 233);

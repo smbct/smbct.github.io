@@ -472,7 +472,6 @@ pre code {
 
 div.extensible-content figure.highlight {
   min-width: fit-content;
-  padding-right: 12px;
   overflow-x: scroll;
   background-color: rgb(255, 255, 255);
   border-bottom-left-radius: 0%;
@@ -508,7 +507,6 @@ div.extensible-content figure.highlight {
   line-height: 1.4;
   padding: 0rem;
   margin: 0rem;
-  margin-bottom: 1rem;
 }
 .highlight pre {
   margin-bottom: 0;
@@ -736,11 +734,26 @@ body {
   color: rgb(255, 255, 255);
   border-radius: 0.2rem;
   position: absolute;
-  left: -0.1rem;
-  top: 0.55rem;
-  border: solid 2px;
-  height: 1rem;
-  width: 1.4rem;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  #sidebar a:hover.icon_flag div,
+  #sidebar a:focus.icon_flag div {
+    left: 0rem;
+    top: 0.55rem;
+    border: solid 2px;
+    height: 1rem;
+    width: 1.5rem;
+  }
+}
+@-moz-document url-prefix() {
+  #sidebar a:hover.icon_flag div,
+  #sidebar a:focus.icon_flag div {
+    left: -0.1rem;
+    top: 0.55rem;
+    border: solid 2px;
+    height: 1rem;
+    width: 1.4rem;
+  }
 }
 
 #sidebar a.active {
@@ -754,11 +767,24 @@ body {
   color: rgb(255, 255, 255);
   border-radius: 0.2rem;
   position: absolute;
-  left: -0.1rem;
-  top: 0.55rem;
-  border: solid 2px;
-  height: 1rem;
-  width: 1.4rem;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+  #sidebar a.active.icon_flag div {
+    left: 0rem;
+    top: 0.55rem;
+    border: solid 2px;
+    height: 1rem;
+    width: 1.5rem;
+  }
+}
+@-moz-document url-prefix() {
+  #sidebar a.active.icon_flag div {
+    left: -0.1rem;
+    top: 0.55rem;
+    border: solid 2px;
+    height: 1rem;
+    width: 1.4rem;
+  }
 }
 
 #sidebar .site-title {
@@ -1090,6 +1116,7 @@ button.disqus-load {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   font-weight: 900;
+  cursor: pointer;
 }
 
 .collapse-panel div label:hover {
@@ -1127,7 +1154,6 @@ button.disqus-load {
 
 .collapse-panel div div.extensible-content {
   padding: 7px;
-  padding-right: 12px;
   font-size: 14px;
   color: #555;
   margin: 0px;
@@ -1154,8 +1180,24 @@ div.series {
   border: 1px solid #ccc;
   border-radius: 0.3rem;
   padding: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
+h2.series {
+  padding: 0rem;
+  display: block;
+}
+h2.series a.series {
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 0.3rem;
+  padding: 1rem 3rem;
+}
+
+/* Missing from other answers */
 div.series:hover {
   background-color: rgb(233, 233, 233);
 }
