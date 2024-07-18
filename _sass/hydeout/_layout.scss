@@ -23,46 +23,52 @@
 */
 
 body {
-  background-attachment: fixed;
-  background-color: $sidebar-bg-color;
-  background-image: linear-gradient(to bottom, lighten($sidebar-bg-color, 7%), darken($sidebar-bg-color, 7%));
-  color: $sidebar-text-color;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+    background-attachment: fixed;
+    background-color: $sidebar-bg-color;
+    background-image: linear-gradient(
+        to bottom,
+        lighten($sidebar-bg-color, 7%),
+        darken($sidebar-bg-color, 7%)
+    );
+    color: $sidebar-text-color;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 #sidebar {
-  flex: 0 0 auto;
-  padding: $section-spacing;
+    flex: 0 0 auto;
+    padding: $section-spacing;
 
-  .site-title {
-    font-family: 'Abril Fatface', serif;
-    font-size: $large-font-size;
-    font-weight: normal;
-    margin-bottom: $heading-spacing;
-    margin-top: 0;
-  }
+    .site-title {
+        font-family: "Abril Fatface", serif;
+        font-size: $large-font-size;
+        font-weight: normal;
+        margin-bottom: $heading-spacing;
+        margin-top: 0;
+    }
 
-  .site-title .back-arrow { margin-right: 0.5rem; }
+    .site-title .back-arrow {
+        margin-right: 0.5rem;
+    }
 }
 
 .content {
-  background: $body-bg;
-  color: $body-color;
-  padding: $section-spacing;
+    background: $body-bg;
+    color: $body-color;
+    padding: $section-spacing;
 }
 
 // Container is flexbox as well -- we want content div to stretch and fill
 .container {
-  display: flex;
-  flex: 1 1 auto;
-  flex-direction: column;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
 
-  > .content {
-    flex-grow: 1;
-    padding-bottom: $section-spacing * 2;
-  }
+    > .content {
+        flex-grow: 1;
+        padding-bottom: $section-spacing * 2;
+    }
 }
 
 /* -----------------------------------------------------------
@@ -72,31 +78,29 @@ body {
 // Hide secondary nav content in sidebar
 // Hide lead paragraph in sidebar
 #sidebar {
-  header ~ *,
-  header ~ nav,
-  p.lead {
-    display: none;
-  }
+    header ~ *,
+    header ~ nav,
+    p.lead {
+        display: none;
+    }
 }
 
 // Make header elements blend into sidebar / background
 .container > header {
-  background: transparent;
-  color: $sidebar-title-color;
-  margin:
-    ($heading-spacing - $section-spacing)
-    $section-spacing
-    $section-spacing;
+    background: transparent;
+    color: $sidebar-title-color;
+    margin: ($heading-spacing - $section-spacing) $section-spacing
+        $section-spacing;
 
-  h1,
-  h2 {
-    color: inherit;
-  }
+    h1,
+    h2 {
+        color: inherit;
+    }
 
-  h1:last-child,
-  h2:last-child {
-    margin-bottom: 0;
-  }
+    h1:last-child,
+    h2:last-child {
+        margin-bottom: 0;
+    }
 }
 
 /* -----------------------------------------------------------
@@ -104,30 +108,29 @@ body {
 ----------------------------------------------------------- */
 
 .home #sidebar {
+    // Center sidebar content
+    text-align: center;
 
-  // Center sidebar content
-  text-align: center;
+    // Bigger title
+    .site-title {
+        font-size: 3.25rem;
+    }
 
-  // Bigger title
-  .site-title {
-    font-size: 3.25rem;
-  }
+    // Show secondary nav content + lead
+    header ~ *,
+    p.lead {
+        display: block;
+    }
 
-  // Show secondary nav content + lead
-  header ~ *,
-  p.lead {
-    display: block;
-  }
+    header ~ nav {
+        display: flex;
+    }
 
-  header ~ nav {
-    display: flex;
-  }
-
-  // Slightly more bottom padding to compensate for heading not match 100% of
-  // line-height on top
-  > *:last-child {
-    margin-bottom: 0.5rem;
-  }
+    // Slightly more bottom padding to compensate for heading not match 100% of
+    // line-height on top
+    > *:last-child {
+        margin-bottom: 0.5rem;
+    }
 }
 
 /* -----------------------------------------------------------
@@ -135,105 +138,100 @@ body {
 ----------------------------------------------------------- */
 
 @media (min-width: $large-breakpoint) {
-  body {
-    flex-direction: row;
-    min-height: 100vh;
-    -webkit-overflow-scrolling: touch;
-    overflow-y: auto;
+    body {
+        flex-direction: row;
+        min-height: 100vh;
+        -webkit-overflow-scrolling: touch;
+        overflow-y: auto;
 
-    > * {
-      -webkit-overflow-scrolling: touch;
-      overflow-y: auto;
-    }
-  }
-
-  /* Undo mobile CSS */
-
-  #sidebar,
-  .home #sidebar {
-    text-align: left;
-    width: $sidebar-width;
-
-    > *:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  #sidebar {
-    position: fixed;
-
-    // Attach to bottom or top of window
-    @if $sidebar-sticky {
-      bottom: 0;
-    }
-
-    @else {
-      top: 0;
-    }
-
-    // Attach to right or left of window
-    @if $layout-reverse {
-      right: 0;
-    }
-
-    @else {
-      left: 0;
-    }
-
-    .site-title {
-      font-size: 3.25rem;
-      .back-arrow { display: none; }
-    }
-
-    p.lead,
-    header ~ * {
-      display: block;
-    }
-
-    header ~ nav {
-      display: flex;
-    }
-  }
-
-  .index #sidebar { margin-bottom: 0; }
-
-  // Make entire container background white to contrast against sidebar
-  .container {
-    background: $body-bg;
-    color: $body-color;
-    min-height: 100vh;
-    padding:
-      $section-spacing * 2
-      $section-spacing * 2
-      0;
-
-    @if $layout-reverse {
-      margin-right: $sidebar-width;
-    }
-
-    @else {
-      margin-left: $sidebar-width;
-    }
-
-    > header {
-      color: $heading-color;
-      margin: 0;
-
-      h1,
-      h2 {
-        color: inherit;
-
-        &:last-child {
-          margin-bottom: $heading-spacing;
+        > * {
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
         }
-      }
     }
 
-    > * {
-      max-width: 38rem;
-      padding: 0;
+    /* Undo mobile CSS */
+
+    #sidebar,
+    .home #sidebar {
+        text-align: left;
+        width: $sidebar-width;
+
+        > *:last-child {
+            margin-bottom: 0;
+        }
     }
-  }
+
+    #sidebar {
+        position: fixed;
+
+        // Attach to bottom or top of window
+        @if $sidebar-sticky {
+            bottom: 0;
+        } @else {
+            top: 0;
+        }
+
+        // Attach to right or left of window
+        @if $layout-reverse {
+            right: 0;
+        } @else {
+            left: 0;
+        }
+
+        .site-title {
+            font-size: 3.25rem;
+            .back-arrow {
+                display: none;
+            }
+        }
+
+        p.lead,
+        header ~ * {
+            display: block;
+        }
+
+        header ~ nav {
+            display: flex;
+        }
+    }
+
+    .index #sidebar {
+        margin-bottom: 0;
+    }
+
+    // Make entire container background white to contrast against sidebar
+    .container {
+        background: $body-bg;
+        color: $body-color;
+        min-height: 100vh;
+        padding: $section-spacing * 2 $section-spacing * 2 0;
+
+        @if $layout-reverse {
+            margin-right: $sidebar-width;
+        } @else {
+            margin-left: $sidebar-width;
+        }
+
+        > header {
+            color: $heading-color;
+            margin: 0;
+
+            h1,
+            h2 {
+                color: inherit;
+
+                &:last-child {
+                    margin-bottom: $heading-spacing;
+                }
+            }
+        }
+
+        > * {
+            max-width: 38rem;
+            padding: 0;
+        }
+    }
 }
 
 /* -----------------------------------------------------------
@@ -241,130 +239,156 @@ body {
 ----------------------------------------------------------- */
 
 #sidebar a {
-  color: $sidebar-link-color;
+    color: $sidebar-link-color;
 
-  svg {
-    fill: $sidebar-icon-color;
-  }
+    svg {
+        fill: $sidebar-icon-color;
+    }
 }
 
 #sidebar a:hover,
 #sidebar a:focus,
 #sidebar a.active {
-  svg { fill: $sidebar-icon-color; }
+    svg {
+        fill: $sidebar-icon-color;
+    }
 }
 
 #sidebar a:hover,
 #sidebar a:focus {
-  text-decoration: underline;
+    text-decoration: underline;
 
-  &.icon {
-    text-decoration: none;
-  }
-
-  &.icon_flag {
-    text-decoration: none;
-
-    div {
-      color: rgb(255, 255, 255);
-      border-radius: 0.2rem;
-      position: absolute;
-      left: -0.1rem;
-      top: 0.55rem;
-      border: solid 2px;
-      height: 1rem;
-      width: 1.4rem;
+    &.icon {
+        text-decoration: none;
     }
 
-  }
+    &.icon_flag {
+        text-decoration: none;
 
+        div {
+            color: rgb(255, 255, 255);
+            border-radius: 0.2rem;
+            position: absolute;
+
+            @media screen and (-webkit-min-device-pixel-ratio: 0) {
+                // chrome
+                left: 0rem;
+                top: 0.55rem;
+                border: solid 2px;
+                height: 1rem;
+                width: 1.5rem;
+            }
+            @-moz-document url-prefix() {
+                // firefox
+                left: -0.1rem;
+                top: 0.55rem;
+                border: solid 2px;
+                height: 1rem;
+                width: 1.4rem;
+            }
+        }
+    }
 }
 
 #sidebar a.active {
-  font-weight: bold;
+    font-weight: bold;
 
-  &.icon_flag {
-    text-decoration: none;
-    font-weight:normal;
-    div {
-      color: rgb(255, 255, 255);
-      border-radius: 0.2rem;
-      position: absolute;
-      left: -0.1rem;
-      top: 0.55rem;
-      border: solid 2px;
-      height: 1rem;
-      width: 1.4rem;
+    &.icon_flag {
+        text-decoration: none;
+        font-weight: normal;
+        div {
+            color: rgb(255, 255, 255);
+            border-radius: 0.2rem;
+            position: absolute;
+
+            // chrome
+            @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+                left: 0rem;
+                top: 0.55rem;
+                border: solid 2px;
+                height: 1rem;
+                width: 1.5rem;
+            }
+
+            // firefox
+            @-moz-document url-prefix() {
+                left: -0.1rem;
+                top: 0.55rem;
+                border: solid 2px;
+                height: 1rem;
+                width: 1.4rem;
+            }
+        }
     }
-  }
-
 }
 
 #sidebar .site-title {
-  color: $sidebar-title-color;
-  a { color: inherit; }
+    color: $sidebar-title-color;
+    a {
+        color: inherit;
+    }
 }
 
 #sidebar nav {
-  display: flex;
+    display: flex;
 }
 
 #sidebar-nav-links {
-  flex-flow: column nowrap;
+    flex-flow: column nowrap;
 }
 
 #sidebar-icon-links {
-  flex-flow: row wrap;
-  justify-content: center;
-  margin-top: 1rem;
-  max-width: 100%;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-top: 1rem;
+    max-width: 100%;
 
-  @media (min-width: $large-breakpoint) {
-    justify-content: flex-start;
-    margin-left: -0.25em;
-  }
+    @media (min-width: $large-breakpoint) {
+        justify-content: flex-start;
+        margin-left: -0.25em;
+    }
 }
 
 #sidebar nav > * {
-  display: block;
-  line-height: 1.75;
+    display: block;
+    line-height: 1.75;
 }
 
 #sidebar nav > .icon {
-  display: inline-block;
-  font-size: 1.5rem;
-  margin: 0 0.25em;
+    display: inline-block;
+    font-size: 1.5rem;
+    margin: 0 0.25em;
 }
 
 // custom icon flags
 #sidebar nav > .icon_flag {
-  display: inline-block;
-  font-size: 1.2rem;
-  margin: 0 0.25em;
-  position:relative;
+    display: inline-block;
+    font-size: 1.2rem;
+    margin: 0 0.25em;
+    position: relative;
 }
 
 @media print {
-  #sidebar {
-    display: none;
-  }
-
-  body {
-    display: block;
-  }
-
-  .container {
-    display: block;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0;
-
-    > * {
-      max-width: 100%;
+    #sidebar {
+        display: none;
     }
-  }
 
-  html {
-    font-size: normal;
-  }
+    body {
+        display: block;
+    }
+
+    .container {
+        display: block;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+
+        > * {
+            max-width: 100%;
+        }
+    }
+
+    html {
+        font-size: normal;
+    }
 }
