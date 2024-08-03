@@ -10,7 +10,7 @@ pre {
 
 code {
   background-color: #f9f9f9;
-  border-radius: 3px;
+  // border-radius: 3px;
   color: $code-color;
   font-size: 85%;
   padding: 0.25em 0.5em;
@@ -37,7 +37,7 @@ div.extensible-content figure.highlight {
   // padding-right: 7px;
   overflow-x: scroll;
   background-color: rgb(255, 255, 255);
-  border-bottom-left-radius: 0%;
+  // border-bottom-left-radius: 0%;
 }
 
 .code_frame {
@@ -47,7 +47,6 @@ div.extensible-content figure.highlight {
   border-collapse: collapse;
 
   border-radius: 0.25rem;
-  
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 
@@ -71,14 +70,19 @@ div.extensible-content figure.highlight {
   width:fit-content;
 }
 
+
+
+
 // Pygments/Rouge via Jekyll
 .highlight {
+
   background-color: #f9f9f9;
 
+  // border: 1px solid $border-color;
   // border-radius: 0.25rem;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  // border-top-right-radius: 0.5rem;
+  // border-bottom-left-radius: 0.5rem;
+  // border-bottom-right-radius: 0.5rem;
 
   font-size: 0.8rem;
   line-height: 1.4;
@@ -89,7 +93,7 @@ div.extensible-content figure.highlight {
   margin: 0rem;
 
   // extra space at the bottom
-  // margin-bottom: 1rem;
+  margin-bottom: 1em;
 
   pre {
     margin-bottom: 0;
@@ -104,6 +108,7 @@ div.extensible-content figure.highlight {
   // remove the extra space outside the code cell
   .rouge-table {
     margin: 0rem;
+    
   }
 
   .lineno {
@@ -117,6 +122,38 @@ div.extensible-content figure.highlight {
     user-select: none; // Make sure numbers aren't selectable
   }
   
+
+}
+
+
+// fix border not showing 
+.highlight .gutter.gl {
+  border-right: 1px solid $border-color;
+}
+.highlight {
+  table, td {
+    border: 0px;
+  }
+}
+div.collapse-panel {
+  .highlight {
+    border: 1px solid $border-color;
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+.highlight {
+  border: 1px solid $border-color;
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  // fixes invisible corners
+  pre {
+    border-radius: 0.5rem;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
 }
 
 // Gist via GitHub Pages
