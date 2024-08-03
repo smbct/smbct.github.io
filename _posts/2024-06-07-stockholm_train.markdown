@@ -19,7 +19,7 @@ Est-ce que ces déplacements valent vraiment le coup dans un monde aux ressource
 En tout cas je suis décidé personnellement: aucun de mes déplacements ne justifient un impact aussi négatif ❌.
 Je choisis donc de me comporter de manière stricte : soit j'effectue mes déplacements en train ou bus, soit je ne ne me déplace pas !
 Dans ce cas-ci, le laboratoire qui m'emploie n'a pas émis d'objections pour que je m'y rende en train ✅.
-Une aubaine pour moi car ce type de voyage m'intéressait depuis un certain temps ! 
+Une aubaine pour moi car ce type de voyage m'intéressait depuis un certain temps !
 
 ![Un chemin de fer.](/assets/stockholm/suede_1.jpg)
 
@@ -29,7 +29,7 @@ Une aubaine pour moi car ce type de voyage m'intéressait depuis un certain temp
 J'ai donc planifié mon Paris-Stockholm en train.
 Plus précisément, ma destination finale dans ce voyage est en fait Uppsala, une petite ville un peu plus au nord par rapport à Stockholm.
 Ce trajet est particulièrement opportun pour moi car, ayant des amis qui vivent à Stockholm, j'ai décidé de m'y arrêter quelques jours avant la conférence.
-Je pouvais ensuite rejoindre Uppsala en train pour un trajet de 40 minutes environ. 
+Je pouvais ensuite rejoindre Uppsala en train pour un trajet de 40 minutes environ.
 
 Le plus direct pour rejoindre Stockholm en train depuis la France est de passer par le Danemark.
 En effet, il existe des ponts 🌉 au Danemark et entre le Danemark et la Suède pour connecter les différentes îles, empruntables en voiture mais également [en train](https://fr.wikipedia.org/wiki/Ligne_de_Copenhague_%C3%A0_Malm%C3%B6) !
@@ -61,12 +61,12 @@ Après cela, le train de nuit au départ d'Hambourg me permet d'arriver à Stock
 #### Les premiers soucis avant le départ
 
 J'étais évidemment conscient avant de partir qu'un tel trajet en train est assez risqué : il suffit qu'un train saute ou qu'une correspondance ne soit pas possible pour que cela se répercute sur tous les autres trains 🀟.
-Pire encore, le trajet étant composé par mes soins avec deux parties distinctes, les différentes compagnies ferroviaires n'ont aucune obligation d'assurer les correspondances entre ces deux parties et de nous assister en cas de problèmes. 
+Pire encore, le trajet étant composé par mes soins avec deux parties distinctes, les différentes compagnies ferroviaires n'ont aucune obligation d'assurer les correspondances entre ces deux parties et de nous assister en cas de problèmes.
 
 
 Pour anticiper les problèmes, j'ai effectué les réservations le plus tôt possible et de manière flexible, permettant d'échanger les billets tardivement en cas de besoin.
 Voyageant dans un cadre professionnel, je suis passé par le prestataire en contrat avec mon employeur ce qui a un peu ralenti et compliqué le processus car les informations étaient transmises de manière indirecte.
-Des travaux prévus sur les voies pour le trajet entre Hambourg et Stockholm ont notamment retardé la préparation du voyage car les billets n'étaient pas disponibles à la vente quand j'ai commencé à planifier le voyage. 
+Des travaux prévus sur les voies pour le trajet entre Hambourg et Stockholm ont notamment retardé la préparation du voyage car les billets n'étaient pas disponibles à la vente quand j'ai commencé à planifier le voyage.
 
 Les premiers soucis sur ce voyage se sont par ailleurs présentés peu de temps avant le départ.
 Un mail envoyé un jour plus tôt de la part de la Deutsche Bahn (compagnie ferroviaire allemande) a en effet prévenu que la correspondance du trajet entre Paris et Hambourg ne pouvait être assurée et invitait a choisir parmi **3 trajets alternatifs** proposés.
@@ -100,11 +100,11 @@ C'est donc parti pour l'Allemagne !
 
 ![En route vers l'Allemagne !](/assets/stockholm/en_route_allemagne.jpg)
 <div class="custom_caption" markdown="1">
-\> En route vers l'Allemagne ! 🚃 
+\> En route vers l'Allemagne ! 🚃
 </div>
 
 Arrivé à ma première destination allemande 🇩🇪, je me renseigne donc cette fois-ci auprès d'un agent de la DB au sujet de mon trajet initial prévu.
-J'apprend donc que le trajet est toujours prévu et que la correspondance est possible mais que celui-ci arrive bien plus tard que prévu à Hambourg 😖 ! 
+J'apprend donc que le trajet est toujours prévu et que la correspondance est possible mais que celui-ci arrive bien plus tard que prévu à Hambourg 😖 !
 Il me propose donc un trajet alternatif arrivant plus tôt, avec une correspondance ultra-tendue mais qui devrait être tout de même possible car se faisant sur la voie en face de celle de mon arrivée.
 La politique de la DB en cas de problème est donc : si il y a une perturbation sur votre trajet, vous pouvez prendre n'importe quel autre train permettant d'arriver à destination (et même ceux d'autres compagnies même si ça n'est pas une bone idée 😅) !
 Je décide de tenter cette correspondance.
@@ -114,7 +114,7 @@ Une fois le stresse évacué, je peux enfin me poser dans le train suivant pour 
 J'en profite alors pour installer une superbe appli qui m'aurait été bien utile avant : [DB Navigator](https://int.bahn.de/fr/informations-reservation/application-db-navigator) 📱 !
 Il s'agit d'un équivalent de SNCF connect pour les trains allemands mais qui donne plus d'informations sur les correspondances, notamment le numéro de voie à l'avance pour n'importe quel trajet et le temps des correspondances à jour en fonction des retards.
 
-Sur le chemin, je remarque notamment un train de nuit à destination d'Innsbruck en Autriche ⛰️ ! 
+Sur le chemin, je remarque notamment un train de nuit à destination d'Innsbruck en Autriche ⛰️ !
 Le train de nuit, que je j'ai découvert assez récemment en France pour ma part, est en fait bien présent en Europe.
 Je trouve dommage que ceux de la SNCF relient forcément Paris, mais il s'agit d'une option intéressante pour les longs trajets : cela permet d'économiser à la fois du temps et de l'argent !
 
@@ -176,7 +176,7 @@ Il s'agit d'un train de nuit type TER que je vois arriver sur le quai.
 \> Le train de nuit vers la Suède.
 </div>
 
-L'entrée dans le train de nuit se fait comme dans un TER : il n'y a pas de contrôle de billet à l'extérieur comme avec la CNCF, un check-in se fait au contraire à l'intérieur au moment du départ 🛂. 
+L'entrée dans le train de nuit se fait comme dans un TER : il n'y a pas de contrôle de billet à l'extérieur comme avec la CNCF, un check-in se fait au contraire à l'intérieur au moment du départ 🛂.
 Je découvre donc ma couchette 🛏️ dans le compartiment qui est en fait très similaire à ceux qu'on trouve dans les trains de nuits de la SNCF.
 Par contre, pas de kit de nuit contrairement à ces derniers.
 Je découvre une unique briquette d'eau 💧 à destination des voyageurs.
@@ -263,7 +263,7 @@ Mon trajet retour est vraiment similaire au trajet aller : je rejoins Stockholm 
 Avec les soucis de l'aller, j'appréhende un peu ce retour mais je rêve déjà de me retrouver chez moi et de profiter d'un peu de repos.
 
 Le trajet vers Stockholm ne pose pas de problème particulier.
-En gare de Stockholm, j'effectue un ravitaillement en eau 🚰 : toujours pas de point d'eau mais la personne qui gère l'entrée des toilettes me donne l'accès sans payer. 
+En gare de Stockholm, j'effectue un ravitaillement en eau 🚰 : toujours pas de point d'eau mais la personne qui gère l'entrée des toilettes me donne l'accès sans payer.
 
 J'entre donc dans le train de nuit pour Hambourg en espérant vivement que celui-ci circule bien.
 Il y a cependant une différence avec le trajet aller : les places en couchettes n'étaient pas disponibles, et c'est donc une place assise 💺 qui est indiquée sur mon billet.

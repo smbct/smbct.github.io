@@ -7,6 +7,7 @@ tags: low-level
 comments: true
 layout: series_article
 series: reverse_engineering
+back_page: headline.md
 lang: en
 ---
 

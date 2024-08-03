@@ -7,6 +7,7 @@ tags: programming assembly
 comments: true
 layout: series
 series: reverse_engineering
+back_page: /pages/series.html
 lang: en
 ---
 

@@ -6,6 +6,7 @@ categories: low-level programming assembly
 comments: true
 layout: series
 series: x86_assembly
+back_page: /pages/series.html
 lang: en
 ---
 
@@ -19,7 +20,7 @@ This series covers x86-64 assembly programming.
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
 <ul>
-<li>Registers</li> 
+<li>Registers</li>
 <li>System calls</li>
 <li>Command line and gdb</li>
 </ul>
@@ -31,7 +32,7 @@ This series covers x86-64 assembly programming.
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
 <ul>
-<li>Control flow</li> 
+<li>Control flow</li>
 <li>Branching</li>
 <li>Conditional and loops</li>
 </ul>
@@ -42,7 +43,7 @@ This series covers x86-64 assembly programming.
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
 <ul>
-<li>Control flow</li> 
+<li>Control flow</li>
 <li>Memory and stack</li>
 </ul>
 </div>
@@ -52,7 +53,7 @@ This series covers x86-64 assembly programming.
 <div class="series_keypoints">
 <p class="series_keypoints">🔑&nbsp;Key points</p>
 <ul>
-<li>Functions</li> 
+<li>Functions</li>
 <li>Stack frame</li>
 <li>Recursion</li>
 </ul>
@@ -63,7 +64,7 @@ This series covers x86-64 assembly programming.
 <div class="series_keypoints">
 <p class="series_keypoints">🔑 &nbsp;Key points:</p>
 <ul>
-<li>Function parameters</li> 
+<li>Function parameters</li>
 <li>Calling conventions</li>
 <li>Interoperability with C</li>
 </ul>
@@ -76,7 +77,7 @@ This series covers x86-64 assembly programming.
 <p class="series_keypoints">🔑&nbsp;Key points</p>
 <ul>
 <li>Algorithmic</li>
-<li>Memory usage</li> 
+<li>Memory usage</li>
 <li>Code modularity</li>
 </ul>
 </div>
@@ -87,8 +88,18 @@ This series covers x86-64 assembly programming.
 <p class="series_keypoints">🔑&nbsp;Key points</p>
 <ul>
 <li>Flags register and branching</li>
-<li>Floating points numbers</li> 
+<li>Floating points numbers</li>
 <li>Floating points operations</li>
 </ul>
 </div>
 
+* [Chapter 8 : graphical Mandelbrot](/series/x86_64_assembly/pt8)
+
+<div class="series_keypoints">
+<p class="series_keypoints">🔑&nbsp;Key points</p>
+<ul>
+<li>Shared objects and PIE</li>
+<li>Calling conventions</li>
+<li>Data types</li>
+</ul>
+</div>

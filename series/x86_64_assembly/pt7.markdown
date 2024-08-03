@@ -17,7 +17,7 @@ Unfortunately, non-integer values arise in many real world problems hence it is 
 In this post, we will write a program that draws an ASCII version of the Mandelbrot set.
 The Mandelbrot set is a famous fractal that has been intensively rendered on computers in all of its shapes : with colors, in 3d, etc..
 Its computation however relies on complex numbers arithmetic, it is hence necessary to manipulate floating point numbers 🏄.
-We will see here how to draw an [ASCII](https://en.wikipedia.org/wiki/ASCII_art) version of this fractal by relying on some basic floating point number operations in assembly. 
+We will see here how to draw an [ASCII](https://en.wikipedia.org/wiki/ASCII_art) version of this fractal by relying on some basic floating point number operations in assembly.
 
 ![The Mandelbrot set](https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1920px-Mandel_zoom_00_mandelbrot_set.jpg)
 <div class="custom_caption" markdown="1">
@@ -35,7 +35,7 @@ These were useful to write conditionals and loops thanks to branching instructio
 There are however other branching instructions that we did not cover, such as `jbe` (jump if bellow or equal) or `ja` (jump above).
 The reason why several instructions exist is that some of them perform **signed** comparisons.
 
-Internally, the use of the comparison instructions such as `cmp` and `test` set internal flags that dictate the behavior of the branching instructions. 
+Internally, the use of the comparison instructions such as `cmp` and `test` set internal flags that dictate the behavior of the branching instructions.
 To see that in practice, let's create a simple example :
 
 <div class="code_frame">Assembly x86-64</div>
@@ -62,7 +62,7 @@ branching_str:
 {% endhighlight %}
 
 This code performs a comparison of the two 1-byte registers `al` and `bl` and then prints 🖨️ a string if the value in the first register `al` is lower or equal to the value in the second register `bl`.
-If you test this program, you should observe that the comparison is not verified since `43 > 42`, hence the string is printed to the terminal. 
+If you test this program, you should observe that the comparison is not verified since `43 > 42`, hence the string is printed to the terminal.
 
 Now, let's replace the value `43` by the value `150` : `mov al, 150`.
 You will observe that the program now skips the printing instructions! 😱
@@ -79,15 +79,15 @@ the signed version will however represent values between *-128* and *127*.
 You can replace the value `150` in our code by `-106` and see that it has no effect as the binary code is the same!
 
 Now we can replace the `jle` instruction with `jbe`.
-Still with the value `150` for `al`, the program should now execute the printing operations as the `jbe` instruction performs an unsigned comparaison, and correctly interprets the value as `150` 👌.   
+Still with the value `150` for `al`, the program should now execute the printing operations as the `jbe` instruction performs an unsigned comparaison, and correctly interprets the value as `150` 👌.
 
 #### Flags registers
 
 Internally, the comparison instructions and the conditional branching instructions are connected through the flags register.
-These flags are internally set by the comparison instructions and their values will act on the behavior of the jumps. 
+These flags are internally set by the comparison instructions and their values will act on the behavior of the jumps.
 
 We will test it in GDB by re-setting the comparison instruction to `jle` in our code, in order to make the program jump.
-We can then add a breakpoint to pause the program just before the `jle` instruction. 
+We can then add a breakpoint to pause the program just before the `jle` instruction.
 The `p $eflags` command can give us information about the flags that are set to 1 : `$1 = [ PF AF IF OF ]`.
 We can look at [this page](https://faydoc.tripod.com/cpu/jle.htm) for instance to verify when the jump occurs with `jle`.
 We can see that it can happen when `SF` (the sign flag) is different than `OF` (the overflow flag), which is the case here as `OF` is set to 1 but not `SF`.
@@ -126,7 +126,7 @@ Usually, as numbers are coded in binary, the base 2 is used for the exponent.
 
 
 Floating points operations in processors are performed by a dedicated component called the [**F**loating **P**oint **U**nit](https://en.wikipedia.org/wiki/Floating-point_unit) (FPU).
-Hence, the assembly arithmetic instructions are completely separated from their analog integer ones. 
+Hence, the assembly arithmetic instructions are completely separated from their analog integer ones.
 
 ### How are floats implemented in C ?
 
@@ -227,7 +227,7 @@ Let's compile our C code in debug mode : `gcc -g floating_points.c -o floating_p
 We can then set a breakpoint once the value is loaded in memory : `b floating_points.c:10` and execute the `run` command to pause the program.
 In the assembly code generated from C, we can see that, at line 8, the value `0.25` is moved to the stack at the address `rbp-8`.
 
-We can use the command `p $rbp-8` to print the address that contains our value in the stack, which is `0x7fffffffdc58` in my case. 
+We can use the command `p $rbp-8` to print the address that contains our value in the stack, which is `0x7fffffffdc58` in my case.
 Then, it is possible to inspect the memory at this address with `x/gt 0x7fffffffdc58` (the `t` parameter allows to see the value in binary and `g` specifies the number of bytes, which is `8` here as we work with `double` precision floats).
 This gives :
 `0011111111010000000000000000000000000000000000000000000000000000`
@@ -241,9 +241,9 @@ By entering the value `0.25` and by selecting the 64 bits mode (8 bytes), we can
 
 Where the red part represents the sign, the blue part is for the exponent and the green part represents the mantissa.
 This explains the strange integer value we saw above as the  binary representation of `1070596096` is :
-`00111111110100000000000000000000`  
+`00111111110100000000000000000000`
 which corresponds to the first 32 bits of `0.25`'s binary representation.
-You can further play with these gdb commands and verify that for instance, by turning our value into `-0.25`, only the first bit (sign) of its representation is flipped.  
+You can further play with these gdb commands and verify that for instance, by turning our value into `-0.25`, only the first bit (sign) of its representation is flipped.
 
 
 #### Single vs Double precision floats
@@ -297,7 +297,7 @@ The reason why this instruction appears here is because the `printf` function on
 #### From integers to floats
 
 One last useful aspect from floats is their conversion from and to integers.
-Let's try with a last piece of C code : 
+Let's try with a last piece of C code :
 
 <div class="code_frame"> C language </div>
 {% highlight C linenos %}
@@ -360,7 +360,7 @@ for each pixel (Px, Py) on the screen do
         y := 2*x*y + y0
         x := xtemp
         iteration := iteration + 1
- 
+
     color := palette[iteration]
     plot(Px, Py, color)
 {% endhighlight %}
@@ -371,7 +371,7 @@ This will actually simplify the assembly implementation as complex numbers are n
 We can see that the first step is the computation of the initial points, that are scaled from our grid "pixels" coordinates into the complex plane coordinates.
 Then, for each initial point, the test consists in studying the convergence of a sequence 🌀 that depends on the coordinates.
 In this pseudocode, the number of iteration is used to assign a color to the pixel.
-In our case however, we will simply return a boolean value that indicates if wether the function has converged or not for a given initial value.  
+In our case however, we will simply return a boolean value that indicates if wether the function has converged or not for a given initial value.
 
 ### The `draw_mandelbrot` function ✏️
 
@@ -426,7 +426,7 @@ draw_mandelbrot:
             ; [...]
 
             test ax, ax
-            jnz .L_if_not_converge 
+            jnz .L_if_not_converge
 
             ; .L_if_converge:
 
@@ -527,7 +527,7 @@ Then, this value can be scaled in order to be lie in the provided bounds ([-1.12
 
 
 This step requires to simultaneously interact with floating point values and integer values (the column index in the grid height).
-To convert an integer value into a floating point value, we will used the `cvtsi2sd` instruction which can be compared to a **cast** in C. 
+To convert an integer value into a floating point value, we will used the `cvtsi2sd` instruction which can be compared to a **cast** in C.
 This first part in the code loads the grid coordinate and the grid height as 8 bytes floats in the vector registers and then performs necessary arithmetic operations to scale the value :
 
 <div class="code_frame"> Assembly x86-64 </div>
@@ -595,7 +595,7 @@ formatter:
 {% endhighlight %}
 
 Here the values of `x0` and `y0` are taken from the stack memory.
-You may notice that this time 2 floating point values are passed to `printf`, hence the value 2 stored in `eax`. 
+You may notice that this time 2 floating point values are passed to `printf`, hence the value 2 stored in `eax`.
 
 This code can already be tested to verify that the different values of `x0` (in range [-2., 0.47]) and `y0` (in range [-1.12, 1.12]) are displayed at each iteration.
 
@@ -664,8 +664,8 @@ test_convergence:
 
         ; compute the next iteration
         ; [...]
-        
-        
+
+
         ; increase the iteration variable and test for the loop termination
         inc dword ptr [rbp-44]
         mov eax, [rip+max_iteration]
@@ -740,7 +740,7 @@ movsd [rbp-32], xmm0 ; store y_next = 2*x*y + y0
 {% endhighlight %}
 
 Finally, the new value of  `x` is copied from the `xtemp` variable to the stack's memory.
-It is necessary to use a temporary `xtemp` variable since the computation of the new `x` value depends on the `y` value :   
+It is necessary to use a temporary `xtemp` variable since the computation of the new `x` value depends on the `y` value :
 
 {% highlight nasm linenos %}
 ; compute x_next = xtemp
@@ -800,38 +800,38 @@ draw_mandelbrot:
             movsd xmm1, [rbp-32]
             call test_convergence
 
-    ; [...]        
+    ; [...]
 {% endhighlight %}
 
 We can now perform the final test of our code by calling the `draw_mandelbrot` function from a `main`.
-In my implementation, I used a grid of size `80*30` which gives the following result : 
+In my implementation, I used a grid of size `80*30` which gives the following result :
 
 <div class="code_frame"> Bash </div>
 {% highlight plaintext linenos %}
-                                                         ******                 
-                                                         ******                 
-                                                           ***                  
-                                               **  ******************           
-                                                ***************************     
-                                            *******************************     
-                                          * *********************************   
-                           *    *         ***********************************   
-                           ***********   ***********************************    
-                         *************** ***********************************    
-                     *** *************************************************      
-                     *** *************************************************      
-                         *************** ***********************************    
-                           ***********   ***********************************    
-                           *    *         ***********************************   
-                                          * *********************************   
-                                            *******************************     
-                                                ***************************     
-                                               **  ******************           
-                                                           ***                  
-                                                         ******                 
-                                                         ******                 
+                                                         ******
+                                                         ******
+                                                           ***
+                                               **  ******************
+                                                ***************************
+                                            *******************************
+                                          * *********************************
+                           *    *         ***********************************
+                           ***********   ***********************************
+                         *************** ***********************************
+                     *** *************************************************
+                     *** *************************************************
+                         *************** ***********************************
+                           ***********   ***********************************
+                           *    *         ***********************************
+                                          * *********************************
+                                            *******************************
+                                                ***************************
+                                               **  ******************
+                                                           ***
+                                                         ******
+                                                         ******
 {% endhighlight %}
-                                                                                
+
 Perfect! We can clearly see the Mandelbrot set here in our terminal! 🤓
 
 
