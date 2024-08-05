@@ -20,7 +20,7 @@ This will allow us to see how such library 📚 can be **linked** 🔗 to our pr
 
 Our first step is to pick an appropriate library for our project.
 This idea led me directly to the [Simple and Fast Multimedia Library (SFML)](http://127.0.0.1:4000/series/x86_64_assembly/pt8).
-This library offers numerous functionalities to build graphical applications with hardware acceleration, support for audio and networking, etc.. while being extremely to use.
+This library offers numerous functionalities to build graphical applications with hardware acceleration, support for audio 🎧 and networking 🛜, etc.. while being extremely to use.
 The SFML library is coded in C++ but we will actually not rely on its native version in our program.
 
 ![TheSFML logo](/assets/assembly_series/sfml_logo.png)
@@ -145,24 +145,282 @@ lea rsi, [rip+hello_world]
 {% endhighlight %}
 
 This way, the asembler will know we that we are creating a Position Independent Executable, where references are relatives to the pointed instruction.
-The code should now compile with the `make` command.
+The code should now compile ⚙️ with the `make` command.
 
 
-#### A simple window loop
-
-
-
-A simple way to start our implementation consists in first creating a C code that creates a window in SFML and then used GCC to create assembly from this code and analyse how the functions are called.
-This is in fact similar to what we did in [chapter 7](pt7#how-are-floats-implemented-in-c-) to see how floating point operations were performed.
+## A simple window loop
 
 We can now start calling SFML functions through its C API.
 Our first goal will be to create and open a new window 🪟.
-As we saw in [chapter 5](pt5#calling-a-custom-c-function), it is not necessary to provide any definition of a C function to our code, contrary to other languages such as C or C++.
+
+#### Opening a window in CSFML
+
+A simple way to start our implementation consists in first creating a C code that creates a window in SFML and then using GCC to create assembly from this code and analyse how the functions are called.
+This is in fact similar to what we did in [chapter 7](pt7#how-are-floats-implemented-in-c-) to see how floating point operations were performed.
+Our basis will be the follwing code :
+
+<div class="code_frame">C | create_window_c.c </div>
+{% highlight C linenos %}
+#include <unistd.h>
+#include <SFML/Graphics.h>
+
+int main(int argc, char* argv[]) {
+
+    const sfVideoMode mode = {800, 600, 32};
+
+    // create the main window
+    sfRenderWindow* window = sfRenderWindow_create(mode, "SFML window", sfResize | sfClose, NULL);
+
+    // display the window
+    sfRenderWindow_display(window);
+
+    // pause
+    sleep(5);
+    
+    // destroy the window
+    sfRenderWindow_destroy(window);
+
+    return 0;
+}
+{% endhighlight %}
+
+You can see that this program simply creates a window "object" (data **struct**ure) by calling the `sfRenderWindow_create` function.
+The window is then displayed followed by a pause to actually see the window.
+After that, the window object is cleaned up using a destroy function.
+The C API of the SFML library will always follow this scheme : the data of a C++ object is encapsulated in a `struct`, and dedicated functions allow the user to interact with it, including mermory allocating and de-allocating the object.
+
+The following two lines in our Makefile will allow to test the code :
+
+<div class="code_frame">Makefile</div>
+{% highlight Make linenos %}
+create_window_c.o: create_window_c.c
+	gcc create_window_c.c -c -o create_window_c.o
+
+create_window_c: create_window_c.o
+	gcc create_window_c.o -lcsfml-graphics -lcsfml-window -lcsfml-system -o create_window_c
+{% endhighlight %}
+
+Now before compiling this code into assembly, we need to perform some refactoring in order to simplify the task of calling the library 📚 from assembly.
+Indeed, in the above C code, the problem is that values are directly  given in the function call without defining a proper variable with the corresponding data type.
+This makes the code more difficult to read 👓 since we should be able to understand precisely how the data structures are defined and what memory to allocate. 
+
+Here is the actual definition of the `sfRenderWindow_create` function, directly taken from the header file :
+
+<div class="code_frame">C | RenderWindow.h </div>
+{% highlight C linenos %}
+CSFML_GRAPHICS_API sfRenderWindow* sfRenderWindow_create(sfVideoMode mode, const char* title, sfUint32 style, const sfContextSettings* settings);
+{% endhighlight %}
+
+Let's now refactor our previous code by explicitely creating variables for all the arguments :
+
+<div class="code_frame">C | create_window_c.c </div>
+{% highlight C linenos %}
+// [...]
+
+// window pointer
+sfRenderWindow* window;
+
+// window arguments
+const sfVideoMode mode = {800, 600, 32};
+const char* title = "SFML window";
+sfUint32 style = sfResize | sfClose;
+const sfContextSettings* settings = NULL;
+
+// create the main window
+window = sfRenderWindow_create(mode, title, sfResize | sfClose, settings);
+
+// [...]
+{% endhighlight %}
+
+The code should function exactly as previously, except that now we can explicitly see what data is allocated in order to pass the parameters.
+
+#### Opening a window from assembly
+
+Let's add a new entry in our Makefile to transform our previous code into assembly :
+
+<div class="code_frame">Makefile</div>
+{% highlight Make linenos %}
+create_window_c.s: create_window_c.c
+	gcc -S create_window_c.c -masm=intel -fdiagnostics-color=always -fverbose-asm -o create_window_c.s
+{% endhighlight %}
+
+For now, let's extract the portion responsible of allocating the window 🪟 structure :
+
+<div class="code_frame">Assembly x86-64 | create_window_c.s </div>
+{% highlight nasm linenos %}
+; create_window_c.c:12:     const char* title = "SFML window";
+	lea	rax, .LC0[rip]	; tmp84,
+	mov	QWORD PTR -24[rbp], rax	; title, tmp84
+; create_window_c.c:13:     sfUint32 style = sfResize | sfClose;
+	mov	DWORD PTR -28[rbp], 6	; style,
+; create_window_c.c:14:     const sfContextSettings* settings = NULL;
+	mov	QWORD PTR -16[rbp], 0	; settings,
+; create_window_c.c:17:     window = sfRenderWindow_create(mode, title, sfResize | sfClose, settings);
+	mov	rcx, QWORD PTR -16[rbp]	; tmp85, settings
+	mov	rdx, QWORD PTR -24[rbp]	; tmp86, title
+	mov	rsi, QWORD PTR mode.0[rip]	; tmp87, mode
+	mov	eax, DWORD PTR mode.0[rip+8]	; tmp88, mode
+	mov	r8, rcx	;, tmp85
+	mov	ecx, 5	;,
+	mov	rdi, rsi	;, tmp87
+	mov	esi, eax	;, tmp88
+	call	sfRenderWindow_create@PLT	;
+	mov	QWORD PTR -8[rbp], rax	; window, tmp89
+{% endhighlight %}
+
+The arguments of the `sfRenderWindow_create` function are of multiple types.
+`mode` is a `sfVideoMode` **struct**ure (as we can see from the definition), title is a **char array**, style is a **32 bits integer** and settings is a **pointer**.
+
+* The "settings" argument is the easyest to start with.
+Indeed, although this argument is a pointer the default value `NULL` is used in our code.
+Since pointers are just addresses, and since addresses are coded on **8 bytes**, the value that will be given to the function will simply be a *0* coded on 8 bytes.
+This can be seen at lines *7* and *9* from the code above.
+
+* The "title" argument is also an easy one to specify.
+Indeed, we already saw in the previous chapters how to manipulate arrays of characters in assembly.
+We can see at lines *2* and *3* that the string is defined at the `.LC0` symbol in the code and its address is the stored in the stack.
+We can omit the stack part in our code as it is possible to directly reference the address of the symbol in the program's memory.
+
+* We saw that the "style" argument is a simple integer. Howether, its value is obtained through *[bitwise](https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/)* operators, which is a way to store several values into a unique variable.
+We can see at lines *4* and *5* that the resulting value of the combined flags `sfResize | sfClose` is actually **6**. In our case, we can directly use this raw value in the code to simplify things.
+
+* The last parameter, "mode", has the type `sfVideoMode`, which is a structure with 4 integers.
+We can see at lines *11* and *12* that its value is defined at symbol `mode.0`, that is :
+
+{% highlight nasm linenos %}
+mode.0:
+; width:
+	.long	800
+; height:
+	.long	600
+; bitsPerPixel:
+	.long	32
+{% endhighlight %}
+
+Since data values of a **struct** are contiguous in memory, this order will actually always be verified when defining a `sfVideoMode`.
+We can see that the *3* values are coded on **4** bytes each (`.long`).
+This implies that 12 bytes of memory are necessary to pass all the values.
+This is the reason why this parameter is splitted across two registers, `rdi` that contains the width and height values contiguously (lines *11* and *15*) and `esi` that contains the "bitsPerPixel" field on 4 bytes (lines *12* and *16*).
+
+We can now write our own assembly code to open the window, starting from the following basis :
+
+<div class="code_frame">create_window_assembly.s | Assembly x86-64</div>
+{% highlight nasm linenos %}
+.global main
+.intel_syntax noprefix
+
+main:
+    
+    push rbp ; storing the rbp value before manipulation
+    mov rbp, rsp ; storing the rsp register
+
+    ; memory allocation (window pointer)
+    sub rsp, 8
+
+    ; storing the preserved registers
+    push rdi
+    push rsi
+    push rbx
+
+    ; window creation
+    ; [...]
+
+    ; calling "display"
+    ; [...]
+
+    ; calling "sleep"
+    ; [...]
+
+    ; window destruction
+    ; [...]
+
+    pop rbx
+    pop rsi
+    pop rdi
+
+    ; restoring the rsp and rbp registers
+    mov rsp, rbp
+    pop rbp
+
+    ; return
+    mov rax, 0
+    ret
+
+; constants definitions
+
+{% endhighlight %}
+
+Note that 8 bytes are allocated in the stack as we need to store the window pointer (returned by the create function).
+We then start completing by defining the constants : the video mode, the window title and the style :
+
+{% highlight nasm linenos %}
+; constants definitions
+window_title:
+   .string	"SFML x86 window"
+
+; window video mode
+window_width:
+    .long 800
+window_height:
+    .long 600
+window_depth:
+    .long 32
+
+; window style (sfResize | sfClose)
+window_style:
+    .long 6
+{% endhighlight %}
+
+Now we can complete the code by calling the "create" function. Recall that the order of the registers for the parameters are given in this [table](https://i.sstatic.net/j8hpC.png) (see [chapter 5](pt5)).
+
+{% highlight nasm linenos %}
+; window creation
+; video mode
+mov rdi, [rip+window_width]
+mov esi, [rip+window_depth]
+; title
+lea rdx, [rip+window_title]
+; style
+mov ecx, [rip+window_style]
+; settings
+mov r8, qword ptr 0
+call sfRenderWindow_create
+mov [rbp-8], rax ; store the window ptr
+{% endhighlight %}
+
+Recall that it is now necessary to specify the `rip` register as we are creating **PIE** and that it is not necessary to provide any definition of the library functions to our code, contrary to other languages such as C or C++ as we saw in [chapter 5](pt5#calling-a-custom-c-function).
+
+We can now add the other function calls, that are much simpler in terms of arguments :
+
+{% highlight nasm linenos %}
+; calling "display"
+mov rdi, [rbp-8]
+call sfRenderWindow_display
+
+; calling "sleep"
+mov edi, 5
+call sleep
+
+; window destruction
+mov rdi, [rbp-8]
+call sfRenderWindow_destroy
+{% endhighlight %}
+
+We can see that the two other CSFML functions have only one argument which is the address of the window object (pointer), and do not return anything.
+The complete code can be compiled with a Makefile entry similar to the one from our previous CSFML "hello world".
+It should now function exactly as the analog C program.
+
 
 ## Graphical Mandelbrot
 
 #### Drawing in SFML
 
 #### Drawing the Mandelbrot set
+
+
+## Bonus : coding the window loop
+
+Now that our program can open a window, we need to add more code so 
+
 
 ## What's next ?
