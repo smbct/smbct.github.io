@@ -148,12 +148,12 @@ This way, the asembler will know we that we are creating a Position Independent 
 The code should now compile ⚙️ with the `make` command.
 
 
-## A simple window loop
+## Opening a window in CSFML
 
 We can now start calling SFML functions through its C API.
 Our first goal will be to create and open a new window 🪟.
 
-#### Opening a window in CSFML
+#### Opening a window in C with CSFML
 
 A simple way to start our implementation consists in first creating a C code that creates a window in SFML and then using GCC to create assembly from this code and analyse how the functions are called.
 This is in fact similar to what we did in [chapter 7](pt7#how-are-floats-implemented-in-c-) to see how floating point operations were performed.
@@ -413,10 +413,375 @@ It should now function exactly as the analog C program.
 
 ## Graphical Mandelbrot
 
+As we can now display an SFML window from assembly, it is time to actually draw the Mandelbrot set 🖍️!
+We will first see how to draw pixel per pixel and display the result on the window.
+
 #### Drawing in SFML
+
+Although providing a complete tutorial on SFML is not the goal of this chapter, it is still important to see how drawing works in this library 📝.
+We actually need to manipulate 3 different type of objects in our code in order to achieve the drawing.
+
+- The first object type is `sfImage`.
+It allows to store and manipulate an array of pixel.
+
+- The second one is `sfTexture`. It is also used to store pixels but this object is actually stored on the graphics card side, in order to speed up the display.
+
+- The third oblect to manipulate is `sfSprite`. Although the `sfTexture` object already prepare an image to be displayed on the screen by the hardware, it is still necessary to provide additional options such as its coordinates and its rotation.
+This type is used to store these information so that several graphical object with the same texture can be manipulated sepatately.
+
+![super mario world](https://icon.ink/wp-content/uploads/sites/5/2020/07/super-mario-world-screenshot-215321-1366x768-1.jpg)
+<div class="custom_caption" markdown="1">
+\> A screenshot from super mario word, where several objects such as the enemies and the clouds are drawn several times with the same texture.
+</div>
+
+Similarly to the previous part, we can write a C code that performs a drawing through these three different objects.
+Starting from our previous C code, we can add the following lines :
+
+<div class="code_frame">C | create_window_c.c </div>
+{% highlight C linenos %}
+// window creation
+// [...]
+
+// creating and displaying a drawing
+const int width = 800, height = 600;
+sfImage* image = sfImage_create(width, height); // image object
+
+// coloring a pixel in red at coordinates (42,42)
+sfColor color_red = sfColor_fromRGB(255, 0, 0);
+sfImage_setPixel(image, 42, 42, color_red);
+
+sfTexture* texture = sfTexture_createFromImage(image, NULL); // texture object
+
+sfSprite* sprite = sfSprite_create(); // sprite object
+sfSprite_setTexture(sprite, texture, sfTrue);
+
+sfRenderWindow_drawSprite(window, sprite, NULL);
+
+// display the window
+// [...]
+
+// dealocate the drawing objects
+// destroy the sprite
+sfSprite_destroy(sprite);
+
+// destroy the texture
+sfTexture_destroy(texture);
+
+// destroy the image
+sfImage_destroy(image);
+
+// [...]
+{% endhighlight %}
+
+This code can be tested and should add a red pixel 🟥 in our window, at coordinate (42,42) (the origin being the upper left corner).
+We can observe a cascading dependance between each object : the sprite depends on the texture that depends on the image.
+At some point, a pointer ➡️ is passed to the next object.
+
+And generate the result in assembly :
+
+<div class="collapse-panel"><div>
+<label for="code_2">Expand</label>
+<input type="checkbox" name="" id="code_2"><span class="collapse-label"></span>
+<div class="extensible-content">
+<div class="code_frame">Assembly x86-64 | create_window_c.s </div>
+{% highlight nasm linenos %}
+; create_window_c.c:22:     sfImage* image = sfImage_create(width, height); // image object
+	mov	edx, DWORD PTR -56[rbp]	; height.0_1, height
+	mov	eax, DWORD PTR -60[rbp]	; width.1_2, width
+	mov	esi, edx	;, height.0_1
+	mov	edi, eax	;, width.1_2
+	call	sfImage_create@PLT	;
+	mov	QWORD PTR -24[rbp], rax	; image, tmp92
+
+
+; create_window_c.c:24:     sfColor color_red = sfColor_fromRGB(255, 0, 0);
+	mov	edx, 0	;,
+	mov	esi, 0	;,
+	mov	edi, 255	;,
+	call	sfColor_fromRGB@PLT	;
+	mov	DWORD PTR -52[rbp], eax	; color_red, tmp94
+
+; create_window_c.c:25:     sfImage_setPixel(image, 42, 42, color_red);
+	mov	edx, DWORD PTR -52[rbp]	; tmp95, color_red
+	mov	rax, QWORD PTR -24[rbp]	; tmp96, image
+	mov	ecx, edx	;, tmp95
+	mov	edx, 42	;,
+	mov	esi, 42	;,
+	mov	rdi, rax	;, tmp96
+	call	sfImage_setPixel@PLT	;
+
+; create_window_c.c:33:     sfTexture* texture = sfTexture_createFromImage(image, NULL); // texture object
+	mov	rax, QWORD PTR -24[rbp]	; tmp97, image
+	mov	esi, 0	;,
+	mov	rdi, rax	;, tmp97
+	call	sfTexture_createFromImage@PLT	;
+	mov	QWORD PTR -16[rbp], rax	; texture, tmp98
+
+; create_window_c.c:35:     sfSprite* sprite = sfSprite_create(); // sprite object
+	call	sfSprite_create@PLT	;
+	mov	QWORD PTR -8[rbp], rax	; sprite, tmp99
+
+; create_window_c.c:36:     sfSprite_setTexture(sprite, texture, sfTrue);
+	mov	rcx, QWORD PTR -16[rbp]	; tmp100, texture
+	mov	rax, QWORD PTR -8[rbp]	; tmp101, sprite
+	mov	edx, 1	;,
+	mov	rsi, rcx	;, tmp100
+	mov	rdi, rax	;, tmp101
+	call	sfSprite_setTexture@PLT	;
+
+; create_window_c.c:40:     sfRenderWindow_drawSprite(window, sprite, NULL);
+	mov	rcx, QWORD PTR -8[rbp]	; tmp102, sprite
+	mov	rax, QWORD PTR -32[rbp]	; tmp103, window
+	mov	edx, 0	;,
+	mov	rsi, rcx	;, tmp102
+	mov	rdi, rax	;, tmp103
+	call	sfRenderWindow_drawSprite@PLT	;
+{% endhighlight %}
+</div></div></div>
+
+We can see that this code is very similar to the previous one : the different objects (image, texture and sprite) are maniuplated through their pointers.
+The new type here is `sfColor` that stores a color coded on three components : red, green and blue values between *0* and *255*.
+If we look at the `sfColor` definition in the CSFML header, we can see that it is actually composed of 4 8-bits values, one for each color and one for opacity :
+
+<div class="code_frame">C language | Color.h </div>
+{% highlight C linenos %}
+typedef struct
+{
+    sfUint8 r;
+    sfUint8 g;
+    sfUint8 b;
+    sfUint8 a;
+} sfColor;
+{% endhighlight %}
+
+This implies that we can actually define the color directly with a symbol in our code instead of needing to call the `sfColor_fromRGB` function.
+
+Let's now add the assembly calls into our program. We first allocate more memory into the stack in order to store the image, texture and sprite pointers :
+
+<div class="code_frame"> create_window_assembly.s | Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; memory allocation
+sub rsp, 40
+; rbp-8 : window pointer, 8 bytes
+; rbp-16 : image pointer, 8 bytes
+; rbp-24 : texture pointer, 8 bytes
+; rbp-32 : sprite pointer, 8 bytes
+{% endhighlight %}
+
+We also add the symbol corresponding the red color, which is coded on 4 8-bits (1 byte) values :
+
+
+{% highlight nasm linenos %}
+color_red:
+	.byte 255, 0, 0, 255
+{% endhighlight %}
+
+And we can now add the function calls to create and destroy the objects and to actually draw on the screen :
+
+<div class="collapse-panel"><div>
+<label for="code_3">Expand</label>
+<input type="checkbox" name="" id="code_3"><span class="collapse-label"></span>
+<div class="extensible-content">
+{% highlight nasm linenos %}
+; window creation
+; [...]
+
+; image creation
+mov edi, [rip+window_width] ; image width
+mov esi, [rip+window_height] ; image height
+call sfImage_create
+mov [rbp-16], rax ; image ptr
+
+; draw on the image
+mov rdi, [rbp-16] ; image ptr
+mov esi, 42 ; x coordinates
+mov edx, 42 ; y coordinates
+mov ecx, [rip+color_red] ; color
+call sfImage_setPixel
+
+; texture creation
+mov rdi, [rbp-16] ; image ptr
+mov esi, 0
+call sfTexture_createFromImage
+mov [rbp-24], rax ; texture ptr
+
+; sprite creation
+call sfSprite_create
+mov [rbp-32], rax ; sprite ptr
+
+; sprite set texture
+mov rdi, [rbp-32] ; sprite ptr
+mov rsi, [rbp-24] ; texture ptr
+mov edx, 1
+call sfSprite_setTexture
+
+; drawing the sprite
+mov rdi, [rbp-8] ; window ptr
+mov rsi, [rbp-32]
+mov edx, 0
+call sfRenderWindow_drawSprite
+
+; window display and sleep
+; [...]
+
+; sprite destruction
+mov rdi, [rbp-32]
+call sfSprite_destroy
+
+; texure destruction
+mov rdi, [rbp-24]
+call sfTexture_destroy
+
+; image de destruction
+mov rdi, [rbp-16]
+call sfImage_destroy
+
+; window destruction
+; [...]
+{% endhighlight %}
+</div></div></div>
+
+We can see a very typical scheme in the API.
+The pointer (memory address) of the object to manipulate is systematically passed to the function.
+Additional parameters may also be provided such as a pointer to another object.
+In order to choose the right register size for these parameters, it is handy to compile C code into assembly but it is also possible to look at the function and type definitions.
+
+#### Drawing a rectangle
+
+Now that we are able to draw on the screen, we can implement a simple square drawing algorithm.
+This can be done throug two nested "for" loops.
+We first add two local variables in our main function to iterate over the x and y coordinates :
+
+<div class="code_frame"> create_window_assembly.s | Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; memory allocation
+sub rsp, 40
+; rbp-8 : window pointer, 8 bytes
+; rbp-16 : image pointer, 8 bytes
+; rbp-24 : texture pointer, 8 bytes
+; rbp-32 : sprite pointer, 8 bytes
+; rbp-36 : temp x coordinate, 4 bytes
+; rbp-40 : temp y coordinate, 4 bytes
+{% endhighlight %}
+
+By allocating 4 bytes per variable, there is no need to extend the stack allocation because of the current 16-bytes alignement.
+Then, we write our double nested for that iterates of the coordinates :
+
+<div class="code_frame"> create_window_assembly.s | Assembly x86-64 </div>
+{% highlight nasm linenos %}
+mov [rbp-36], dword ptr 20
+.L_for_temp_x: ; for loop x coordinates
+
+    mov [rbp-40], dword ptr 20
+    .L_for_temp_y: ; for loop y coordinates
+
+        ; draw on the image
+        mov rdi, [rbp-16] ; image ptr
+        mov esi, [rbp-36] ; x coordinates
+        mov edx, [rbp-40] ; y coordinates
+        mov ecx, [rip+color_red] ; color
+        call sfImage_setPixel
+
+        inc dword ptr [rbp-40]
+        cmp [rbp-40], dword ptr 50
+        jne .L_for_temp_y
+                
+    inc dword ptr [rbp-36]
+    cmp [rbp-36], dword ptr 60
+    jne .L_for_temp_x
+{% endhighlight %}
+
+The result should be similar to the followinf screen capture (upper left part of the screen).
+
+![the resulting rectangle](/assets/assembly_series/rectangle_sfml.png)
+<div class="custom_caption" markdown="1">
+\> The resulting rectangle (cropped).
+</div>
 
 #### Drawing the Mandelbrot set
 
+Our last step is now to include our code from the [previous chapter](pt7) in order to draw the Mandelbrot set in the window.
+This is actually the easy part since all the hard work was done in the last chapter.
+We will build from the two functions [test_convergence](pt7#the-test_convergence-function) and [draw_mandelbrot](pt7#the-draw_mandelbrot-function-️).
+
+These two functions can be added in a separate file "mandelbrot.s" in order to structure our project.
+This will require us to add few lines in the Makefile in order to compile this new file into an object file and to link it when making the final executable.
+
+The `test_convergence` function does not need any modification, it still receives the normalized coordinates as input and decide if the corresponding pixel must be drawn or not.
+The `draw_mandelbrot` function howver needs some modifications.
+First, it is necessary to pass the image pointer to the function in order to draw the pixels and store it in the stack :
+
+<div class="code_frame"> mandelbrot.s | Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; ----------------------------------------------------------
+; draw the ascii mandelbrot set
+; edi: width
+; esi: height
+; rdx: sfImage pointer
+draw_mandelbrot:
+
+    ; stack allocation
+    sub rsp, 40
+    ; width: rbp-4, 4 bytes
+    ; height: rbp-8, 4 bytes
+    ; [...]
+    ; image pointer: rbp-40, 8 bytes
+
+    ; store the parameters
+    ; [...]
+    mov [rbp-40], rdx
+
+    ; [...]
+
+{% endhighlight %}
+
+Then the printing instructions must be replaced by a call to `sfImage_setPixel` function :
+
+{% highlight nasm linenos %}
+; .L_if_converge:
+
+    ; draw a pixel
+    mov rdi, [rbp-40] ; image ptr
+    mov esi, [rbp-16] ; x coordinates
+    mov edx, [rbp-12] ; y coordinates
+    mov ecx, [rip+color_red] ; color
+    call sfImage_setPixel
+
+    jmp .L_end_if_converge
+
+.L_if_not_converge:
+
+    ; do nothing
+
+.L_end_if_converge:
+{% endhighlight %}
+
+Additionaly, it is necessary to add the `rip` register when referencing data at some labels as we sa previously and to remove all the extra printing instructions.
+The last missing piece to our code is the call to `draw_mandelbrot` in the `main` function that replaces the previous `sfImage_setPixel` calls :
+
+<div class="code_frame"> main function | Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; image creation
+; [...]
+
+; call the draw_mandelbrot function
+mov edi, [rip+window_width]
+mov esi, [rip+window_height]
+mov rdx, [rbp-16] ; image pointer
+call draw_mandelbrot
+
+; texture creation
+; [...]
+{% endhighlight %}
+
+Everything should now be in place to compile and test our program :
+
+![the resulting mandelbrot set](/assets/assembly_series/sfml_mandelbrot.png)
+<div class="custom_caption" markdown="1">
+\> Our Mandelbrot set in an SFML window!
+</div>
+
+Perfect! 🥳
 
 ## Bonus : coding the window loop
 

@@ -540,10 +540,10 @@ This first part in the code loads the grid coordinate and the grid height as 8 b
     cvtsi2sd xmm3, dword ptr [rbp-8] ; load the height as a 8 bytes float
     inc dword ptr [rbp-8]
     divsd xmm1, xmm3 ; compute a y position in [0, 1]
-    movsd xmm3, [rip+max_y]
-    subsd xmm3, [rip+min_y]
+    movsd xmm3, [max_y]
+    subsd xmm3, [min_y]
     mulsd xmm1, xmm3 ; scale the [0,1] position by (max_y-min-y)
-    addsd xmm1, [rip+min_y] ; add min_y to the position
+    addsd xmm1, [min_y] ; add min_y to the position
     movsd [rbp-32], xmm1 ; store y0
 {% endhighlight %}
 
@@ -559,10 +559,10 @@ The computation of x0 is done similarly :
     cvtsi2sd xmm3, dword ptr [rbp-4]
     inc dword ptr [rbp-4]
     divsd xmm0, xmm3
-    movsd xmm3, [rip+max_x]
-    subsd xmm3, [rip+min_x]
+    movsd xmm3, [max_x]
+    subsd xmm3, [min_x]
     mulsd xmm0, xmm3
-    addsd xmm0, [rip+min_x]
+    addsd xmm0, [min_x]
     movsd [rbp-24], xmm0
 {% endhighlight %}
 
@@ -582,7 +582,7 @@ To do so, we will define a string with adequate formatters for floating point do
 
     ; display x0 and y0
     mov eax, 2
-    lea rdi, [rip+formatter]
+    lea rdi, [formatter]
     movsd xmm0, [rbp-24]
     movsd xmm1, [rbp-32]
     call printf
@@ -668,7 +668,7 @@ test_convergence:
 
         ; increase the iteration variable and test for the loop termination
         inc dword ptr [rbp-44]
-        mov eax, [rip+max_iteration]
+        mov eax, [max_iteration]
         cmp eax, [rbp-44]
         jne .L_for_conv
 
@@ -732,7 +732,7 @@ This is the place where the constant `2.0` defined earlier is used :
 
 {% highlight nasm linenos %}
 ; compute ynext = 2*x*y + y0
-movsd xmm0, [rip+double_2_cst] ; xmm0 = 2
+movsd xmm0, [double_2_cst] ; xmm0 = 2
 mulsd xmm0, [rbp-24] ; xmm0 = 2*x
 mulsd xmm0, [rbp-32] ; xmm0 = 2*x*y
 addsd xmm0, [rbp-16] ; xmm0 = 2*x*y + y0
@@ -766,7 +766,7 @@ mulsd xmm1, xmm1
 addsd xmm0, xmm1
 
 ; comparison of x*x+y*y and cst. 4.
-movsd xmm1, [rip+double_4_cst]
+movsd xmm1, [double_4_cst]
 comisd xmm0, xmm1
 
 ; branching if the convergence test is not verified
