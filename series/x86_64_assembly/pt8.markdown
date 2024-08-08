@@ -1,7 +1,7 @@
 ---
 title:  Assembly x86 programming 101 &#58 chapter 8, graphical Mandelbrot
 author: smbct
-date:   2024-06-28 10:00:00 +0200
+date:   2024-08-06 10:00:00 +0200
 categories: low-level programming assembly
 comments: true
 layout: series_article
