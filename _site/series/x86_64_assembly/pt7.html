@@ -146,6 +146,10 @@
   
 
   
+    
+  
+
+  
 
   
 
@@ -183,6 +187,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -413,7 +421,7 @@ These were useful to write conditionals and loops thanks to branching instructio
 <p>There are however other branching instructions that we did not cover, such as <code class="language-plaintext highlighter-rouge">jbe</code> (jump if bellow or equal) or <code class="language-plaintext highlighter-rouge">ja</code> (jump above).
 The reason why several instructions exist is that some of them perform <strong>signed</strong> comparisons.</p>
 
-<p>Internally, the use of the comparison instructions such as <code class="language-plaintext highlighter-rouge">cmp</code> and <code class="language-plaintext highlighter-rouge">test</code> set internal flags that dictate the behavior of the branching instructions. 
+<p>Internally, the use of the comparison instructions such as <code class="language-plaintext highlighter-rouge">cmp</code> and <code class="language-plaintext highlighter-rouge">test</code> set internal flags that dictate the behavior of the branching instructions.
 To see that in practice, let’s create a simple example :</p>
 
 <div class="code_frame">Assembly x86-64</div>
@@ -484,7 +492,7 @@ Still with the value <code class="language-plaintext highlighter-rouge">150</cod
 These flags are internally set by the comparison instructions and their values will act on the behavior of the jumps.</p>
 
 <p>We will test it in GDB by re-setting the comparison instruction to <code class="language-plaintext highlighter-rouge">jle</code> in our code, in order to make the program jump.
-We can then add a breakpoint to pause the program just before the <code class="language-plaintext highlighter-rouge">jle</code> instruction. 
+We can then add a breakpoint to pause the program just before the <code class="language-plaintext highlighter-rouge">jle</code> instruction.
 The <code class="language-plaintext highlighter-rouge">p $eflags</code> command can give us information about the flags that are set to 1 : <code class="language-plaintext highlighter-rouge">$1 = [ PF AF IF OF ]</code>.
 We can look at <a href="https://faydoc.tripod.com/cpu/jle.htm">this page</a> for instance to verify when the jump occurs with <code class="language-plaintext highlighter-rouge">jle</code>.
 We can see that it can happen when <code class="language-plaintext highlighter-rouge">SF</code> (the sign flag) is different than <code class="language-plaintext highlighter-rouge">OF</code> (the overflow flag), which is the case here as <code class="language-plaintext highlighter-rouge">OF</code> is set to 1 but not <code class="language-plaintext highlighter-rouge">SF</code>.</p>
@@ -655,7 +663,7 @@ To understand why, we can have a look at the memory in the program.</p>
 We can then set a breakpoint once the value is loaded in memory : <code class="language-plaintext highlighter-rouge">b floating_points.c:10</code> and execute the <code class="language-plaintext highlighter-rouge">run</code> command to pause the program.
 In the assembly code generated from C, we can see that, at line 8, the value <code class="language-plaintext highlighter-rouge">0.25</code> is moved to the stack at the address <code class="language-plaintext highlighter-rouge">rbp-8</code>.</p>
 
-<p>We can use the command <code class="language-plaintext highlighter-rouge">p $rbp-8</code> to print the address that contains our value in the stack, which is <code class="language-plaintext highlighter-rouge">0x7fffffffdc58</code> in my case. 
+<p>We can use the command <code class="language-plaintext highlighter-rouge">p $rbp-8</code> to print the address that contains our value in the stack, which is <code class="language-plaintext highlighter-rouge">0x7fffffffdc58</code> in my case.
 Then, it is possible to inspect the memory at this address with <code class="language-plaintext highlighter-rouge">x/gt 0x7fffffffdc58</code> (the <code class="language-plaintext highlighter-rouge">t</code> parameter allows to see the value in binary and <code class="language-plaintext highlighter-rouge">g</code> specifies the number of bytes, which is <code class="language-plaintext highlighter-rouge">8</code> here as we work with <code class="language-plaintext highlighter-rouge">double</code> precision floats).
 This gives :
 <code class="language-plaintext highlighter-rouge">0011111111010000000000000000000000000000000000000000000000000000</code></p>
@@ -669,7 +677,7 @@ By entering the value <code class="language-plaintext highlighter-rouge">0.25</c
 
 <p>Where the red part represents the sign, the blue part is for the exponent and the green part represents the mantissa.
 This explains the strange integer value we saw above as the  binary representation of <code class="language-plaintext highlighter-rouge">1070596096</code> is :
-<code class="language-plaintext highlighter-rouge">00111111110100000000000000000000</code><br />
+<code class="language-plaintext highlighter-rouge">00111111110100000000000000000000</code>
 which corresponds to the first 32 bits of <code class="language-plaintext highlighter-rouge">0.25</code>’s binary representation.
 You can further play with these gdb commands and verify that for instance, by turning our value into <code class="language-plaintext highlighter-rouge">-0.25</code>, only the first bit (sign) of its representation is flipped.</p>
 
@@ -845,7 +853,7 @@ We will define a function that, for each of the point, indicates if it belongs t
         y := 2*x*y + y0
         x := xtemp
         iteration := iteration + 1
- 
+
     color := palette[iteration]
     plot(Px, Py, color)
 </pre></td></tr></tbody></table></code></pre></figure>
@@ -1015,7 +1023,7 @@ We will start by writing a function <code class="language-plaintext highlighter-
             <span class="c1">; [...]</span>
 
             <span class="nf">test</span> <span class="nb">ax</span><span class="p">,</span> <span class="nb">ax</span>
-            <span class="nf">jnz</span> <span class="nv">.L_if_not_converge</span> 
+            <span class="nf">jnz</span> <span class="nv">.L_if_not_converge</span>
 
             <span class="c1">; .L_if_converge:</span>
 
@@ -1125,7 +1133,7 @@ Then, this value can be scaled in order to be lie in the provided bounds ([-1.12
 <h4 id="computation-of-x0-and-y0">Computation of x0 and y0</h4>
 
 <p>This step requires to simultaneously interact with floating point values and integer values (the column index in the grid height).
-To convert an integer value into a floating point value, we will used the <code class="language-plaintext highlighter-rouge">cvtsi2sd</code> instruction which can be compared to a <strong>cast</strong> in C. 
+To convert an integer value into a floating point value, we will used the <code class="language-plaintext highlighter-rouge">cvtsi2sd</code> instruction which can be compared to a <strong>cast</strong> in C.
 This first part in the code loads the grid coordinate and the grid height as 8 bytes floats in the vector registers and then performs necessary arithmetic operations to scale the value :</p>
 
 <div class="code_frame"> Assembly x86-64 </div>
@@ -1151,10 +1159,10 @@ This first part in the code loads the grid coordinate and the grid height as 8 b
     <span class="nf">cvtsi2sd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span> <span class="c1">; load the height as a 8 bytes float</span>
     <span class="nf">inc</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">8</span><span class="p">]</span>
     <span class="nf">divsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="nv">xmm3</span> <span class="c1">; compute a y position in [0, 1]</span>
-    <span class="nf">movsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">max_y</span><span class="p">]</span>
-    <span class="nf">subsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">min_y</span><span class="p">]</span>
+    <span class="nf">movsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">max_y</span><span class="p">]</span>
+    <span class="nf">subsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">min_y</span><span class="p">]</span>
     <span class="nf">mulsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="nv">xmm3</span> <span class="c1">; scale the [0,1] position by (max_y-min-y)</span>
-    <span class="nf">addsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">min_y</span><span class="p">]</span> <span class="c1">; add min_y to the position</span>
+    <span class="nf">addsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="p">[</span><span class="nv">min_y</span><span class="p">]</span> <span class="c1">; add min_y to the position</span>
     <span class="nf">movsd</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">32</span><span class="p">],</span> <span class="nv">xmm1</span> <span class="c1">; store y0</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
@@ -1183,10 +1191,10 @@ This first part in the code loads the grid coordinate and the grid height as 8 b
     <span class="nf">cvtsi2sd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
     <span class="nf">inc</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
     <span class="nf">divsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="nv">xmm3</span>
-    <span class="nf">movsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">max_x</span><span class="p">]</span>
-    <span class="nf">subsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">min_x</span><span class="p">]</span>
+    <span class="nf">movsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">max_x</span><span class="p">]</span>
+    <span class="nf">subsd</span> <span class="nv">xmm3</span><span class="p">,</span> <span class="p">[</span><span class="nv">min_x</span><span class="p">]</span>
     <span class="nf">mulsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="nv">xmm3</span>
-    <span class="nf">addsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">min_x</span><span class="p">]</span>
+    <span class="nf">addsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nv">min_x</span><span class="p">]</span>
     <span class="nf">movsd</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">],</span> <span class="nv">xmm0</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
@@ -1224,7 +1232,7 @@ To do so, we will define a string with adequate formatters for floating point do
 
     <span class="c1">; display x0 and y0</span>
     <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="mi">2</span>
-    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">formatter</span><span class="p">]</span>
+    <span class="nf">lea</span> <span class="nb">rdi</span><span class="p">,</span> <span class="p">[</span><span class="nv">formatter</span><span class="p">]</span>
     <span class="nf">movsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span>
     <span class="nf">movsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">32</span><span class="p">]</span>
     <span class="nf">call</span> <span class="nv">printf</span>
@@ -1381,11 +1389,11 @@ For each different couple of (x0, y0) values, this function will perform some nu
 
         <span class="c1">; compute the next iteration</span>
         <span class="c1">; [...]</span>
-        
-        
+
+
         <span class="c1">; increase the iteration variable and test for the loop termination</span>
         <span class="nf">inc</span> <span class="kt">dword</span> <span class="nv">ptr</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">44</span><span class="p">]</span>
-        <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">max_iteration</span><span class="p">]</span>
+        <span class="nf">mov</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nv">max_iteration</span><span class="p">]</span>
         <span class="nf">cmp</span> <span class="nb">eax</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">44</span><span class="p">]</span>
         <span class="nf">jne</span> <span class="nv">.L_for_conv</span>
 
@@ -1470,7 +1478,7 @@ This is the place where the constant <code class="language-plaintext highlighter
 5
 6
 </pre></td><td class="code"><pre><span class="c1">; compute ynext = 2*x*y + y0</span>
-<span class="nf">movsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">double_2_cst</span><span class="p">]</span> <span class="c1">; xmm0 = 2</span>
+<span class="nf">movsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nv">double_2_cst</span><span class="p">]</span> <span class="c1">; xmm0 = 2</span>
 <span class="nf">mulsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">24</span><span class="p">]</span> <span class="c1">; xmm0 = 2*x</span>
 <span class="nf">mulsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">32</span><span class="p">]</span> <span class="c1">; xmm0 = 2*x*y</span>
 <span class="nf">addsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">16</span><span class="p">]</span> <span class="c1">; xmm0 = 2*x*y + y0</span>
@@ -1521,7 +1529,7 @@ The comparison with the convergence constant <code class="language-plaintext hig
 <span class="nf">addsd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="nv">xmm1</span>
 
 <span class="c1">; comparison of x*x+y*y and cst. 4.</span>
-<span class="nf">movsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="p">[</span><span class="nv">rip</span><span class="o">+</span><span class="nv">double_4_cst</span><span class="p">]</span>
+<span class="nf">movsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="p">[</span><span class="nv">double_4_cst</span><span class="p">]</span>
 <span class="nf">comisd</span> <span class="nv">xmm0</span><span class="p">,</span> <span class="nv">xmm1</span>
 
 <span class="c1">; branching if the convergence test is not verified</span>
@@ -1573,7 +1581,7 @@ According to what we saw in this chapter, the <code class="language-plaintext hi
             <span class="nf">movsd</span> <span class="nv">xmm1</span><span class="p">,</span> <span class="p">[</span><span class="nb">rbp</span><span class="o">-</span><span class="mi">32</span><span class="p">]</span>
             <span class="nf">call</span> <span class="nv">test_convergence</span>
 
-    <span class="c1">; [...]        </span>
+    <span class="c1">; [...]</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>We can now perform the final test of our code by calling the <code class="language-plaintext highlighter-rouge">draw_mandelbrot</code> function from a <code class="language-plaintext highlighter-rouge">main</code>.
@@ -1603,28 +1611,28 @@ In my implementation, I used a grid of size <code class="language-plaintext high
 20
 21
 22
-</pre></td><td class="code"><pre>                                                         ******                 
-                                                         ******                 
-                                                           ***                  
-                                               **  ******************           
-                                                ***************************     
-                                            *******************************     
-                                          * *********************************   
-                           *    *         ***********************************   
-                           ***********   ***********************************    
-                         *************** ***********************************    
-                     *** *************************************************      
-                     *** *************************************************      
-                         *************** ***********************************    
-                           ***********   ***********************************    
-                           *    *         ***********************************   
-                                          * *********************************   
-                                            *******************************     
-                                                ***************************     
-                                               **  ******************           
-                                                           ***                  
-                                                         ******                 
-                                                         ******                 
+</pre></td><td class="code"><pre>                                                         ******
+                                                         ******
+                                                           ***
+                                               **  ******************
+                                                ***************************
+                                            *******************************
+                                          * *********************************
+                           *    *         ***********************************
+                           ***********   ***********************************
+                         *************** ***********************************
+                     *** *************************************************
+                     *** *************************************************
+                         *************** ***********************************
+                           ***********   ***********************************
+                           *    *         ***********************************
+                                          * *********************************
+                                            *******************************
+                                                ***************************
+                                               **  ******************
+                                                           ***
+                                                         ******
+                                                         ******
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <p>Perfect! We can clearly see the Mandelbrot set here in our terminal! 🤓</p>
