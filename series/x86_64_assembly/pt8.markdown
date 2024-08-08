@@ -10,17 +10,17 @@ back_page: headline.md
 lang: en
 ---
 
-In the previou chapter, we saw the use of vector registers in assembly to perform floating point operations on decimal numbers.
+In the previous chapter, we saw the use of vector registers in assembly to perform floating point operations on decimal numbers.
 Although the result was already interesting, still it is a shame that a wonderfull object such as the Mandelbrot set cannot be visualized under its best angle.
 
-In this chapter, we will build from this previous program and bring it to a new dimension by using a graphical library 📊.
+In this chapter, we will build from this previous code and bring it to a new dimension by using a graphical library 📊.
 This will allow us to see how such library 📚 can be **linked** 🔗 to our program and how to **call its functions** 📣 directly from our assembly program.
 
 ## Setting up a graphical library from x86-64
 
 Our first step is to pick an appropriate library for our project.
 This idea led me directly to the [Simple and Fast Multimedia Library (SFML)](http://127.0.0.1:4000/series/x86_64_assembly/pt8).
-This library offers numerous functionalities to build graphical applications with hardware acceleration, support for audio 🎧 and networking 🛜, etc.. while being extremely to use.
+This library offers numerous functionalities to build graphical applications with hardware acceleration, support for audio 🎧 and networking 🛜, etc.. while being extremely easy to use.
 The SFML library is coded in C++ but we will actually not rely on its native version in our program.
 
 ![TheSFML logo](/assets/assembly_series/sfml_logo.png)
@@ -31,17 +31,18 @@ The SFML library is coded in C++ but we will actually not rely on its native ver
 #### What's wrong with C++ ?
 
 I will be honest, it took me some time to make this chapter work properly.
-The obvious choice to start with SFML was to interface the assembly program directly with its C++ API.
-However, it turns out to be quite delicate for several reasons.
+The natural choice to interface SFML with our program was to use its C++ API.
+However, it turns out to be quite delicate 😵‍💫 for several reasons.
 
 We already saw in the [5th chapter](pt6) how to call a function from a C compiled ⚙️ program in our assembly code.
-To do so, our compiled code (object file) just needed to be linked 🔗 to the compiled C code, and we were able to call 📣 our C function without any additional definition.
-This changes a little bit in C++ as a lot of code is generated from the header files (function definitions, templated functions, etc..).
+To do so, our compiled code (object file) just needed to be linked 🔗 to the compiled C code, and we were able to call 📣 our the function without any additional definition.
+This changes a little bit in C++ as some code is generated from the header files (function definitions, templated functions, etc..).
 This code is however only generated to produce a final executable and I was not able ❌ to obtain a compiled version of all the interface functions of the library.
 
 C is on the other hand a much simpler language where object files contain everything that is needed to call a library's [API](https://en.wikipedia.org/wiki/API).
-This is why a finally decided to rely on the [C SFML binding](https://www.sfml-dev.org/download/csfml/) for this chapter.
-C seems stable enough so that the binding is actually chosen instead of the native C++ API as basis of othe bindings such as the [.NET](https://www.sfml-dev.org/download/sfml.net/) or the [Rust](https://github.com/jeremyletang/rust-sfml) ones. Quoting from the .NET bind page : ``"It is built on top of the C binding, CSFML, to ensure maximum compatibility across platforms."`` 
+This is why a finally decided to rely on the [C SFML binding](https://www.sfml-dev.org/download/csfml/) for this chapter (note 📝 that it is possible to create C bindings from any C++ library).
+C seems stable enough so that the binding is actually chosen instead of the native C++ API as basis of othe bindings such as the [.NET](https://www.sfml-dev.org/download/sfml.net/) or the [Rust](https://github.com/jeremyletang/rust-sfml) ones. Quoting from the .NET bind page : 
+> It is built on top of the C binding, CSFML, to ensure maximum compatibility across platforms.
 
 
 
@@ -54,8 +55,8 @@ There is no need to download 🛜 the original C++ SFML library as the CSFML bin
 
 #### Project configuration
 
-We will start the program with a simple main function in `x86`.
-We use define `libc` main function in order to allow the use of the C standard library in our program with usefull functions such as `printf`.
+We will start with a simple main function in x86 assembly.
+We rely on the `libc` main function in order to allow the use of the C standard library in our program with useful functions such as `printf`.
 
 <div class="collapse-panel"><div>
 <label for="code_1">Expand</label>
@@ -73,7 +74,7 @@ main:
 
     ; storing the preserved registers
     push rdi
-	push rsi
+    push rsi
 
     mov rax, 1
     mov rdi, 1
@@ -99,7 +100,7 @@ hello_world:
 
 The compilation will be performed in two steps as we already did in previous chapters : first compiling (more accurately assembling) the x86 source files into object files, and second linking the object files together with the additional external libraries 📚.
 
-Since our compilation command would become longer here with by linking the SFML library, we will write a Makefile.
+We will create a Makefile to simplify the use of long compilation commands here.
 The makefile will contain only 2 lines :
 
 <div class="code_frame">Makefile</div>
@@ -113,7 +114,7 @@ hello_sfml.o: hello_sfml.s
 
 The main new thing in our linking command is the C-SFML shared library files for the  `graphics`, `window` and `system` [modules](https://www.sfml-dev.org/index.php) respectively. 
 
-You could also notice that here we omitted the `-static` options that we used in the previous chapters.
+You could also notice that here we omitted the `-static` options we used in the previous chapters.
 This is because now we are working with a [shared library](https://en.wikipedia.org/wiki/Shared_library).
 This means that the C-SFML object code will not be incorporated in the final executable of our program but will be loaded at runtime instead.
 
@@ -155,7 +156,7 @@ Our first goal will be to create and open a new window 🪟.
 
 #### Opening a window in C with CSFML
 
-A simple way to start our implementation consists in first creating a C code that creates a window in SFML and then using GCC to create assembly from this code and analyse how the functions are called.
+A simple way to start our implementation consists in first creating a C code that creates a window 🪟 in SFML and then using GCC to create assembly from this code and analyse how the functions are called.
 This is in fact similar to what we did in [chapter 7](pt7#how-are-floats-implemented-in-c-) to see how floating point operations were performed.
 Our basis will be the follwing code :
 
@@ -232,7 +233,7 @@ window = sfRenderWindow_create(mode, title, sfResize | sfClose, settings);
 // [...]
 {% endhighlight %}
 
-The code should function exactly as previously, except that now we can explicitly see what data is allocated in order to pass the parameters.
+The code should function exactly as previously, except that now we can explicitly see 👀 what data is allocated in order to pass the parameters.
 
 #### Opening a window from assembly
 
@@ -272,13 +273,13 @@ The arguments of the `sfRenderWindow_create` function are of multiple types.
 `mode` is a `sfVideoMode` **struct**ure (as we can see from the definition), title is a **char array**, style is a **32 bits integer** and settings is a **pointer**.
 
 * The "settings" argument is the easyest to start with.
-Indeed, although this argument is a pointer the default value `NULL` is used in our code.
+Indeed, although this argument is a pointer ➡️, the default value `NULL` is used in our code.
 Since pointers are just addresses, and since addresses are coded on **8 bytes**, the value that will be given to the function will simply be a *0* coded on 8 bytes.
 This can be seen at lines *7* and *9* from the code above.
 
 * The "title" argument is also an easy one to specify.
 Indeed, we already saw in the previous chapters how to manipulate arrays of characters in assembly.
-We can see at lines *2* and *3* that the string is defined at the `.LC0` symbol in the code and its address is the stored in the stack.
+We can see at lines *2* and *3* that the string ⛓️ is defined at the `.LC0` symbol in the code and its address is the stored in the stack 🥞.
 We can omit the stack part in our code as it is possible to directly reference the address of the symbol in the program's memory.
 
 * We saw that the "style" argument is a simple integer. Howether, its value is obtained through *[bitwise](https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/)* operators, which is a way to store several values into a unique variable.
@@ -350,7 +351,7 @@ main:
 
 {% endhighlight %}
 
-Note that 8 bytes are allocated in the stack as we need to store the window pointer (returned by the create function).
+Note 📝 that 8 bytes are allocated in the stack 🥞 as we need to store 🗄️ the window pointer (returned by the "create" function).
 We then start completing by defining the constants : the video mode, the window title and the style :
 
 {% highlight nasm linenos %}
@@ -388,7 +389,7 @@ call sfRenderWindow_create
 mov [rbp-8], rax ; store the window ptr
 {% endhighlight %}
 
-Recall that it is now necessary to specify the `rip` register as we are creating **PIE** and that it is not necessary to provide any definition of the library functions to our code, contrary to other languages such as C or C++ as we saw in [chapter 5](pt5#calling-a-custom-c-function).
+Moreover, it is now also necessary to specify the `rip` register as we are creating a **PIE** and it is not necessary to provide any definition of the library functions to our code, contrary to other languages such as C or C++ as we saw in [chapter 5](pt5#calling-a-custom-c-function).
 
 We can now add the other function calls, that are much simpler in terms of arguments :
 
@@ -406,25 +407,25 @@ mov rdi, [rbp-8]
 call sfRenderWindow_destroy
 {% endhighlight %}
 
-We can see that the two other CSFML functions have only one argument which is the address of the window object (pointer), and do not return anything.
+We can see that the two other CSFML functions have only one argument which is the address of the window object 🪟 (pointer), and do not return anything.
 The complete code can be compiled with a Makefile entry similar to the one from our previous CSFML "hello world".
 It should now function exactly as the analog C program.
 
 
 ## Graphical Mandelbrot
 
-As we can now display an SFML window from assembly, it is time to actually draw the Mandelbrot set 🖍️!
-We will first see how to draw pixel per pixel and display the result on the window.
+As we can now display an SFML window 🪟 from assembly, it is time to actually draw the Mandelbrot set 🖍️!
+We will first see how to draw pixel per pixel in an image and display the result on the window.
 
 #### Drawing in SFML
 
-Although providing a complete tutorial on SFML is not the goal of this chapter, it is still important to see how drawing works in this library 📝.
+Although providing a complete tutorial on SFML is not the goal of this chapter, it is still important to see how drawing 👾 works in this library 📝.
 We actually need to manipulate 3 different type of objects in our code in order to achieve the drawing.
 
 - The first object type is `sfImage`.
 It allows to store and manipulate an array of pixel.
 
-- The second one is `sfTexture`. It is also used to store pixels but this object is actually stored on the graphics card side, in order to speed up the display.
+- The second one is `sfTexture`. It is also used to store pixels but this object is actually stored on the graphics card side, in order to speed up the display 🖥️.
 
 - The third oblect to manipulate is `sfSprite`. Although the `sfTexture` object already prepare an image to be displayed on the screen by the hardware, it is still necessary to provide additional options such as its coordinates and its rotation.
 This type is used to store these information so that several graphical object with the same texture can be manipulated sepatately.
@@ -475,9 +476,9 @@ sfImage_destroy(image);
 
 This code can be tested and should add a red pixel 🟥 in our window, at coordinate (42,42) (the origin being the upper left corner).
 We can observe a cascading dependance between each object : the sprite depends on the texture that depends on the image.
-At some point, a pointer ➡️ is passed to the next object.
+At some point, a pointer ➡️ is passed from one object to the next object.
 
-And generate the result in assembly :
+Let's generate the result in assembly :
 
 <div class="collapse-panel"><div>
 <label for="code_2">Expand</label>
@@ -540,7 +541,7 @@ And generate the result in assembly :
 </div></div></div>
 
 We can see that this code is very similar to the previous one : the different objects (image, texture and sprite) are maniuplated through their pointers.
-The new type here is `sfColor` that stores a color coded on three components : red, green and blue values between *0* and *255*.
+The new type here is `sfColor` that stores a color coded on [three components](https://en.wikipedia.org/wiki/RGB_color_model) : red 🟥, green 🟩 and blue 🟦 values between *0* and *255*.
 If we look at the `sfColor` definition in the CSFML header, we can see that it is actually composed of 4 8-bits values, one for each color and one for opacity :
 
 <div class="code_frame">C language | Color.h </div>
@@ -556,7 +557,7 @@ typedef struct
 
 This implies that we can actually define the color directly with a symbol in our code instead of needing to call the `sfColor_fromRGB` function.
 
-Let's now add the assembly calls into our program. We first allocate more memory into the stack in order to store the image, texture and sprite pointers :
+Let's now add the assembly calls into our program. We first allocate more memory into the stack 🥞 in order to store the image, texture and sprite pointers ➡️ :
 
 <div class="code_frame"> create_window_assembly.s | Assembly x86-64 </div>
 {% highlight nasm linenos %}
@@ -568,7 +569,7 @@ sub rsp, 40
 ; rbp-32 : sprite pointer, 8 bytes
 {% endhighlight %}
 
-We also add the symbol corresponding the red color, which is coded on 4 8-bits (1 byte) values :
+We also add the symbol corresponding the red color (red and opacity compenent at 100% 💯), which is coded on 4 8-bits (1 byte) values :
 
 
 {% highlight nasm linenos %}
@@ -576,7 +577,7 @@ color_red:
 	.byte 255, 0, 0, 255
 {% endhighlight %}
 
-And we can now add the function calls to create and destroy the objects and to actually draw on the screen :
+And we can now add the function calls 📣 to create and destroy the objects and to actually draw on the screen :
 
 <div class="collapse-panel"><div>
 <label for="code_3">Expand</label>
@@ -644,12 +645,12 @@ call sfImage_destroy
 We can see a very typical scheme in the API.
 The pointer (memory address) of the object to manipulate is systematically passed to the function.
 Additional parameters may also be provided such as a pointer to another object.
-In order to choose the right register size for these parameters, it is handy to compile C code into assembly but it is also possible to look at the function and type definitions.
+In order to choose the right register size for these parameters, it is handy to compile C code into assembly but it is also possible to directly look at the function and type definitions.
 
 #### Drawing a rectangle
 
 Now that we are able to draw on the screen, we can implement a simple square drawing algorithm.
-This can be done throug two nested "for" loops.
+This is done through two nested "for" loops.
 We first add two local variables in our main function to iterate over the x and y coordinates :
 
 <div class="code_frame"> create_window_assembly.s | Assembly x86-64 </div>
@@ -664,8 +665,8 @@ sub rsp, 40
 ; rbp-40 : temp y coordinate, 4 bytes
 {% endhighlight %}
 
-By allocating 4 bytes per variable, there is no need to extend the stack allocation because of the current 16-bytes alignement.
-Then, we write our double nested for that iterates of the coordinates :
+By allocating 4 bytes per variable, there is no need to extend the stack 🥞 allocation because of the current 16-bytes alignement.
+Then, we write our double nested "for" loop that iterates of the coordinates :
 
 <div class="code_frame"> create_window_assembly.s | Assembly x86-64 </div>
 {% highlight nasm linenos %}
@@ -691,7 +692,7 @@ mov [rbp-36], dword ptr 20
     jne .L_for_temp_x
 {% endhighlight %}
 
-The result should be similar to the followinf screen capture (upper left part of the screen).
+The result should be similar to the following screen capture (upper left part of the screen).
 
 ![the resulting rectangle](/assets/assembly_series/rectangle_sfml.png)
 <div class="custom_caption" markdown="1">
@@ -702,14 +703,14 @@ The result should be similar to the followinf screen capture (upper left part of
 
 Our last step is now to include our code from the [previous chapter](pt7) in order to draw the Mandelbrot set in the window.
 This is actually the easy part since all the hard work was done in the last chapter.
-We will build from the two functions [test_convergence](pt7#the-test_convergence-function) and [draw_mandelbrot](pt7#the-draw_mandelbrot-function-️).
+We will build from the two functions : [test_convergence](pt7#the-test_convergence-function) and [draw_mandelbrot](pt7#the-draw_mandelbrot-function-️).
 
-These two functions can be added in a separate file "mandelbrot.s" in order to structure our project.
-This will require us to add few lines in the Makefile in order to compile this new file into an object file and to link it when making the final executable.
+These two functions can be added in a separate file "mandelbrot.s" in order to structure our project as we already did in the previous chapter.
+This will require us to add few lines in the Makefile in order to compile ⚙️ this new file into an object file and to link 🔗 it when making the final executable.
 
 The `test_convergence` function does not need any modification, it still receives the normalized coordinates as input and decide if the corresponding pixel must be drawn or not.
-The `draw_mandelbrot` function howver needs some modifications.
-First, it is necessary to pass the image pointer to the function in order to draw the pixels and store it in the stack :
+The `draw_mandelbrot` function however needs some adjustments.
+First, in order to draw the pixels, it is necessary to pass the image pointer to the function and store it in the stack 🥞 :
 
 <div class="code_frame"> mandelbrot.s | Assembly x86-64 </div>
 {% highlight nasm linenos %}
@@ -756,7 +757,7 @@ Then the printing instructions must be replaced by a call to `sfImage_setPixel` 
 .L_end_if_converge:
 {% endhighlight %}
 
-Additionaly, it is necessary to add the `rip` register when referencing data at some labels as we sa previously and to remove all the extra printing instructions.
+Additionaly, it is necessary to add the `rip` register when referencing data at some labels as we saw previously and to remove all the extra printing 🖨️ instructions.
 The last missing piece to our code is the call to `draw_mandelbrot` in the `main` function that replaces the previous `sfImage_setPixel` calls :
 
 <div class="code_frame"> main function | Assembly x86-64 </div>
@@ -781,11 +782,215 @@ Everything should now be in place to compile and test our program :
 \> Our Mandelbrot set in an SFML window!
 </div>
 
-Perfect! 🥳
+Perfect! 🥳 Feel free to improve the figure by adding colors depending on the number of iterations when testing the convergence for instance 😃.
 
 ## Bonus : coding the window loop
 
-Now that our program can open a window, we need to add more code so 
+Our goal is already achieved in this chapter but we did not exploit the full potential of window 🪟 application as the user cannot interact with the window yet.
+For instance, it would be great if we could close the application through the dedicated window button ❌.
 
+Instead of digging in the documentation we can already observe how the main window loop is coded in C and use automatic assembly code generation to take some inspiration 😤.
+Here is the basic code scheme :
+
+
+<div class="code_frame">C language | main_window_loop </div>
+{% highlight C linenos %}
+// create the main window
+// [...]
+
+//-------------------------------------------------
+// Start the application loop
+sfEvent event;
+while (sfRenderWindow_isOpen(window)) {
+
+    // Process events
+    while (sfRenderWindow_pollEvent(window, &event)) {
+        // Close window : exit
+        if (event.type == sfEvtClosed) {
+            sfRenderWindow_close(window);
+        }
+    }
+
+    // draw in the window
+    // [...]
+
+    // Update the window
+    sfRenderWindow_display(window);
+}
+
+// destroy the window
+// [...]
+{% endhighlight %}
+
+This loop, when inserted in between the window object allocation and its deallocation, should allow the user to contemplate the window 🪟 until they closes it with the cross.
+All the drawing code must go just before the display function call.
+
+In order to allow the user to interact with the window, the program must check the "events".
+Events are of different type : mouse button pressed 🖱️, key pressed ⌨️, window button triggered ❌, etc..
+Since multiple events may be present at each iteration, a while loop 🔁 helps processing them all at once.
+
+In our assembly code, this means that we need to call 3 new functions : `sfRenderWindow_isOpen`, `sfRenderWindow_pollEvent` and `sfRenderWindow_close`.
+The most difficult part will be to understand how the event type is coded.
+To do so, we can write a small C program that creates and processes an event :
+
+<div class="code_frame">C language </div>
+{% highlight C linenos %}
+// window creation
+// [...]
+
+// test with the event type
+sfEvent event;
+
+// output the size of sfEvent struct, in bytes
+printf("event size: %ld\n", sizeof(sfEvent));
+
+// function call needing an sfEvent pointer
+sfRenderWindow_pollEvent(window, &event);
+
+event.type = sfEvtClosed;
+
+// window destruction
+// [...]
+{% endhighlight %}
+
+When compiled into an executable, this program indicates that the size (in bytes) of the `sfEvent` type is **28** thanks to the `sizeof` operator.
+This information will be useful when allocating space in the stack 🥞 to store the event variable. 
+
+We can now automatically generate the corresponding assembly code for the lines of interest :
+
+<div class="code_frame">Assembly x86-64 </div>
+{% highlight nasm linenos %}
+; test_event.c:21:     printf("event size: %ld\n", sizeof(sfEvent));
+	mov	esi, 28	;,
+	lea	rax, .LC1[rip]	; tmp90,
+	mov	rdi, rax	;, tmp90
+	mov	eax, 0	;,
+	call	printf@PLT	;
+
+; test_event.c:23:     sfRenderWindow_pollEvent(window, &event);
+	lea	rdx, -48[rbp]	; tmp91,
+	mov	rax, QWORD PTR -56[rbp]	; tmp92, window
+	mov	rsi, rdx	;, tmp91
+	mov	rdi, rax	;, tmp92
+	call	sfRenderWindow_pollEvent@PLT	;
+
+; test_event.c:25:     event.type = sfEvtClosed;
+	mov	DWORD PTR -48[rbp], 0	; event.type,
+{% endhighlight %}
+
+We can see at line 2 that the size of `sfEvent`,  *28*, is directly hard-coded into the assembly code.
+That is beacause the `sizeof` operator in C is processed at [compile time](https://www.geeksforgeeks.org/sizeof-operator-c/).
+
+Line *9* indicates that the event is located at address `rbp-48` in the stack 🥞.
+Since its size is `28`, this means that the event is contained in the stack from address `rbp-48` to address `rpb-20`.
+Then, we can see at line *16* that the field `type` in the event is actually the first field of the structure, since its address is also the base address of the event (`rbp-48`) in the stack.
+We also learn that the 4 bytes value *0* code for the event value `sfEvtClosed`.
+
+We can use these information to create a new program in assembly that performs the classical main loop :
+
+<div class="collapse-panel"><div>
+<label for="code_4">Expand</label>
+<input type="checkbox" name="" id="code_4"><span class="collapse-label"></span>
+<div class="extensible-content">
+<div class="code_frame">Assembly x86-64 | main_window_loop_assembly.s </div>
+{% highlight nasm linenos %}
+
+main:
+    
+    ; [...]
+
+    ; stack allocation
+    sub rsp, 72
+    ; rbp-8 : window pointer, 8 bytes
+    ; rbp-16 : image pointer, 8 bytes
+    ; rbp-24 : texture pointer, 8 bytes
+    ; rbp-32 : sprite pointer, 8 bytes
+    ; rbp-36 ; temp x coordinate, 4 bytes
+    ; rbp-40 ; temp y coordinate, 4 bytes
+    ; rbp-68 ; event, 28 bytes
+
+    ; storing the preserved registers
+    ; [...]
+
+    ; window creation
+    ; [...]
+
+    ; main window loop
+    .L_while_window_open:
+
+        ; test if window is open 
+        mov rdi, [rbp-8] ; window pointer
+        call sfRenderWindow_isOpen
+        test eax, eax
+        jz .L_end_while_window_open
+
+        ; poll event loop
+        .L_while_poll_event:
+
+            mov rdi, [rbp-8] ; window ptr
+            lea rsi, [rbp-68] ; event ptr
+            call sfRenderWindow_pollEvent
+
+            ; leave poll event loop if no eventw
+            test eax, eax
+            jz .L_end_while_pool_event
+
+            ; test event type and close the window if required
+            mov eax, dword ptr [rbp-68]
+            test eax, eax
+            jnz .L_end_if_event_equal_close 
+
+            .L_if_event_equal_close:
+                mov rdi, [rbp-8] ; window ptr
+                call sfRenderWindow_close
+            .L_end_if_event_equal_close:
+
+            jmp .L_while_poll_event
+        .L_end_while_pool_event:
+
+        ; window draw instruction
+
+        ; calling "display"
+        mov	rdi, [rbp-8]
+        call sfRenderWindow_display
+
+        jmp .L_while_window_open
+    .L_end_while_window_open:
+
+    ; window destruction
+    ; [...]
+
+    ; restoring registers
+    ; [...]
+
+    ; return
+    ; [...]
+{% endhighlight %}
+</div></div></div>
+
+Once again, I ommitted in this code instructions that are not related to the main loop itself.
+We can see the two nested while loops 🔁, one for keeping the window 🪟 open and another one for polling the events.
+These loops are implemented slightly differently to what we saw previously : a systematic jump 🦘 is present at the end of each loop iteration.
+The termination test is the performed at the beginning of the loop, before executing its instructions.
+This is actually necessary in order to perform a proper `while` loop, where the termination test is done at the beginning.
+
+Other than that, the different function calls 📣 are performed in order to gather the events, test if the window is open and close it when necessary.
+We can see that the `lea` instruction is necessary to pass the event to the function as it is given as a pointer ➡️ (hence its memory address in the stack 🥞).
+Moreover, the return value is coded on 4 bytes, as we could guess on the assembly code, and the `test` instruction is used to perform the tests.
+
+What remains is adding our Mandelbrot code to draw the Mandelbrot set inside the main loop.
+The sprite should be displayed just before calling the window display function.
+However, the function that draws on the image can be called only once at the beginning of the program (outside the main loop).
 
 ## What's next ?
+
+This chapter should already give a taste of what's possible when developing in assembly.
+This is going to be the last chapter in this series as my primary goal was simply to show that assembly is just a language like another.
+I really hope the this series helps to narrow the gap between highy level programming and low level program execution.
+
+The codes from this chapter are available at [this link](https://github.com/smbct/x86-64_101_linux/tree/main/pt8_graphical_mandelbrot).
+Feel free to improve this code by, for instance, adding colors, zoom, mouse input, etc...
+At some point, developing in assembly should feel just a little less comfortable that using higher level languages 😇.
+
+I will probably not be done with assembly yet as I still have some project ideas at the lower level of coding!
+Stay tuned! 🥳
