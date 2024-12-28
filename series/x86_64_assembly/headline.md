@@ -10,7 +10,7 @@ back_page: /pages/series.html
 lang: en
 ---
 
-This series covers x86-64 assembly programming.
+This series introduces the basics of assembly programming in the x86-64 language.
 
 * [Intro : Why this series.](/blog/assembly-x86-series)
 
