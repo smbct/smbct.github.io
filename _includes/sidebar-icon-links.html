@@ -1,5 +1,15 @@
 <nav id="sidebar-icon-links">
 
+  <a id="subscribe-link" class="icon" title="Subscribe" aria-label="Subscribe"
+    href="{{ site.feed.path | default: 'feed.xml' | relative_url }}">
+    {% include svg/feed.svg %}
+  </a>
+
+  <a id="mastodon-link" class="icon" title="Mastodon" aria-label="Mastodon"
+    href="{{ site.mastodon.link }}">
+    {% include svg/mastodon.svg %}
+  </a>
+
   {% if site.hydeout.repo %}
     <a id="github-link"
        class="icon" title="Github Profile" aria-label="Github Profile"
@@ -7,12 +17,6 @@
       {% include svg/github.svg %}
     </a>
   {% endif %}
-
-  <a id="subscribe-link"
-     class="icon" title="Subscribe" aria-label="Subscribe"
-     href="{{ site.feed.path | default: 'feed.xml' | relative_url }}">
-    {% include svg/feed.svg %}
-  </a>
 
   {% comment %}
     Check if we have tag or search pages page active before linking to it.

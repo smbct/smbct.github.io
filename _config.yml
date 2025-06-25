@@ -39,6 +39,9 @@ author:
 hydeout:
   repo: https://github.com/smbct
 
+mastodon:
+  link: https://social.linux.pizza/@smbct
+
 plugins:
   - jekyll-feed
   - jekyll-gist
