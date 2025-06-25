@@ -1,9 +1,24 @@
 {% if page.back_page != null %}
+
+{% if page.url contains "/series/" %}
+    {% unless page.url contains "headline" %}
+        {% assign elts_thispage = page.url | split: "/" %}
+    {% endunless %}
+{% endif %}
+
 {% for p in site.pages %}
-    {% if p.url == page.back_page or p.name == page.back_page %}
+
+    {% if elts_thispage != null %}
+        {% assign elts_other = p.url | split: "/" %}
+        {% if elts_thispage[-2] == elts_other[-2] and p.name == page.back_page %}
+            {% assign back_page = p %}
+        {% endif %}
+    {% elsif p.url == page.back_page or p.name == page.back_page %}
         {% assign back_page = p %}    
     {% endif %}
+   
 {% endfor %}
+
 {% endif %}
 
 {% if back_page != null %}

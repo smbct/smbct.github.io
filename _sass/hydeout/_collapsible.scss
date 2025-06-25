@@ -23,6 +23,8 @@
 .collapse-panel div label{
     // padding: 7px 7px 7px 32px;
 
+    border-bottom: 1px solid #ccc;
+
     padding-left: 2.5rem;
 
     height: 1.7rem;
@@ -92,6 +94,11 @@
     overflow-y: scroll;
     overflow-x: scroll;
     height: 17rem;
+
+    // overide the space between the content and the bottom of the panel
+    .highlight {
+        margin-bottom: 0em;
+    }
 }
 .collapse-panel div input:checked ~ div.extensible-content{
     height: fit-content;

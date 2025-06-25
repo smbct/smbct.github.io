@@ -450,7 +450,6 @@ pre {
 
 code {
   background-color: #f9f9f9;
-  border-radius: 3px;
   color: #bf616a;
   font-size: 85%;
   padding: 0.25em 0.5em;
@@ -474,7 +473,6 @@ div.extensible-content figure.highlight {
   min-width: fit-content;
   overflow-x: scroll;
   background-color: rgb(255, 255, 255);
-  border-bottom-left-radius: 0%;
 }
 
 .code_frame {
@@ -500,13 +498,11 @@ div.extensible-content figure.highlight {
 
 .highlight {
   background-color: #f9f9f9;
-  border-top-right-radius: 0.5rem;
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
   font-size: 0.8rem;
   line-height: 1.4;
   padding: 0rem;
   margin: 0rem;
+  margin-bottom: 1em;
 }
 .highlight pre {
   margin-bottom: 0;
@@ -523,6 +519,33 @@ div.extensible-content figure.highlight {
   color: #999;
   display: inline-block;
   user-select: none;
+}
+
+.highlight .gutter.gl {
+  border-right: 1px solid #e5e5e5;
+}
+
+.highlight table, .highlight td {
+  border: 0px;
+}
+
+div.collapse-panel .highlight {
+  border: 1px solid #e5e5e5;
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.highlight {
+  border: 1px solid #e5e5e5;
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.highlight pre {
+  border-radius: 0.5rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 /*
@@ -1107,6 +1130,7 @@ button.disqus-load {
 }
 
 .collapse-panel div label {
+  border-bottom: 1px solid #ccc;
   padding-left: 2.5rem;
   height: 1.7rem;
   padding-top: 0.085rem;
@@ -1160,6 +1184,9 @@ button.disqus-load {
   overflow-y: scroll;
   overflow-x: scroll;
   height: 17rem;
+}
+.collapse-panel div div.extensible-content .highlight {
+  margin-bottom: 0em;
 }
 
 .collapse-panel div input:checked ~ div.extensible-content {
