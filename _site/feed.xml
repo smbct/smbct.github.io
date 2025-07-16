@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2025-07-16T22:20:42+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry xml:lang="en"><title type="html">Kinect pose tracking on Linux in 2025</title><link href="https://smbct.github.io/blog/kinect_tracking/" rel="alternate" type="text/html" title="Kinect pose tracking on Linux in 2025" /><published>2025-07-15T10:00:00+02:00</published><updated>2025-07-15T10:00:00+02:00</updated><id>https://smbct.github.io/blog/kinect_tracking</id><content type="html" xml:base="https://smbct.github.io/blog/kinect_tracking/"><![CDATA[<p><strong>Full body tracking</strong>, or pose tracking, skeleton 💀 tracking, etc.. is a hardware 📹 and software technology used for producing a virtual three dimensional representation of a person’s body in real time 🕺.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2025-07-16T22:30:23+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry xml:lang="en"><title type="html">Kinect pose tracking on Linux in 2025</title><link href="https://smbct.github.io/blog/kinect_tracking/" rel="alternate" type="text/html" title="Kinect pose tracking on Linux in 2025" /><published>2025-07-15T10:00:00+02:00</published><updated>2025-07-15T10:00:00+02:00</updated><id>https://smbct.github.io/blog/kinect_tracking</id><content type="html" xml:base="https://smbct.github.io/blog/kinect_tracking/"><![CDATA[<p><strong>Full body tracking</strong>, or pose tracking, skeleton 💀 tracking, etc.. is a hardware 📹 and software technology used for producing a virtual three dimensional representation of a person’s body in real time 🕺.
 This technology recently gained my interest for a video game modding project 🎮. 
 However, capturing the body movements in real time is not an easy task and a combination of specialized hardware 📷 and software 💾 is necessary to achieve it.</p>
 
@@ -432,47 +432,7 @@ We are definitely far from <strong>high end</strong> devices such as the <a href
 The Kinect once again did not stop at gaming: I found two more examples in <a href="https://www.gamesindustry.biz/kinect-trialled-by-surgeons">surgery</a> 🧑‍⚕️ and <a href="https://www.gamesindustry.biz/microsoft-testing-kinect-therapy-system-for-soldiers">therapy</a> 🪖.
 The device is also an interesting tool for <a href="https://www.youtube.com/watch?v=h4VMbeB5Hlk&amp;ab_channel=PBSIdeaChannel">artists</a>, to help questioning our relationship to computers through the lens of <a href="https://en.wikipedia.org/wiki/User_interface">User Interfaces</a> for example.
 To me, all these applications make it worth the time investment ⌚.
-And beyond this particular device, I am convinced that we have everything to gain from maintaining old yet operational systems.</p>]]></content><author><name>smbct</name></author><category term="hardware" /><category term="programming" /><category term="hardware" /><category term="low-level" /><summary type="html"><![CDATA[Full body tracking, or pose tracking, skeleton 💀 tracking, etc.. is a hardware 📹 and software technology used for producing a virtual three dimensional representation of a person’s body in real time 🕺. This technology recently gained my interest for a video game modding project 🎮. However, capturing the body movements in real time is not an easy task and a combination of specialized hardware 📷 and software 💾 is necessary to achieve it.]]></summary></entry><entry xml:lang="en"><title type="html">Bringing Kinect pose tracking to Apptainer</title><link href="https://smbct.github.io/blog/kinect_apptainer/" rel="alternate" type="text/html" title="Bringing Kinect pose tracking to Apptainer" /><published>2025-07-06T10:00:00+02:00</published><updated>2025-07-06T10:00:00+02:00</updated><id>https://smbct.github.io/blog/kinect_apptainer</id><content type="html" xml:base="https://smbct.github.io/blog/kinect_apptainer/"><![CDATA[<p>As I wrote in the <a href="../">previous post</a>, 
-As I explored how to develop the <strong>Kinect</strong>, I wanted to provide a reliable way of reproducing the software installation necessary to perform 3d pose tracking.
-One way of doing so is to rely on contenerisation/</p>
-
-<!-- ![imf](https://apptainer.org/apptainer.svg) -->
-<p><img width="512" alt="apptainer logo" src="https://apptainer.org/apptainer.svg" /></p>
-<div class="custom_caption">
-  <p>&gt; The logo of Apptainer.</p>
-</div>
-
-<h2 id="the-issue">The issue</h2>
-
-<p>An error message when the application starts.
-No other information.</p>
-
-<p>Guess that not enough privileg in the container image
-(linux user space versus kernel space)</p>
-
-<h2 id="containers-freenect-and-openni">Containers, freenect and openni</h2>
-
-<p>Test with the freenect driver works, what difference ?</p>
-
-<h2 id="using-gdb">Using gdb</h2>
-
-<p>Since code is open source for the most part, first try by using gdb to compile
-also installation on clean system (live usb) to check if it still works</p>
-
-<h2 id="log-level">Log level</h2>
-
-<p>Discover of log journal in <code class="language-plaintext highlighter-rouge">/var/log</code></p>
-
-<p>Discover of the log level</p>
-
-<p>change of the log level</p>
-
-<h2 id="the-solution">The solution</h2>
-
-<p>searching for the kernel busy device and the error code (-6) in libusb
-searching on the web -&gt; there is</p>
-
-<h2 id="conclusion">Conclusion</h2>]]></content><author><name>smbct</name></author><category term="low-level" /><category term="programming" /><category term="hardware" /><category term="low-level" /><category term="container" /><summary type="html"><![CDATA[As I wrote in the previous post, As I explored how to develop the Kinect, I wanted to provide a reliable way of reproducing the software installation necessary to perform 3d pose tracking. One way of doing so is to rely on contenerisation/]]></summary></entry><entry xml:lang="fr"><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
+And beyond this particular device, I am convinced that we have everything to gain from maintaining old yet operational systems.</p>]]></content><author><name>smbct</name></author><category term="hardware" /><category term="programming" /><category term="hardware" /><category term="low-level" /><summary type="html"><![CDATA[Full body tracking, or pose tracking, skeleton 💀 tracking, etc.. is a hardware 📹 and software technology used for producing a virtual three dimensional representation of a person’s body in real time 🕺. This technology recently gained my interest for a video game modding project 🎮. However, capturing the body movements in real time is not an easy task and a combination of specialized hardware 📷 and software 💾 is necessary to achieve it.]]></summary></entry><entry xml:lang="fr"><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
 Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs.
 L’impact individuel des déplacements en avion en terme d’émissions CO₂ est énorme.
@@ -2224,4 +2184,101 @@ Et bien sûr, elle a été résolue avec le programme linéaire !</p>
       <td>4</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><category term="optimisation" /><category term="IA" /><category term="jeux" /><summary type="html"><![CDATA[La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.]]></summary></entry></feed>
+</table>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><category term="optimisation" /><category term="IA" /><category term="jeux" /><summary type="html"><![CDATA[La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.]]></summary></entry><entry xml:lang="fr"><title type="html">Programmation linéaire</title><link href="https://smbct.github.io/blog/programmation-lineaire/" rel="alternate" type="text/html" title="Programmation linéaire" /><published>2016-04-16T21:20:33+02:00</published><updated>2016-04-16T21:20:33+02:00</updated><id>https://smbct.github.io/blog/programmation-lineaire</id><content type="html" xml:base="https://smbct.github.io/blog/programmation-lineaire/"><![CDATA[<p>Pour un premier article, j’ai choisi de parler d’un sujet que je vais avoir probablement l’occasion d’évoquer à nouveau par la suite : la programmation linéaire.
+Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l’on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d’optimisation, et des méthodes efficaces pour les traiter.</p>
+
+<blockquote class="prompt-info">
+  <p>Mais au fait, c’est quoi l’optimisation finalement ?</p>
+</blockquote>
+
+<p>Optimiser, c’est essayer de faire de la meilleure façon possible. Cela peut concerner le fait de partir d’une façon de faire, d’une procédure, d’un plan, et trouver des moyens de l’améliorer pour traiter au mieux une situation. Cela peut aussi concerner le fait de prévoir à l’avance quelle va être la meilleure stratégie pour attaquer un problème. L’améliorer peut alors vouloir dire gagner du temps, réduire des dépenses, maximiser ses chances, etc…</p>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<h2 id="loptimisation-en-maths-et-en-info">L’optimisation en maths et en info</h2>
+
+<p>En mathématiques, l’optimisation est une notion très précise. Optimiser signifie trouver les valeurs maximale et minimale que peut atteindre une fonction.</p>
+
+<blockquote class="prompt-info">
+  <p>Et pourquoi un maximum ou un minimum ?</p>
+</blockquote>
+
+<p>Il n’est pas forcément évident aux premiers abords qu’un problème d’optimisation est un problème de recherche de maximum ou de minimum. Cependant, en y réfléchissant, derrière tout problème d’optimisation se cache un min ou un max. Par exemple, dans certaines situations, on veut optimiser le temps mis pour faire une action. Cela veut alors dire prendre le moins de temps possible. On cherche bien un minimum. Dans d’autres contextes, on peut aussi chercher à optimiser un gain. On cherche alors à obtenir le gain maximum.</p>
+
+<p>Donc si l’on veut traduire un problème d’optimisation naturel en problème mathématique, cela consiste donc à trouver une fonction qui exprime le mieux possible la quantité à optimiser (que ça soit du temps, de l’argent, etc…)</p>
+
+<p>Passer d’un problème réel à un problème mathématique, c’est l’action de modéliser. Une des première chose à faire pour modéliser un problème, c’est identifier les variables. Les variables sont impliquées de le calcul de la fonction à optimiser. Elles correspondent pour le problème réel aux différentes décisions que l’on peut prendre (par exemple, “combien d’unité produire ?” ou encore “doit-on activer cette option ?”).</p>
+
+<p>Une autre chose que l’on doit prendre en compte lorsque l’on optimise est la présence de contraintes. En effet, les variables de notre fonction (que l’on appelle variables de décision) ne peuvent pas prendre n’importe quelles valeurs ! Par exemple, si nos variables concernent un nombre d’unité à produire, on ne peut pas évidemment pas produire en quantité infinie. Les ressources disponibles entre donc en compte dans ce type de problème. Par ailleurs, les contraintes apparaissent parfois de manière plus subtile.</p>
+
+<blockquote class="prompt-info">
+  <p>Mais alors, pourquoi parler d’informatique ?</p>
+</blockquote>
+
+<p>Comme on l’a vu précédemment, les mathématiques nous offrent des outils puissants pour traiter les problèmes d’optimisation. En effet, une fois que le problème est modélisé, on peut appliquer des théorèmes pour calculer le maximum ou le minimum de fonctions.</p>
+
+<p>Cependant, les problèmes que l’on veut résoudre peuvent parfois comporter des milliers de variables. On ne peut donc plus espérer résoudre ces problèmes à la main. C’est pourquoi il a fallut mettre en place des algorithmes capable de calculer ce genre de chose le plus rapidement possible.</p>
+
+<p>Implémenter des méthodes de calculs automatiques ne suffit toutefois pas à résoudre tous les problèmes. Certains problèmes sont en effet par nature très difficiles à résoudre et les algorithmes généraux prennent énormément de temps. Les outils mathématiques sont limités pour ces problèmes. Il est donc nécessaire de les étudier en profondeur afin de trouver des techniques algorithmiques adaptées pour la résolution.</p>
+
+<blockquote class="prompt-info">
+  <p>Une des caractéristiques du domaine est qu’il n’existe pas de méthode générale efficace pour traiter n’importe quel problème.</p>
+</blockquote>
+
+<h2 id="la-programmation-linéaire-dans-tout-ça">La programmation linéaire dans tout ça</h2>
+
+<p>La programmation linéaire désigne un ensemble de règles que l’on se donne pour représenter sous forme mathématique un problème réel. Le but du jeu est de représenter notre problème concret sous forme d’une fonction mathématique et d’un ensemble de contraintes, en respectant ces règles.</p>
+
+<p>En programmation linéaire, on considère donc une fonction à optimiser, sous plusieurs contrainte. La limite imposée est le fait que la fonction et les contraintes doivent être linéaires. Cela signifie que, dans l’expression de la fonction et des contraintes a la forme d’une somme de variables multipliées par de coefficients. On ne peut ainsi pas multiplier deux variables, diviser deux variables, appliquer une racine, etc…</p>
+
+<p>Ces limitations peuvent paraître très contraignantes. Cependant, un très grand nombre de problèmes réels peuvent se modéliser de cette façon. Parfois, il faut avoir recours à certains tricks mais ceux-ci sont facilement intégrés par expérience. Il faut enfin retenir que si l’on se contraint, c’est parceque les méthodes algorithmiques disponibles pour ces problèmes sont très efficaces. Il vaut donc mieux se creuser la tête et trouver une bonne modélisation en programmation linéaire plutôt que d’avoir à résoudre un problème non linéaire.</p>
+
+<h2 id="un-premier-exemple-de-modélisation">Un premier exemple de modélisation</h2>
+
+<p>Prenons un premier exemple de modélisation.</p>
+
+<p><img src="/assets/cookies.jpg" alt="Des cookies !" /></p>
+
+<p>Partons d’une situation simple : nous allons recevoir des invités et nous voulons leur préparer deux types de petits biscuits. Les deux demandent les mêmes ingrédients : de la farine et du sucre.</p>
+
+<p>Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n’ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ? Dans l’exemple présenté, les données sont issues de recettes respectives de madeleines et de biscuits à la cannelle.</p>
+
+<h3 id="les-variables-du-problème">Les variables du problème</h3>
+
+<p>La première étape de la modélisation consiste à trouver les variables du problème. Ici, les variables sont faciles à trouver. La question concerne directement le nombre de biscuit à produire. On définit donc deux variables : \(x_1\) représentant le nombre de biscuit de type 1 que l’on veut créer et \(x_2\) représentant le nombre de biscuit de type 2.</p>
+
+<h3 id="les-contraintes">Les contraintes</h3>
+
+<p>Une fois les variables trouvées, on peut regarder les contraintes. Pour ce problème, il y a deux contraintes liées aux ressources disponible (farine et sucre), une contrainte concernant les convives et enfin des contraintes plus générales, et enfin des contraintes structurelles.</p>
+
+<p>Tout d’abord, on peut définir la contrainte pour la farine. On suppose que l’on dispose d’un kilogramme de farine. La recette nous indique également qu’il faut 4.2 g de farine pour un biscuit de type 1 et 15 g de farine pour les biscuits de type 2. On en déduit donc la contrainte \(4.2 x_1 + 15 x_2 \leq 1000\).</p>
+
+<p>On procède de manière similaire pour le sucre. On obtient : \(5.8 x_1 + 7.5 x_2 \leq 1000\).</p>
+
+<p>La contrainte suivante traduit une préférence des convives. On suppose qu’un quart de invités n’aime pas les biscuits du type 1. Par ailleurs, il n’y a pas de préférence pour ceux du type 2. On en déduit : \(x_1 \leq \frac{1}{4} (x_1 + x_2)\)</p>
+
+<p>Enfin, on ne peut pas produire un nombre négatif de biscuit. On a donc \(x_1, x_2 \geq 0\). De plus, on ne peut pas produire de demi-biscuit. Heureusement, en programmation linéaire, nous pouvons résoudre des problèmes avec des variables dites entières. On a donc comme dernière contrainte : \(x_1, x_2 \in \mathbb{Z}\).</p>
+
+<h3 id="la-fonction-objectif">La fonction objectif</h3>
+
+<p>Il ne reste plus qu’à écrire la fonction à optimiser. Ici, on veut maximiser la nombre de gâteau produit. La fonction est donc \(z = x_1 + x_2\).</p>
+
+<p>On peut donc récapituler le modèle de notre problème :</p>
+
+\[\text{max} \,z = x_{1} + x_{2}\\
+	 \begin{align*}
+		s.c.\quad 4.2 x_1 + 15 x_2 &amp;\leq 1000 \\
+			5.8 x_1 + 7.5 x_2 &amp;\leq 1000 \\
+			x_1 &amp;\leq \frac{1}{4} (x_1 + x_2) \\
+			x_1, x_2 &amp;\in \mathbb{N}
+	\end{align*}\]
+
+<p>Je passe les détails de la résolution de ce problème car cela nécessiterait plusieurs articles. Elle est néanmoins basée sur la méthode du branch and bound et l’algorithme du simplexe. Après résolution, on trouve \(x_1 = 20\) et \(x_2 = 61\). Nous allons donc pouvoir confectionner 81 gâteaux pour nos invités.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>La programmation linéaire est donc un outil très intéressant pour l’optimisation. Malheureusement, ce n’est pas un outil infaillible. Même si les algorithmes utilisés pour résoudre ces problèmes sont très efficaces en variable continues (c’est à dire lorsque les variables ne sont pas forcément des entiers), ce n’est pas la même chose pour les variables entières ou binaires. L’idée est alors de profiter de toutes les spécificités du problème que l’on traite afin d’en tirer avantage et de proposer des méthodes de résolution dédiées. Parfois, on décide carrément de quitter le formalisme de la programmation linéaire et de traiter le problème avec un autre outil mieux adapté (ex : les graphes). Les problèmes d’optimisation sont donc loin d’être parfaitement maîtrisés et cet article n’effleure que très légèrement toutes les choses que l’on peut faire en optimisation.</p>
+
+<h2 id="crédit">Crédit</h2>
+
+<p>photo credit: <a href="http://www.flickr.com/photos/7702423@N04/26056556830">297/365/2853 (April 3, 2016) - Chocolate Coconut Cookies</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(license)</a></p>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><summary type="html"><![CDATA[Pour un premier article, j’ai choisi de parler d’un sujet que je vais avoir probablement l’occasion d’évoquer à nouveau par la suite : la programmation linéaire. Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l’on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d’optimisation, et des méthodes efficaces pour les traiter.]]></summary></entry></feed>
