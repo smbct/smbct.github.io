@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
   <head>
   <link href="https://gmpg.org/xfn/11" rel="profile" />
@@ -13,7 +13,7 @@
 
   <title>
     
-      Séries &middot; blog de smbct
+      Bringing Kinect pose tracking to Apptainer &middot; smbct's blog
     
   </title>
 
@@ -37,30 +37,30 @@
 </head>
 
 
-  <body class="category">
+  <body class="post">
 
     
     <div id="sidebar">
   <header>
     <div class="site-title">
-      <a href="/fr/">
+      <a href="/">
         
           <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
   <path d="M0 0h24v24H0z" fill="none"/>
   <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
 </svg></span>
         
-        blog de smbct
+        smbct's blog
       </a>
     </div>
-    <p class="lead">Notes sur l'informatique, la programmation, la société et plus.</p>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
   </header>
   <nav id="sidebar-nav-links">
 
   
     
       <a class="home-link "
-          href="/fr/">Blog</a>
+          href="/">Blog</a>
     
   
   
@@ -163,16 +163,12 @@
 
   <!-- should be improved -->
   
-  <a class="category-link  active"
-      href="/pages/fr_series.html">Séries </a>
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
   
 
   
 
-
-  
-    
-  
 
   
     
@@ -181,7 +177,11 @@
   
     
       <a class="category-link "
-          href="/pages/fr_about.html">À propos</a>
+          href="/pages/about.html">About</a>
+    
+  
+
+  
     
   
 
@@ -332,13 +332,13 @@
 <!-- When one of the link is not set, the corresponding flag cannot be clicked -->
 
 <a id="icon_flag"
-     class="icon_flag"
-     href="/pages/series.html"
+     class="icon_flag active"
+     
      >
 🇬🇧 <div></div>
 </a>
 <a id="icon_flag"
-  class="icon_flag active"
+  class="icon_flag"
   
 >
 🇫🇷 <div></div>
@@ -355,9 +355,8 @@
 
 
   <div id="credit">
-    Créé avec <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> et
-    <a href="https://giscus.app/fr">giscus</a>.
-    Hébergé par <a href="https://pages.github.com">github</a>.
+  Made with <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> and <a href="https://giscus.app">giscus</a>.
+  Hosted by <a href="https://pages.github.com">github</a>.
   </div>
 
 </div>
@@ -368,34 +367,224 @@
   
 
 
+<p class="back-link">
+    <a href="/index.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Blog</a>
+</p>
 
-  <h1 class="page-title">Séries</h1>
+
+  <h1 class="post-title">Bringing Kinect pose tracking to Apptainer</h1>
 </header>
 <div class="content">
+  <div class="post-meta">
   
-  <p>Parfois je commence à travailler sur un billet et au cours de l’écriture, je réalise que le contenu mériterait d’être plus développé.
-C’est de cette manière que les séries ont été créées sur ce blog, un endroit dans lequel je peux détailler les sujets et ajouter du contenu technique.</p>
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      06 Jul 2025
+    
+  </span>
 
-<div class="series" onclick="location.href='/series/x86_64_assembly/headline';">
-<center>
-<h2>x86-64 assembly programming</h2>
-</center>
-<p>
-A series that covers the basics of x86-64 programming.
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    1 min
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        low-level
+      
+    
+  </span>
+</div>
+
+
+  <div class="post-body">
+    <p>As I wrote in the <a href="../">previous post</a>, 
+As I explored how to develop the <strong>Kinect</strong>, I wanted to provide a reliable way of reproducing the software installation necessary to perform 3d pose tracking.
+One way of doing so is to rely on contenerisation/</p>
+
+<!-- ![imf](https://apptainer.org/apptainer.svg) -->
+<p><img width="512" alt="apptainer logo" src="https://apptainer.org/apptainer.svg" /></p>
+<div class="custom_caption">
+  <p>&gt; The logo of Apptainer.</p>
+</div>
+
+<h2 id="the-issue">The issue</h2>
+
+<p>An error message when the application starts.
+No other information.</p>
+
+<p>Guess that not enough privileg in the container image
+(linux user space versus kernel space)</p>
+
+<h2 id="containers-freenect-and-openni">Containers, freenect and openni</h2>
+
+<p>Test with the freenect driver works, what difference ?</p>
+
+<h2 id="using-gdb">Using gdb</h2>
+
+<p>Since code is open source for the most part, first try by using gdb to compile
+also installation on clean system (live usb) to check if it still works</p>
+
+<h2 id="log-level">Log level</h2>
+
+<p>Discover of log journal in <code class="language-plaintext highlighter-rouge">/var/log</code></p>
+
+<p>Discover of the log level</p>
+
+<p>change of the log level</p>
+
+<h2 id="the-solution">The solution</h2>
+
+<p>searching for the kernel busy device and the error code (-6) in libusb
+searching on the web -&gt; there is</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#programming">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">programming</span>
+    </a>
+  
+    
+    <a href="/tags.html#hardware">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">hardware</span>
+    </a>
+  
+    
+    <a href="/tags.html#low-level">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">low-level</span>
+    </a>
+  
+    
+    <a href="/tags.html#container">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">container</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+  <section class="related">
+  
+  <h2>Related Posts</h2>
+  
+  <ul class="posts-list">
+    
+      <li>
+        <h3>
+          <a href="/blog/kinect_tracking/">
+            Kinect pose tracking on Linux in 2025
+            <small>15 Jul 2025</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/stockholm_train/">
+            Un Paris - Stockholm en train 🚆
+            <small>07 Jun 2024</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/blog/assembly-x86-series/">
+            A series on x86 assembly programming
+            <small>05 Jun 2024</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</section>
+
+</div>
+
+
+
+<p class="back-link">
+    <a href="/index.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Blog</a>
 </p>
-</div>
-
-
-
-<ul class="posts-list">
-  
-  
-</ul>
-
-</div>
-
-
-
 
 
     </main>

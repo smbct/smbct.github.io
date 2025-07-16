@@ -1,4 +1,478 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2025-07-07T23:51:17+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry xml:lang="fr"><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://smbct.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://smbct.github.io/" rel="alternate" type="text/html" /><updated>2025-07-16T22:20:42+02:00</updated><id>https://smbct.github.io/feed.xml</id><title type="html">smbct’s blog</title><subtitle>Notes on computer science, programming, society and more.</subtitle><author><name>smbct</name></author><entry xml:lang="en"><title type="html">Kinect pose tracking on Linux in 2025</title><link href="https://smbct.github.io/blog/kinect_tracking/" rel="alternate" type="text/html" title="Kinect pose tracking on Linux in 2025" /><published>2025-07-15T10:00:00+02:00</published><updated>2025-07-15T10:00:00+02:00</updated><id>https://smbct.github.io/blog/kinect_tracking</id><content type="html" xml:base="https://smbct.github.io/blog/kinect_tracking/"><![CDATA[<p><strong>Full body tracking</strong>, or pose tracking, skeleton 💀 tracking, etc.. is a hardware 📹 and software technology used for producing a virtual three dimensional representation of a person’s body in real time 🕺.
+This technology recently gained my interest for a video game modding project 🎮. 
+However, capturing the body movements in real time is not an easy task and a combination of specialized hardware 📷 and software 💾 is necessary to achieve it.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+<img alt="3d pose tracking illustration" src="https://www.researchgate.net/profile/Melvyn-Roerdink/publication/283536111/figure/fig1/AS:339855277084674@1458039220277/Body-points-derived-with-the-human-pose-estimation-software-of-Kinect-v1-A-RGB-image.png" />
+</div>
+<div class="custom_caption">
+  <p>&gt; An illustration of 3D pose tracking. Image by <a href="https://www.researchgate.net/publication/283536111_Kinematic_Validation_of_a_Multi-Kinect_v2_Instrumented_10-Meter_Walkway_for_Quantitative_Gait_Assessments">Melvyn Roerdink</a>.</p>
+</div>
+
+<p>As I was looking for a cheap and reliable solution, I spent some time reviewing and compare existing methods 👀.
+In this blog post 📃, I will expose multiple options that I found to solve this problem.
+I will particularly focus on the <strong>Kinect</strong> 🎥, a gaming device developed by <a href="https://fr.wikipedia.org/wiki/Microsoft">Microsoft</a>.
+After reviewing multiple aspects of this device, we will see how to setup a working environment on Linux to develop for the Kinect and actually perform 3d tracking.
+This topic will also give the opportunity to argument about open source, about the usability of consumer products and obsolescence 💬.</p>
+
+<h2 id="full-body-tracking-starter-guide">Full body tracking starter guide</h2>
+
+<p>There exists several technologies capable of performing body tracking:</p>
+
+<ul>
+  <li>
+    <p>A first solution can be found around <strong>V</strong>irtual <strong>R</strong>eality devices.
+Some allow for <a href="https://pimax.com/blogs/blogs/pose-tracking-methods-outside-in-vs-inside-out-tracking-in-vr">full body tracking</a> but these devices remain <a href="https://www.vive.com/fr/product/">particularly expensive</a>.</p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Motion_capture">Motion capture</a> is another solution, mostly used in the cinema industry 🎬.
+This solution may necessitate heavy hardware (multiple cameras) with additional body markers and is more relevant for professional applications.</p>
+  </li>
+  <li>
+    <p><a href="https://en.wikipedia.org/wiki/Deep_learning">Deep learning</a> technologies may help here as well.
+Some models allow for pose estimation from RGB cameras thanks to Convolutional Neural Networks, even in <a href="https://medium.com/augmented-startups/top-9-pose-estimation-models-of-2022-70d00b11db43">real time</a>. These software based solutions would however require high <a href="https://en.wikipedia.org/wiki/Graphics_processing_unit">GPU</a> compute capabilities to perform fast neural network inference and reach a decent framerate.</p>
+  </li>
+  <li>
+    <p>Depth cameras are the last option that I found, the Kinect being one of them.
+These devices use various type of imaging sensors for reconstructing depth images, where each pixel represents a distance to the camera.
+Several devices <a href="https://www.intelrealsense.com/depth-camera-d435/">exist</a> but once again, most of them are rather <a href="https://store.intelrealsense.com/buy-intel-realsense-depth-camera-d435.html">expensive</a>.</p>
+  </li>
+</ul>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<a title="Marc Auledas, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Intel_Realsense_depth_camera_D435.jpg"><img alt="Intel Realsense depth camera D435 mounted on a small tripod" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Intel_Realsense_depth_camera_D435.jpg/256px-Intel_Realsense_depth_camera_D435.jpg?20210504180506" /></a>
+</div>
+<div class="custom_caption">
+  <p>&gt; The intel RealSense D435 device, another type of Depth camera. Image from <a href="https://commons.wikimedia.org/wiki/File:Intel_Realsense_depth_camera_D435.jpg">wikimedia</a>.</p>
+</div>
+
+<h4 id="looking-for-affordable-options-">Looking for affordable options 💰</h4>
+
+<p>The advent of <strong>VR</strong> technologies has further encouraged the development of cheap and/or open source tracking solutions, which brought us multiple alternatives to expensive options.
+<a href="https://vrheaven.io/full-body-tracking-quest/">Various solutions</a> have been imagined such as wearing sensors/markers or relying on webcams.
+For instance the <a href="https://www.crowdsupply.com/slimevr/slimevr-full-body-tracker">kick-started</a> open source <a href="https://slimevr.dev/">SlimeVR</a> device is a camera-free solution based on a set of wearable sensors 👖.
+Another example is actually the <strong>Kinect</strong>, as an old consumer device used by several <a href="https://kinectvr.com/">open source solutions</a>.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
+<img src="https://docs.slimevr.dev/assets/img/slimeVRTrackers.jpg" alt="SlimeVR wearable devices." />
+</div>
+<div class="custom_caption">
+  <p>&gt; The wearable tracking devices from SlimeVR’s solution. Image from <a href="https://slimevr.dev/">SliveVR</a>.</p>
+</div>
+
+<p>At the end, the <strong>Kinect</strong> appears to me as one of the most convenient and affordable option.
+Indeed, the device can still be found today and have become particularly cheap.
+However, a condition for the device to be usable is the availability of <strong>drivers</strong> and <strong>libraries</strong>.
+This part is not easy as hardware and software is evolving fast and such devices, produced by profit companies, are mostly closed source and even safe-guarded 🔒!</p>
+
+<h2 id="but-what-is-the-kinect--️">But <strong>what</strong> is the Kinect ? 📽️</h2>
+
+<p>The <a href="https://en.wikipedia.org/wiki/Kinect"><strong>Kinect</strong></a> is a 15 years old 👴 device developed by <a href="https://fr.wikipedia.org/wiki/Microsoft">Microsoft</a> as a motion game controller for its Xbox 360 console.
+More precisely, the Kinect enables the capture of a depth buffer and reconstruction of 3d skeleton of a player, allowing for precise interactions in virtual applications such as <a href="https://fr.wikipedia.org/wiki/Kinect_Sports">video games</a>.</p>
+
+<p>The Kinect device was first presented at the <a href="https://archive.org/details/microsoft-e3-2009">E3 2009</a> conference (as <em>Project Natal</em>) as a motion controller <a href="https://en.wikipedia.org/wiki/Kinect">in response to</a> Nintendo’s Wii Remote and Sony’s PlayStation Move.
+The device was presented as a webcam and was not intended to be used in combination with another physical device 🎮.
+It has a microphone, a set of motors and 2 cameras: a RGB camera and an InfraRed <em>Depth</em> camera.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<a title="Evan-Amos, Public domain, via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File:Xbox-360-Kinect-Standalone.png"><img width="400" alt="kinect_my_optoin_" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Xbox-360-Kinect-Standalone.png/512px-Xbox-360-Kinect-Standalone.png?20110811044925" /></a>
+<div class="custom_caption">
+    <p>&gt; The original Kinect for xbox 360, image from <a href="https://commons.wikimedia.org/wiki/File:Xbox-360-Kinect-Standalone.png">wikimedia</a>.</p>
+  </div>
+</div>
+
+<p>One of the main aspect of the device is of course its capability to perform 3d pose tracking in realtime, that is to recover a coarse 3d skeleton of people’s body in the camera field.
+This feature is of interest in the gaming industry 🎲 but also in other areas such as healthcare 🧑‍⚕️, robotics 🤖, etc..</p>
+
+<h4 id="the-kinects-successors-">The <strong>Kinect</strong>’s successors 🪦</h4>
+
+<p>Despite the limited success of the first Kinect’s 💸, Microsoft released a second version of its device together with the Xbox One console in 2013.
+The new device, called <strong>Kinect 2</strong> or Kinect One, was originally <a href="https://en.wikipedia.org/wiki/Kinect">controversially bundled with the new console</a> to favor its adoption.
+As we may understand, criticisms were notably raised for privacy concerns 🔒.
+This resulted in an updated version of the console that was then sold alone, its Kinect port being removed by Microsoft (an external power adapter was then provided with the device).</p>
+
+<h4 id="SDK"> The <b>Kinect</b> development kits </h4>
+
+<p>In parallel, Microsoft also released alternative versions of the two controllers dedicated to developers and professionals: the <a href="https://pcper.com/2012/01/microsoft-releasing-kinect-for-windows-and-sdk-on-february-1st-2012/"><strong>Kinect</strong> for Windows</a> and <a href="https://www.gamesindustry.biz/kinect-2-0-for-windows-coming-in-2014"><strong>Kinect 2</strong> for Windows</a>.
+These two additional devices had their hardware <strong>slightly modified</strong> compared to the original ones.
+Theses releases were accompanied by two respective <a href="https://en.wikipedia.org/wiki/Software_development_kit"><strong>S</strong>oftware <strong>D</strong>evelopment <strong>K</strong>its</a> (and drivers), allowing developers to write their own applications 🧑‍💻 for the <strong>Kinects</strong>. 
+Of course, we were not ready to see any effort from Microsoft to release Linux or Macos versions of the drivers and SDK’s 🤷.
+Also important to note, these products were sold at a significantly higher price 💵 than their Xbox counterparts 🕹️, and they are rather difficult to find these days.</p>
+
+<div style="display: flex; align-items: center; gap: 1rem; max-width: 100%">
+<div style="display flex;"><img src="https://pcper.com/wp-content/uploads/2012/01/1cca-kinect-for-windows-0.jpg" alt="The first Kinect for Windows." /></div>
+<div style="display flex;"><img src="https://www.stuff.tv/wp-content/uploads/sites/2/2021/08/kinect-for-windows-v2.jpg" alt="The second Kinect for Windows." /></div>
+</div>
+<div class="custom_caption">
+  <p>&gt; On the left, the first Kinect for Windows (image from <a href="https://pcper.com/2012/01/microsoft-releasing-kinect-for-windows-and-sdk-on-february-1st-2012/">PC Perspective</a>).
+On the right, the second Kinect for Windows (image from <a href="https://www.stuff.tv/news/kinect-windows-v2-now-available-pre-order/">Stuff.tv</a>).</p>
+</div>
+
+<p>Although Microsoft’s SDK had official support only for the <strong>Windows versions</strong> of the two Kinects hardware, <a href="https://robotics.stackexchange.com/questions/654/what-is-the-difference-between-kinect-for-windows-and-kinect-for-xbox">it has been discovered</a> that the two versions of the devices (Windows vs Xbox) were extremely close, even allowing for SDK compatibility with the Xbox Kinects! 😶
+This fact has probably driven the developer community to invest more efforts in using the device!</p>
+
+<p>In 2020, Microsoft persisted with its Kinects by releasing a third model: the <a href="https://en.wikipedia.org/wiki/Azure_Kinect"><strong>Azure Kinect</strong></a>.
+More precise than its predecessors, this product was released as a development device only 📦, with target applications primarily outside of the gaming industry 🏭.
+Similarly to the other Kinect’s development kits, the Azure Kinect was sold at a much higher price than the consumer level ones 👾.
+The device did not last long as Microsoft announced its discontinuation in late 2023 ☠️ (few specimens might still be found at the moment at a high price).</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/kinect-dk_built-for-developers?resMode=sharp2&amp;op_usm=1.5,0.65,15,0&amp;wid=734&amp;hei=414&amp;qlt=100&amp;fit=constrain" alt="The azure Kinect sensor." /></p>
+  <div class="custom_caption">
+    <p>&gt; The azure Kinect sensor, image by <a href="https://www.microsoft.com">Microsoft</a>.</p>
+  </div>
+</div>
+
+<h2 id="kinect-hacking-and-open-source-drivers">Kinect hacking and open source drivers</h2>
+
+<p>Before diving into body tracking tools for the Kinect, I wanted to cover a bit of history around Kinect’s hack.
+When the device was released, a <a href="https://en.wikipedia.org/wiki/Bug_bounty_program">bounty</a> was offered by <a href="https://www.adafruit.com/">Adafruit</a> to the first people being able to hack the camera: that is developing a custom driver and obtain a depth image.
+Although <a href="https://linuxdevices.org/bounty-offered-for-hacking-microsofts-kinect-xbox-controller/">disapproved by Microsoft</a>, this event helped the release of open source 🔓 and multi-platform drivers 🐧 while Microsoft only supported Windows systems 🪟 and Kinect for Windows.
+Although hacking may usually be seen as controversial, such a hack would actually have the effect of encouraging the usability of the product.
+It appears to me here as an elegant way of encouraging developers to familiarize around a technology ⚙️ and also fight against its obsolescence 🚮.</p>
+
+<p>Anyway, the bounty was <a href="https://blog.adafruit.com/2010/11/10/we-have-a-winner-open-kinect-drivers-released-winner-will-use-3k-for-more-hacking-plus-an-additional-2k-goes-to-the-eff/">a success</a> as a <a href="https://web.archive.org/web/20230111044143/https://openkinect.org/wiki/Main_Page">hacking community</a> was formed around the Kinect.
+A tutorial was even made by Adafruit on <a href="https://learn.adafruit.com/hacking-the-kinect/overview">how to hack the device</a>!
+The second Kinect was also <a href="https://www.engadget.com/2014-07-18-hackers-make-xbox-ones-kinect-work-on-a-pc.html">rapidly hacked</a> and two open source drivers for the two devices have been released as a result: <a href="https://github.com/OpenKinect">libfreenect 1 and 2</a>. 
+These actions have probably greatly contributed to increasing the usability of the Kinects despite of its limited success in the gaming world 👾.</p>
+
+<h2 id="looking-for-pose-tracking-libraries-for-the-kinect">Looking for pose tracking libraries for the Kinect</h2>
+
+<p>The <strong>Kinect</strong>’s hardware itself is not capable of directly providing a full body skeleton that can be exploited in applications.
+It is instead in charge of re-constructing and sending the monochrome depth image 🖼️ from its <a href="https://en.wikipedia.org/wiki/Structured_light">structured light</a> IR sensor/projector to a computer (which is already a substantial!).</p>
+
+<p>The skeleton reconstruction is rather performed on the software side 🖥️.
+Let’s face it, this is definitely not an easy problem!
+Up to these days, only few libraries/softwares are available to perform this task.
+Paradoxaly, it seems to me that there have been some incentives to make this as open as possible since the Kinect remains one of the most affordable option here, and considering its various fields of application 🤔.
+I was surprised to find only few notes on the skeleton tracking problem in the open drivers documentation. 
+This is why after spending some time digging into the subject, I will review here what I could learn 🔎.</p>
+
+<h4 id="microsofts-algorithm-and-sdk">Microsoft’s algorithm and SDK</h4>
+
+<p>With the release of the first Kinect in 2010, Microsoft faced the challenge of releasing a fully-working computing library for extracting skeleton information from a depth image, for its in-game applications.
+Although Microsoft would obviously not release an open-source solution of its algorithm 🔒, some piece of information is still available online about its technology.
+This <a href="https://archive.org/details/Microsoft_Research_Video_146550">conference talk</a> and the <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/BodyPartRecognition.pdf">associated paper</a> explain that <a href="https://en.wikipedia.org/wiki/Microsoft_Research">Microsoft Reasearch</a> developed an approach based on <strong>machine learning</strong>.
+More precisely, the proposed machine learning model is a classification model in charge of associating the depth pixels to body parts.
+The model, based on kind of <a href="https://en.wikipedia.org/wiki/Random_forest">random forest</a> 🌲, was trained (fitted) on a motion captured dataset.
+Of course at the time deep learning was not as popular as it is today.
+Additional research material on the algorithm may be found online (<a href="https://www.microsoft.com/en-us/research/publication/real-time-human-pose-recognition-in-parts-from-a-single-depth-image/?from=https://research.microsoft.com/apps/pubs/?id=145347&amp;type=exact">here</a> and <a href="https://pages.cs.wisc.edu/~ahmad/kinect.pdf">there</a> for instance).</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+<div style="display: flex; align-items: center; gap: 3rem; max-width: 100%">
+<div style="display flex;"><img src="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/vrkinect-harlequin_view.jpg
+" alt="The first Kinect for Windows." /></div>
+<div style="display flex;"><img src="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/vrkinect-position_view.jpg" alt="The second Kinect for Windows." /></div>
+</div>
+</div>
+<div class="custom_caption">
+  <p>&gt; On the left, result of the random forest classification of body parts from depth pixels. On the right, the resulting skeleton joints estimation. Images from <a href="https://www.microsoft.com/en-us/research/project/human-pose-estimation-for-kinect/">Microsoft</a>.</p>
+</div>
+
+<p>When it comes to the implementation, we mentioned earlier the Kinect and Kinect 2 <a href="#SDK">SDK</a> released by Microsoft together with the release of the Windows versions of the devices.
+The SDK came with Kinect’s drivers ⚙️ and with an implementation of Microsoft’s skeleton algorithms for both the first and second Kinects (the skeleton is more detailed 🔬 with the second Kinect, which may be due to the higher definition of the depth image as well as some improvements on the algorithms).
+Athough the original Xbox Kinects were not officially supported by the framework, the SDK <strong>do work</strong> and is a first viable solution for performing skeleton tracking.
+Unfortunately, a closed source and Windows only solution was not satisfying to me 😒, which made me keep exploring.</p>
+
+<h4 id="openni-framework-and-nite">OpenNI framework and NITE</h4>
+
+<p>The second solution is <a href="https://en.wikipedia.org/wiki/OpenNI">OpenNI</a>, an open source framework developed by the <a href="https://en.wikipedia.org/wiki/PrimeSense">PrimeSense</a> company.
+PrimeSense was actually at the origin of Kinect’s hardware and the company was then <a href="https://www.theverge.com/2013/11/24/5141416/apple-confirms-primesense-acquisition">bought by Apple</a> in 2013.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="https://i0.wp.com/yannickloriot.com/wp-content/uploads/2011/03/OpenNi-Architecture.png?w=460&amp;ssl=1" alt="OpenNI framework architecture" /></p>
+  <div class="custom_caption">
+    <p>&gt; Architecture of the OpenNI framework. Image from <a href="https://yannickloriot.com/2011/03/kinect-how-to-install-and-use-openni-on-windows-part-1/">Yannick Loriot</a>.</p>
+  </div>
+</div>
+
+<p><a href="https://web.archive.org/web/20110112091914/http://wiki.openni.org/mediawiki/index.php/Main_Page">OpenNI</a> was developed to mutualize natural interface devices such as depth cameras together with processing algorithms into one API.
+<a href="https://sebastien.warin.fr/2011/01/05/1067-kinect-introduction-openkinect-openni-nite/">About one year</a> after the release of the Kinect, PrimeSense released an open source version of OpenNI.
+A library 📚 called <strong>NITE</strong> was also freely released, binary only this time 🔢, to take care of skeleton reconstructions and other complex computations.
+From this release, several open source Kinect drivers have been provided such as <a href="https://github.com/avin2/SensorKinect">this one</a> by github user <a href="https://github.com/avin2">avin2</a> (I absolutely don’t now if it is an open source project, if it comes from the libfreenect project or if it is an official driver… 🤷).</p>
+
+<p>Anyway, these three components : <strong>OpenNI</strong>, a <strong>Kinect driver</strong> and the <strong>NITE</strong> library appeared as a viable multi-platform solution for skeleton tracking with the first Kinect 👨‍💻 and has been easily adopted by the <a href="https://wiki.ubuntu-fr.org/kinect_openni">kinect hobbyists community</a>.
+Unfortunately, combining the fact that these libraries are unmaintained, not fully open source and that the official documentation 🗎 is unavailable, the usage has become more difficult today 😬.
+We will still see at the end of the post how to set up the Kinect developement environment with tracking through OpenNI ⬇️.</p>
+
+<p>A more recent version, OpenNI2, was also released and can still be found <a href="https://structure.io/openni/">these days</a>.
+It seems usable not only with <a href="https://github.com/OpenKinect/libfreenect/tree/master/OpenNI2-FreenectDriver">the first Kinect</a> but also with <a href="https://stackoverflow.com/questions/27465516/does-openni-2-2-support-kinect-v2">the second one</a> 📸.
+Several pages on the web seems to indicate that this is also a solution to develop with the two Kinects on Linux: for instance see <a href="https://www.programmersought.com/article/78274238050/">here</a> and <a href="https://github.com/carlosoleto/Ubuntu-Kinect2-Vpython">here</a> and <a href="https://robots.uc3m.es/installation-guides/install-openni-nite.html#install-nite22-ubuntu">here</a>.
+But because there are few resources available on the web, I will keep the focus on the first Kinect in this post.</p>
+
+<h4 id="alternatives">Alternatives</h4>
+
+<p>Due to the difficulty of the problem, it is clear that reliable solutions would be primarily brought through commercial products 🛒, which is a shame for the open source world 🌐.
+The Kinect SDK’s and the OpenNI solution are by far the <a href="https://msr-peng.github.io/portfolio/projects/skeleton_tracking/">most considered ones</a>.
+Nevertheless, few alternatives can still be found.</p>
+
+<p>First, <a href="https://nuitrack.com/">NuiTrack</a> is a commercial software that performs multi-device Skeleton tracking, including support for the three Kinects.
+It remains a closed source and expensive solution but it is apparently still maintained 🗓️.
+Few information is available about its technology but part of it seems to be powered by deep learning.
+This solution may however be usable <a href="https://github.com/3DiVi/nuitrack-sdk/releases/tag/v0.35.7">on arm64 platforms</a>, which includes the <a href="https://www.raspberrypi.com/products/raspberry-pi-4-model-b/">RaspberryPi 4</a>.
+This could indicate that the underlying algorithm is not unreasonably intensive ⚡.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://static.tildacdn.net/tild6236-3061-4739-a333-663731633965/skel-v2.gif" alt="NuiTrack solution" /></p>
+  <div class="custom_caption">
+    <p>&gt; The NuiTrack software in action. Image by <a href="https://nuitrack.com/">NuiTrack</a>.</p>
+  </div>
+</div>
+
+<p>By further digging into existing algorithms, I came up onto additional solutions developed by small teams or individuals and that do not rely on machine learning.
+These solutions seem to be rather based on mathematical and <strong>physical models</strong> of the body, by minimizing <strong>geodesic distances</strong> for instance 📐.
+<a href="https://github.com/Norman0406">Norman0406</a> on github made available a fully open source solution 🧑‍💻 apparently developed during a research project: <a href="https://github.com/Norman0406/OpenSkeletonFitting">OpenSkeletonFitting</a>.
+Kudos to them for achieving and releasing the full code!
+More information about the approach is available in the <code class="language-plaintext highlighter-rouge">OpenSkeletonFitting/Doc</code> directory.
+I came across a quite related approach which seems to be a thesis work by Abhishek Kar, available <a href="https://traf-barak.pwr.edu.pl/Others/Literature/2010/Kar%20-%20Skeletal%20Tracking%20using%20Microsoft%20Kinect%20The%20Microsoft%20Kinect%20sensor.pdf">here</a> but I was not able to find an open source implementation for this one.</p>
+
+<p>The remaining approaches that I found belong to the research world 🧑‍🔬.
+I came through several research articles <a href="https://ieeexplore.ieee.org/abstract/document/8337363">here</a>, <a href="https://www.sciencedirect.com/science/article/abs/pii/S026322411830410X">here</a>, <a href="https://ieeexplore.ieee.org/abstract/document/7467728">there</a> and <a href="https://www.sciencedirect.com/science/article/abs/pii/S026288561100134X">there</a>.
+Sadly, it seems that the authors rarely share their source code details… 😢 This is bad!
+Overall there is a mix of approaches with machine learning and more explicit modeling of the human body.
+I can however surprisingly note this <a href="https://github.com/SeyedMuhammadHosseinMousavi/Real-Time-Differential-Evolution-Human-Pose-Estimation">method</a> (working on RGB images this time) that rely on <a href="https://en.wikipedia.org/wiki/Differential_evolution">evolutionary computing</a> 🧬!</p>
+
+<p>At the end, it is clear that once again, the problem is far from being easy! 
+Due to the current attention raised by deep learning 🧠, and due to its success on image processing 🖼️ with convolutional architectures, I believe that modern solutions would prioritize this type of approach.
+This seems to be the case for instance in a <a href="https://realsenseai.com/skeletal-tracking/skeletal-tracking/">presentation by RealSense</a> of their own algorithms for depth cameras. 
+If we think in terms of open and accessible approaches, the question remains about a frugal and open source solution to keep the Kinect devices alive 🛟.
+For now, the OpenNI/NITE couple, although not fully open, seems a reliable one and I decided to go with it.</p>
+
+<h2 id="hands-on-setting-up-a-linux-kinect-development-environment">Hands on! Setting up a Linux <strong>Kinect</strong> development environment</h2>
+
+<p>After covering multiple aspects of the skeleton tracking problem, we will now see how to actually set up the hardware and run a first tracking program.
+We will work on the first Kinect in its XBox 360 model (excluding the Kinect for Windows one) and the OpenNI library.</p>
+
+<h4 id="setting-up-the-hardware">Setting up the hardware</h4>
+
+<p>The first step to work with the Kinect is to connect it to a computer 🔌!
+As straightforward as it seems, this is already the first difficulty since the Xbox 360 Kinect had its own custom plug 😧.
+Fortunately, the communication between the Kinect and the console is performed over USB but the Kinect also requires its own 12V power supply ⚡ that cannot be taken from USB (The Xbox was able to provide 12V on its own through the custom cable).
+This <a href="https://www.instructables.com/Wiring-an-Xbox-Kinect-for-USB/">nice tutorial</a> by <a href="https://www.instructables.com/member/squiggy2/">squiggy2</a> explains how to rewire Kinect’s original cable by separating the USB wires from the power ones.</p>
+
+<p>⚠️ Warning, working with electricity always comes at <a href="https://www.circuitbasics.com/working-with-electronics-safely/">a risk</a>.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 90%;">
+<div style="display: flex; align-items: center; gap: 3rem; max-width: 100%">
+<div style="display flex;"><img src="https://content.instructables.com/FR8/X180/HH2VL3PN/FR8X180HH2VL3PN.jpg?auto=webp&amp;frame=1&amp;width=1024&amp;height=1024&amp;fit=bounds&amp;md=MjAxMy0xMi0yMCAyMjo0NDo0Ni4w" /></div>
+<div style="display flex; width: 200%;"><img src="https://content.instructables.com/FOA/QBHU/HH2VL3XA/FOAQBHUHH2VL3XA.png?auto=webp&amp;frame=1&amp;fit=bounds&amp;md=MjAxMy0xMi0yMCAyMjo0NTowOC4w
+" /></div>
+</div>
+</div>
+<div class="custom_caption">
+  <p>&gt; One the left, a classical USB cable. On the right, the Kinect custom cable. Images by <a href="https://www.instructables.com/Wiring-an-Xbox-Kinect-for-USB/">squiggy2</a>.</p>
+</div>
+
+<p>To perform the wiring, you need a 12V power supply that would be plugged in addition to the USB cable.
+A 12V and 2A (24W) must work fine.
+Instead of buying a new one, this type of supply may usually be found from old devices such as laptop charging blocks 🔋. 
+At the moment of writing these lines, I also realise that the Kinect could even be plugged to a desktop <a href="https://electronics.stackexchange.com/questions/63793/where-to-get-12v-from-my-computer">computer’s power supply</a> 🖥️.
+I also wondered if modern USB-C charging blocks could be used as a power supply since they support multiple output tension but <a href="https://hackaday.io/project/20424-pd-buddy-sink">extra eltronics</a> would be necessary and it seems that on 12V, the maximum power <a href="https://www.zonsanpower.com/blog/can-i-use-a-usb-charger-as-a-power-supply.html">might not be enough</a> for the Kinect ❌.</p>
+
+<h4 id="setting-up-openni-and-nite-library">Setting up OpenNI and NITE library</h4>
+
+<p>We will see now how to install OpenNI on recent Ubuntu distributions 🐧, starting from an empty system.
+I tested the scripts inside a <a href="https://ubuntu.com/tutorials/try-ubuntu-before-you-install#1-getting-started">live Ubuntu USB image</a> 🖫 to ensure that the procedure is reproducible.
+We will make sure that at the end of the installation, it is possible to compile and run few program samples to develop with skeleton data 🩻.</p>
+
+<p>The three piece of softwares will be obtained from these three (non official) git repositories hosted on github:</p>
+
+<ul>
+  <li>OpenNI: <code class="language-plaintext highlighter-rouge">https://github.com/smbct/OpenNI.git</code></li>
+  <li>SensorKinect: <code class="language-plaintext highlighter-rouge">https://github.com/smbct/SensorKinect.git</code></li>
+  <li>NITE: <code class="language-plaintext highlighter-rouge">https://github.com/arnaud-ramey/NITE-Bin-Dev-Linux-v1.5.2.23.git</code></li>
+</ul>
+
+<p>These repositories have evolved from the original releases in order to maintain compatibility and fix multiple issues.
+One recent issue with OpenNI was a compilation error caused by a clash on <a href="https://gcc.gnu.org/onlinedocs/cpp/Macros.html">C++ <strong>macro</strong></a> names between the source and recent versions of the <a href="https://gcc.gnu.org/">GCC compiler</a>.
+This error almost made me give up on the installation ❌ when I started the project!
+Fortunately, several people have been working on a fix 😇.
+One of the proposed solution is to downgrade GCC ⤵️ to an older version, as suggested <a href="https://github.com/slugspark/KinectSkeletontTracking_18.04/tree/master">here</a> and <a href="https://github.com/pingarelho/Kinect-Skeleton-Tracking-on-Linux?tab=readme-ov-file">here</a>.
+I am however not a big fan of this as replacing the GCC version (even temporarily) is somehow intrusive 🥷 in the system.
+Another solution has been proposed by <a href="https://github.com/roncapat">roncapat</a> via a <a href="https://github.com/OpenNI/OpenNI/pull/128/commits">pull request</a> on github: <a href="https://github.com/OpenNI/OpenNI/pull/128/commits/99e5dcc60860ea065bad3afaefb4c4cf7bc98e18">renaming the macro in question.</a>
+I did not see this at the time I tried and I actually came up with the exact same modification <a href="https://github.com/OpenNI/OpenNI/commit/75749441887b8ac2a3c6f0557f4baccc737755d9">in my fork</a> 🤦
+(<em>Note to self: always check the pull requests, they are particularly informative.</em>)</p>
+
+<p>To simplify the installation process, I created a <em>bash</em> install script in a <a href="https://github.com/smbct/KinectOpenNISetup/tree/main">github repository</a>.
+The installation can then be done by cloning the repository and executing the <em>bash</em> script with root privileges:</p>
+
+<div class="code_frame"> bash</div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>git clone https://github.com/smbct/KinectOpenNISetup.git
+<span class="nb">cd</span> ./KinectOpenNISetup
+<span class="nb">sudo </span>bash install_openni_kinect.sh
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This should install the dependencies and then download, compile, and install the OpenNI library, the Kinect driver and the NITE binary library.
+Once the installation is complete, the Kinect can be connected to the computer 🖥️ and tested via the two C++ examples in the repository.
+These examples have been developed to help reproduce the development environment.
+Fom these, one may simply copy the source files and the Makefile to setup its own script.
+The code source has been made simple to <strong>build upon it</strong>.</p>
+
+<p>The first example, <strong>SimpleSkeletonRevisited</strong>, is a console-only program that prints skeleton information in the terminal.
+A <strong>calibration</strong> phase is necessary for OpenNI to compute the skeleton joints: this can be performed simply as standing in front of the Kinect at a reasonable distance.
+After that, the program should print the 3d position of one skeleton joint:</p>
+
+<div class="code_frame"> bash</div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="c"># from KinectOpenNISetup directory</span>
+<span class="nb">cd </span>SimpleSkeletonRevisited
+make SimpleSkeletonRevisited
+./SimpleSkeletonRevisited
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The second example, <strong>SkeletonViewer</strong> is a graphical program that displays a 3d scene with <a href="https://www.opengl.org/">openGL</a> and the <a href="https://freeglut.sourceforge.net/docs/api.php">freeglut</a> library.</p>
+
+<div class="code_frame"> bash</div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="c"># from KinectOpenNISetup directory</span>
+<span class="nb">cd </span>SimpleSkeletonRevisited
+make SimpleSkeletonRevisited
+./SimpleSkeletonRevisited
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
+  <p><img src="https://github.com/smbct/KinectOpenNISetup/blob/main/SkeletonViewer.png?raw=true" alt="The SkeletonViewer program" /></p>
+</div>
+<div class="custom_caption">
+  <p>&gt; The small program SkeletonViewer that I wrote for visualizing the skeleton in 3d.</p>
+</div>
+
+<p>More examples are available in the OpenNI directory.
+They are being compiled with the library when running the install script.
+They can be found in the directory <code class="language-plaintext highlighter-rouge">OpenNI/Platform/Linux/Redist/OpenNI*/Samples/Bin/x*-Release</code> and may serve as tutorials for more advanced features.</p>
+
+<p>⚠️ Note: when I first tried the installation process a few time ago I came across a running issue with the Kinect.
+I had to follow the procedure described <a href="https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1521245">here</a>: <code class="language-plaintext highlighter-rouge">sudo -s &amp;&amp;
+echo -1 &gt; /sys/module/usbcore/parameters/autosuspend</code>.
+For some reason, I did not have the issue anymore when writing this post 🤷.</p>
+
+<h4 id="runnning-the-kinect-inside-a-container">Runnning the Kinect inside a container</h4>
+
+<p>As I was looking for a simpler way of setting up the Kinect/OpenNI/NITE development environment, my idea was to build a <strong>container</strong> with all the tools installed in it.
+More precisely, <a href="https://en.wikipedia.org/wiki/Containerization_(computing)">containerization</a> is a software technology that allows to create an isolated environment in the Operating System to execute a program in a controlled way (in terms of software dependencies and not necessarily in terms of security! ⚠️).</p>
+
+<p>I created a small <a href="https://apptainer.org/">Apptainer</a> image definition file to create an image with a working development environment.
+Unfortunately at first, the Kinect wouldn’t be recognised by any test program…
+I identified a small missing piece of code in the driver and created <a href="https://github.com/smbct/OpenNI/commit/47a0815f4362c9682ba8341866d1c0de08a134eb">a commit to fix the issue</a>.
+I may write a future blog post to add more details of the debugging process which I find interesting (I have almost no knowledge in driver development!).</p>
+
+<p>With Apptainer installed in the system, the following commands allow to create the apptainer image:</p>
+
+<div class="code_frame"> bash</div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre>git clone https://github.com/smbct/KinectOpenNISetup.git
+<span class="nb">cd</span> ./KinectOpenNISetup
+apptainer build openni_kinect.sif openni_kinect.def
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Once the image is created, it is possible to open a shell inside the container with the command:</p>
+
+<p><code class="language-plaintext highlighter-rouge">apptainer shell openni_kinect.sif</code></p>
+
+<p>Once inside the container, the examples can be compiled and run:</p>
+
+<div class="code_frame"> bash | openni_kinect.sif </div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="c"># from within openni_kinect.sif shell</span>
+<span class="nb">cd </span>SimpleSkeletonRevisited
+make SimpleSkeletonRevisited
+./SimpleSkeletonRevisited
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>⚠️ Note: graphical programs cannot be run by default on some systems, which prevents from running the <code class="language-plaintext highlighter-rouge">SkeletonViewer</code> example.
+I encountered this issue when working on a gnome+wayland desktop (Debian default).
+It is possible to solve the issue with the following command (on the host, outside of the container): <code class="language-plaintext highlighter-rouge">xhost +SI:localuser:$(id -un)</code>.
+See more details on the issue <a href="https://unix.stackexchange.com/questions/330366/how-can-i-run-a-graphical-application-in-a-container-under-wayland">here</a>.</p>
+
+<h4 id="what-about-windows-and-macos-">What about Windows and MacOS ?</h4>
+
+<p>I have only covered Linux systems here for two main reasons 🤔: I am more familiar with them and they are more accessible for experienced users/developers.
+However the OpenNI release also contains a Windows and a MacOS version 👍.
+I have no idea of what still works and what does not in recent versions of these operating systems though…
+Some documentation on the installation for Windows can still be found <a href="https://www.codeproject.com/Articles/148251/How-to-Successfully-Install-Kinect-on-Windows-Open
+https://yannickloriot.com/2011/03/">here</a> and <a href="https://lh1075.blogspot.com/2016/10/openninite-installation-on-windows.html">here</a>.</p>
+
+<h2 id="concluding-thoughts">Concluding thoughts</h2>
+
+<p>I hope that this post gives an interesting overview of what the Kinect is capable of and how to use it in some projects.
+A lot of elements were not covered here such as variations of the open source drivers for different platforms (for instance I found a version of the <a href="https://github.com/avin2/SensorKinect">avin2</a> driver specialized <a href="https://github.com/jspricke/debian-openni-sensor-avin2-sensorkinect">for Debian</a>), about the Kinect audio system 🎤 that was apparently also <a href="https://salsa.debian.org/debian/kinect-audio-setup">reverse engineered</a>, the Kinect 2 drivers, etc…
+There is definitely more to be explored.</p>
+
+<p>I do have several ideas yet for further improving the usability, performance and openness of the Kinect software ecosystem.
+It is already possible to build 👷 upon existing open source code to improve its maintainability (I am indeed talking about OpenNI…).
+The skeleton tracking part is also critical ⚠️ as the NITE library is not open source.
+This prevents for instance a port to <a href="https://en.wikipedia.org/wiki/ARM_architecture_family">arm devices</a> such as the <a href="https://www.raspberrypi.com/">raspberry pi</a>.
+There are only few solutions here but I do believe that there is <a href="https://decompilation.wiki/">always a way</a>.</p>
+
+<p>Anyway, for now what started as a hobby to me has also become a source of reflection about aging hardware, obsolescence and open source development 😀.
+Helping to keep an old gaming device alive might not be the most useful software contribution 💽 but it is a good opportunity to enjoy “old” technology 🧓 and to learn more about how things work 🤓!</p>
+
+<p>I still believe that keeping things alive has its point though.
+This may be a way of opening technology to everyone, which is reflected with the Kinect by numerous hacking/modding <a href="https://kinect.fandom.com/wiki/Hacks">projects</a> and more recently around <a href="https://k2vr.tech/">VR</a>.
+We are definitely far from <strong>high end</strong> devices such as the <a href="https://en.wikipedia.org/wiki/Apple_Vision_Pro">Apple Vision Pro</a> here 👓, even the name sounds rather <em>restrictive</em>…
+The Kinect once again did not stop at gaming: I found two more examples in <a href="https://www.gamesindustry.biz/kinect-trialled-by-surgeons">surgery</a> 🧑‍⚕️ and <a href="https://www.gamesindustry.biz/microsoft-testing-kinect-therapy-system-for-soldiers">therapy</a> 🪖.
+The device is also an interesting tool for <a href="https://www.youtube.com/watch?v=h4VMbeB5Hlk&amp;ab_channel=PBSIdeaChannel">artists</a>, to help questioning our relationship to computers through the lens of <a href="https://en.wikipedia.org/wiki/User_interface">User Interfaces</a> for example.
+To me, all these applications make it worth the time investment ⌚.
+And beyond this particular device, I am convinced that we have everything to gain from maintaining old yet operational systems.</p>]]></content><author><name>smbct</name></author><category term="hardware" /><category term="programming" /><category term="hardware" /><category term="low-level" /><summary type="html"><![CDATA[Full body tracking, or pose tracking, skeleton 💀 tracking, etc.. is a hardware 📹 and software technology used for producing a virtual three dimensional representation of a person’s body in real time 🕺. This technology recently gained my interest for a video game modding project 🎮. However, capturing the body movements in real time is not an easy task and a combination of specialized hardware 📷 and software 💾 is necessary to achieve it.]]></summary></entry><entry xml:lang="en"><title type="html">Bringing Kinect pose tracking to Apptainer</title><link href="https://smbct.github.io/blog/kinect_apptainer/" rel="alternate" type="text/html" title="Bringing Kinect pose tracking to Apptainer" /><published>2025-07-06T10:00:00+02:00</published><updated>2025-07-06T10:00:00+02:00</updated><id>https://smbct.github.io/blog/kinect_apptainer</id><content type="html" xml:base="https://smbct.github.io/blog/kinect_apptainer/"><![CDATA[<p>As I wrote in the <a href="../">previous post</a>, 
+As I explored how to develop the <strong>Kinect</strong>, I wanted to provide a reliable way of reproducing the software installation necessary to perform 3d pose tracking.
+One way of doing so is to rely on contenerisation/</p>
+
+<!-- ![imf](https://apptainer.org/apptainer.svg) -->
+<p><img width="512" alt="apptainer logo" src="https://apptainer.org/apptainer.svg" /></p>
+<div class="custom_caption">
+  <p>&gt; The logo of Apptainer.</p>
+</div>
+
+<h2 id="the-issue">The issue</h2>
+
+<p>An error message when the application starts.
+No other information.</p>
+
+<p>Guess that not enough privileg in the container image
+(linux user space versus kernel space)</p>
+
+<h2 id="containers-freenect-and-openni">Containers, freenect and openni</h2>
+
+<p>Test with the freenect driver works, what difference ?</p>
+
+<h2 id="using-gdb">Using gdb</h2>
+
+<p>Since code is open source for the most part, first try by using gdb to compile
+also installation on clean system (live usb) to check if it still works</p>
+
+<h2 id="log-level">Log level</h2>
+
+<p>Discover of log journal in <code class="language-plaintext highlighter-rouge">/var/log</code></p>
+
+<p>Discover of the log level</p>
+
+<p>change of the log level</p>
+
+<h2 id="the-solution">The solution</h2>
+
+<p>searching for the kernel busy device and the error code (-6) in libusb
+searching on the web -&gt; there is</p>
+
+<h2 id="conclusion">Conclusion</h2>]]></content><author><name>smbct</name></author><category term="low-level" /><category term="programming" /><category term="hardware" /><category term="low-level" /><category term="container" /><summary type="html"><![CDATA[As I wrote in the previous post, As I explored how to develop the Kinect, I wanted to provide a reliable way of reproducing the software installation necessary to perform 3d pose tracking. One way of doing so is to rely on contenerisation/]]></summary></entry><entry xml:lang="fr"><title type="html">Un Paris - Stockholm en train 🚆</title><link href="https://smbct.github.io/blog/stockholm_train/" rel="alternate" type="text/html" title="Un Paris - Stockholm en train 🚆" /><published>2024-06-07T10:00:00+02:00</published><updated>2024-06-07T10:00:00+02:00</updated><id>https://smbct.github.io/blog/stockholm_train</id><content type="html" xml:base="https://smbct.github.io/blog/stockholm_train/"><![CDATA[<p>Cette année, mon travail m’a donné la chance d’assister à une conférence de recherche en Suède 🇸🇪.
 Malheureusement, les conférences de chercheurs 🧑‍🔬 me renvoient une image de plus en plus négative à l’heure de l’urgence climatique.
 Elles impliquent généralement que des centaines de personnes prennent l’avion pour passer quelques jours seulement à l’étranger (potentiellement à l’autre bout du monde) à écouter des présentations de travaux d’autres chercheurs.
 L’impact individuel des déplacements en avion en terme d’émissions CO₂ est énorme.
@@ -1750,101 +2224,4 @@ Et bien sûr, elle a été résolue avec le programme linéaire !</p>
       <td>4</td>
     </tr>
   </tbody>
-</table>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><category term="optimisation" /><category term="IA" /><category term="jeux" /><summary type="html"><![CDATA[La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.]]></summary></entry><entry xml:lang="fr"><title type="html">Programmation linéaire</title><link href="https://smbct.github.io/blog/programmation-lineaire/" rel="alternate" type="text/html" title="Programmation linéaire" /><published>2016-04-16T21:20:33+02:00</published><updated>2016-04-16T21:20:33+02:00</updated><id>https://smbct.github.io/blog/programmation-lineaire</id><content type="html" xml:base="https://smbct.github.io/blog/programmation-lineaire/"><![CDATA[<p>Pour un premier article, j’ai choisi de parler d’un sujet que je vais avoir probablement l’occasion d’évoquer à nouveau par la suite : la programmation linéaire.
-Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l’on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d’optimisation, et des méthodes efficaces pour les traiter.</p>
-
-<blockquote class="prompt-info">
-  <p>Mais au fait, c’est quoi l’optimisation finalement ?</p>
-</blockquote>
-
-<p>Optimiser, c’est essayer de faire de la meilleure façon possible. Cela peut concerner le fait de partir d’une façon de faire, d’une procédure, d’un plan, et trouver des moyens de l’améliorer pour traiter au mieux une situation. Cela peut aussi concerner le fait de prévoir à l’avance quelle va être la meilleure stratégie pour attaquer un problème. L’améliorer peut alors vouloir dire gagner du temps, réduire des dépenses, maximiser ses chances, etc…</p>
-
-<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-
-<h2 id="loptimisation-en-maths-et-en-info">L’optimisation en maths et en info</h2>
-
-<p>En mathématiques, l’optimisation est une notion très précise. Optimiser signifie trouver les valeurs maximale et minimale que peut atteindre une fonction.</p>
-
-<blockquote class="prompt-info">
-  <p>Et pourquoi un maximum ou un minimum ?</p>
-</blockquote>
-
-<p>Il n’est pas forcément évident aux premiers abords qu’un problème d’optimisation est un problème de recherche de maximum ou de minimum. Cependant, en y réfléchissant, derrière tout problème d’optimisation se cache un min ou un max. Par exemple, dans certaines situations, on veut optimiser le temps mis pour faire une action. Cela veut alors dire prendre le moins de temps possible. On cherche bien un minimum. Dans d’autres contextes, on peut aussi chercher à optimiser un gain. On cherche alors à obtenir le gain maximum.</p>
-
-<p>Donc si l’on veut traduire un problème d’optimisation naturel en problème mathématique, cela consiste donc à trouver une fonction qui exprime le mieux possible la quantité à optimiser (que ça soit du temps, de l’argent, etc…)</p>
-
-<p>Passer d’un problème réel à un problème mathématique, c’est l’action de modéliser. Une des première chose à faire pour modéliser un problème, c’est identifier les variables. Les variables sont impliquées de le calcul de la fonction à optimiser. Elles correspondent pour le problème réel aux différentes décisions que l’on peut prendre (par exemple, “combien d’unité produire ?” ou encore “doit-on activer cette option ?”).</p>
-
-<p>Une autre chose que l’on doit prendre en compte lorsque l’on optimise est la présence de contraintes. En effet, les variables de notre fonction (que l’on appelle variables de décision) ne peuvent pas prendre n’importe quelles valeurs ! Par exemple, si nos variables concernent un nombre d’unité à produire, on ne peut pas évidemment pas produire en quantité infinie. Les ressources disponibles entre donc en compte dans ce type de problème. Par ailleurs, les contraintes apparaissent parfois de manière plus subtile.</p>
-
-<blockquote class="prompt-info">
-  <p>Mais alors, pourquoi parler d’informatique ?</p>
-</blockquote>
-
-<p>Comme on l’a vu précédemment, les mathématiques nous offrent des outils puissants pour traiter les problèmes d’optimisation. En effet, une fois que le problème est modélisé, on peut appliquer des théorèmes pour calculer le maximum ou le minimum de fonctions.</p>
-
-<p>Cependant, les problèmes que l’on veut résoudre peuvent parfois comporter des milliers de variables. On ne peut donc plus espérer résoudre ces problèmes à la main. C’est pourquoi il a fallut mettre en place des algorithmes capable de calculer ce genre de chose le plus rapidement possible.</p>
-
-<p>Implémenter des méthodes de calculs automatiques ne suffit toutefois pas à résoudre tous les problèmes. Certains problèmes sont en effet par nature très difficiles à résoudre et les algorithmes généraux prennent énormément de temps. Les outils mathématiques sont limités pour ces problèmes. Il est donc nécessaire de les étudier en profondeur afin de trouver des techniques algorithmiques adaptées pour la résolution.</p>
-
-<blockquote class="prompt-info">
-  <p>Une des caractéristiques du domaine est qu’il n’existe pas de méthode générale efficace pour traiter n’importe quel problème.</p>
-</blockquote>
-
-<h2 id="la-programmation-linéaire-dans-tout-ça">La programmation linéaire dans tout ça</h2>
-
-<p>La programmation linéaire désigne un ensemble de règles que l’on se donne pour représenter sous forme mathématique un problème réel. Le but du jeu est de représenter notre problème concret sous forme d’une fonction mathématique et d’un ensemble de contraintes, en respectant ces règles.</p>
-
-<p>En programmation linéaire, on considère donc une fonction à optimiser, sous plusieurs contrainte. La limite imposée est le fait que la fonction et les contraintes doivent être linéaires. Cela signifie que, dans l’expression de la fonction et des contraintes a la forme d’une somme de variables multipliées par de coefficients. On ne peut ainsi pas multiplier deux variables, diviser deux variables, appliquer une racine, etc…</p>
-
-<p>Ces limitations peuvent paraître très contraignantes. Cependant, un très grand nombre de problèmes réels peuvent se modéliser de cette façon. Parfois, il faut avoir recours à certains tricks mais ceux-ci sont facilement intégrés par expérience. Il faut enfin retenir que si l’on se contraint, c’est parceque les méthodes algorithmiques disponibles pour ces problèmes sont très efficaces. Il vaut donc mieux se creuser la tête et trouver une bonne modélisation en programmation linéaire plutôt que d’avoir à résoudre un problème non linéaire.</p>
-
-<h2 id="un-premier-exemple-de-modélisation">Un premier exemple de modélisation</h2>
-
-<p>Prenons un premier exemple de modélisation.</p>
-
-<p><img src="/assets/cookies.jpg" alt="Des cookies !" /></p>
-
-<p>Partons d’une situation simple : nous allons recevoir des invités et nous voulons leur préparer deux types de petits biscuits. Les deux demandent les mêmes ingrédients : de la farine et du sucre.</p>
-
-<p>Mais voilà, nous disposons de ces deux ingrédients en quantité limité malheureusement. De plus, les convives à qui sont destinés ces biscuits n’ont pas tous les mêmes goûts. Ainsi, il ne faut pas produire les deux types de biscuits en même quantité. La question est alors : combien de biscuit de chaque type produire ? Dans l’exemple présenté, les données sont issues de recettes respectives de madeleines et de biscuits à la cannelle.</p>
-
-<h3 id="les-variables-du-problème">Les variables du problème</h3>
-
-<p>La première étape de la modélisation consiste à trouver les variables du problème. Ici, les variables sont faciles à trouver. La question concerne directement le nombre de biscuit à produire. On définit donc deux variables : \(x_1\) représentant le nombre de biscuit de type 1 que l’on veut créer et \(x_2\) représentant le nombre de biscuit de type 2.</p>
-
-<h3 id="les-contraintes">Les contraintes</h3>
-
-<p>Une fois les variables trouvées, on peut regarder les contraintes. Pour ce problème, il y a deux contraintes liées aux ressources disponible (farine et sucre), une contrainte concernant les convives et enfin des contraintes plus générales, et enfin des contraintes structurelles.</p>
-
-<p>Tout d’abord, on peut définir la contrainte pour la farine. On suppose que l’on dispose d’un kilogramme de farine. La recette nous indique également qu’il faut 4.2 g de farine pour un biscuit de type 1 et 15 g de farine pour les biscuits de type 2. On en déduit donc la contrainte \(4.2 x_1 + 15 x_2 \leq 1000\).</p>
-
-<p>On procède de manière similaire pour le sucre. On obtient : \(5.8 x_1 + 7.5 x_2 \leq 1000\).</p>
-
-<p>La contrainte suivante traduit une préférence des convives. On suppose qu’un quart de invités n’aime pas les biscuits du type 1. Par ailleurs, il n’y a pas de préférence pour ceux du type 2. On en déduit : \(x_1 \leq \frac{1}{4} (x_1 + x_2)\)</p>
-
-<p>Enfin, on ne peut pas produire un nombre négatif de biscuit. On a donc \(x_1, x_2 \geq 0\). De plus, on ne peut pas produire de demi-biscuit. Heureusement, en programmation linéaire, nous pouvons résoudre des problèmes avec des variables dites entières. On a donc comme dernière contrainte : \(x_1, x_2 \in \mathbb{Z}\).</p>
-
-<h3 id="la-fonction-objectif">La fonction objectif</h3>
-
-<p>Il ne reste plus qu’à écrire la fonction à optimiser. Ici, on veut maximiser la nombre de gâteau produit. La fonction est donc \(z = x_1 + x_2\).</p>
-
-<p>On peut donc récapituler le modèle de notre problème :</p>
-
-\[\text{max} \,z = x_{1} + x_{2}\\
-	 \begin{align*}
-		s.c.\quad 4.2 x_1 + 15 x_2 &amp;\leq 1000 \\
-			5.8 x_1 + 7.5 x_2 &amp;\leq 1000 \\
-			x_1 &amp;\leq \frac{1}{4} (x_1 + x_2) \\
-			x_1, x_2 &amp;\in \mathbb{N}
-	\end{align*}\]
-
-<p>Je passe les détails de la résolution de ce problème car cela nécessiterait plusieurs articles. Elle est néanmoins basée sur la méthode du branch and bound et l’algorithme du simplexe. Après résolution, on trouve \(x_1 = 20\) et \(x_2 = 61\). Nous allons donc pouvoir confectionner 81 gâteaux pour nos invités.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>La programmation linéaire est donc un outil très intéressant pour l’optimisation. Malheureusement, ce n’est pas un outil infaillible. Même si les algorithmes utilisés pour résoudre ces problèmes sont très efficaces en variable continues (c’est à dire lorsque les variables ne sont pas forcément des entiers), ce n’est pas la même chose pour les variables entières ou binaires. L’idée est alors de profiter de toutes les spécificités du problème que l’on traite afin d’en tirer avantage et de proposer des méthodes de résolution dédiées. Parfois, on décide carrément de quitter le formalisme de la programmation linéaire et de traiter le problème avec un autre outil mieux adapté (ex : les graphes). Les problèmes d’optimisation sont donc loin d’être parfaitement maîtrisés et cet article n’effleure que très légèrement toutes les choses que l’on peut faire en optimisation.</p>
-
-<h2 id="crédit">Crédit</h2>
-
-<p>photo credit: <a href="http://www.flickr.com/photos/7702423@N04/26056556830">297/365/2853 (April 3, 2016) - Chocolate Coconut Cookies</a> via <a href="http://photopin.com">photopin</a> <a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">(license)</a></p>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><summary type="html"><![CDATA[Pour un premier article, j’ai choisi de parler d’un sujet que je vais avoir probablement l’occasion d’évoquer à nouveau par la suite : la programmation linéaire. Pour commencer, clarifions un peu les termes. Le mot programmation ne signifie pas ici écrire des lignes de code, contrairement à ce que l’on pourrait penser. Programmer veut ici dire planifier. La programmation linéaire (ou encore optimisation linéaire) regroupe un ensemble de problèmes d’optimisation, et des méthodes efficaces pour les traiter.]]></summary></entry></feed>
+</table>]]></content><author><name>smbct</name></author><category term="vulgarisation" /><category term="IA" /><category term="optimisation" /><category term="IA" /><category term="jeux" /><summary type="html"><![CDATA[La programmation linéaire est un formalisme permettant de traiter des problèmes très larges. C’est ce que je voudrais montrer aujourd’hui en donnant la modélisation sous forme d’un programme linéaire de la résolution d’un sudoku. La modélisation va donc être moins évidente qu’avec l’exemple présenté dans l’article sur la programmation linéaire.]]></summary></entry></feed>
