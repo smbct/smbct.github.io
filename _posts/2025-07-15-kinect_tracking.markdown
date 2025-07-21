@@ -9,7 +9,7 @@ lang: en
 back_page: /index.html
 ---
 
-**Full body tracking**, or pose tracking, skeleton 💀 tracking, etc.. is a hardware 📹 and software technology used for producing a virtual three dimensional representation of a person's body in real time 🕺.
+**Full body tracking**, or pose tracking, skeleton tracking, etc.. is a hardware 📷 and software technology used for producing a virtual three dimensional representation of a person's body in real time 🕺.
 This technology recently gained my interest for a video game modding project 🎮. 
 However, capturing the body movements in real time is not an easy task and a combination of specialized hardware 📷 and software 💾 is necessary to achieve it.
 
@@ -23,13 +23,13 @@ However, capturing the body movements in real time is not an easy task and a com
 As I was looking for a cheap and reliable solution, I spent some time reviewing and compare existing methods 👀.
 In this blog post 📃, I will expose multiple options that I found to solve this problem.
 I will particularly focus on the **Kinect** 🎥, a gaming device developed by [Microsoft](https://fr.wikipedia.org/wiki/Microsoft).
-After reviewing multiple aspects of this device, we will see how to setup a working environment on Linux to develop for the Kinect and actually perform 3d tracking.
+We will explore what the device is actually capable of and we will see how to setup a working environment on Linux to develop for the Kinect and actually perform 3D tracking.
 This topic will also give the opportunity to argument about open source, about the usability of consumer products and obsolescence 💬.
 
 ## Full body tracking starter guide 
 
 
-There exists several technologies capable of performing body tracking:
+There exist several technologies capable of performing body tracking:
 
 - A first solution can be found around **V**irtual **R**eality devices.
 Some allow for [full body tracking](https://pimax.com/blogs/blogs/pose-tracking-methods-outside-in-vs-inside-out-tracking-in-vr) but these devices remain [particularly expensive](https://www.vive.com/fr/product/).
@@ -53,10 +53,10 @@ Several devices [exist](https://www.intelrealsense.com/depth-camera-d435/) but o
 
 #### Looking for affordable options 💰
 
-The advent of **VR** technologies has further encouraged the development of cheap and/or open source tracking solutions, which brought us multiple alternatives to expensive options.
+The advent of **VR** technologies has further encouraged the development of cheap and/or open source tracking solutions.
 [Various solutions](https://vrheaven.io/full-body-tracking-quest/) have been imagined such as wearing sensors/markers or relying on webcams.
 For instance the [kick-started](https://www.crowdsupply.com/slimevr/slimevr-full-body-tracker) open source [SlimeVR](https://slimevr.dev/) device is a camera-free solution based on a set of wearable sensors 👖.
-Another example is actually the **Kinect**, as an old consumer device used by several [open source solutions](https://kinectvr.com/).
+Another example is actually the **Kinect**, considered as an old consumer device used by several [open source solutions](https://kinectvr.com/).
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
 <img src="https://docs.slimevr.dev/assets/img/slimeVRTrackers.jpg" alt="SlimeVR wearable devices.">
@@ -66,7 +66,7 @@ Another example is actually the **Kinect**, as an old consumer device used by se
 </div>
 
 
-At the end, the **Kinect** appears to me as one of the most convenient and affordable option.
+In the end, the **Kinect** appears to me as one of the most convenient and affordable option.
 Indeed, the device can still be found today and have become particularly cheap.
 However, a condition for the device to be usable is the availability of **drivers** and **libraries**.
 This part is not easy as hardware and software is evolving fast and such devices, produced by profit companies, are mostly closed source and even safe-guarded 🔒!
@@ -75,7 +75,7 @@ This part is not easy as hardware and software is evolving fast and such devices
 ## But **what** is the Kinect ? 📽️
 
 The [**Kinect**](https://en.wikipedia.org/wiki/Kinect) is a 15 years old 👴 device developed by [Microsoft](https://fr.wikipedia.org/wiki/Microsoft) as a motion game controller for its Xbox 360 console.
-More precisely, the Kinect enables the capture of a depth buffer and reconstruction of 3d skeleton of a player, allowing for precise interactions in virtual applications such as [video games](https://fr.wikipedia.org/wiki/Kinect_Sports).
+More precisely, the Kinect enables the capture of a depth buffer and reconstruction of 3D skeleton of a player, allowing for precise interactions in virtual applications such as [video games](https://fr.wikipedia.org/wiki/Kinect_Sports).
 
 The Kinect device was first presented at the [E3 2009](https://archive.org/details/microsoft-e3-2009) conference (as *Project Natal*) as a motion controller [in response to](https://en.wikipedia.org/wiki/Kinect) Nintendo's Wii Remote and Sony's PlayStation Move.
 The device was presented as a webcam and was not intended to be used in combination with another physical device 🎮.
@@ -88,7 +88,7 @@ It has a microphone, a set of motors and 2 cameras: a RGB camera and an InfraRed
 </div>
 </div>
 
-One of the main aspect of the device is of course its capability to perform 3d pose tracking in realtime, that is to recover a coarse 3d skeleton of people's body in the camera field.
+One of the main aspect of the device is of course its capability to perform 3D pose tracking in realtime, that is to recover a coarse 3D skeleton of people's body in the camera field.
 This feature is of interest in the gaming industry 🎲 but also in other areas such as healthcare 🧑‍⚕️, robotics 🤖, etc..
 
 
@@ -150,14 +150,21 @@ These actions have probably greatly contributed to increasing the usability of t
 ## Looking for pose tracking libraries for the Kinect
 
 The **Kinect**'s hardware itself is not capable of directly providing a full body skeleton that can be exploited in applications.
-It is instead in charge of re-constructing and sending the monochrome depth image 🖼️ from its [structured light](https://en.wikipedia.org/wiki/Structured_light) IR sensor/projector to a computer (which is already a substantial!).
+It is instead in charge of re-constructing and sending the monochrome depth image 🖼️ from its [structured light](https://en.wikipedia.org/wiki/Structured_light) IR sensor/projector to a computer (which is already substantial!).
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;" markdown="1">
+![An example of depth image captured by the Kinect.](https://learn.microsoft.com/en-us/archive/msdn-magazine/2012/november/images/jj851072.holmquest_fig03(en-us,msdn.10).jpg)
+<div class="custom_caption" markdown="1">
+\> An example of depth image captured by the Kinect. Image from [Leland Holmquest](https://learn.microsoft.com/en-us/archive/msdn-magazine/2012/november/kinect-3d-sight-with-kinect).
+</div>
+</div>
 
 The skeleton reconstruction is rather performed on the software side 🖥️.
 Let's face it, this is definitely not an easy problem!
 Up to these days, only few libraries/softwares are available to perform this task.
-Paradoxaly, it seems to me that there have been some incentives to make this as open as possible since the Kinect remains one of the most affordable option here, and considering its various fields of application 🤔.
 I was surprised to find only few notes on the skeleton tracking problem in the open drivers documentation. 
-This is why after spending some time digging into the subject, I will review here what I could learn 🔎. 
+In my opinion, the Kinect becomes less interesting without this feature and I am surprised that we did not see additional efforts in releasing an open source solution 🤔.
+After spending some time digging into the subject, I will review here what I could actually find 🔎. 
 
 
 
@@ -337,7 +344,7 @@ The code source has been made simple to **build upon it**.
 
 The first example, **SimpleSkeletonRevisited**, is a console-only program that prints skeleton information in the terminal.
 A **calibration** phase is necessary for OpenNI to compute the skeleton joints: this can be performed simply as standing in front of the Kinect at a reasonable distance.
-After that, the program should print the 3d position of one skeleton joint:
+After that, the program should print the 3D position of one skeleton joint:
 
 <div class="code_frame"> bash</div>
 {% highlight bash linenos %}
@@ -347,7 +354,7 @@ make SimpleSkeletonRevisited
 ./SimpleSkeletonRevisited
 {% endhighlight %}
 
-The second example, **SkeletonViewer** is a graphical program that displays a 3d scene with [openGL](https://www.opengl.org/) and the [freeglut](https://freeglut.sourceforge.net/docs/api.php) library.
+The second example, **SkeletonViewer** is a graphical program that displays a 3D scene with [openGL](https://www.opengl.org/) and the [freeglut](https://freeglut.sourceforge.net/docs/api.php) library.
 
 <div class="code_frame"> bash</div>
 {% highlight bash linenos %}
@@ -361,7 +368,7 @@ make SimpleSkeletonRevisited
 ![The SkeletonViewer program](https://github.com/smbct/KinectOpenNISetup/blob/main/SkeletonViewer.png?raw=true)
 </div>
 <div class="custom_caption" markdown="1">
-\> The small program SkeletonViewer that I wrote for visualizing the skeleton in 3d.
+\> The small program SkeletonViewer that I wrote for visualizing the skeleton in 3D.
 </div>
 
 More examples are available in the OpenNI directory.
@@ -424,7 +431,8 @@ https://yannickloriot.com/2011/03/) and [here](https://lh1075.blogspot.com/2016/
 ## Concluding thoughts
 
 I hope that this post gives an interesting overview of what the Kinect is capable of and how to use it in some projects.
-A lot of elements were not covered here such as variations of the open source drivers for different platforms (for instance I found a version of the [avin2](https://github.com/avin2/SensorKinect) driver specialized [for Debian](https://github.com/jspricke/debian-openni-sensor-avin2-sensorkinect)), about the Kinect audio system 🎤 that was apparently also [reverse engineered](https://salsa.debian.org/debian/kinect-audio-setup), the Kinect 2 drivers, etc...
+A lot of elements were not covered here such as [hardware modes for the Kinect](https://medium.com/robotics-weekends/how-to-turn-old-kinect-into-a-compact-usb-powered-rgbd-sensor-f23d58e10eb0
+), variations of the open source drivers for different platforms (for instance I found a version of the [avin2](https://github.com/avin2/SensorKinect) driver specialized [for Debian](https://github.com/jspricke/debian-openni-sensor-avin2-sensorkinect)), about the Kinect audio system 🎤 that was apparently also [reverse engineered](https://salsa.debian.org/debian/kinect-audio-setup), the Kinect 2 drivers, etc...
 There is definitely more to be explored.
 
 I do have several ideas yet for further improving the usability, performance and openness of the Kinect software ecosystem.
