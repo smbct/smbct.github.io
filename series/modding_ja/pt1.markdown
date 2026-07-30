@@ -154,3 +154,9 @@ My professional experience made me realize that if I wanted to make progress, I 
 So I decided to create the series to document my progresses 🚧. My goal is to show technical details about the development but also give hints for not being stuck in such projects. The pace is  low but I have a lot of ideas for the following such as integrating the Joy-Con, using gesture for the force and so on... 🚀 Until the next post, the current version of my code is already [hosted on github](https://github.com/smbct/jamod)!
 
 
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
+![Visual debugging and skeleton tracking in Jedi Academy.]({{ site.baseurl }}/assets/ja_mod/preamble.png)
+<div class="custom_caption" markdown="1">
+\> Visual debugging and skeleton tracking in Jedi Academy.
+</div>
+</div>
