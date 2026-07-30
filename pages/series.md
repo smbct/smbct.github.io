@@ -13,6 +13,14 @@ test
 </a>
 </h2>
 
+<div class="series" href='/series/modding_ja/headline' onclick="location.href='/series/modding_ja/headline';">
+<center>
+<h2>Modding Jedi Academy with pose tracking</h2>
+</center>
+<p>
+A journey into creating a pose tracking mod for the Jedi Academy game.
+</p>
+</div>
 
 <div class="series" href='/series/x86_64_assembly/headline' onclick="location.href='/series/x86_64_assembly/headline';">
 <center>
