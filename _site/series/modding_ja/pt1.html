@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Modding Jedi Academy with the Kinect&#58 Origins of the project &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="series_article">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  <a id="subscribe-link" class="icon" title="Subscribe" aria-label="Subscribe"
+    href="/feed.xml">
+    <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+
+  </a>
+
+  <a id="mastodon-link" class="icon" title="Mastodon" aria-label="Mastodon"
+    href="https://social.linux.pizza/@smbct">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+  <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+</svg>
+
+  </a>
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="22" width="22"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+
+
+
+<!-- index pages are treated separately to handle pagination -->
+
+
+<!-- for other pages, the link to the translated page is in a file -->
+
+
+<!-- When one of the link is not set, the corresponding flag cannot be clicked -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     
+     >
+🇬🇧 <div></div>
+</a>
+<a id="icon_flag"
+  class="icon_flag"
+  
+>
+🇫🇷 <div></div>
+</a>
+
+
+
+</nav>
+
+  <p>
+  &copy; 2026.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+
+  <div id="credit">
+  Made with <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> and <a href="https://giscus.app">giscus</a>.
+  Hosted by <a href="https://pages.github.com">github</a>.
+  </div>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+  <h1 class="post-title">Modding Jedi Academy with the Kinect&#58 Origins of the project</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      25 Jul 2026
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    17 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        modding
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p><a href="https://en.wikipedia.org/wiki/Star_Wars_Jedi_Knight:_Jedi_Academy">Jedi Knight 2: Jedi Academy</a> is a Star Wars game released in 2003 by <a href="https://en.wikipedia.org/wiki/Star_Wars_Jedi_Knight:_Jedi_Academy">Raven Software</a>. I am currently modding this game to incorporate <a href="https://en.wikipedia.org/wiki/3D_tracking">pose tracking</a> capabilities with the Wiimote (or Joy-Con) and the Kinect. For this reason, I am starting this series as a dev blog of the mod 🗒️. In this post, I will explain the origin of the project and why I consider it as still relevant as of today in 2026.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="https://media.moddb.com/cache/images/games/1/1/71/thumb_620x2000/Star-Wars-Jedi-Acadamy-9.jpg" alt="The Jedi Academy game." /></p>
+  <div class="custom_caption">
+    <p>&gt; The Jedi Academy game. Image from <a href="https://www.moddb.com/games/star-wars-jedi-academy">moddb</a>.</p>
+  </div>
+</div>
+
+<h1 id="preamble">Preamble</h1>
+
+<p>The year is 2006. Nintendo releases its revolutionary game console, the <a href="https://en.wikipedia.org/wiki/Wii">Wii</a>, alongside the <a href="https://en.wikipedia.org/wiki/Xbox_360">Microsoft Xbox 360</a> and the <a href="https://en.wikipedia.org/wiki/PlayStation_3">Playstation 3</a>. At the center of its gameplay, the Wiimote (or Wii remote controller) invites the player to use their gesture in addition to the buttons to control video games 🕹️.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Nintendo-Wii-Remote-wNunchuck.jpg/1920px-Nintendo-Wii-Remote-wNunchuck.jpg" alt="The wiimote with the nunckuck extension." /></p>
+  <div class="custom_caption">
+    <p>&gt; The wiimote with the nunckuck extension. Image from <a href="https://en.wikipedia.org/wiki/Wii_Remote">wikipedia</a>.</p>
+  </div>
+</div>
+
+<p>The Wiimote may actually not be seen as an actual revolution since pointing devices 🫵 were already used in the so called <a href="https://en.wikipedia.org/wiki/Light-gun_shooter">light-gun shooter games</a> long before its release. The motion sensing features of the Wiimote however did seem to be a renewal in the game industry at that time. Its success was followed by some efforts from Microsoft and PlayStation to provide a similar experience respectively through their <a href="https://en.wikipedia.org/wiki/Kinect">Kinect</a> and <a href="https://en.wikipedia.org/wiki/PlayStation_Move">PlayStation Move</a>.</p>
+
+<p>Gesture recognition in video games seems to remain popular in 2026 as some controllers keep integrating motion sensing devices. For instance, the <a href="https://en.wikipedia.org/wiki/Joy-Con">Joy-Con</a> accompanying the <a href="https://en.wikipedia.org/wiki/Nintendo_Switch">Nintendo Switch</a> presents capabilities that are similar to the Wiimote and PlayStation’s <a href="https://en.wikipedia.org/wiki/DualShock#DualSense">Dual Sense</a> controller also integrates several motion sensors. As I mentioned in my <a href="/blog/kinect_tracking/">Kinect</a> post, modern <a href="https://en.wikipedia.org/wiki/Virtual_reality">Virtual Reality</a> devices are also equipped with several sensors for pose tracking.</p>
+
+<p>When the Wii was released, I was as a young nerd inevitably fascinated by the technology 🤩. I was actually rather interested in understanding the technology than I was in playing the associated video games. It became particularly interesting to me when I discovered on the web that the Wiimote could be used on a computer 🖥️!</p>
+
+<h1 id="the-wiimote-on-the-pc">The Wiimote on the pc</h1>
+
+<p>Instead of simply owning a Wii console at that time, I would only by a Wiimote for experimenting on a pc and study how it works ⚙️. Connecting the Wiimote is <a href="https://www.digitalcitizen.life/how-to-connect-a-wii-remote-to-a-pc/">fairly simple</a> as it only requires a <a href="https://en.wikipedia.org/wiki/Bluetooth">Bluetooth</a> dongle 🛜. The level 0 of using the Wiimote then consisted of a simple mapping between the buttons of the remote and the keyboard ⌨️. This could be performed with softwares such as <a href="https://vrarwiki.com/wiki/GlovePIE">GlovePie</a> and <a href="https://www.julianloehr.de/educational-work/hid-wiimote/">HID Wiimote</a> so that the remote could be used as a controller for pc games or even as a mouse pointer. A mapping was also possible between the Wiimote’ accelerometers and standard joystick axes 🕹️, enabling the use of the motion sensing capabilities in games supporting joysticks (as a wheel for racing games for instance 🏎️).</p>
+
+<p>Such mapping between the Wiimote and conventional game inputs was good enough for gesture in some applications such as racing games but the integration of the Wiimote remained limited as pc games were not prepared for it 👾. As a cheap device compared to profesionnal equipment, the Wiimote was however a great tool for research and experiments 🧑‍🔬 as it has been demonstrated by <a href="http://johnnylee.net/projects/wii/">several projects</a> from Johnny Chung Lee and by academics works such as the <a href="https://www.nime.org/proceedings/2010/nime2010_170.pdf">Linux Laptop Orchestra</a>.</p>
+
+<p>Coming back to video games, things become especially interesting if we focus on the world of modding. <a href="https://en.wikipedia.org/wiki/Video_game_modding">Videogame modding</a> consists in modyfying an existing game to add new features such as maps, levels and so on.. In 2007, a developer named PJG2005 released a <a href="https://www.moddb.com/mods/half-life-2-wiimote-mod">mod</a> for the game <a href="https://en.wikipedia.org/wiki/Half-Life_2">Half-Life 2</a> that integrated the Wiimote and the Nunchuck (its main extension) in a native manner.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="https://media.moddb.com/cache/images/mods/1/9/8775/thumb_620x2000/57525.jpg" alt="The configuration menus for the Wiimote in the mod in Half-Life 2." /></p>
+  <div class="custom_caption">
+    <p>&gt; The configuration menus for the Wiimote in the mod in Half-Life 2. Image from <a href="https://www.moddb.com/mods/half-life-2-wiimote-mod">moddb</a>.</p>
+  </div>
+</div>
+
+<p>Although the mod was only released in beta version, it really provided the true experience of a <a href="https://en.wikipedia.org/wiki/First-person_shooter">First Person Shooter</a> game on the Wii. I was fascinated when I discovered this development. The old video bellow (in french) gives a good overview of the various features in the mod.</p>
+
+<div style="padding-bottom: 56.25%; position: relative;"><iframe style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: 0px;" width="100%" height="100%" src="https://www.dailymotion.com/embed/video/x1nx0g" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" title="Media Embed"><small>Propulsé par <a href="https://embed.tube/fr/embed-code-generator/dailymotion/">embed dailymotion</a></small></iframe></div>
+
+<p>This very video actually put me on the track of this project. I was impressed by the responsiveness of the Wiimote and its seamless integration into the original game ✨.</p>
+
+<h1 id="star-wars-games-with-pose-tracking">Star Wars games with pose tracking</h1>
+
+<p>Like many Star Wars enthusiastic, I was dreaming of the perfect Star Wars gaming experience thanks to the Wiimote. Obviously, the first thing that comes in mind is the possibility to perform lightsaber combats from real gestures 🤺! Wii players became excited when <a href="https://en.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_%E2%80%93_Lightsaber_Duels">Star Wars: The Clone Wars – Lightsaber Duels</a> was announced in 2008 as they could hope for the Wii <a href="https://www.slashfilm.com/499634/finally-a-lightsaber-wii-video-game/">lightsaber experience</a>. Unfortunately, the game simply <a href="https://www.ign.com/articles/2008/11/13/star-wars-the-clone-wars-lightsaber-duels-review">did not meet the players expectations</a> and it was not well received ❌. The developers themselves announced that this was not going to be a real swordplay game but the marketing inevitably made its way into the players’ minds…</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="https://www.nintendo.com/eu/media/images/migration/games_7/screenshots/wii_13/starwarsclonewars/TethBridge_OWK_v_AV6.jpg" alt="Star Wars: The Clone Wars – Lightsaber Duels was received as a missed opportunity from the fans." /></p>
+  <div class="custom_caption">
+    <p>&gt; Star Wars: The Clone Wars – Lightsaber Duels was received as a missed opportunity from the fans. Image from <a href="https://www.nintendo.com/en-gb/Games/Wii/Star-Wars-The-Clone-Wars-Lightsaber-Duels-283267.html#Overview">nintendo</a>.</p>
+  </div>
+</div>
+
+<p><a href="https://en.wikipedia.org/wiki/Star_Wars:_The_Force_Unleashed">The Force Unleashed</a> and <a href="https://en.wikipedia.org/wiki/Star_Wars:_The_Clone_Wars_%E2%80%93_Republic_Heroes">The Clone Wars: Republic Heroes</a> games were also good candidates for the Wiimote but its technology was simply not sufficient for providing the experience players were hoping for 🎮 (that I would also discover by myself at some point 😅).</p>
+
+<h2 id="and-outside-of-the-wii-world-">And outside of the Wii world ?</h2>
+
+<p>As I mentioned earlier in this post, Microsoft released the <strong>Kinect</strong> device in response to Nintendo for providing a similar experience in Xbox games. The Kinect was also a good opportunity for Star Wars games. <a href="https://en.wikipedia.org/wiki/Kinect_Star_Wars">Kinect Star Wars</a> released in 2012 once again provided hope to the players but the result <a href="https://www.ign.com/articles/2012/04/03/kinect-star-wars-review">was still deceiving</a> 🤷. Pose tracking was however <a href="https://www.youtube.com/watch?v=w7tDxiZCfwE">better achieved</a> with the Kinect than it was with the Wiimote for reasons that I will detail later in this post. At the end, something was still missing 🗋.</p>
+
+<p>What about now in <strong>2026</strong> ? To my knowledge, there has not been any additional Star Wars game on a console that utilizes motion tracking. However, with the advent of Virtual Reality Devices for gaming in the 2015’s, there has been a revival of the Star Wars pose tracking gaming enthusiasm. A <a href="https://starwars.fandom.com/wiki/Category:Virtual_reality_games">small list</a> of VR games is available but they seem to be only experimental demos or minigames. They still made a <a href="https://gamesbeat.com/virtual-reality-has-finally-let-me-live-my-star-wars-dream/">good impression</a> around the gaming community</p>
+
+<p>A more concrete line of action has actually been conducted from the modding community. Contributions have been made in two different directions 🔁. Some mods would turn an existing VR game into a Star Wars game. This has been done on <a href="https://en.wikipedia.org/wiki/Blade_%26_Sorcery">Blade &amp; Sorcery</a> for creating <a href="https://www.nexusmods.com/bladeandsorcery/mods/528">The Outer Rim</a> mod and in <a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls_V:_Skyrim">Skyrim Special Edition</a> with the <a href="https://www.nexusmods.com/skyrimspecialedition/mods/88569">Star Wars Redux VR</a> mod that recreates the <a href="https://en.wikipedia.org/wiki/Star_Wars:_Battlefront">Battlefront</a> experience in Virtual Reality.</p>
+
+<p>The other way around, <em>i.e.</em>, turning an existing star wars game into a VR one, appears more interesting to me as it does not require to re-create the entire universe from scratch 🖼️. This has been achieved for instance on the game <a href="https://en.wikipedia.org/wiki/Star_Wars_Jedi:_Fallen_Order">Jedi: fallen order</a>. The mod from pande4360 is named <a href="https://www.nexusmods.com/starwarsjedifallenorder/mods/828">UEVR Profile 6DOF Motion Combat</a> and seem to provide a native and complete VR experience of the original game 👍. After digging a little bit to understand how it was done, I found that Jedi: fallen order was actually made in the game engine <a href="https://en.wikipedia.org/wiki/Unreal_Engine">Unreal Engine</a> and that the mod was made using the <a href="https://github.com/praydog/UEVR">UEVR framework</a>, a general toolkit for converting games based on this engine into VR.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="https://staticdelivery.nexusmods.com/mods/3061/images/828/828-1754351439-1082356261.png" alt="The Jedi: fallen order VR mod" /></p>
+  <div class="custom_caption">
+    <p>&gt; The Jedi: fallen order VR mod. Image from <a href="https://www.nexusmods.com/starwarsjedifallenorder/mods/828">nexusmods</a>.</p>
+  </div>
+</div>
+
+<p>And now that becomes interesting. Another game that has been modded for VR is actually Jedi Academy 😲! Along with Jedi Knight II, its predecessor, <a href="https://www.teambeefvr.com/">Team Beef</a> released a <a href="https://sidequestvr.com/app/15472/jk-xr-jedi-knight-in-vr-meta-quest">complete VR mod</a> (rather called a VR port) that is also <a href="https://github.com/Team-Beef-Studios/JKXR">open source</a>! The team actually released this type of port for dozens of games. However, as close as it may be to my original idea 💡, this did not stop me from experimenting with my own vision for reasons I will also explain. Lastly, although this is not a mod I wanted to mention this ongoing <a href="https://x.com/vr_jedi">fan remake</a> of Jedi Knight II into a modern VR game. The current result is pretty nice but I am still believing that a complete remake is not reasonable considering the amount of work that is required here 🫠.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <iframe width="600" height="461" src="https://www.youtube.com/embed/cvpl9I3cDD0">
+</iframe>
+  <div style="margin-top:8px;">
+<div class="custom_caption">
+      <p>&gt; The Jedi Academy VR mod almost achieves what I had in mind.</p>
+    </div>
+</div>
+</div>
+
+<p>To sum up, the VR modding/developing community has been extremely productive and creative in the recent years. Even Half-Life 2 got his own <a href="https://halflife2vr.com/">VR port</a> for an experience that may not be far from the 2007 Wiimote mod. Drifting off-topic 💨 I must mention here the <a href="https://crementif.github.io/BotW-BetterVR/">VR mod</a> for <a href="https://en.wikipedia.org/wiki/The_Legend_of_Zelda:_Breath_of_the_Wild">Zelda Breath Of The Wild</a> that I found while writing this post. The mod is <a href="https://github.com/Crementif/BotW-BetterVR">open-source</a> and Crementif, its author, gives a fair amount of details about its creation 📝 (I desperately wanted to learn more about it). The mod is actually built upon the Wii U version of the game on a PC emulator. Among other aspects, it uses a manipulation of the PowerPC machine instructions of the game to <a href="https://en.wikipedia.org/wiki/Hooking">hook</a> C++ functions that alter its behavior and add the VR features. I would not imagine the amount of work and technical skills required to reverse engineer the game engine from assembly instructions. Impressive work 👏!</p>
+
+<h1 id="my-idea-with-jedi-academy">My idea with Jedi Academy</h1>
+
+<p>Now coming back to my project. When I thought about it in the 2010’s, my idea was to create a mod to play Jedia Academy with the Wiimote, similarly to the old Half-Life 2 Wiimote mod experience. Witnessing the unability of editors at that time to release a true lightsaber gaming experience with gesture recognition 🥷, I was willing to solve this disturbance in the force 😎. For me, Jedi Academy is a perfect game for experimenting with this gameplay. I am biased as I was actually playing it but its saber combat already feel smooth and the game in general feel responsive.</p>
+
+<p>Also the game is both a First Person and a Third Person Shooter. I imagined this as integrating a FPS mod similarly to the one of the Half Life 2 mod and adding a Wiimote based lightsaber combat on top of that ⚔️. I started from nothing as I did not know how to program at that time but I was sufficiently motivated to learn along the way 📚. For multiple reasons, this project was unfortunately simply not feasible at this moment 🙅. The idea resurfaced years later for some reasons and I became once again motivated to give it a try. Obviously, I looked at the recent contributions and the existence of a VR mod for Jedi Academy mod did not stop me for two reasons:</p>
+
+<ul>
+  <li>
+    <p>1) VR games are always played as First Person but the Third Person lightsaber view in JA is really part of the game identity in my opinion. Motion tracking in this perspective still appears to me as an innovation.</p>
+  </li>
+  <li>
+    <p>2) Despite the rapid progress of the VR market, the technology is still expensive and not well spread. Apparently, the amount of gamers that use VR <a href="https://www.demandsage.com/virtual-reality-statistics/">is estimated</a> between 5% and 10% only. This is so much an issue that someone even made a <a href="https://www.moddb.com/mods/half-life-alyx-novr">NO-VR mod</a> for the VR-only game <a href="https://en.wikipedia.org/wiki/Half-Life:_Alyx">Half-Life: Alix</a>. Putting aside the headset feature, motion tracking only can rely on cheap and mass consuming devices such as the Wiimote.</p>
+  </li>
+</ul>
+
+<p>This was enough motivation for me to pursue this modding idea lately. I will now further describe what I learned and the choice I made from the old idea many years ago to an actual development more recently 📅.</p>
+
+<h2 id="focus-on-the-wiimote-technology-and-its-limits">Focus on the Wiimote technology and its limits</h2>
+
+<p>Making a motion tracking based gameplay requires to actually understand the sensing technology. The motion recognition capabilites from the Wiimote can be divided into two parts :</p>
+
+<ul>
+  <li>
+    <p>The <strong>pointing</strong> device: the Wiimote has an infrared camera at its front that detects infrared sources such as the one coming from the Wii <a href="https://wiikipedia.fandom.com/wiki/Wii_Sensor_Bar">sensor bar</a> (the name was indeed misleading). This feature allows to use the Wiimote as a pointer. It was notably used in <a href="https://en.wikipedia.org/wiki/The_Conduit">first person</a> <a href="https://en.wikipedia.org/wiki/Metroid_Prime_3:_Corruption">shooter games</a> where the gun freely moves around the screen before turning the camera as it get close to the borders.</p>
+  </li>
+  <li>
+    <p>The <strong>motion</strong> device: the Wiimote is equipped with 3-axis accelerometers. This enables to <strong>partially</strong> detect the orientation of the Wiimote. This feature was used intensively in <a href="https://en.wikipedia.org/wiki/Wii_Sports">Wii Sports</a> in the form of a precise motion tracking (e.g. golf) or a simple gesture/strength detection (e.g. boxing).</p>
+  </li>
+</ul>
+
+<p>The Nunchuck, Wiimote’s main extension, is also equipped with accelerometers, allowing for the same motion recognition capabilities. A strong limitation of theses devices is the lack of sensors for a full tracking of its orientation 📏. More particularly, it was not possible at that time to track the “yaw” angle of the Wiimote because this one is not subject to gravity (see picture bellow).</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 60%;">
+  <p><img src="https://reso-nance.org/wiki/_media/projets/smashword/synopsys-android-virtual-prototyping-part-3-fig-12-.jpg" alt="The &quot;yaw pitch roll&quot; orientation system illustrated on the Wiimote." /></p>
+  <div class="custom_caption">
+    <p>&gt; The “yaw pitch roll” orientation system illustrated on the Wiimote. Image from <a href="https://reso-nance.org/wiki/projets/smashwords/dev/accueil">reso-nance.org</a>.</p>
+  </div>
+</div>
+
+<p>To counter these limitations, Nintendo released the <a href="https://en.wikipedia.org/wiki/Wii_MotionPlus">Wii Motion Plus</a> in 2009 as a pass-through extension module for the Wiimote 🥳. The Motion Plus contains a 3-axis gyroscope that completes the information from the accelerometers with angular velocities. This <a href="https://www.youtube.com/watch?v=ZirGW_64kzk">video</a> shows how angles can be partially extracted from the accelerometers only and this <a href="https://www.youtube.com/watch?v=V5p23OTXn7E">one</a> illustrates how the combination of accelerometers and gyroscopes achieved “full” orientation tracking (drift remains possible nonetheless).</p>
+
+<h2 id="modding-jedi-academy-then-and-now">Modding Jedi Academy, then and now</h2>
+
+<p>Modding can be a very tough experience depending on the game that is tackled 🤔. It can go from modifying a small 3d model or few lines of scripting code to a whole reverse engineering journey the the depth of the game. Fortunately, an official <a href="https://jkhub.org/files/file/1137-jedi-academy-sdk/?tab=reviews">Software Development Kit (SDK)</a> was released early on for the game. However, the SDK was only released for the multiplayer mode 👥 of the game whereas I was specifically interested in the single-player mod. This original SDK contains a small coding tutorial 📝 to make a simple mod and I remember playing with it a little bit back then 🧙. Not all the code was available at that time so the possible contributions were actually limited 😔. Impressively, someone was however able to implement <a href="https://jkhub.org/forums/topic/4754-physics-for-openjk/">rigid body physics</a> in the game!</p>
+
+<p>What happened then? In 2013, as Disney decided to shut down <a href="https://en.wikipedia.org/wiki/Lucasfilm_Games">LucasArts</a> 📦, Raven Software decided to release <a href="code.idtech.space/raven/jediacademy">the full source code</a> of the game. <a href="https://github.com/JACoders/OpenJK">OpenJK</a> then became the main project that maintains the code. The project is still active in 2026 and a large amount of work has been done to modernize and adapt the game for modern hardware and software!</p>
+
+<p>This changed everything as it became really feasible to make the mod 😃! At that time, I had however lost interest in the project and the idea of catching up barely crossed my mind. I regained some interest in the project much more recently and decided to play with the code again. I had switched to Linux long before so the OpenJK port was the perfect occasion to use the tools that I enjoy most in the project 🧑‍💻. At that period, I made significant progresses in implementing the First Person Shooter gun mod 🔫 with the Wiimote but I did not really keep track of my progress and the code was messy. I started thinking about ligthsaber combats ⚔️ but after a while, I realized that this was simply not possible to exclusively rely on the Wiimote. Indeed, even if the Wiimote is able to output its absolute orientation, other skeleton joints such the elbow and the shoulder 💁 cannot be tracked in any manner 🦾.</p>
+
+<p>After reviewing the options, I ended up thinking that including the Kinect in my project was actually the best I could do, which is the reason I wrote a <a href="(/blog/kinect_tracking/)">blog post</a> about it. Wiimote+Kinect makes a great duo since the Kinect cannot track the wrist and misses some classical gamepad buttons 🎮. I bought a ridiculously cheap unit of the Kinect v1 and I started experimenting with the code. I made good progresses at understanding the skeletal positioning 🩻 in JA code and how to pass joint information from the Kinect to the game 📡. Unfortunately, I had much trouble figuring out how to correctly position the joints and I ended up stuck again.</p>
+
+<h1 id="what-about-now">What about now?</h1>
+
+<p>My professional experience made me realize that if I wanted to make progress, I had to create a way to properly debug my code 🛠️. Sadly, debugging 3D geometry code can be tricky as matrices may not seem very explanatory when printed on the terminal… 🧑‍💻 My idea then was to introduce visual debugging features in the game (<em>i.e.</em>, drawing 3D shapes to understand my calculations), to help me figuring out the correct positioning procedure ℹ️. After that, I was able to correctly position the arm according to the Kinect tracking ✅. There is still much to do however to make it actually playable. For instance, there is no damage when moving the arm at the moment…</p>
+
+<p>So I decided to create the series to document my progresses 🚧. My goal is to show technical details about the development but also give hints for not being stuck in such projects. The pace is  low but I have a lot of ideas for the following such as integrating the Joy-Con, using gesture for the force and so on… 🚀 Until the next post, the current version of my code is already <a href="https://github.com/smbct/jamod">hosted on github</a>!</p>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#programming-modding-video-games-virtual-reality">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">programming modding video-games virtual-reality</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+
+</div>
+
+
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
