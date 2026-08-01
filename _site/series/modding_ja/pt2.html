@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Modding Jedi Academy with the Kinect&#58 Visual debugging 1 &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="series_article">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  <a id="subscribe-link" class="icon" title="Subscribe" aria-label="Subscribe"
+    href="/feed.xml">
+    <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+
+  </a>
+
+  <a id="mastodon-link" class="icon" title="Mastodon" aria-label="Mastodon"
+    href="https://social.linux.pizza/@smbct">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+  <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+</svg>
+
+  </a>
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="22" width="22"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+
+
+
+<!-- index pages are treated separately to handle pagination -->
+
+
+<!-- for other pages, the link to the translated page is in a file -->
+
+
+<!-- When one of the link is not set, the corresponding flag cannot be clicked -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     
+     >
+🇬🇧 <div></div>
+</a>
+<a id="icon_flag"
+  class="icon_flag"
+  
+>
+🇫🇷 <div></div>
+</a>
+
+
+
+</nav>
+
+  <p>
+  &copy; 2026.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+
+  <div id="credit">
+  Made with <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> and <a href="https://giscus.app">giscus</a>.
+  Hosted by <a href="https://pages.github.com">github</a>.
+  </div>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+  <h1 class="post-title">Modding Jedi Academy with the Kinect&#58 Visual debugging 1</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      25 Jul 2026
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    16 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        modding
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p>As announced in the <a href="/series/modding_ja/pt1">preamble</a> of the series, I started fresh on this project with a specific goal in mind: find a way to perform visual debugging 🖼️ in the game from the code source. I will present the coding setup of the mod here and detail how to alter the drawing part of the game.</p>
+
+<p>The first thing to know (from wikipédia for instance) is that Jedi Academy is based on a custom version of the <a href="https://en.wikipedia.org/wiki/Id_Tech_3">id Tech 3</a> game engine. id Tech 3 is actually the game engine behind the game <a href="https://en.wikipedia.org/wiki/Quake_III_Arena">Quake 3</a> 🎮. It has been used repetitively for developing games of the same genre and era such as <a href="https://en.wikipedia.org/wiki/Call_of_Duty_(video_game)">Call of Duty</a> and <a href="https://en.wikipedia.org/wiki/Medal_of_Honor:_Allied_Assault">Medal of Honor</a>.
+The engine is notably known for its very efficient implementation of the <a href="https://en.wikipedia.org/wiki/Fast_inverse_square_root">inverse square root function</a>: <code class="language-plaintext highlighter-rouge">Q_rsqrt(...)</code>, which code can still be found in Jedi Academy source code 😲!</p>
+
+<h1 id="overview-of-the-game-engine-code">Overview of the game engine code</h1>
+
+<p>Although Jedi Academy source code is unsurprisingly not well documented, some useful resources 📚 can still be found about the original id tech 3 sources. Some information can also be found around modding community forums, including on <a href="https://jkhub.org/">Jedi Knight Hub</a>. <a href="https://fabiensanglard.net/quake3/">This page</a> by Fabien Sanglard gives a good overview of the code architecture.</p>
+
+<p><img src="https://fabiensanglard.net/fd_proxy/quake3/q3_workspace_architecture2.png" alt="The id tech 3 engine architecture." /></p>
+<div class="custom_caption">
+  <p>&gt; The id tech 3 game engine architecture. Image from <a href="https://fabiensanglard.net/quake3/">fabiensanglard.net</a>.</p>
+</div>
+
+<p>The engine is split into a server side (2) and a client side (3). This separation allows to easily run the server part on an actual server and communicate with multiple clients in a multiplayer configuration 🛜. Hence, these two different part run their own <a href="https://en.wikipedia.org/wiki/Virtual_machine">process virtual machines</a> and receive commands with the form of events. The two parts have their own directories in the source code: <code class="language-plaintext highlighter-rouge">game</code> and <code class="language-plaintext highlighter-rouge">cgame</code> respectively. Similar directories can be found in the <a href="https://github.com/JACoders/OpenJK/tree/master/code">OpenJK</a> version of JA code.</p>
+
+<h1 id="setting-up-a-development-environment">Setting up a development environment</h1>
+
+<p>The first thing to do is being able to compile ⚙️ and execute the code. A compilation tutorial is given on the <a href="https://github.com/JACoders/OpenJK/wiki/Compilation-guide">OpenJK repository</a>. I personally work on a Linux based OS and <a href="https://en.wikipedia.org/wiki/CMake">CMake</a> but the port is also compatible with Windows and Visual Studio. It is obviously essential to own a valid copy of the game 💿 for any further action. It can be found today on multiple game platforms.</p>
+
+<p>Compiling and lunching the game is repetitively performed in the development of any mod. I personally rely on CMake environment variables and commands to automatically install the mod after each modification of the code but other options are also possible. Lastly, a code editor adapted for large project is important, more precisely with a decent search functionality 🔍.</p>
+
+<h1 id="diving-into-the-renderer-code">Diving into the renderer code</h1>
+
+<p>Our goal in this post is to find a way to draw debugging information on the level. Drawing will only occur on the client side of the game because the server side is only dedicated to game logic 🎴. We can indeed see on the architecture image that the 🖥️ is directly linked to the client. In the original <a href="https://code.idtech.space/raven/jediacademy/src/branch/master/code/">code</a> directory, it is possible to spot a <code class="language-plaintext highlighter-rouge">renderer</code> sub-directory, same name as the <code class="language-plaintext highlighter-rouge">.lib</code> in the figure. The renderer is actually a common name for the part in charge of drawing the scene.</p>
+
+<p>We will now focus on the OpenJK code. The renderer is actually to be found in the <code class="language-plaintext highlighter-rouge">code/rd-vanilla</code> directory. Some time before 👴, the OpenJK documentation actually announced that several renderers were maintained in parallel. <code class="language-plaintext highlighter-rouge">vanilla</code> seems to be the only one that is officially conserved these days. In <a href="https://github.com/JACoders/OpenJK/tree/master/code/rd-vanilla">this directory</a> we see files such as <code class="language-plaintext highlighter-rouge">tr_draw.cpp</code> and <code class="language-plaintext highlighter-rouge">tr_surface.cpp</code>. This is definitely the right place for drawing!</p>
+
+<p>It is now time to start exploring ⌚. A good option is to proceed hierarchically 🪜. We first look at file names and then look at function names. Last, but not least, we  may look at the actual code in the functions. When an interesting functions is found, it is also useful to look at what functions call it (hence the search functionality). A good start here is the <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> file. Let’s look at the <code class="language-plaintext highlighter-rouge">R_GenerateDrawSurfs([...])</code> function for instance. It seems to be responsible for preparing the polygons that will be drawn on the screen. There are several function calls in it, for instance <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces ();</code>. What if we try to comment this call and lunch the game ? Note that a command can be passed to the game executable to load a level without going through the menu, for instance with <code class="language-plaintext highlighter-rouge">load jedi_01</code> to start from a savefile 🗃️.</p>
+
+<div style="display: flex; align-items: center; gap: 1rem; max-width: 100%">
+<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_entity.png" alt="The first Kinect for Windows." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_no_entity.png" alt="The second Kinect for Windows." /></div>
+</div>
+<div class="custom_caption">
+  <p>&gt; On the left, normal rendering with the OpenJK build. On the right, rendering after commenting the call to <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces</code>.</p>
+</div>
+
+<p>We are onto something! Many objects in the level seem to actually be “entities”, including the player itself. It is now worth looking at the content of<code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces</code> to understand more. It is not necessary to understand everything in the function but rather get the general structure.</p>
+
+<div class="code_frame"> R_AddEntitySurfaces([...])</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="k">for</span> <span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">&lt;</span> <span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">num_entities</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="n">ent</span> <span class="o">=</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntity</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="p">];</span>
+	<span class="c1">//	[...]</span>
+	<span class="k">switch</span> <span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">reType</span> <span class="p">)</span> <span class="p">{</span>
+		<span class="c1">//	[...]</span>
+		<span class="k">case</span> <span class="n">RT_MODEL</span><span class="p">:</span>
+			<span class="k">switch</span> <span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentModel</span><span class="o">-&gt;</span><span class="n">type</span> <span class="p">)</span> <span class="p">{</span>
+				<span class="k">case</span> <span class="n">MOD_MESH</span><span class="p">:</span>
+					<span class="n">R_AddMD3Surfaces</span><span class="p">(</span> <span class="n">ent</span> <span class="p">);</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="c1">//	[...]</span>
+				<span class="k">case</span> <span class="n">MOD_MDXM</span><span class="p">:</span>
+					<span class="n">R_AddGhoulSurfaces</span><span class="p">(</span> <span class="n">ent</span><span class="p">);</span>
+					<span class="k">break</span><span class="p">;</span>
+				<span class="c1">//	[...]</span>
+			<span class="p">}</span>
+			<span class="c1">// [...]</span>
+	<span class="p">}</span>
+<span class="p">}</span>		
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>There is a main loop 🔁 that seems to iterate over entities and add their surfaces (probably triangles) individually. We will now try to better understand<code class="language-plaintext highlighter-rouge">trRefEntity_t</code>. A big part of mastering the code comes from the understanding of data structures: where data is located and how it is stored. We can play a bit with the code by commenting some of the <code class="language-plaintext highlighter-rouge">R_Add[...]Surfaces(ent)</code> function calls. By doing so, we realize that <code class="language-plaintext highlighter-rouge">R_AddMD3Surfaces</code> concerns the objects of the level 📦 whereas <code class="language-plaintext highlighter-rouge">R_AddGhoulSurfaces</code> is for the characters 🧍. From the function, we see that it is possible to know the type of the entity from the well-named field <code class="language-plaintext highlighter-rouge">type</code>. An interesting thing to notice here as well is that <code class="language-plaintext highlighter-rouge">tr.refdef.entities</code> seems to be a global variable as it is not defined anywhere else in the code. This is going to be useful if we want to extract information from this structure.</p>
+
+<h2 id="looking-for-the-3d-models-">Looking for the 3D models 🔬</h2>
+
+<p>The search functionality is once helpful to find the definition of <code class="language-plaintext highlighter-rouge">refEntity_t</code>. It leads to the file <code class="language-plaintext highlighter-rouge">tr_local.h</code>. In the structure, we can find a lot of information such as a position (<code class="language-plaintext highlighter-rouge">origin</code>), an orientation (<code class="language-plaintext highlighter-rouge">axis</code>) and so on. The field <code class="language-plaintext highlighter-rouge">hModel</code> seems to indicate information about the 3D model of the entity but its type is not very helpful to extract information. Back to the function <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces()</code>, we can actually see the field being used in a function call:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">tr</span><span class="p">.</span><span class="n">currentModel</span> <span class="o">=</span> <span class="n">R_GetModelByHandle</span><span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">hModel</span> <span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>So <code class="language-plaintext highlighter-rouge">hModel</code> seems to be a sort of identifier a pointer to the actual model data. We can have a look at the function <code class="language-plaintext highlighter-rouge">R_GetModelByHandle()</code> to discover that the return type is actually <code class="language-plaintext highlighter-rouge">model_t</code>. The definition of this type is in fact just above the function definition in <code class="language-plaintext highlighter-rouge">tr_local.h</code> once again. We see fields that seem to be related to the model data and information, notably with a field <code class="language-plaintext highlighter-rouge">name</code>.</p>
+
+<p>Let’s try something: print the name of the current model in the entity loop in <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces</code>. We could use the standard C++ printing functions but the game engine actually provide its own function: <code class="language-plaintext highlighter-rouge">Com_Printf</code> that look alike the <a href="https://cplusplus.com/reference/cstdio/printf/">C function</a> <code class="language-plaintext highlighter-rouge">printf</code>. Let’s add the following line in the function just after the call to <code class="language-plaintext highlighter-rouge">R_GetModelByHandle()</code>:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="c1">// print the model name</span>
+<span class="n">Com_Printf</span><span class="p">(</span><span class="s">"current model: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="p">(</span><span class="n">tr</span><span class="p">.</span><span class="n">currentModel</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>When testing the game, we can now see in the terminal the name of the models that are being drawn in the scene! The text is also printed in the in-game terminal accessible with the key “ ² “.</p>
+
+<div class="code_frame"> Terminal output</div>
+
+<figure class="highlight"><pre><code class="language-txt" data-lang="txt"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre>[...]
+current model: models/map_objects/imperial/switch.md3
+current model: models/map_objects/desert/wall_light.md3
+current model: models/map_objects/desert/emitter.md3
+current model: models/map_objects/desert/emitter.md3
+current model: models/map_objects/desert/emitter.md3
+current model: models/map_objects/desert/view_panel_desert.md3
+current model: models/map_objects/desert/view_panel_desert.md3
+current model: models/map_objects/desert/view_panel_desert.md3
+[...]
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h1 id="drawing-in-the-scene">Drawing in the scene</h1>
+
+<p>We can now extract model information and print to the terminal. What about actually drawing in the scene ✏️ ?
+A natural thing to do is to keep diving in the function calls, in particular with the <code class="language-plaintext highlighter-rouge">Add[...]Surfaces</code> ones and see how surfaces are actually processed. Unfortunately, the code of these functions is pretty obscure. Drawing pipelines in 3D applications actually process all surfaces as <a href="https://wikis.khronos.org/opengl/Buffer_Object">a single buffer</a> for efficiency reasons.
+Fortunately, this is not the only way to draw information. If we further study the <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> file, we may find the following function:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">R_DebugPolygon</span><span class="p">(</span> <span class="kt">int</span> <span class="n">color</span><span class="p">,</span> <span class="kt">int</span> <span class="n">numPoints</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">points</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// [...]</span>
+	<span class="n">qglColor3f</span><span class="p">(</span> <span class="n">color</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span><span class="o">&gt;&gt;</span><span class="mi">1</span><span class="p">)</span><span class="o">&amp;</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">color</span><span class="o">&gt;&gt;</span><span class="mi">2</span><span class="p">)</span><span class="o">&amp;</span><span class="mi">1</span> <span class="p">);</span>
+	<span class="n">qglBegin</span><span class="p">(</span> <span class="n">GL_POLYGON</span> <span class="p">);</span>
+	<span class="k">for</span> <span class="p">(</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numPoints</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+		<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">points</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">3</span> <span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">qglEnd</span><span class="p">();</span>
+	<span class="c1">// [...]</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can see wrapper calls around the <a href="https://en.wikipedia.org/wiki/OpenGL">OpenGL standard</a> for 3D rendering (with the addition of a “q” for quake I suppose). A good thing here is that OpenGL is actually well documented with <a href="https://rogerboesch.medium.com/the-opengl-tutorial-part-ii-28e89600565e">many tutorials</a> available (it is important to look at version 2 or bellow since more recent versions abandoned this type of simple drawing calls).</p>
+
+<h2 id="a-first-drawing-call">A first drawing call</h2>
+
+<p>A natural question here is: where to put the drawing code ? As opposed to a simple print, drawing calls must be written in the right place because several states have to be initialized to prepare the image rendering. The <code class="language-plaintext highlighter-rouge">R_RenderView([...])</code> seems to be the general drawing function in <code class="language-plaintext highlighter-rouge">tr_main.cpp</code>. We will try to loop over entities in this one and display some 3D lines 📈. Here is the code to add at the end of the function:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="n">R_IssuePendingRenderCommands</span><span class="p">();</span>
+<span class="k">for</span> <span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">&lt;</span> <span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">num_entities</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="n">trRefEntity_t</span><span class="o">*</span> <span class="n">ent</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="p">];</span>
+	<span class="n">refEntity_t</span><span class="o">*</span> <span class="n">e</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
+	<span class="kt">float</span> <span class="n">shifted</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">100</span><span class="p">};</span>
+	<span class="n">GL_Bind</span><span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">whiteImage</span><span class="p">);</span>
+	<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+	<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+	<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span> <span class="p">);</span>
+	<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">shifted</span> <span class="p">);</span>
+	<span class="n">qglEnd</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We are looping over all entities and access their position (<code class="language-plaintext highlighter-rouge">origin</code>). Then, we draw a red line that starts from its origin and goes straight up (third value in <code class="language-plaintext highlighter-rouge">shifted</code>). Two notable points here: <code class="language-plaintext highlighter-rouge">GL_Bind( tr.whiteImage);</code> is necessary as the drawing calls seem to be performed in texturing mode. The second thing is a call to <code class="language-plaintext highlighter-rouge">R_IssuePendingRenderCommands()</code> required to make perform the drawing. I found a similar call in the <code class="language-plaintext highlighter-rouge">R_DebugGraphics()</code> function with the following comment: “the render thread can’t make callbacks to the main thread”. I am not able to precisely explain why the call is necessary 🤔 but it seems that because of the command system, some state must be cleared before performing the drawing calls.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt1/draw_line.png" alt="We can draw lines in the scene now." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can draw lines in the scene now.</p>
+  </div>
+</div>
+
+<h2 id="drawing-bounding-boxes">Drawing bounding boxes</h2>
+
+<p>We will now tackle the actual objective of this post: drawing bounding boxes around entites. Bounding Boxes (bbox) are cubes (<a href="https://en.wikipedia.org/wiki/Rectangular_cuboid">rectangular cuboid</a>) that completely includes the entity vertices. <a href="https://en.wikipedia.org/wiki/Minimum_bounding_box">Bounding boxes</a> may be used in games and other 3D applications to perform fast collision tests and prevent from systematically iterate over all vertices of a model. By going through OpenJK renderer code, we can find the following function in <code class="language-plaintext highlighter-rouge">tr_model.h</code>:</p>
+
+<div class="code_frame"> R_RenderView</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">R_ModelBounds</span><span class="p">(</span> <span class="n">qhandle_t</span> <span class="n">handle</span><span class="p">,</span> <span class="n">vec3_t</span> <span class="n">mins</span><span class="p">,</span> <span class="n">vec3_t</span> <span class="n">maxs</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// [...]</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The function returns the minimum and maximum coordinates of the box for the 3 different axes. We can test this by drawing a line between the two points but the coordinates of the points are actually local to the entity and must be shifted by the entity’s  origin (or global position):</p>
+
+<div class="code_frame"> R_RenderView</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="n">vec3_t</span> <span class="n">mins</span><span class="p">,</span> <span class="n">maxs</span><span class="p">;</span>
+<span class="n">R_ModelBounds</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">hModel</span><span class="p">,</span> <span class="n">mins</span><span class="p">,</span> <span class="n">maxs</span> <span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">mins</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="n">maxs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="n">GL_Bind</span><span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">whiteImage</span><span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">mins</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">maxs</span> <span class="p">);</span>
+<span class="n">qglEnd</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Now, to draw the complete bounding box we need to define all vertices and edges of a cube, as represented below.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://s1.qwant.com/thumbr/353x325/0/4/6b17b783a0ebab5ae065b2525d19f054c388c82bba1a2ecbe4ed7ed60978a4/OIP.tezvr2oDH4_7xBYzkenpYwAAAA.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%2Fid%2FOIP.tezvr2oDH4_7xBYzkenpYwAAAA%3Fr%3D0%26pid%3DApi&amp;q=0&amp;b=1&amp;p=0&amp;a=0" alt="Vertices and faces of a cube" /></p>
+  <div class="custom_caption">
+    <p>&gt; Vertices and faces of a cube. Image from <a href="https://mcleanquilve.blogspot.com/2022/05/how-to-draw-xyz-plane.html">McLean Quilve</a>.</p>
+  </div>
+</div>
+
+<p>The code is long and does not worth a complete explanation. In summary, I separated the upper and lower faces of the cube (last component) and made sure that a line is drawn between two points only of there is exactly one change between these two.</p>
+
+<div class="code_frame"> R_RenderView</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="code"><pre><span class="n">vec3_t</span> <span class="n">mins</span><span class="p">,</span> <span class="n">maxs</span><span class="p">;</span>
+<span class="n">R_ModelBounds</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">hModel</span><span class="p">,</span> <span class="n">mins</span><span class="p">,</span> <span class="n">maxs</span> <span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">mins</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="n">maxs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="n">vec3_t</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span> <span class="c1">// cube vertex</span>
+<span class="c1">// upper face</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="c1">// lower face</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+<span class="n">vertex</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">maxs</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">mins</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+
+<span class="n">GL_Bind</span><span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">whiteImage</span><span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+<span class="c1">// lower face</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+<span class="c1">// upper face</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">);</span>
+<span class="c1">// connection</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">vertex</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglEnd</span><span class="p">();</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Here is the result:</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
+  <p><img src="/assets/ja_mod/pt1/draw_bbox.png" alt="The resulting bounding boxes." /></p>
+  <div class="custom_caption">
+    <p>&gt; The resulting bounding boxes.</p>
+  </div>
+</div>
+
+<p>We are almost done! We can see that the main character does not have its own bounding box. Unfortunately, we cannot do much without a lot of additional effort because the characters are handled differently and the <code class="language-plaintext highlighter-rouge">R_ModelBounds([...])</code> function does not work here. The second issue is circled in red in the image: some bounding boxes are not well oriented. Actually the orientation is wrong ❌ for all entities as we do not account for their <code class="language-plaintext highlighter-rouge">axis</code> field. But it turns out that most of them are actually not rotated.</p>
+
+<div class="code_frame"> R_RenderView</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="code"><pre><span class="c1">// draw orientation axis</span>
+<span class="n">vec3_t</span> <span class="n">directions</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">directions</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">axis</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="mf">10.</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="n">qglDepthRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">directions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">directions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">directions</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="p">);</span>
+<span class="n">qglEnd</span><span class="p">();</span>
+<span class="n">qglDepthRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Here I used the function ̀qglDepthRange(0,0);` to temporary disable the depth test, meaning that axis are displayed on top of everything. Otherwise, as they are located at the center of the entity, they would be almost always hidden.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
+  <p><img src="/assets/ja_mod/pt1/draw_bbox_axis.png" alt="The bounding box is not aligned with the three orientation axis." /></p>
+  <div class="custom_caption">
+    <p>&gt; The bounding box is not aligned with the three orientation axis.</p>
+  </div>
+
+  <p>We need to <em>rotate</em> the bounding box vertices to correct the orientation. The <code class="language-plaintext highlighter-rouge">axis</code> field of the entity can actually be seen as a 3D <a href="https://en.wikipedia.org/wiki/Rotation_matrix"><strong>rotation</strong> matrix</a>. 3D transformations can actually be represented by matrices, <em>i.e.</em>, 2D arrays of numbers. Transforming a point is done by <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">multiplying its coordinates by the matrix</a>. The code bellow achieves it:</p>
+
+  <div class="code_frame"> R_RenderView</div>
+
+  <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="c1">// rotate the vertices</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">vert_ind</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">vert_ind</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">vert_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">vec3_t</span> <span class="n">temp</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">};</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// rows</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// cols</span>
+			<span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">vertex</span><span class="p">[</span><span class="n">vert_ind</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">axis</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">vertex</span><span class="p">[</span><span class="n">vert_ind</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+  <p>Note that vertices are actually rotated with respect to the local origin, at coordinates <code class="language-plaintext highlighter-rouge">(0,0,0)</code>. This is why we add the entity position (absolute origin) only after the orientation is computed, at the end of the loop. We now have the correct orientation of the bounding boxes:</p>
+
+  <div style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
+    <p><img src="/assets/ja_mod/pt1/draw_bbox_axis_orientation.png" alt="The bounding box are now correctly oriented." /></p>
+    <div class="custom_caption">
+      <p>&gt; The bounding box are now correctly oriented.</p>
+    </div>
+
+    <h1 id="conclusion">Conclusion</h1>
+
+    <p>This post gives an overview of what can be done with the code (basically everything). It is really about intensive trial and errors and educated guesses about the engine or the game. It is hard to directly make the correct guess but failed attempts ⛔ are also informative and help to make some progress about the code 🧑‍💻.</p>
+
+    <p>The next post will be about drawing the skeletons of the characters 🧍 in order to understand how they are animated 🤸. The current post has the form of a tutorial 🧑‍🎓 but it will progressively migrate toward a devblog format, where I will focus on covering ideas, the difficulties and solutions that helped me along the way.</p>
+  </div>
+</div>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#programming-modding-video-games-virtual-reality">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">programming modding video-games virtual-reality</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+
+</div>
+
+
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
