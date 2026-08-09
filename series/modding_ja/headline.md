@@ -16,3 +16,6 @@ This series is about creating a mod for the Star Wars game [Jedi Academy](https:
 * [Preamble: origins of the project](/series/modding_ja/pt1)
 
 * [Entry 1: Visual debugging 1 and bounding boxes](/series/modding_ja/pt2)
+
+* [Entry 2: Visual debugging 2 and skeletons](/series/modding_ja/pt3)
+

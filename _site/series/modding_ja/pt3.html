@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Modding Jedi Academy with the Kinect&#58 Visual debugging 2 &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="series_article">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  <a id="subscribe-link" class="icon" title="Subscribe" aria-label="Subscribe"
+    href="/feed.xml">
+    <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+
+  </a>
+
+  <a id="mastodon-link" class="icon" title="Mastodon" aria-label="Mastodon"
+    href="https://social.linux.pizza/@smbct">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+  <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+</svg>
+
+  </a>
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="22" width="22"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+
+
+
+<!-- index pages are treated separately to handle pagination -->
+
+
+<!-- for other pages, the link to the translated page is in a file -->
+
+
+<!-- When one of the link is not set, the corresponding flag cannot be clicked -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     
+     >
+🇬🇧 <div></div>
+</a>
+<a id="icon_flag"
+  class="icon_flag"
+  
+>
+🇫🇷 <div></div>
+</a>
+
+
+
+</nav>
+
+  <p>
+  &copy; 2026.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+
+  <div id="credit">
+  Made with <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> and <a href="https://giscus.app">giscus</a>.
+  Hosted by <a href="https://pages.github.com">github</a>.
+  </div>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+  <h1 class="post-title">Modding Jedi Academy with the Kinect&#58 Visual debugging 2</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      30 Jul 2026
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    23 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        modding
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p>In the <a href="/series/modding_ja/pt2">last post</a> of the series, we have been able to hook into OpenJK’s code and insert some new lines to draw bounding boxes 📦 around the entities.
+We will now try to draw <a href="https://en.wikipedia.org/wiki/Skeletal_animation">the skeletons</a> 🩻 that are used for the the characters animations.</p>
+
+<p>The animation system used in Jedi Outcast and Jedi Academy does not actually originate from id tech 3 original engine. The system has been developed by Raven Software themselves under the name <a href="https://en.wikipedia.org/wiki/Star_Wars_Jedi_Knight_II:_Jedi_Outcast">GHOUL 2</a> for the needs of their Star Wars games 🤺. This component provide a <a href="https://en.wikipedia.org/wiki/Ragdoll_physics">ragdoll system</a> for the game: character’s death animations are generated on the fly in reaction to their environment.</p>
+
+<h2 id="drawing-character-orientations">Drawing character orientations</h2>
+
+<p>We saw in the previous post that our bounding box code was not working with animated entities 🤸‍♂️ as opposed to static ones. We were still able to display the entities origin and axes (or orientation). This means that animated characters are part of the entities list. Let’s start from our entity loop from the <a href="/series/modding_ja/pt2">previous part</a> in the function <code class="language-plaintext highlighter-rouge">R_RenderView([...])</code>. By playing with the field <code class="language-plaintext highlighter-rouge">reType</code> of <code class="language-plaintext highlighter-rouge">refEntity_t</code> and the field <code class="language-plaintext highlighter-rouge">type</code> of the <code class="language-plaintext highlighter-rouge">model_t</code> struct, we can select only entities that corresponds to characters and draw their orientation (see function <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces (void)</code>):</p>
+
+<div class="code_frame"> R_RenderView([...])</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="k">for</span> <span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">&lt;</span> <span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">num_entities</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="n">trRefEntity_t</span><span class="o">*</span> <span class="n">ent</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="p">];</span>
+	<span class="n">refEntity_t</span><span class="o">*</span> <span class="n">e</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">reType</span> <span class="o">!=</span> <span class="n">RT_MODEL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">model_t</span><span class="o">*</span> <span class="n">currentModel</span> <span class="o">=</span> <span class="n">R_GetModelByHandle</span><span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">hModel</span> <span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">currentModel</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">MOD_BAD</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="c1">// [...]</span>
+	<span class="c1">// drawing code</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The reason why the type of the model corresponds to <code class="language-plaintext highlighter-rouge">MOD_BAD</code> is troubling but recall that it is not necessary to understand <em>everything</em> in the code at this point as we can rely on our tests.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/entity_axis.png" alt="We can select the characters and draw their orientation." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can select the characters and draw their orientation.</p>
+  </div>
+</div>
+
+<h2 id="looking-for-skeletal-information">Looking for skeletal information</h2>
+
+<p>Let’s start from the <code class="language-plaintext highlighter-rouge">refEntity_t</code> type that we are referencing in the code. In the definition 🔍 (<code class="language-plaintext highlighter-rouge">tr_types.h</code>), we can spot a field <code class="language-plaintext highlighter-rouge">CGhoul2Info_v *ghoul2;</code> that should be related to the Ghoul 2 animation engine . By searching the definition of <code class="language-plaintext highlighter-rouge">CGhoul2Info_v</code>, we can find that it is actually a class defined in <code class="language-plaintext highlighter-rouge">ghoul2_shared.h</code>. The class seems to be a container for objects of the type <code class="language-plaintext highlighter-rouge">CGhoul2Info</code>. Jumping once again, we end up in another class definition in the same file.</p>
+
+<p>This is now interesting. In <code class="language-plaintext highlighter-rouge">CGhoul2Info</code>, we can see datatypes such as <code class="language-plaintext highlighter-rouge">boneInfo_v</code> and <code class="language-plaintext highlighter-rouge">boltInfo_v</code> and fields like <code class="language-plaintext highlighter-rouge">mSkelFrameNum</code>. This should be the correct place to find information ℹ️ about model animations since the skeleton should be defined from a list of bones 🦴. My first idea was to focus on <code class="language-plaintext highlighter-rouge">boneInfo_v</code>, which appears to be an alias for <code class="language-plaintext highlighter-rouge">std::vector&lt;boneInfo_t&gt;</code>. Following the definitions ➡️, we find that <code class="language-plaintext highlighter-rouge">boneInfo_t</code> is another struct that seem to contain positional information such as the field <code class="language-plaintext highlighter-rouge">lastPosition</code>.</p>
+
+<p>Let’s try to write a loop that extracts this specific field, try to draw it and print the coordinates in the terminal:</p>
+<div class="code_frame"> R_AddEntitySurfaces([...])</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre></td><td class="code"><pre><span class="n">R_IssuePendingRenderCommands</span><span class="p">();</span>
+<span class="n">GL_Bind</span><span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">whiteImage</span><span class="p">);</span>
+<span class="n">qglLineWidth</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">&lt;</span> <span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">num_entities</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="n">trRefEntity_t</span><span class="o">*</span> <span class="n">ent</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="p">];</span>
+	<span class="n">refEntity_t</span><span class="o">*</span> <span class="n">e</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">reType</span> <span class="o">!=</span> <span class="n">RT_MODEL</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">model_t</span><span class="o">*</span> <span class="n">currentModel</span> <span class="o">=</span> <span class="n">R_GetModelByHandle</span><span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">hModel</span> <span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">currentModel</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">MOD_BAD</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">ghoul2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="n">CGhoul2Info_v</span><span class="o">&amp;</span> <span class="n">ghoul2</span> <span class="o">=</span> <span class="o">*</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">ghoul2</span><span class="p">;</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ghoul2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">CGhoul2Info</span> <span class="o">&amp;</span><span class="n">info</span> <span class="o">=</span> <span class="n">ghoul2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+		<span class="k">for</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">bone_ind</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">bone_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">boneInfo_t</span><span class="o">&amp;</span> <span class="n">bone_info</span> <span class="o">=</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">[</span><span class="n">bone_ind</span><span class="p">];</span>
+			<span class="n">Com_Printf</span><span class="p">(</span><span class="s">"%f %f %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+			<span class="n">vec3_t</span> <span class="n">temp</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">2</span><span class="p">]};</span>
+			<span class="n">vec3_t</span> <span class="n">temp2</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">bone_info</span><span class="p">.</span><span class="n">lastPosition</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">100</span><span class="p">};</span>
+			<span class="n">qglDepthRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+			<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+			<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+			<span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">temp</span><span class="p">);</span>
+			<span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">temp2</span><span class="p">);</span>
+			<span class="n">qglEnd</span><span class="p">();</span>
+			<span class="n">qglDepthRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The code is more complex, with 3 nested loops 🔁: one for the entity index, one for the model index in the entity? and one for the bone index. We then try to display the <code class="language-plaintext highlighter-rouge">lastPosition</code> of the bone as if it was local regarding the entity, shifting by its origin as we did before.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/bone_attempt1.png" alt="A first attempt to display bone information from the characters." /></p>
+  <div class="custom_caption">
+    <p>&gt; A first attempt to display bone information from the characters.</p>
+  </div>
+</div>
+
+<p>Obviously the result is not what we were hopping for. We can see in the terminal output that the <code class="language-plaintext highlighter-rouge">lastPosition</code> field is always null:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="o">[</span>...]
+0.000000 0.000000 0.000000
+0.000000 0.000000 0.000000
+0.000000 0.000000 0.000000
+<span class="o">[</span>...]
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can look further 👀 in the <code class="language-plaintext highlighter-rouge">boneInfo_t</code> struct in <code class="language-plaintext highlighter-rouge">ghoul2_shared.h</code> and test other fields. I spent some time exploring many of them but unfortunately, I was not able to find any relevant information. It was a dead end and we need a new idea.</p>
+
+<h2 id="second-attempt">Second attempt</h2>
+
+<p>We were previously exploring the renderer code 🖼️. It is clear that the renderer has access to the bone information since it is in charge of drawing the characters 🧍.
+To find more information, we can have a look at the renderer function <code class="language-plaintext highlighter-rouge">R_AddGhoulSurfaces( trRefEntity_t *ent )</code> in <code class="language-plaintext highlighter-rouge">tr_ghoul2.cpp</code>. We already encountered a call to this function in <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces([...])</code>. In this function, we can spot calls to Ghoul 2 functions such as <code class="language-plaintext highlighter-rouge">G2_GetBoltMatrixLow([...])</code> and <code class="language-plaintext highlighter-rouge">G2_TransformGhoulBones([...])</code>. Aside from these calls, it is hard to get anything more instructive 🧑‍🎓.</p>
+
+<p>We can now look at the <code class="language-plaintext highlighter-rouge">G2_TransformGhoulBones([...])</code> function in <code class="language-plaintext highlighter-rouge">tr_ghoul2.cpp</code> and try to get more details. This function takes a <code class="language-plaintext highlighter-rouge">CGhoul2Info</code> object as input and it seems to mainly process its member field <code class="language-plaintext highlighter-rouge">mBoneCache</code> 🦴. We can then see in the <code class="language-plaintext highlighter-rouge">CGhoul2Info</code> class definition that <code class="language-plaintext highlighter-rouge">mBoneCache</code> has type <code class="language-plaintext highlighter-rouge">CBoneCache</code> which is defined in <code class="language-plaintext highlighter-rouge">tr_ghoul2.cpp</code> once again.
+Despite its name, <code class="language-plaintext highlighter-rouge">G2_TransformGhoulBones([...])</code> is probably not what we are looking for since it does not perform any complex computation (no function call, no complex operations, …).</p>
+
+<p><code class="language-plaintext highlighter-rouge">G2_GetBoltMatrixLow([...])</code> might be more interesting 🤔. We see some matrix multiplication being performed with dedicated functions. More importantly, we see additional data types <code class="language-plaintext highlighter-rouge">mdxaSkel_t *skel;</code> and <code class="language-plaintext highlighter-rouge">mdxaSkelOffsets_t *offsets;</code> that seem to be related to the skeleton 🦿:</p>
+
+<div class="code_frame"> void G2_GetBoltMatrixLow([...])</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="n">mdxaSkel_t</span>		<span class="o">*</span><span class="n">skel</span><span class="p">;</span>
+<span class="n">mdxaSkelOffsets_t</span> <span class="o">*</span><span class="n">offsets</span><span class="p">;</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="p">(</span><span class="n">mdxaSkelOffsets_t</span> <span class="o">*</span><span class="p">)((</span><span class="n">byte</span> <span class="o">*</span><span class="p">)</span><span class="n">boneCache</span><span class="p">.</span><span class="n">header</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">mdxaHeader_t</span><span class="p">));</span>
+<span class="n">skel</span> <span class="o">=</span> <span class="p">(</span><span class="n">mdxaSkel_t</span> <span class="o">*</span><span class="p">)((</span><span class="n">byte</span> <span class="o">*</span><span class="p">)</span><span class="n">boneCache</span><span class="p">.</span><span class="n">header</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">mdxaHeader_t</span><span class="p">)</span> <span class="o">+</span> <span class="n">offsets</span><span class="o">-&gt;</span><span class="n">offsets</span><span class="p">[</span><span class="n">boneNum</span><span class="p">]);</span>
+<span class="n">Multiply_3x4Matrix</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bolt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">boneCache</span><span class="p">.</span><span class="n">Eval</span><span class="p">(</span><span class="n">boneNum</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">skel</span><span class="o">-&gt;</span><span class="n">BasePoseMat</span><span class="p">);</span> <span class="c1">// DEST FIRST ARG</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>These types also appear in the definition of <code class="language-plaintext highlighter-rouge">CBoneCache</code>: <code class="language-plaintext highlighter-rouge">int mNumBones;</code>, <code class="language-plaintext highlighter-rouge">mdxaSkel_t **mSkels;</code> and <code class="language-plaintext highlighter-rouge">CTransformBone *mFinalBones;</code>.</p>
+
+<p>What to do with all that information ? For now, we are not able to extract bone positions and or orientations from the <em>potentially-skeleton-related</em> data structures but we can spot some functions that could to do the computation for us.
+However, we were initially looking for <strong>bones</strong> 🦴 and all we can get is something about <strong>bolts</strong> 🔩. There is a mention to both of these throughout the code.
+At this point, it is possible to review the function definitions and spot an alternative function: <code class="language-plaintext highlighter-rouge">void G2_GetBoneMatrixLow(CGhoul2Info &amp;ghoul2,int boneNum,const vec3_t scale,mdxaBone_t &amp;retMatrix,mdxaBone_t *&amp;retBasepose,mdxaBone_t *&amp;retBaseposeInv)</code> that seem to perform the calculation for bones. Its content is similar to the one from <code class="language-plaintext highlighter-rouge">G2_GetBoltMatrixLow([...])</code>:</p>
+
+<div class="code_frame"> G2_GetBoneMatrixLow([...])</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="n">mdxaSkel_t</span>		<span class="o">*</span><span class="n">skel</span><span class="p">;</span>
+<span class="n">mdxaSkelOffsets_t</span> <span class="o">*</span><span class="n">offsets</span><span class="p">;</span>
+<span class="n">offsets</span> <span class="o">=</span> <span class="p">(</span><span class="n">mdxaSkelOffsets_t</span> <span class="o">*</span><span class="p">)((</span><span class="n">byte</span> <span class="o">*</span><span class="p">)</span><span class="n">boneCache</span><span class="p">.</span><span class="n">header</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">mdxaHeader_t</span><span class="p">));</span>
+<span class="n">skel</span> <span class="o">=</span> <span class="p">(</span><span class="n">mdxaSkel_t</span> <span class="o">*</span><span class="p">)((</span><span class="n">byte</span> <span class="o">*</span><span class="p">)</span><span class="n">boneCache</span><span class="p">.</span><span class="n">header</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">mdxaHeader_t</span><span class="p">)</span> <span class="o">+</span> <span class="n">offsets</span><span class="o">-&gt;</span><span class="n">offsets</span><span class="p">[</span><span class="n">boneNum</span><span class="p">]);</span>
+<span class="n">Multiply_3x4Matrix</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bolt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">boneCache</span><span class="p">.</span><span class="n">Eval</span><span class="p">(</span><span class="n">boneNum</span><span class="p">),</span> <span class="o">&amp;</span><span class="n">skel</span><span class="o">-&gt;</span><span class="n">BasePoseMat</span><span class="p">);</span> <span class="c1">// DEST FIRST ARG</span>
+<span class="n">retBasepose</span><span class="o">=&amp;</span><span class="n">skel</span><span class="o">-&gt;</span><span class="n">BasePoseMat</span><span class="p">;</span>
+<span class="n">retBaseposeInv</span><span class="o">=&amp;</span><span class="n">skel</span><span class="o">-&gt;</span><span class="n">BasePoseMatInv</span><span class="p">;</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Given the prefix <strong>re</strong> of its parameter’s names, we can guess that these parameters actually contain the result of the computation ➗. The return type of these parameters is <code class="language-plaintext highlighter-rouge">mdxaBone_t</code>, a struct that contains a unique field <code class="language-plaintext highlighter-rouge">float matrix[3][4];</code> (<code class="language-plaintext highlighter-rouge">mdx_format.h</code>).</p>
+
+<h3 id="affine-transformations-in-3d">Affine transformations in 3D</h3>
+
+<p>Apparently, 3D transformations in Ghoul2 and Jedi Academy (rotation, translation, ..) are performed using 3 rows and 4 columns matrices (the first index usually corresponds to the rows). We saw in the previous post that matrices are commonly used for computing 3D transformations 🦿. <em>3x4</em> matrices are one way of expressing <a href="https://www.brainvoyager.com/bv/doc/UsersGuide/CoordsAndTransforms/SpatialTransformationMatrices.html">Affine transformations</a> by possibly combining translations, rotations and scaling. The matrix elements correspond to the blue part in the following illustration:</p>
+
+<div style="display: flex; align-items: center; gap: 0.5em; max-width: 100%">
+<div style="display flex;"><img src="https://www.brainvoyager.com/bv/doc/UsersGuide/CoordsAndTransforms/Images/TransformationMatrix1.png" alt="Affine 3D transformations can be represented through 3x4 matrices." /></div>
+<div style="display flex;"><img src="https://www.brainvoyager.com/bv/doc/UsersGuide/CoordsAndTransforms/Images/Translation-Matrix2.png" alt="A translation is a simple addition to the 4th column." /></div>
+</div>
+<div class="custom_caption">
+  <p>&gt; Affine 3D transformations can be represented through 3x4 matrices. A translation is a simple addition to the 4th column.</p>
+</div>
+
+<p>Let us assume that the bone orientation (position and translation) is returned in the 4th parameter: <code class="language-plaintext highlighter-rouge">retMatrix</code>. We can try to loop over the bones 🦴 of the entity model and call <code class="language-plaintext highlighter-rouge">G2_GetBoneMatrixLow([...])</code> with a given bone index to obtain information about its position. We then show the bone by drawing a line between the entity origin and its position.</p>
+
+<p>We previously spotted that the field <code class="language-plaintext highlighter-rouge">mBlist</code> of <code class="language-plaintext highlighter-rouge">CGhoul2Info_v</code> is actually a <code class="language-plaintext highlighter-rouge">std::vector&lt;boneInfo_v&gt;</code>, so basically a list of bones. Let’s try to use its size for our bone loop 🔁. We locally define the matrices (of type <code class="language-plaintext highlighter-rouge">mdxaBone_t</code>) that are returned by the function to extract its result. The function actually takes pointers 👇 as parameters so these pointers need to be defined likewise. Then, we extract the third column of <code class="language-plaintext highlighter-rouge">retMatrix</code> to extract the assumed position of the bone 🦾 (see in the right picture above, the translation part of the matrix corresponds to the fourth column):</p>
+
+<div class="code_frame"> R_RenderView([...])</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="n">trRefEntity_t</span><span class="o">*</span> <span class="n">ent</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="p">];</span>
+<span class="c1">// [...]</span>
+<span class="n">CGhoul2Info_v</span><span class="o">&amp;</span> <span class="n">ghoul2</span> <span class="o">=</span> <span class="o">*</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">ghoul2</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ghoul2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">CGhoul2Info</span> <span class="o">&amp;</span><span class="n">info</span> <span class="o">=</span> <span class="n">ghoul2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bone_ind</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">bone_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">const</span> <span class="n">vec3_t</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+		<span class="n">mdxaBone_t</span> <span class="n">retMatrix</span><span class="p">,</span> <span class="n">retBasepose</span><span class="p">,</span> <span class="n">retBaseposeInv</span><span class="p">,</span> <span class="n">retMatrix2</span><span class="p">;</span>
+		<span class="n">mdxaBone_t</span> <span class="o">*</span><span class="n">ptr_retBasepose</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">retBasepose</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr_retBaseposeInv</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">retBaseposeInv</span><span class="p">;</span>
+		<span class="n">G2_GetBoneMatrixLow</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">retMatrix</span><span class="p">,</span> <span class="n">ptr_retBasepose</span><span class="p">,</span> <span class="n">ptr_retBaseposeInv</span><span class="p">);</span>
+		<span class="n">vec3_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">[</span><span class="mi">2</span><span class="p">]};</span>
+		<span class="n">vec3_t</span> <span class="n">pos2</span> <span class="o">=</span> <span class="p">{</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]};</span>
+		<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+		<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+		<span class="n">qglEnd</span><span class="p">();</span>
+	<span class="p">}</span>
+	<span class="c1">// [...]</span>
+<span class="p">}</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Unfortunately, the above code does not compile yet ⚙️ because the function <code class="language-plaintext highlighter-rouge">G2_GetBoneMatrixLow([...])</code> is not defined in the file <code class="language-plaintext highlighter-rouge">tr_main.cpp</code>. A quick search indicates that this function is actually not defined in any header <em>.h</em> file. A simple solution to that problem is to re-define the function by adding a simple line of code above our loop, <em>outside</em> of any function:</p>
+
+<div class="code_frame"> tr_main.cpp</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="kt">void</span> <span class="nf">G2_GetBoneMatrixLow</span><span class="p">(</span><span class="n">CGhoul2Info</span> <span class="o">&amp;</span><span class="n">ghoul2</span><span class="p">,</span><span class="kt">int</span> <span class="n">boneNum</span><span class="p">,</span><span class="k">const</span> <span class="n">vec3_t</span> <span class="n">scale</span><span class="p">,</span><span class="n">mdxaBone_t</span> <span class="o">&amp;</span><span class="n">retMatrix</span><span class="p">,</span><span class="n">mdxaBone_t</span> <span class="o">*&amp;</span><span class="n">retBasepose</span><span class="p">,</span><span class="n">mdxaBone_t</span> <span class="o">*&amp;</span><span class="n">retBaseposeInv</span><span class="p">);</span>
+<span class="c1">// [...]</span>
+<span class="kt">void</span> <span class="nf">R_RenderView</span> <span class="p">(</span><span class="n">viewParms_t</span> <span class="o">*</span><span class="n">parms</span><span class="p">)</span> <span class="p">{</span>
+<span class="c1">// [...]</span>
+<span class="p">}</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>As we see now in the screenshot bellow, the extracted position seem consistent with the body positions. However, we see lines going from one entity to another, suggesting a mismatch between the entity origin and the bone position.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/bone_attempt2.png" alt="We can select only the characters and draw their orientation." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can select only the characters and draw their orientation.</p>
+  </div>
+</div>
+
+<p>An explanation to this issue can be found in the <code class="language-plaintext highlighter-rouge">G2_GetBoneMatrixLow([...])</code> function with the following line: <code class="language-plaintext highlighter-rouge">Multiply_3x4Matrix(&amp;retMatrix,&amp;worldMatrix, &amp;bolt);</code>. The output matrix <code class="language-plaintext highlighter-rouge">retMatrix</code> is multiplied by a matrix <code class="language-plaintext highlighter-rouge">worldMatrix</code>. We can look further and see that this matrix is initialized in the function <code class="language-plaintext highlighter-rouge">G2_GenerateWorldMatrix(angles,position);</code> (for instance, in <code class="language-plaintext highlighter-rouge">G2_RagDollCurrentPosition([...])</code>). This matrix seems to be actually local to an entity? Let’s try to add its initialization it in our bone drawing code:</p>
+
+<div class="code_frame"> tr_main.cpp</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="code"><pre><span class="k">for</span> <span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">&lt;</span> <span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">num_entities</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="n">trRefEntity_t</span><span class="o">*</span> <span class="n">ent</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="p">];</span>
+	<span class="n">refEntity_t</span><span class="o">*</span> <span class="n">e</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
+	<span class="c1">// [...]</span>
+	<span class="n">G2_GenerateWorldMatrix</span><span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">angles</span><span class="p">,</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">);</span>
+	<span class="c1">// [...]</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Once again, the definition of <code class="language-plaintext highlighter-rouge">G2_GenerateWorldMatrix([...])</code> needs to be added in the file <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> to compile. With this additional initialization, the entity mismatch issue ↔️ is solved:</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/bone_attempt3.png" alt="We can now successfully extract positions of the bones." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can now successfully extract positions of the bones.</p>
+  </div>
+</div>
+
+<h2 id="drawing-the-actual-bones-">Drawing the actual bones 🦴</h2>
+
+<p>Having access to the bone positions is good enough but now we want to actually draw the bones. We can expect the skeleton 🩻 to be defined hierarchically: every bone being linked to a <em>parent</em> one. For instance, the radius is likely to be linked 🔗 to the humerus 🦾. The hierarchy 🌲 means that if the parent bone moves, the children bone will be move the same.</p>
+
+<p>At this stage, I tried to find such information in the <code class="language-plaintext highlighter-rouge">CGhoul2Info</code> data structure but I was not able to find anything about the hierarchy 📝. My second attempt was to look at the other function’s names in the file <code class="language-plaintext highlighter-rouge">G2_bones.cppp</code>. Bingo 💯, we can find there a function <code class="language-plaintext highlighter-rouge">G2_GetParentBoneMatrixLow</code> with the same parameters than <code class="language-plaintext highlighter-rouge">G2_GetBoneMatrixLow</code> ✅. Let’s try extract a second position from this assumed parent bone and draw a line between the two:</p>
+
+<div class="code_frame"> R_RenderView(viewParms_t *parms)</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="n">qglDepthRange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">);</span>
+<span class="n">G2_GenerateWorldMatrix</span><span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">angles</span><span class="p">,</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bone_ind</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">bone_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">const</span> <span class="n">vec3_t</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+	<span class="n">mdxaBone_t</span> <span class="n">retMatrix</span><span class="p">,</span> <span class="n">retBasepose</span><span class="p">,</span> <span class="n">retBaseposeInv</span><span class="p">,</span> <span class="n">retMatrix2</span><span class="p">;</span>
+	<span class="n">mdxaBone_t</span> <span class="o">*</span><span class="n">ptr_retBasepose</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">retBasepose</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr_retBaseposeInv</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">retBaseposeInv</span><span class="p">;</span>
+	<span class="n">G2_GetBoneMatrixLow</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">retMatrix</span><span class="p">,</span> <span class="n">ptr_retBasepose</span><span class="p">,</span> <span class="n">ptr_retBaseposeInv</span><span class="p">);</span>
+	<span class="n">vec3_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]};</span>
+	<span class="n">G2_GetParentBoneMatrixLow</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">retMatrix2</span><span class="p">,</span> <span class="n">ptr_retBasepose</span><span class="p">,</span> <span class="n">ptr_retBaseposeInv</span><span class="p">);</span>
+	<span class="n">vec3_t</span> <span class="n">pos2</span> <span class="o">=</span> <span class="p">{</span><span class="n">retMatrix2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]};</span>
+	<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+	<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+	<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+	<span class="n">qglEnd</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="n">qglDepthRange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/bone_attempt4.png" alt="We start to see some bones but the skeleton is incomplete." /></p>
+  <div class="custom_caption">
+    <p>&gt; We start to see some bones but the skeleton is incomplete.</p>
+  </div>
+</div>
+
+<p>We are almost there the but skeleton is not complete yet. We need to find the correct number of bones in the skeleton related data structures. There is a <code class="language-plaintext highlighter-rouge">mNumBones</code> field in <code class="language-plaintext highlighter-rouge">mBoneCache</code> class (we saw it before). Let’s try this one:</p>
+
+<div class="code_frame"> R_RenderView(viewParms_t *parms)</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="n">G2_GenerateWorldMatrix</span><span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">angles</span><span class="p">,</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bone_ind</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="o">-&gt;</span><span class="n">mNumBones</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// [...]</span>
+<span class="p">}</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>There is now a new definition issue because of <code class="language-plaintext highlighter-rouge">mBoneCache</code>. The class <code class="language-plaintext highlighter-rouge">CBoneCache</code> is only defined in <code class="language-plaintext highlighter-rouge">tr_ghoul2.cpp</code>.  A <a href="https://en.cppreference.com/cpp/language/class">forward declaration</a> of it in <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> would not work here because the access to one of its member is required. A simple fix consists in pasting the entire definition of the class in <code class="language-plaintext highlighter-rouge">tr_main.cpp</code>. This also requires to add the two following forward declaration: <code class="language-plaintext highlighter-rouge">struct SBoneCalc;</code> and <code class="language-plaintext highlighter-rouge">class CTransformBone;</code>:</p>
+
+<div class="code_frame"> tr_main.cpp</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="k">struct</span> <span class="nc">SBoneCalc</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">CTransformBone</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">CBoneCache</span>
+<span class="p">{</span>
+	<span class="c1">// [...]</span>
+	<span class="c1">// the class declaration goes here</span>
+<span class="p">};</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We now have a complete skeleton 🥳:</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/bone_attempt5.png" alt="The skeleton is now complete." /></p>
+  <div class="custom_caption">
+    <p>&gt; The skeleton is now complete.</p>
+  </div>
+</div>
+
+<h2 id="few-adjustments">Few adjustments</h2>
+
+<p>Several improvements can be made. First, the skeleton actually contains a lot of bones, some of them not particularly useful (fingers for instance). It would be nice to filter the bones based on their names. There is actually a function  <code class="language-plaintext highlighter-rouge">char *G2_GetBoneNameFromSkel(CGhoul2Info &amp;ghoul2, int boneNum);</code> that we can test in <code class="language-plaintext highlighter-rouge">tr_ghoul2.cpp</code>. Let’s try to print the bone names in the terminal 🧑‍💻:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="n">Com_Printf</span><span class="p">(</span><span class="s">"n bones: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="o">-&gt;</span><span class="n">mNumBones</span><span class="p">);</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bone_ind</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="o">-&gt;</span><span class="n">mNumBones</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">const</span> <span class="n">vec3_t</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+	<span class="kt">char</span><span class="o">*</span> <span class="n">bone_name</span> <span class="o">=</span> <span class="n">G2_GetBoneNameFromSkel</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">);</span>
+	<span class="n">Com_Printf</span><span class="p">(</span><span class="s">"Current bone: %d %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">,</span> <span class="n">bone_name</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We find several entities with 53 bones, where names are self explanatory 🩻:</p>
+
+<div class="collapse-panel"><div>
+<label for="code_1">Expand</label>
+<input type="checkbox" name="" id="code_1" /><span class="collapse-label"></span>
+<div class="extensible-content">
+<div class="code_frame"> Terminal output</div>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+</pre></td><td class="code"><pre>n bones: 53
+Current bone: 0 model_root
+Current bone: 1 pelvis
+Current bone: 2 Motion
+Current bone: 3 lfemurYZ
+Current bone: 4 lfemurX
+Current bone: 5 ltibia
+Current bone: 6 ltalus
+Current bone: 7 rfemurYZ
+Current bone: 8 rfemurX
+Current bone: 9 rtibia
+Current bone: 10 rtalus
+Current bone: 11 lower_lumbar
+Current bone: 12 upper_lumbar
+Current bone: 13 thoracic
+Current bone: 14 cervical
+Current bone: 15 cranium
+Current bone: 16 ceyebrow
+Current bone: 17 jaw
+Current bone: 18 lblip2
+Current bone: 19 leye
+Current bone: 20 rblip2
+Current bone: 21 ltlip2
+Current bone: 22 rtlip2
+Current bone: 23 reye
+Current bone: 24 rclavical
+Current bone: 25 rhumerus
+Current bone: 26 rhumerusX
+Current bone: 27 rradius
+Current bone: 28 rradiusX
+Current bone: 29 rhand
+Current bone: 30 r_d1_j1
+Current bone: 31 r_d1_j2
+Current bone: 32 r_d2_j1
+Current bone: 33 r_d2_j2
+Current bone: 34 r_d4_j1
+Current bone: 35 r_d4_j2
+Current bone: 36 rhang_tag_bone
+Current bone: 37 lclavical
+Current bone: 38 lhumerus
+Current bone: 39 lhumerusX
+Current bone: 40 lradius
+Current bone: 41 lradiusX
+Current bone: 42 lhand
+Current bone: 43 l_d4_j1
+Current bone: 44 l_d4_j2
+Current bone: 45 l_d2_j1
+Current bone: 46 l_d2_j2
+Current bone: 47 l_d1_j1
+Current bone: 48 l_d1_j2
+Current bone: 49 ltail
+Current bone: 50 rtail
+Current bone: 51 lhang_tag_bone
+Current bone: 52 face
+</pre></td></tr></tbody></table></code></pre></figure>
+
+</div></div></div>
+
+<p>We can see a symmetry in the bone’s names with a <em>r</em> or <em>l</em> prefix, meaning left 👈 or right 👉. There are also <em>bones</em> that are not actual bones such as <code class="language-plaintext highlighter-rouge">reye</code>, <code class="language-plaintext highlighter-rouge">rblip2</code>, etc…  Based on this extraction  and some trials and errors, I defined a small list of bones 🦴 that is enough to draw a simple and complete skeleton:</p>
+
+<div class="code_frame"> R_RenderView(viewParms_t *parms)</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre><span class="c1">// [...]</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">bone_draw</span> <span class="o">=</span> <span class="p">{</span><span class="s">"rclavical"</span><span class="p">,</span> <span class="s">"rhumerus"</span><span class="p">,</span> <span class="s">"rradius"</span><span class="p">,</span> <span class="s">"rhand"</span><span class="p">,</span> <span class="s">"lclavical"</span><span class="p">,</span> <span class="s">"lhumerus"</span><span class="p">,</span> <span class="s">"lradius"</span><span class="p">,</span> <span class="s">"lhand"</span><span class="p">,</span> <span class="s">"thoracic"</span><span class="p">,</span> <span class="s">"upper_lumbar"</span><span class="p">,</span> <span class="s">"lower_lumbar"</span><span class="p">,</span> <span class="s">"ltibia"</span><span class="p">,</span> <span class="s">"lfemurYZ"</span><span class="p">,</span> <span class="s">"ltalus"</span><span class="p">,</span> <span class="s">"rtibia"</span><span class="p">,</span> <span class="s">"rfemurYZ"</span><span class="p">,</span> <span class="s">"rtalus"</span><span class="p">};</span>
+<span class="k">for</span> <span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span> <span class="o">&lt;</span> <span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">num_entities</span><span class="p">;</span> <span class="n">tr</span><span class="p">.</span><span class="n">currentEntityNum</span><span class="o">++</span> <span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// [...]</span>
+	<span class="n">qglDepthRange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">);</span>
+	<span class="n">G2_GenerateWorldMatrix</span><span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">angles</span><span class="p">,</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">);</span>
+	<span class="n">Com_Printf</span><span class="p">(</span><span class="s">"n bones: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="o">-&gt;</span><span class="n">mNumBones</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bone_ind</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="o">-&gt;</span><span class="n">mNumBones</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">const</span> <span class="n">vec3_t</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+		<span class="kt">char</span><span class="o">*</span> <span class="n">bone_name</span> <span class="o">=</span> <span class="n">G2_GetBoneNameFromSkel</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">);</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">bone_draw</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bone_draw</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">bone_name</span><span class="p">))</span> <span class="o">==</span> <span class="n">bone_draw</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+			<span class="k">continue</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="c1">// [...]</span>
+		<span class="c1">// draw the bones</span>
+	<span class="p">}</span>
+	<span class="c1">// [...]</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The result is satisfying but there is still one drawing issue to solve. We can see that the skeleton is actually not well adjusted with the 3D character model. The offset seems bigger when the player is looking up:</p>
+
+<div style="display: flex; align-items: center; gap: 0.5em; max-width: 100%">
+<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt6.png" alt="Debug rendering of a limited set of bones." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt7.png" alt="The skeleton is not well superposed with the character model." /></div>
+</div>
+<div class="custom_caption">
+  <p>&gt; Debug rendering of a limited set of bones. The skeleton is not well superposed with the character model.</p>
+</div>
+
+<p>The correction here is a bit tricky. The entity position and orientation is provided to the skeleton engine 🩻 through <code class="language-plaintext highlighter-rouge">G2_GenerateWorldMatrix( ent-&gt;e.angles,ent-&gt;e.origin);</code>. This function manipulates the <code class="language-plaintext highlighter-rouge">worldMatrix</code> global variable. The field <code class="language-plaintext highlighter-rouge">angles</code> of the entity is actually not what we previously used to display their orientation. We can try to remove this call and manually initialize the <code class="language-plaintext highlighter-rouge">worldMatrix</code> with the<code class="language-plaintext highlighter-rouge">axis</code> field this time. The first three columns of the matrix correspond to the orientation axes and the fourth one corresponds to the entity origin:</p>
+
+<div class="code_frame"> R_RenderView(viewParms_t *parms)</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="code"><pre><span class="c1">// the static world matrix variable is referenced in this file</span>
+<span class="k">extern</span> <span class="n">mdxaBone_t</span> <span class="n">worldMatrix</span><span class="p">;</span>
+<span class="c1">// [...]</span>
+<span class="c1">// this loop replaces a call to G2_GenerateWorldMatrix( ent-&gt;e.angles,ent-&gt;e.origin)</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">worldMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">axis</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="n">worldMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">worldMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">worldMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">worldMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="p">}</span>
+<span class="c1">// skeleton drawing function</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The bone placement is now correct. It is hard to explain the difference between the fields <code class="language-plaintext highlighter-rouge">angles</code> and <code class="language-plaintext highlighter-rouge">axis</code> but once again, a complete understanding of the code is not required at this stage.</p>
+
+<div style="display: flex; align-items: center; gap: 0.5em; max-width: 100%">
+<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt9.png" alt="The skeleton is not well superposed with the character model." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt8.png" alt="Debug rendering of a limited set of bones." /></div>
+</div>
+<div class="custom_caption">
+  <p>&gt; The bone placement is now perfect.</p>
+</div>
+
+<h2 id="final-touch">Final touch</h2>
+
+<p>Only the bone positions are currently displayed but visualizing their orientation can also be useful for debugging their placement.
+Instead of overloading the screen with superfluous information, we can select an additional subset of bones, the arms for instance 💪, to draw their orientation. The orientation is extracted as the first three columns of the matrix:</p>
+
+<div class="code_frame"> R_RenderView(viewParms_t *parms)</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="c1">// draw the bone matrix</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">bone_matrix_draw</span> <span class="o">=</span> <span class="p">{</span><span class="s">"rhumerus"</span><span class="p">,</span> <span class="s">"rradius"</span><span class="p">,</span> <span class="s">"rhand"</span><span class="p">,</span> <span class="s">"lhumerus"</span><span class="p">,</span> <span class="s">"lradius"</span><span class="p">,</span> <span class="s">"lhand"</span><span class="p">};</span>
+<span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">bone_matrix_draw</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bone_matrix_draw</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">bone_name</span><span class="p">))</span> <span class="o">==</span> <span class="n">bone_matrix_draw</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+	<span class="k">continue</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">float</span> <span class="n">romat_scale</span> <span class="o">=</span> <span class="mf">3.</span><span class="p">;</span>
+<span class="n">qglLineWidth</span><span class="p">(</span><span class="mf">2.5</span><span class="p">);</span>
+<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+<span class="n">qglEnd</span><span class="p">();</span>
+<span class="n">qglLineWidth</span><span class="p">(</span><span class="mf">1.</span><span class="p">);</span>
+<span class="c1">// [...]</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This helps to understand the bone placement. We can see that the first axis in red is always oriented in the direction of the children bone.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/bone_orientation.png" alt="We can select only the characters and draw their orientation." /></p>
+  <div class="custom_caption">
+    <p>&gt; Bones are oriented so that the first axis is pointing toward the children bone’s position.</p>
+  </div>
+</div>
+
+<p>Lastly, drawing all the skeletons makes the scene slightly confusing  😵‍💫 because skeletons are displayed on top of everything. For this reason, we can additionally limit the drawing 🖼️ to the player’s skeleton only. It is however hard to find a field in <code class="language-plaintext highlighter-rouge">trRefEntity_t</code> or <code class="language-plaintext highlighter-rouge">refEntity_t</code> that indicates that an entity corresponds to the actual player 🎮. This is not surprising since this information is not really useful for drawing the scene. Luckily enough, we can however realize that the player is always the first animated entity, at index 0! We can now remove the entity loop to only process the player. Here is the final code:</p>
+
+<div class="collapse-panel"><div>
+<label for="code_2">Expand</label>
+<input type="checkbox" name="" id="code_2" /><span class="collapse-label"></span>
+<div class="extensible-content">
+<div class="code_frame"> R_RenderView(viewParms_t *parms)</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+</pre></td><td class="code"><pre><span class="c1">// skeleton debug drawing</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">bone_draw</span> <span class="o">=</span> <span class="p">{</span><span class="s">"rclavical"</span><span class="p">,</span> <span class="s">"rhumerus"</span><span class="p">,</span> <span class="s">"rradius"</span><span class="p">,</span> <span class="s">"rhand"</span><span class="p">,</span> <span class="s">"lclavical"</span><span class="p">,</span> <span class="s">"lhumerus"</span><span class="p">,</span> <span class="s">"lradius"</span><span class="p">,</span> <span class="s">"lhand"</span><span class="p">,</span> <span class="s">"thoracic"</span><span class="p">,</span> <span class="s">"upper_lumbar"</span><span class="p">,</span> <span class="s">"lower_lumbar"</span><span class="p">,</span> <span class="s">"ltibia"</span><span class="p">,</span> <span class="s">"lfemurYZ"</span><span class="p">,</span> <span class="s">"ltalus"</span><span class="p">,</span> <span class="s">"rtibia"</span><span class="p">,</span> <span class="s">"rfemurYZ"</span><span class="p">,</span> <span class="s">"rtalus"</span><span class="p">};</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">bone_matrix_draw</span> <span class="o">=</span> <span class="p">{</span><span class="s">"rhumerus"</span><span class="p">,</span> <span class="s">"rradius"</span><span class="p">,</span> <span class="s">"rhand"</span><span class="p">,</span> <span class="s">"lhumerus"</span><span class="p">,</span> <span class="s">"lradius"</span><span class="p">,</span> <span class="s">"lhand"</span><span class="p">};</span>
+
+<span class="n">R_IssuePendingRenderCommands</span><span class="p">();</span>
+<span class="n">GL_Bind</span><span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">whiteImage</span><span class="p">);</span>
+<span class="n">qglDepthRange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">);</span>
+<span class="c1">// select the first entity (player)</span>
+<span class="n">trRefEntity_t</span><span class="o">*</span> <span class="n">ent</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="n">refEntity_t</span><span class="o">*</span> <span class="n">e</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">reType</span> <span class="o">!=</span> <span class="n">RT_MODEL</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">model_t</span><span class="o">*</span> <span class="n">currentModel</span> <span class="o">=</span> <span class="n">R_GetModelByHandle</span><span class="p">(</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">hModel</span> <span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">currentModel</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">MOD_BAD</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">ghoul2</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// setup "word" matrix			</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">worldMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">axis</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">];</span>
+	<span class="p">}</span>
+	<span class="n">worldMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">origin</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="n">CGhoul2Info_v</span><span class="o">&amp;</span> <span class="n">ghoul2</span> <span class="o">=</span> <span class="o">*</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">ghoul2</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ghoul2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">CGhoul2Info</span> <span class="o">&amp;</span><span class="n">info</span> <span class="o">=</span> <span class="n">ghoul2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">continue</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="n">qglLineWidth</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+	<span class="n">Com_Printf</span><span class="p">(</span><span class="s">"n bones: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="o">-&gt;</span><span class="n">mNumBones</span><span class="p">);</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">bone_ind</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">&lt;</span> <span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="o">-&gt;</span><span class="n">mNumBones</span><span class="p">;</span> <span class="n">bone_ind</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">const</span> <span class="n">vec3_t</span> <span class="n">scale</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+		<span class="kt">char</span><span class="o">*</span> <span class="n">bone_name</span> <span class="o">=</span> <span class="n">G2_GetBoneNameFromSkel</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">);</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">bone_draw</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bone_draw</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">bone_name</span><span class="p">))</span> <span class="o">==</span> <span class="n">bone_draw</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+			<span class="k">continue</span><span class="p">;</span>
+		<span class="p">}</span>
+
+		<span class="c1">// compute the bone position</span>
+		<span class="n">mdxaBone_t</span> <span class="n">retMatrix</span><span class="p">,</span> <span class="n">retBasepose</span><span class="p">,</span> <span class="n">retBaseposeInv</span><span class="p">,</span> <span class="n">retMatrix2</span><span class="p">;</span>
+		<span class="n">mdxaBone_t</span> <span class="o">*</span><span class="n">ptr_retBasepose</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">retBasepose</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr_retBaseposeInv</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">retBaseposeInv</span><span class="p">;</span>
+		<span class="n">G2_GetBoneMatrixLow</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">retMatrix</span><span class="p">,</span> <span class="n">ptr_retBasepose</span><span class="p">,</span> <span class="n">ptr_retBaseposeInv</span><span class="p">);</span>
+		<span class="n">vec3_t</span> <span class="n">pos</span> <span class="o">=</span> <span class="p">{</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]};</span>
+		<span class="n">G2_GetParentBoneMatrixLow</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">bone_ind</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">retMatrix2</span><span class="p">,</span> <span class="n">ptr_retBasepose</span><span class="p">,</span> <span class="n">ptr_retBaseposeInv</span><span class="p">);</span>
+		<span class="n">vec3_t</span> <span class="n">pos2</span> <span class="o">=</span> <span class="p">{</span><span class="n">retMatrix2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span> <span class="n">retMatrix2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]};</span>
+
+		<span class="c1">// draw the bone</span>
+		<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+		<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+		<span class="n">qglEnd</span><span class="p">();</span>
+
+		<span class="c1">// draw the bone orientation</span>
+		<span class="k">if</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">bone_matrix_draw</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">bone_matrix_draw</span><span class="p">.</span><span class="n">end</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">bone_name</span><span class="p">))</span> <span class="o">==</span> <span class="n">bone_matrix_draw</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+			<span class="k">continue</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="kt">float</span> <span class="n">romat_scale</span> <span class="o">=</span> <span class="mf">3.</span><span class="p">;</span>
+		<span class="n">qglLineWidth</span><span class="p">(</span><span class="mf">2.5</span><span class="p">);</span>
+		<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+		<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span>
+		<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+		<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+		<span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span>
+		<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+		<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+		<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+		<span class="n">pos2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span> <span class="n">pos2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">retMatrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">romat_scale</span><span class="p">;</span>
+		<span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos</span> <span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span> <span class="n">pos2</span> <span class="p">);</span>
+		<span class="n">qglEnd</span><span class="p">();</span>
+		<span class="n">qglLineWidth</span><span class="p">(</span><span class="mf">1.</span><span class="p">);</span>
+	<span class="p">}</span>
+	<span class="n">qglDepthRange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">);</span>
+
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+</div></div></div>
+
+<p>And we have the final result for this skeleton drawing phase:</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt2/skeleton_final.png" alt="We are finally able to draw the player's skeleton." /></p>
+  <div class="custom_caption">
+    <p>&gt; We are finally able to draw the player’s skeleton.</p>
+  </div>
+</div>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>This part was notably more difficult than the previous one due to the complexity of Ghoul2’s code. Here I tried to re-create the thinking process 🤔 that I used when solving this task. However, remember that this is not the only solution 💡 and that multiple path may lead to the same solution anyway. It is clear that all the experience with game engine ⚙️ and 3D graphical coding is helpful here but the result remains achievable with less knowledge if one is investing a sufficient amount of time 🕣.</p>
+
+<p>The ending result is useful enough but the process itself is also very helpful to understand how 3D orientation works and how it is implemented in Jedi Academy. The process of modding is greatly simplified as soon as one start to play and experiment with the code 🧑‍💻.</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#programming-modding-video-games-virtual-reality">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">programming modding video-games virtual-reality</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+
+</div>
+
+
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>

@@ -162,6 +162,10 @@
   
 
   
+    
+  
+
+  
 
   
 
@@ -203,6 +207,10 @@
     
   
 
+  
+
+  
+    
   
 
   
@@ -466,8 +474,8 @@ The engine is notably known for its very efficient implementation of the <a href
 <p>It is now time to start exploring ⌚. A good option is to proceed hierarchically 🪜. We first look at file names and then look at function names. Last, but not least, we  may look at the actual code in the functions. When an interesting functions is found, it is also useful to look at what functions call it (hence the search functionality). A good start here is the <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> file. Let’s look at the <code class="language-plaintext highlighter-rouge">R_GenerateDrawSurfs([...])</code> function for instance. It seems to be responsible for preparing the polygons that will be drawn on the screen. There are several function calls in it, for instance <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces ();</code>. What if we try to comment this call and lunch the game ? Note that a command can be passed to the game executable to load a level without going through the menu, for instance with <code class="language-plaintext highlighter-rouge">load jedi_01</code> to start from a savefile 🗃️.</p>
 
 <div style="display: flex; align-items: center; gap: 1rem; max-width: 100%">
-<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_entity.png" alt="The first Kinect for Windows." /></div>
-<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_no_entity.png" alt="The second Kinect for Windows." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_entity.png" alt="Normal rendering with the OpenJK build" /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_no_entity.png" alt="rendering after commenting the call to R_AddEntitySurfaces()." /></div>
 </div>
 <div class="custom_caption">
   <p>&gt; On the left, normal rendering with the OpenJK build. On the right, rendering after commenting the call to <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces</code>.</p>
@@ -828,7 +836,7 @@ Fortunately, this is not the only way to draw information. If we further study t
 
   <p>We need to <em>rotate</em> the bounding box vertices to correct the orientation. The <code class="language-plaintext highlighter-rouge">axis</code> field of the entity can actually be seen as a 3D <a href="https://en.wikipedia.org/wiki/Rotation_matrix"><strong>rotation</strong> matrix</a>. 3D transformations can actually be represented by matrices, <em>i.e.</em>, 2D arrays of numbers. Transforming a point is done by <a href="https://en.wikipedia.org/wiki/Matrix_multiplication">multiplying its coordinates by the matrix</a>. The code bellow achieves it:</p>
 
-  <div class="code_frame"> R_RenderView</div>
+  <div class="code_frame"> R_RenderView([...])</div>
 
   <figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2

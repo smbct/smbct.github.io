@@ -42,8 +42,8 @@ We will now focus on the OpenJK code. The renderer is actually to be found in th
 It is now time to start exploring ⌚. A good option is to proceed hierarchically 🪜. We first look at file names and then look at function names. Last, but not least, we  may look at the actual code in the functions. When an interesting functions is found, it is also useful to look at what functions call it (hence the search functionality). A good start here is the `tr_main.cpp` file. Let's look at the `R_GenerateDrawSurfs([...])` function for instance. It seems to be responsible for preparing the polygons that will be drawn on the screen. There are several function calls in it, for instance `R_AddEntitySurfaces ();`. What if we try to comment this call and lunch the game ? Note that a command can be passed to the game executable to load a level without going through the menu, for instance with `load jedi_01` to start from a savefile 🗃️.
 
 <div style="display: flex; align-items: center; gap: 1rem; max-width: 100%">
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt1/draw_entity.png" alt="The first Kinect for Windows." /></div>
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt1/draw_no_entity.png" alt="The second Kinect for Windows." /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt1/draw_entity.png" alt="Normal rendering with the OpenJK build" /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt1/draw_no_entity.png" alt="rendering after commenting the call to R_AddEntitySurfaces()." /></div>
 </div>
 <div class="custom_caption" markdown="1">
 \> On the left, normal rendering with the OpenJK build. On the right, rendering after commenting the call to `R_AddEntitySurfaces`. 
@@ -284,7 +284,7 @@ Here I used the function ̀qglDepthRange(0,0);` to temporary disable the depth t
 We need to *rotate* the bounding box vertices to correct the orientation. The `axis` field of the entity can actually be seen as a 3D [**rotation** matrix](https://en.wikipedia.org/wiki/Rotation_matrix). 3D transformations can actually be represented by matrices, *i.e.*, 2D arrays of numbers. Transforming a point is done by [multiplying its coordinates by the matrix](https://en.wikipedia.org/wiki/Matrix_multiplication). The code bellow achieves it:  
 
 
-<div class="code_frame"> R_RenderView</div>
+<div class="code_frame"> R_RenderView([...])</div>
 {% highlight c++ linenos %}
 // rotate the vertices
 for(int vert_ind = 0; vert_ind < 8; vert_ind ++) {
