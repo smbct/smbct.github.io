@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
   <head>
   <link href="https://gmpg.org/xfn/11" rel="profile" />
@@ -13,7 +13,7 @@
 
   <title>
     
-      À propos &middot; blog de smbct
+      Modding Jedi Academy with the Kinect&#58 Understanding skeleton positioning &middot; smbct's blog
     
   </title>
 
@@ -37,30 +37,30 @@
 </head>
 
 
-  <body class="category">
+  <body class="series_article">
 
     
     <div id="sidebar">
   <header>
     <div class="site-title">
-      <a href="/fr/">
+      <a href="/">
         
           <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
   <path d="M0 0h24v24H0z" fill="none"/>
   <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
 </svg></span>
         
-        blog de smbct
+        smbct's blog
       </a>
     </div>
-    <p class="lead">Notes sur l'informatique, la programmation, la société et plus.</p>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
   </header>
   <nav id="sidebar-nav-links">
 
   
     
       <a class="home-link "
-          href="/fr/">Blog</a>
+          href="/">Blog</a>
     
   
   
@@ -175,6 +175,8 @@
 
   
     
+  
+
   
 
   
@@ -184,7 +186,7 @@
   <!-- should be improved -->
   
   <a class="category-link "
-      href="/pages/fr_series.html">Séries </a>
+          href="/pages/series.html">Series </a>
   
 
   
@@ -196,27 +198,13 @@
 
   
     
-  
-
-  
-    
-      <a class="category-link  active"
-          href="/pages/fr_about.html">À propos</a>
+      <a class="category-link "
+          href="/pages/about.html">About</a>
     
   
 
   
     
-  
-
-  
-    
-  
-
-  
-    
-  
-
   
 
   
@@ -229,6 +217,8 @@
 
   
     
+  
+
   
 
   
@@ -297,6 +287,20 @@
 
   
     
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
   
 
   
@@ -372,13 +376,13 @@
 <!-- When one of the link is not set, the corresponding flag cannot be clicked -->
 
 <a id="icon_flag"
-     class="icon_flag"
-     href="/pages/about.html"
+     class="icon_flag active"
+     
      >
 🇬🇧 <div></div>
 </a>
 <a id="icon_flag"
-  class="icon_flag active"
+  class="icon_flag"
   
 >
 🇫🇷 <div></div>
@@ -395,9 +399,8 @@
 
 
   <div id="credit">
-    Créé avec <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> et
-    <a href="https://giscus.app/fr">giscus</a>.
-    Hébergé par <a href="https://pages.github.com">github</a>.
+  Made with <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> and <a href="https://giscus.app">giscus</a>.
+  Hosted by <a href="https://pages.github.com">github</a>.
   </div>
 
 </div>
@@ -408,28 +411,118 @@
   
 
 
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
 
-  <h1 class="page-title">À propos</h1>
+
+  <h1 class="post-title">Modding Jedi Academy with the Kinect&#58 Understanding skeleton positioning</h1>
 </header>
 <div class="content">
+  <div class="post-meta">
   
-  <p>Bienvenu sur mon blog. J’ai travaillé maintenant depuis quelques années dans la recherche et l’industrie de l’informatique. J’ai un bagage en informatique et de l’expérience dans son application à la biologie, et j’espère utiliser ce blog comme un endroit pour garder des notes et m’exprimer sur divers sujets.</p>
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      09 Aug 2026
+    
+  </span>
 
-<p>Mes intérêts du moment gravitent autour de la science, des technologiques de l’informatique et de leurs utilisations actuelles dans la société.
-Je suis également très préoccupé par la crise climatique et environnementale, ainsi que par les inégalités sociales et internationales.
-Les technologies numériques sont utilisées de manières non justes et nous distraient des vrais problèmes.</p>
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
 
-
-
-<ul class="posts-list">
+<span class="reading-time" title="Estimated read time">
   
   
-</ul>
+    1 min
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        modding
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p>In the <a href="/series/modding_ja/pt3">last post</a> of the series, we have implemented a visual debugging feature to display the character’s skeletons. This will help us in this post to understand how body positioning is performed and how wa can interact with it.</p>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#programming-modding-video-games-virtual-reality">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">programming modding video-games virtual-reality</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
 
 </div>
 
 
 
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
 
 
     </main>
