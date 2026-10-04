@@ -42,8 +42,8 @@ We will now focus on the OpenJK code. The renderer is actually to be found in th
 It is now time to start exploring ⌚. A good option is to proceed hierarchically 🪜. We first look at file names and then look at function names. Last, but not least, we  may look at the actual code in the functions. When an interesting functions is found, it is also useful to look at what functions call it (hence the search functionality). A good start here is the `tr_main.cpp` file. Let's look at the `R_GenerateDrawSurfs([...])` function for instance. It seems to be responsible for preparing the polygons that will be drawn on the screen. There are several function calls in it, for instance `R_AddEntitySurfaces ();`. What if we try to comment this call and lunch the game ? Note that a command can be passed to the game executable to load a level without going through the menu, for instance with `load jedi_01` to start from a savefile 🗃️.
 
 <div style="display: flex; align-items: center; gap: 1rem; max-width: 100%">
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt1/draw_entity.png" alt="Normal rendering with the OpenJK build" /></div>
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt1/draw_no_entity.png" alt="rendering after commenting the call to R_AddEntitySurfaces()." /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt2/draw_entity.png" alt="Normal rendering with the OpenJK build" /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt2/draw_no_entity.png" alt="rendering after commenting the call to R_AddEntitySurfaces()." /></div>
 </div>
 <div class="custom_caption" markdown="1">
 \> On the left, normal rendering with the OpenJK build. On the right, rendering after commenting the call to `R_AddEntitySurfaces`. 
@@ -154,7 +154,7 @@ for ( tr.currentEntityNum = 0; tr.currentEntityNum < tr.refdef.num_entities; tr.
 We are looping over all entities and access their position (`origin`). Then, we draw a red line that starts from its origin and goes straight up (third value in `shifted`). Two notable points here: `GL_Bind( tr.whiteImage);` is necessary as the drawing calls seem to be performed in texturing mode. The second thing is a call to `R_IssuePendingRenderCommands()` required to make perform the drawing. I found a similar call in the `R_DebugGraphics()` function with the following comment: "the render thread can't make callbacks to the main thread". I am not able to precisely explain why the call is necessary 🤔 but it seems that because of the command system, some state must be cleared before performing the drawing calls. 
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![We can draw lines in the scene now.]({{ site.baseurl }}/assets/ja_mod/pt1/draw_line.png)
+![We can draw lines in the scene now.]({{ site.baseurl }}/assets/ja_mod/pt2/draw_line.png)
 <div class="custom_caption" markdown="1">
 \> We can draw lines in the scene now.
 </div>
@@ -244,7 +244,7 @@ qglEnd();
 Here is the result:
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 80%;" markdown="1">
-![The resulting bounding boxes.]({{site.baseurl}}/assets/ja_mod/pt1/draw_bbox.png)
+![The resulting bounding boxes.]({{site.baseurl}}/assets/ja_mod/pt2/draw_bbox.png)
 <div class="custom_caption" markdown="1">
 \> The resulting bounding boxes.
 </div>
@@ -276,7 +276,7 @@ qglDepthRange(0,1);
 Here I used the function ̀qglDepthRange(0,0);` to temporary disable the depth test, meaning that axis are displayed on top of everything. Otherwise, as they are located at the center of the entity, they would be almost always hidden.
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 100%;" markdown="1">
-![The bounding box is not aligned with the three orientation axis.]({{site.baseurl}}/assets/ja_mod/pt1/draw_bbox_axis.png)
+![The bounding box is not aligned with the three orientation axis.]({{site.baseurl}}/assets/ja_mod/pt2/draw_bbox_axis.png)
 <div class="custom_caption" markdown="1">
 \> The bounding box is not aligned with the three orientation axis.
 </div>
@@ -303,7 +303,7 @@ for(int vert_ind = 0; vert_ind < 8; vert_ind ++) {
 Note that vertices are actually rotated with respect to the local origin, at coordinates `(0,0,0)`. This is why we add the entity position (absolute origin) only after the orientation is computed, at the end of the loop. We now have the correct orientation of the bounding boxes:
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 100%;" markdown="1">
-![The bounding box are now correctly oriented.]({{site.baseurl}}/assets/ja_mod/pt1/draw_bbox_axis_orientation.png)
+![The bounding box are now correctly oriented.]({{site.baseurl}}/assets/ja_mod/pt2/draw_bbox_axis_orientation.png)
 <div class="custom_caption" markdown="1">
 \> The bounding box are now correctly oriented.
 </div>

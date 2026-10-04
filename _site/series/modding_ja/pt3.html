@@ -509,7 +509,7 @@ We will now try to draw <a href="https://en.wikipedia.org/wiki/Skeletal_animatio
 <p>The reason why the type of the model corresponds to <code class="language-plaintext highlighter-rouge">MOD_BAD</code> is troubling but recall that it is not necessary to understand <em>everything</em> in the code at this point as we can rely on our tests.</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/entity_axis.png" alt="We can select the characters and draw their orientation." /></p>
+  <p><img src="/assets/ja_mod/pt3/entity_axis.png" alt="We can select the characters and draw their orientation." /></p>
   <div class="custom_caption">
     <p>&gt; We can select the characters and draw their orientation.</p>
   </div>
@@ -597,7 +597,7 @@ We will now try to draw <a href="https://en.wikipedia.org/wiki/Skeletal_animatio
 <p>The code is more complex, with 3 nested loops 🔁: one for the entity index, one for the model index in the entity? and one for the bone index. We then try to display the <code class="language-plaintext highlighter-rouge">lastPosition</code> of the bone as if it was local regarding the entity, shifting by its origin as we did before.</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/bone_attempt1.png" alt="A first attempt to display bone information from the characters." /></p>
+  <p><img src="/assets/ja_mod/pt3/bone_attempt1.png" alt="A first attempt to display bone information from the characters." /></p>
   <div class="custom_caption">
     <p>&gt; A first attempt to display bone information from the characters.</p>
   </div>
@@ -768,7 +768,7 @@ At this point, it is possible to review the function definitions and spot an alt
 <p>As we see now in the screenshot bellow, the extracted position seem consistent with the body positions. However, we see lines going from one entity to another, suggesting a mismatch between the entity origin and the bone position.</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/bone_attempt2.png" alt="We can select only the characters and draw their orientation." /></p>
+  <p><img src="/assets/ja_mod/pt3/bone_attempt2.png" alt="We can select only the characters and draw their orientation." /></p>
   <div class="custom_caption">
     <p>&gt; We can select only the characters and draw their orientation.</p>
   </div>
@@ -797,7 +797,7 @@ At this point, it is possible to review the function definitions and spot an alt
 <p>Once again, the definition of <code class="language-plaintext highlighter-rouge">G2_GenerateWorldMatrix([...])</code> needs to be added in the file <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> to compile. With this additional initialization, the entity mismatch issue ↔️ is solved:</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/bone_attempt3.png" alt="We can now successfully extract positions of the bones." /></p>
+  <p><img src="/assets/ja_mod/pt3/bone_attempt3.png" alt="We can now successfully extract positions of the bones." /></p>
   <div class="custom_caption">
     <p>&gt; We can now successfully extract positions of the bones.</p>
   </div>
@@ -846,7 +846,7 @@ At this point, it is possible to review the function definitions and spot an alt
 </pre></td></tr></tbody></table></code></pre></figure>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/bone_attempt4.png" alt="We start to see some bones but the skeleton is incomplete." /></p>
+  <p><img src="/assets/ja_mod/pt3/bone_attempt4.png" alt="We start to see some bones but the skeleton is incomplete." /></p>
   <div class="custom_caption">
     <p>&gt; We start to see some bones but the skeleton is incomplete.</p>
   </div>
@@ -895,7 +895,7 @@ At this point, it is possible to review the function definitions and spot an alt
 <p>We now have a complete skeleton 🥳:</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/bone_attempt5.png" alt="The skeleton is now complete." /></p>
+  <p><img src="/assets/ja_mod/pt3/bone_attempt5.png" alt="The skeleton is now complete." /></p>
   <div class="custom_caption">
     <p>&gt; The skeleton is now complete.</p>
   </div>
@@ -1088,8 +1088,8 @@ Current bone: 52 face
 <p>The result is satisfying but there is still one drawing issue to solve. We can see that the skeleton is actually not well adjusted with the 3D character model. The offset seems bigger when the player is looking up:</p>
 
 <div style="display: flex; align-items: center; gap: 0.5em; max-width: 100%">
-<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt6.png" alt="Debug rendering of a limited set of bones." /></div>
-<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt7.png" alt="The skeleton is not well superposed with the character model." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt3/bone_attempt6.png" alt="Debug rendering of a limited set of bones." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt3/bone_attempt7.png" alt="The skeleton is not well superposed with the character model." /></div>
 </div>
 <div class="custom_caption">
   <p>&gt; Debug rendering of a limited set of bones. The skeleton is not well superposed with the character model.</p>
@@ -1134,8 +1134,8 @@ Current bone: 52 face
 <p>The bone placement is now correct. It is hard to explain the difference between the fields <code class="language-plaintext highlighter-rouge">angles</code> and <code class="language-plaintext highlighter-rouge">axis</code> but once again, a complete understanding of the code is not required at this stage.</p>
 
 <div style="display: flex; align-items: center; gap: 0.5em; max-width: 100%">
-<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt9.png" alt="The skeleton is not well superposed with the character model." /></div>
-<div style="display flex;"><img src="/assets/ja_mod/pt2/bone_attempt8.png" alt="Debug rendering of a limited set of bones." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt3/bone_attempt9.png" alt="The skeleton is not well superposed with the character model." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt3/bone_attempt8.png" alt="Debug rendering of a limited set of bones." /></div>
 </div>
 <div class="custom_caption">
   <p>&gt; The bone placement is now perfect.</p>
@@ -1195,7 +1195,7 @@ Instead of overloading the screen with superfluous information, we can select an
 <p>This helps to understand the bone placement. We can see that the first axis in red is always oriented in the direction of the children bone.</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/bone_orientation.png" alt="We can select only the characters and draw their orientation." /></p>
+  <p><img src="/assets/ja_mod/pt3/bone_orientation.png" alt="We can select only the characters and draw their orientation." /></p>
   <div class="custom_caption">
     <p>&gt; Bones are oriented so that the first axis is pointing toward the children bone’s position.</p>
   </div>
@@ -1297,7 +1297,6 @@ Instead of overloading the screen with superfluous information, we can select an
 
 <span class="n">R_IssuePendingRenderCommands</span><span class="p">();</span>
 <span class="n">GL_Bind</span><span class="p">(</span> <span class="n">tr</span><span class="p">.</span><span class="n">whiteImage</span><span class="p">);</span>
-<span class="n">qglDepthRange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">);</span>
 <span class="c1">// select the first entity (player)</span>
 <span class="n">trRefEntity_t</span><span class="o">*</span> <span class="n">ent</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">tr</span><span class="p">.</span><span class="n">refdef</span><span class="p">.</span><span class="n">entities</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="n">refEntity_t</span><span class="o">*</span> <span class="n">e</span> <span class="o">=</span> <span class="o">&amp;</span><span class="p">(</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">);</span>
@@ -1311,6 +1310,7 @@ Instead of overloading the screen with superfluous information, we can select an
 <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">ghoul2</span><span class="p">)</span> <span class="p">{</span>
 	<span class="k">return</span><span class="p">;</span>
 <span class="p">}</span>
+<span class="n">qglDepthRange</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">);</span>
 
 <span class="c1">// setup "word" matrix			</span>
 <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
@@ -1380,7 +1380,7 @@ Instead of overloading the screen with superfluous information, we can select an
 <p>And we have the final result for this skeleton drawing phase:</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt2/skeleton_final.png" alt="We are finally able to draw the player's skeleton." /></p>
+  <p><img src="/assets/ja_mod/pt3/skeleton_final.png" alt="We are finally able to draw the player's skeleton." /></p>
   <div class="custom_caption">
     <p>&gt; We are finally able to draw the player’s skeleton.</p>
   </div>

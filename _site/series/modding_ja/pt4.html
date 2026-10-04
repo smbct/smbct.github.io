@@ -428,7 +428,7 @@
   <span class="post-date">
     📅
     
-      09 Aug 2026
+      20 Sep 2026
     
   </span>
 
@@ -438,7 +438,10 @@
 <span class="reading-time" title="Estimated read time">
   
   
-    1 min
+    19 
+    
+      mins
+    
   
 </span>
   •
@@ -464,7 +467,555 @@
 
 
   <div class="post-body">
-    <p>In the <a href="/series/modding_ja/pt3">last post</a> of the series, we have implemented a visual debugging feature to display the character’s skeletons. This will help us in this post to understand how body positioning is performed and how wa can interact with it.</p>
+    <p>In the <a href="/series/modding_ja/pt3">last post</a> of the series, we have implemented a visual debugging feature to display the character’s skeletons 🩻. This will help us in this post to understand how body positioning is performed and how we can interact with it. We will try to control the orientations of the body limbs to facilitate the integration of a Kinect 📷.</p>
+
+<h2 id="looking-for-ghoul2-controls">Looking for Ghoul2 controls</h2>
+
+<p>We start once again from our previous code in the <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> file. We have been previously able to display rotation matrices of the different bones 🦴. We are now looking for some functions that will help us actually rotate these bones.</p>
+
+<p>We have seen the Ghoul2 functions start with <code class="language-plaintext highlighter-rouge">G2_[...]</code> so we can first search 🔍 for the place where they are defined.
+This lead us to <code class="language-plaintext highlighter-rouge">ghoul2/G2.h</code> with many defined function.</p>
+
+<p>We eventually find these three <em>setter</em> functions related to bone angles:</p>
+
+<div class="code_frame"> ghoul2/G2.h</div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="code"><pre><span class="n">qboolean</span> <span class="nf">G2_Set_Bone_Angles_Matrix</span><span class="p">(</span><span class="n">CGhoul2Info</span> <span class="o">*</span><span class="n">ghlInfo</span><span class="p">,</span> <span class="n">boneInfo_v</span> <span class="o">&amp;</span><span class="n">blist</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">boneName</span><span class="p">,</span> <span class="k">const</span> <span class="n">mdxaBone_t</span> <span class="o">&amp;</span><span class="n">matrix</span><span class="p">,</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">blendTime</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">currentTime</span><span class="p">);</span>
+
+<span class="n">qboolean</span> <span class="nf">G2_Set_Bone_Angles_Index</span><span class="p">(</span><span class="n">CGhoul2Info</span> <span class="o">*</span><span class="n">ghlInfo</span><span class="p">,</span> <span class="n">boneInfo_v</span> <span class="o">&amp;</span><span class="n">blist</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">index</span><span class="p">,</span>
+			<span class="k">const</span> <span class="kt">float</span> <span class="o">*</span><span class="n">angles</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="k">const</span> <span class="n">Eorientations</span> <span class="n">yaw</span><span class="p">,</span>
+			<span class="k">const</span> <span class="n">Eorientations</span> <span class="n">pitch</span><span class="p">,</span> <span class="k">const</span> <span class="n">Eorientations</span> <span class="n">roll</span><span class="p">,</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">blendTime</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">currentTime</span><span class="p">);</span>
+
+<span class="n">qboolean</span> <span class="nf">G2_Set_Bone_Angles_Matrix_Index</span><span class="p">(</span><span class="n">boneInfo_v</span> <span class="o">&amp;</span><span class="n">blist</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">index</span><span class="p">,</span>
+			<span class="k">const</span> <span class="n">mdxaBone_t</span> <span class="o">&amp;</span><span class="n">matrix</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span>
+			<span class="k">const</span> <span class="kt">int</span> <span class="n">blendTime</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">currentTime</span><span class="p">);</span>
+            
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>These functions propose two modes for controlling the bones: using matrices or angles.
+We will first focus on the matrices functions.
+The two functions mainly differ in their second parameters: the “Index” prefixed function seem to identify the bone using an index whereas the other one directly take a string of character as input ⛓️.</p>
+
+<p>For ease, we will use the function <code class="language-plaintext highlighter-rouge">G2_Set_Bone_Angles_Matrix</code>.
+The first 4 parameters of the functions are associated to types we already encountered in the previous post. Then, the user should provide some flags and the two last parameters are related to time ⏲️.</p>
+
+<p>Regarding the <code class="language-plaintext highlighter-rouge">flags</code> parameter, we need to investigate more to guess the possible values.
+Going through the definition of the function, we can spot one value for this flag: <code class="language-plaintext highlighter-rouge">BONE_ANGLES_TOTAL</code>.</p>
+
+<div class="code_frame"> G2_bones.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre><span class="n">G2_Set_Bone_Angles_Matrix</span><span class="p">(</span><span class="cm">/* [..] */</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// [...]</span>
+    <span class="n">blist</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">flags</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="n">BONE_ANGLES_TOTAL</span><span class="p">);</span>
+    <span class="n">blist</span><span class="p">[</span><span class="n">index</span><span class="p">].</span><span class="n">flags</span> <span class="o">|=</span> <span class="n">flags</span><span class="p">;</span>
+    <span class="c1">// [...]</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can find other values for the flags by following the definition of <code class="language-plaintext highlighter-rouge">BONE_ANGLES_TOTAL</code>.
+The definition is in <code class="language-plaintext highlighter-rouge">game/ghoul2_shared.h</code>:</p>
+
+<div class="code_frame"> ghoul2_shared.h </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="cp">#define BONE_ANGLES_PREMULT			0x0001
+#define BONE_ANGLES_POSTMULT		0x0002
+#define BONE_ANGLES_REPLACE			0x0004
+</span><span class="c1">//rww - RAGDOLL_BEGIN</span>
+<span class="cp">#define BONE_ANGLES_RAGDOLL			0x2000  // the rag flags give more details
+#define BONE_ANGLES_IK				0x4000  // the rag flags give more details
+</span><span class="c1">//rww - RAGDOLL_END</span>
+<span class="cp">#define BONE_ANGLES_TOTAL			( BONE_ANGLES_PREMULT | BONE_ANGLES_POSTMULT | BONE_ANGLES_REPLACE )</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can exclude the entries between the <em>ragdoll</em> section as it probably concerns death animations.
+<code class="language-plaintext highlighter-rouge">BONE_ANGLES_TOTAL</code> seems to be a combination of the first defined values.
+It is not clear what their role is but we may guess that this has something to do with the skeleton hierarchy.
+The application of rotations in 3D is indeed not commutative: inverting two successive rotations will result in a different orientation.
+When some bone 🦴 move, it is then natural to apply the same movement to all the bones that are attached to it in the hierarchy (for instance, moving the humerus causes the motion of all the arm 🦾).
+For our concern, it will actually be more convenient to control the bones by setting each matrix independently since the matrices will be obtained externally (from motion capture devices 📷 😇).
+We can select the flag value <code class="language-plaintext highlighter-rouge">BONE_ANGLES_REPLACE</code> for our tests, this mode should not be influenced by parent bones.</p>
+
+<h2 id="first-attempt-a-basic-rotation">First attempt: a basic rotation</h2>
+
+<p>Let’s start by defining the most natural rotation matrix: the <a href="https://en.wikipedia.org/wiki/Identity_matrix">identity</a>, that actually does not apply any rotation 🤷.
+We will apply it to the <code class="language-plaintext highlighter-rouge">humerus</code> bone in out example.
+We start by defining the identity matrix (ones on the diagonal) before iterating over the bones:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="n">mdxaBone_t</span> <span class="n">bone_matrix</span><span class="p">;</span> <span class="c1">// 3x4 matrix</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">;</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">;</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We saw in the previous posts that the <code class="language-plaintext highlighter-rouge">mdxaBone_t</code> matrices are 3x4 matrices, meaning <strong>three</strong> rows and <strong>four</strong> columns.
+We assumed that the rotation part is stored in the first three columns of the matrix.
+We also interpreted the first index as the row index and the second one as the column, which is fairly common.</p>
+
+<p>We can now call the ghoul2 set_angle function  with our identity matrix. We need the <code class="language-plaintext highlighter-rouge">CGhoul2Info*</code> and <code class="language-plaintext highlighter-rouge">boneInfo_v</code> parameters to call the function so the following line can be placed inside of the first loop that iterates over all entities:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="n">CGhoul2Info_v</span><span class="o">&amp;</span> <span class="n">ghoul2</span> <span class="o">=</span> <span class="o">*</span><span class="n">ent</span><span class="o">-&gt;</span><span class="n">e</span><span class="p">.</span><span class="n">ghoul2</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">ghoul2</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">CGhoul2Info</span> <span class="o">&amp;</span><span class="n">info</span> <span class="o">=</span> <span class="n">ghoul2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">info</span><span class="p">.</span><span class="n">mBoneCache</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">continue</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">G2_Set_Bone_Angles_Matrix</span><span class="p">(</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">,</span> <span class="s">"rhumerus"</span><span class="p">,</span> <span class="n">bone_matrix</span><span class="p">,</span> <span class="n">BONE_ANGLES_REPLACE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="c1">// [...]</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We simply put 0’s for the last two parameters as they seem related to animation control 🕺.
+Another useful feature would be the visualization of the matrix before it is sent to ghoul2.
+This may help us identify potential issues in the way we interpret or pass data.<br />
+It was not mentioned before but note that matrices are usually called <a href="https://en.wikipedia.org/wiki/Cartesian_coordinate_system">frames</a> 🖼️ in 3D programming.</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="code"><pre><span class="n">vec3_t</span> <span class="n">origin_shift</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">origin</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">40</span><span class="p">};</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// row</span>
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// col</span>
+		<span class="n">directions</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">origin_shift</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">+</span><span class="n">bone_transformed</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mf">10.</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="n">qglLineWidth</span><span class="p">(</span><span class="mf">2.5</span><span class="p">);</span>
+<span class="n">qglBegin</span><span class="p">(</span><span class="n">GL_LINES</span><span class="p">);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">origin_shift</span><span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">origin_shift</span><span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="n">qglColor3f</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">origin_shift</span><span class="p">);</span> <span class="n">qglVertex3fv</span><span class="p">(</span><span class="n">directions</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
+<span class="n">qglEnd</span><span class="p">();</span>
+<span class="n">qglLineWidth</span><span class="p">(</span><span class="mf">1.</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Here the user rotation matrix is displayed above the character position (<code class="language-plaintext highlighter-rouge">origin_shift</code>) for visibility reasons.
+The drawing is performed similarly than for bone rotation matrices.
+As we previously did, we still assume here that the first index of the matrix corresponds to the row and the second one corresponds to the column.
+By extracting the three columns, we expect to display a frame as represented below, with <span style="color:red">the first column being the forward axis</span> in red, <span style="color:green">the second column being the left axis in green</span> and <span style="color:blue">the third one being the up axis in blue</span>.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 30%;">
+  <p><img src="https://sislerwebgraphics.wordpress.com/wp-content/uploads/2012/11/71ca3-xyz.gif?w=350&amp;h=271" alt="The coordinate frame used in Jedi Academy." /></p>
+  <div class="custom_caption">
+    <p>&gt; The coordinate frame used in Jedi Academy. Image from <a href="https://sislerwebgraphics.wordpress.com/animation-unit/adv-animation-unit/activity-10-2-5d-effect/">Digital Voices</a>.</p>
+  </div>
+</div>
+
+<p>Let see how this behave in an animation:</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt4/identity_1.gif" alt="The matrix sent to ghoul2 is transformed by the current rotation." /></p>
+  <div class="custom_caption">
+    <p>&gt; The matrix sent to ghoul2 is transformed by the current entity rotation.</p>
+  </div>
+</div>
+
+<h2 id="local-versus-global-transformation">Local versus global transformation</h2>
+
+<p>We can see a first mismatch between the bone matrix of the right humerus 🦴 (on the shoulder) and the matrix drawn above the player.
+The humerus matrix seems to correctly orient the arm to the forward direction (red forward, green left and blue up).
+On the contrary, the red axis of the matrix drawn above does not seem to point in the <strong>forward</strong> direction ⬆️ because its direction changes as the player rotates 🌪️.</p>
+
+<p>It is actually the other way around! Our identity matrix is correctly drawn above the player and the alignment problem is actually expected since the identity matrix is global to the game level: it <strong>should not move</strong> as the player rotates. 
+This means that rotation matrices sent to ghoul2 are automatically transformed by the entity’s rotation, which is particularly convenient but what we could expect at first 💡.</p>
+
+<p>We will take advantage on this aspect and transform out matrix prior to displaying it above the character.
+First, we need to create an entity orientation matrix based on its <code class="language-plaintext highlighter-rouge">axis</code> field:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="c1">// build entity orientation matrix</span>
+<span class="n">mdxaBone_t</span> <span class="n">entity_orientation</span><span class="p">;</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">entity_orientation</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">axis</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">];</span> 
+  <span class="p">}</span>
+  <span class="n">entity_orientation</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>This is actually very similar to how we corrected the bounding box orientations in the <a href="/series/modding_ja/pt2">second article of the series</a>.
+The transformation is performed by multiplying this entity orientation matrix by our custom matrix (the identity here, that does nothing for now).
+We will directly use existing functions from the code to perform this operation:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="code"><pre><span class="n">mdxaBone_t</span> <span class="n">bone_transformed</span><span class="p">;</span>
+<span class="n">Multiply_3x4Matrix</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bone_transformed</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">entity_orientation</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">bone_matrix</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The first argument of the function is the returned matrix.
+The multiplication is performed from left (the entity matrix) to right (the bone matrix).
+Copies are necessary here, it is probably not possible to reuse the same matrix to store the result.
+It is also not always easy to find the right order for the matrix multiplication ✖️.
+One intuitive way of considering things is to say that all transformations must be performed once in the local entity frame, so the entity matrix placed first (on the left).</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="/assets/ja_mod/pt4/identity_2.gif" alt="The identity matrix drawn above is now transformed by the entity local matrix." /></p>
+  <div class="custom_caption">
+    <p>&gt; The identity matrix drawn above is now transformed by the entity local matrix.</p>
+  </div>
+</div>
+
+<p>Our matrix now has the same orientation as the humerus as well as the entity matrix drawn at the center of the player (see the previous posts).
+This is expected because again the identity matrix does not perform any transformation, the result of the multiplication is equal to the left matrix.
+Yet, this transformation will be useful in the following since working in the local entity frame is much more convenient.</p>
+
+<h2 id="mastering-correct-bone-orientations">Mastering correct bone orientations</h2>
+
+<p>At this point we are able to move the bones 🦴 by giving a rotation matrix to ghoul2.
+We can see in the gifs above that the arm (humerus) points toward the direction of the forward axis (in red).
+However, the other axis in green and blue have a wrong orientation if we compare to the in-game matrices that was displayed in the previous post.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt3/bone_orientation.png" alt="We can select only the characters and draw their orientation." /></p>
+  <div class="custom_caption">
+    <p>&gt; Bones are oriented so that the first axis is pointing toward the children bone’s position.</p>
+  </div>
+</div>
+
+<p>We can see that when the forward axis (in red) is pointing to the ground, the green one is supposed to point to the right and the blue one should point to backward 🔙.
+If we mentally 🧠 rotate the matrix so the the red axis points forward (as with the identity matrix), we would rotate around the green axis and the blue one should then points downward.
+We can actually see on the second gif that the orientation of the arm 💪 is off: the arm and lightsaber are upside down 🗡️!</p>
+
+<p>We can simply correct this by replacing the identity matrix in our code:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="code"><pre><span class="n">mdxaBone_t</span> <span class="n">bone_matrix</span><span class="p">;</span> <span class="c1">// 3x4 matrix</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">;</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="p">;</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="p">;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt4/correct_orientation.png" alt="The humerus bone has now a more realistic positioning." /></p>
+  <div class="custom_caption">
+    <p>&gt; The humerus bone has now a more realistic positioning.</p>
+  </div>
+</div>
+
+<h2 id="rotating-the-matrix">Rotating the matrix</h2>
+
+<p>Geometry coding can be tedious, especially in 3D 😮‍💨.
+I can actually relate that positioning the bones in this project has been a struggle for a long time and it took me a while to correctly understand it 🗓️, even with some prior experience in 3D.
+We will perform a more rigorous test to see if our positioning is correct by rotating the humerus matrix.</p>
+
+<p>We are going to rotate around the blue (3rd) axis so that only the red and the green one are modified.
+We will control the animation with an angle to compute the coordinates of the two first axes.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/Unit_circle.svg/500px-Unit_circle.svg.png?utm_source=commons.wikimedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail" alt="Coordinate of a point in the circles given an angle." /></p>
+  <div class="custom_caption">
+    <p>&gt; Coordinate of a point in the circles given an angle. Image from <a href="https://en.wikipedia.org/wiki/Unit_circle">wikipedia</a>.</p>
+  </div>
+</div>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre></td><td class="code"><pre><span class="n">mdxaBone_t</span> <span class="n">bone_matrix</span><span class="p">;</span> <span class="c1">// 3x4 matrix</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">static</span> <span class="kt">float</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">angle</span> <span class="o">+=</span> <span class="mf">0.004</span><span class="p">;</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="p">;</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="o">+</span><span class="n">M_PI</span><span class="o">/</span><span class="mf">2.</span><span class="p">);</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="o">+</span><span class="n">M_PI</span><span class="o">/</span><span class="mf">2.</span><span class="p">);</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
+<span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>The angle is defined as a static variable. This way, the value is never reset and it will increments over time 🕖.
+In this example, we increment the angle based on a fix value.
+Note 📝 that in practice, this is not ideal because there is no guarantee that the <code class="language-plaintext highlighter-rouge">tr_main</code> function is called at a fixed frame rate.
+This can cause the rotation to speedup or slowdown.</p>
+
+<p>The two first columns of the rotation matrix are then computed using trigonometric operations.
+Given the illustration above, we would expect the second axis in green to have as coordinates <code class="language-plaintext highlighter-rouge">(sin(angle), cos(angle))</code> by interpreting the forward axis as the “y” one in the circle image.
+The minus comes from the fact that the y axis points to the left whereas the x axis points to the right on the image.
+Finally the coordinates of the red (first) axis are obtained by rotating by 90° or half pi counter clockwise.
+The constant <code class="language-plaintext highlighter-rouge">M_PI</code> is a commonly defined constant in language C.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="/assets/ja_mod/pt4/rotating.gif" alt="We can correctly rotate the humerus matrix." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can correctly rotate the humerus matrix.</p>
+  </div>
+</div>
+
+<p>The animation performs as expected 🥳! The matrix displayed above the player and the humerus matrix behaves exactly the same, meaning we are able to confidently manipulate the bone angles.
+The bone positioning with this animation seems a little odd however but this is only for testing purpose.
+We does not see it on the gif but it is also possible that the saber blade 🤺 intersects with the player.
+For now this does not performs any damage but this will be another topic of discussion for future posts.</p>
+
+<h2 id="controlling-a-second-bone">Controlling a second bone</h2>
+
+<p>We have been able to control one bone for the moment.
+We can see that all other bones of the arm are moved following the humerus position 🦾. 
+We will check that we are yet able to position another bone, the radius one, independently from the humerus.</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td><td class="code"><pre><span class="n">mdxaBone_t</span> <span class="n">bone_matrix_2</span><span class="p">;</span> <span class="c1">// 3x4 matrix</span>
+<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">j</span> <span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">bone_matrix_2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">bone_matrix_2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">;</span>
+<span class="n">bone_matrix_2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="p">;</span>
+<span class="n">bone_matrix_2</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="p">;</span>
+<span class="n">G2_Set_Bone_Angles_Matrix</span><span class="p">(</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">,</span> <span class="s">"rradius"</span><span class="p">,</span> <span class="n">bone_matrix_2</span><span class="p">,</span> <span class="n">BONE_ANGLES_REPLACE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="/assets/ja_mod/pt4/two_bones.gif" alt="We can control multiple bones independently." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can control multiple bones independently.</p>
+  </div>
+</div>
+
+<p>The result is as expected. Although the humerus matrix is rotating, the radius one keeps the same orientation all the time, resulting in a weirdly looking motion.</p>
+
+<h2 id="what-about-yaw-pitch-roll-">What about yaw, pitch, roll ?</h2>
+
+<p>So far, we have found a pretty convenient way of manipulating bones by directly overriding the rotation matrix.
+However, this is not the only way of controlling the bones as we saw at the beginning of the post.
+More precisely, we could spot another function that takes angles as parameters:</p>
+
+<div class="code_frame"> ghoul2/G2.h </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="n">qboolean</span> <span class="nf">G2_Set_Bone_Angles_Index</span><span class="p">(</span><span class="n">CGhoul2Info</span> <span class="o">*</span><span class="n">ghlInfo</span><span class="p">,</span> <span class="n">boneInfo_v</span> <span class="o">&amp;</span><span class="n">blist</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">index</span><span class="p">,</span>
+  <span class="k">const</span> <span class="kt">float</span> <span class="o">*</span><span class="n">angles</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="k">const</span> <span class="n">Eorientations</span> <span class="n">yaw</span><span class="p">,</span>
+  <span class="k">const</span> <span class="n">Eorientations</span> <span class="n">pitch</span><span class="p">,</span> <span class="k">const</span> <span class="n">Eorientations</span> <span class="n">roll</span><span class="p">,</span>
+  <span class="k">const</span> <span class="kt">int</span> <span class="n">blendTime</span><span class="p">,</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">currentTime</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can see that this function takes as parameter an array of angles.
+The following parameters give more indications about these angles: yaw, pitch and roll.
+These are actually three angles representing a way to describe <a href="https://en.wikipedia.org/wiki/Euler_angles#Tait%E2%80%93Bryan_angles">a rotation in space</a>, similarly to what we did with rotation matrices.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Yaw_Axis_Corrected.svg/960px-Yaw_Axis_Corrected.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail" alt="Yaw, pitch, roll angles illustrated as commands of an aircraft." /></p>
+  <div class="custom_caption">
+    <p>&gt; Yaw, pitch, roll angles illustrated as commands of an aircraft. Image from <a href="https://en.wikipedia.org/wiki/Aircraft_principal_axes">wikipedia</a>.</p>
+  </div>
+</div>
+
+<p>This other way of using Ghoul2 is important because this mode is actually the one used in the JA’s code.
+You may notice with a simple search command that the functions that we saw up to now are not really used throughout the engine.
+We have to search more deeply 🔍 to find functions that are actually used in the code.
+For instance, function <code class="language-plaintext highlighter-rouge">BG_G2SetBoneAngles([..])</code> is called numerous times in file <code class="language-plaintext highlighter-rouge">cg_players.cpp</code>.
+This aspect of function usage over the code is not intuitive and it took me a lot of time personally to find out what was usable 🤔.
+For now, we will focus on this alternative way of controlling the bones from the <code class="language-plaintext highlighter-rouge">tr_main</code> function.</p>
+
+<p>The signature of the function <code class="language-plaintext highlighter-rouge">G2_Set_Bone_Angles_Index</code> is similar to the one we used already.
+It takes however an index as parameter rather than a bone name.
+The other difference comes from the array of angles ands the <code class="language-plaintext highlighter-rouge">Eorientations</code> values, one for each angle apparently.
+We can find a definition of <code class="language-plaintext highlighter-rouge">Eorientations</code> in <code class="language-plaintext highlighter-rouge">qcommon/q_shared.h</code> and we see that possible values are <code class="language-plaintext highlighter-rouge">POSITIVE_X</code>, <code class="language-plaintext highlighter-rouge">NEGATIVE_X</code>, <code class="language-plaintext highlighter-rouge">POSITIVE_Y</code>, etc.. .</p>
+
+<p>We will make a first attempt at calling this function by sending values 0’s for angles so that we expect to see the identity matrix for the humerus bone. 
+By default, we can try to send parameters <code class="language-plaintext highlighter-rouge">POSITIVE_X</code>, <code class="language-plaintext highlighter-rouge">POSITIVE_Y</code> and <code class="language-plaintext highlighter-rouge">POSITIVE_Z</code> for the <code class="language-plaintext highlighter-rouge">Eorientations</code> and see what happens:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">humerus_ind</span> <span class="o">=</span> <span class="n">G2_Get_Bone_Index</span><span class="p">(</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="s">"rhumerus"</span><span class="p">,</span> <span class="n">qtrue</span><span class="p">);</span>
+<span class="kt">float</span> <span class="n">angles</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">};</span>
+<span class="n">G2_Set_Bone_Angles_Index</span><span class="p">(</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">,</span> <span class="n">humerus_ind</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">BONE_ANGLES_REPLACE</span><span class="p">,</span> <span class="n">POSITIVE_X</span><span class="p">,</span> <span class="n">POSITIVE_Y</span><span class="p">,</span> <span class="n">POSITIVE_Z</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 30%;">
+  <p><img src="/assets/ja_mod/pt4/euler_test1.png" alt="The bone matrix shown (right shoulder) is not the identity." /></p>
+  <div class="custom_caption">
+    <p>&gt; The bone matrix shown (right shoulder) is not the identity.</p>
+  </div>
+</div>
+
+<p>We see that the resulting matrix is not the identity one.
+We can try to correct this by changing the <code class="language-plaintext highlighter-rouge">Eorientations</code> parameters.
+X (red) and Z (blue) axes seem inverted and with the wrong sign, we will change that:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="n">G2_Set_Bone_Angles_Index</span><span class="p">(</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">,</span> <span class="n">humerus_ind</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">BONE_ANGLES_REPLACE</span><span class="p">,</span> <span class="n">NEGATIVE_Z</span><span class="p">,</span> <span class="n">POSITIVE_Y</span><span class="p">,</span> <span class="n">NEGATIVE_X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 30%;">
+  <p><img src="/assets/ja_mod/pt4/euler_test2.png" alt="The bone matrix shown is now the identity." /></p>
+  <div class="custom_caption">
+    <p>&gt; The bone matrix shown is now the identity.</p>
+  </div>
+</div>
+
+<p>The bone matrix looks like thee identity now ✅.
+We will then try to use our animation test with the yaw, pitch, roll angles function.
+To do so, we need a way to extract these angles from the animated bone matrix.
+I used the answer from <a href="https://stackoverflow.com/questions/11514063/extract-yaw-pitch-and-roll-from-a-rotationmatrix">this stackoverflow post</a> to compute the angles:</p>
+
+<div class="code_frame"> tr_main.cpp </div>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="kt">float</span> <span class="n">angles</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+<span class="n">angles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">atan2</span><span class="p">(</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="mf">180.</span><span class="o">/</span><span class="n">M_PI</span><span class="p">;</span>
+<span class="n">angles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">atan2</span><span class="p">(</span><span class="o">-</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">sqrt</span><span class="p">(</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span><span class="o">*</span><span class="mf">180.</span><span class="o">/</span><span class="n">M_PI</span><span class="p">;</span>
+<span class="n">angles</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">=</span><span class="n">atan2</span><span class="p">(</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span><span class="n">bone_matrix</span><span class="p">.</span><span class="n">matrix</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="mf">180.</span><span class="o">/</span><span class="n">M_PI</span><span class="p">;</span>
+<span class="n">G2_Set_Bone_Angles_Index</span><span class="p">(</span><span class="o">&amp;</span><span class="n">info</span><span class="p">,</span> <span class="n">info</span><span class="p">.</span><span class="n">mBlist</span><span class="p">,</span> <span class="n">humerus_ind</span><span class="p">,</span> <span class="n">angles</span><span class="p">,</span> <span class="n">BONE_ANGLES_REPLACE</span><span class="p">,</span> <span class="n">NEGATIVE_Z</span><span class="p">,</span> <span class="n">POSITIVE_Y</span><span class="p">,</span> <span class="n">NEGATIVE_X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>We can notice in this implementation that the angles are once again converted from radians to degrees because Ghoul2 expects degrees while trigonometric functions usually work with radians.
+Then, we need to care about the order of the angles in the array.
+It would be natural to send them in the “x,y,z” order but “yaw,pitch,roll” actually usually means: rotation around z first, then y, then x.
+I also had to swap the two first angles here. I don’t know exactly why 🤷 but it is possible that the convention used in the stackoverflow post is not the same (sometimes the y axis points upward).</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 30%;">
+  <p><img src="/assets/ja_mod/pt4/euler_animation.gif" alt="Our animation is now performed using yaw,pitch,roll angles." /></p>
+  <div class="custom_caption">
+    <p>&gt; Our animation is now performed using yaw,pitch,roll angles.</p>
+  </div>
+</div>
+
+<p>Note 📝 that as it is mentioned in the original post, this way of extracting angles from the matrix is prone to numerical instabilities.
+As suggested in the post, at some point I moved to the C++ libraries <a href="https://libeigen.gitlab.io/">Eigen</a> for this mod to avoid additional issues.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This post was an important piece to understand bone positioning in Jedi Academy.
+I wanted to share my experience and more importantly give some hints and show how to make progress on technical projects by decomposing complex tasks into simpler ones.
+In the next post, I will talk about the integration of the kinect into the game.
+I will switch to a different format, closer to a devblog than a tutorial-style.</p>
 
 
     

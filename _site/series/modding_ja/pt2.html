@@ -498,8 +498,8 @@ The engine is notably known for its very efficient implementation of the <a href
 <p>It is now time to start exploring ⌚. A good option is to proceed hierarchically 🪜. We first look at file names and then look at function names. Last, but not least, we  may look at the actual code in the functions. When an interesting functions is found, it is also useful to look at what functions call it (hence the search functionality). A good start here is the <code class="language-plaintext highlighter-rouge">tr_main.cpp</code> file. Let’s look at the <code class="language-plaintext highlighter-rouge">R_GenerateDrawSurfs([...])</code> function for instance. It seems to be responsible for preparing the polygons that will be drawn on the screen. There are several function calls in it, for instance <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces ();</code>. What if we try to comment this call and lunch the game ? Note that a command can be passed to the game executable to load a level without going through the menu, for instance with <code class="language-plaintext highlighter-rouge">load jedi_01</code> to start from a savefile 🗃️.</p>
 
 <div style="display: flex; align-items: center; gap: 1rem; max-width: 100%">
-<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_entity.png" alt="Normal rendering with the OpenJK build" /></div>
-<div style="display flex;"><img src="/assets/ja_mod/pt1/draw_no_entity.png" alt="rendering after commenting the call to R_AddEntitySurfaces()." /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt2/draw_entity.png" alt="Normal rendering with the OpenJK build" /></div>
+<div style="display flex;"><img src="/assets/ja_mod/pt2/draw_no_entity.png" alt="rendering after commenting the call to R_AddEntitySurfaces()." /></div>
 </div>
 <div class="custom_caption">
   <p>&gt; On the left, normal rendering with the OpenJK build. On the right, rendering after commenting the call to <code class="language-plaintext highlighter-rouge">R_AddEntitySurfaces</code>.</p>
@@ -662,7 +662,7 @@ Fortunately, this is not the only way to draw information. If we further study t
 <p>We are looping over all entities and access their position (<code class="language-plaintext highlighter-rouge">origin</code>). Then, we draw a red line that starts from its origin and goes straight up (third value in <code class="language-plaintext highlighter-rouge">shifted</code>). Two notable points here: <code class="language-plaintext highlighter-rouge">GL_Bind( tr.whiteImage);</code> is necessary as the drawing calls seem to be performed in texturing mode. The second thing is a call to <code class="language-plaintext highlighter-rouge">R_IssuePendingRenderCommands()</code> required to make perform the drawing. I found a similar call in the <code class="language-plaintext highlighter-rouge">R_DebugGraphics()</code> function with the following comment: “the render thread can’t make callbacks to the main thread”. I am not able to precisely explain why the call is necessary 🤔 but it seems that because of the command system, some state must be cleared before performing the drawing calls.</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
-  <p><img src="/assets/ja_mod/pt1/draw_line.png" alt="We can draw lines in the scene now." /></p>
+  <p><img src="/assets/ja_mod/pt2/draw_line.png" alt="We can draw lines in the scene now." /></p>
   <div class="custom_caption">
     <p>&gt; We can draw lines in the scene now.</p>
   </div>
@@ -804,7 +804,7 @@ Fortunately, this is not the only way to draw information. If we further study t
 <p>Here is the result:</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
-  <p><img src="/assets/ja_mod/pt1/draw_bbox.png" alt="The resulting bounding boxes." /></p>
+  <p><img src="/assets/ja_mod/pt2/draw_bbox.png" alt="The resulting bounding boxes." /></p>
   <div class="custom_caption">
     <p>&gt; The resulting bounding boxes.</p>
   </div>
@@ -853,7 +853,7 @@ Fortunately, this is not the only way to draw information. If we further study t
 <p>Here I used the function ̀qglDepthRange(0,0);` to temporary disable the depth test, meaning that axis are displayed on top of everything. Otherwise, as they are located at the center of the entity, they would be almost always hidden.</p>
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
-  <p><img src="/assets/ja_mod/pt1/draw_bbox_axis.png" alt="The bounding box is not aligned with the three orientation axis." /></p>
+  <p><img src="/assets/ja_mod/pt2/draw_bbox_axis.png" alt="The bounding box is not aligned with the three orientation axis." /></p>
   <div class="custom_caption">
     <p>&gt; The bounding box is not aligned with the three orientation axis.</p>
   </div>
@@ -891,7 +891,7 @@ Fortunately, this is not the only way to draw information. If we further study t
   <p>Note that vertices are actually rotated with respect to the local origin, at coordinates <code class="language-plaintext highlighter-rouge">(0,0,0)</code>. This is why we add the entity position (absolute origin) only after the orientation is computed, at the end of the loop. We now have the correct orientation of the bounding boxes:</p>
 
   <div style="display: block; margin-left: auto; margin-right: auto; width: 100%;">
-    <p><img src="/assets/ja_mod/pt1/draw_bbox_axis_orientation.png" alt="The bounding box are now correctly oriented." /></p>
+    <p><img src="/assets/ja_mod/pt2/draw_bbox_axis_orientation.png" alt="The bounding box are now correctly oriented." /></p>
     <div class="custom_caption">
       <p>&gt; The bounding box are now correctly oriented.</p>
     </div>
