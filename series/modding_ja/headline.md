@@ -19,4 +19,4 @@ This series is about creating a mod for the Star Wars game [Jedi Academy](https:
 
 * [Entry 2: Visual debugging 2 and skeletons](/series/modding_ja/pt3)
 
-* [Entry 3:  Kinect integration](/series/modding_ja/pt3)
+* [Entry 3:  Understanding skeleton positioning](/series/modding_ja/pt4)

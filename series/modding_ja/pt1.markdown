@@ -55,9 +55,12 @@ Coming back to video games, things become especially interesting if we focus on 
 
 Although the mod was only released in beta version, it really provided the true experience of a [First Person Shooter](https://en.wikipedia.org/wiki/First-person_shooter) game on the Wii. I was fascinated when I discovered this development. The old video bellow (in french) gives a good overview of the various features in the mod.
 
-<div style="padding-bottom: 56.25%; position: relative;"><iframe style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; border: 0px;" width="100%" height="100%" src="https://www.dailymotion.com/embed/video/x1nx0g" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" title="Media Embed"><small>Propulsé par <a href="https://embed.tube/fr/embed-code-generator/dailymotion/">embed dailymotion</a></small></iframe></div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kc-cQs3qZJ0?si=kvYARHwqZWgdllP4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="custom_caption" markdown="1" style="margin-top:1px;">
+\> Demonstration of the Half Life 2 Wiimote mod in 2025. Video by [KrisFreeman](https://www.youtube.com/watch?v=kc-cQs3qZJ0).
+</div>
 
-This very video actually put me on the track of this project. I was impressed by the responsiveness of the Wiimote and its seamless integration into the original game ✨.
+It was actually [this very video](https://www.dailymotion.com/video/x1nx0g) that put me on the track of this project (I can no longer directly embed it in this page). I was impressed by the responsiveness of the Wiimote and its seamless integration into the original game ✨.
 
 # Star Wars games with pose tracking
 

@@ -40,7 +40,7 @@ for ( tr.currentEntityNum = 0; tr.currentEntityNum < tr.refdef.num_entities; tr.
 The reason why the type of the model corresponds to `MOD_BAD` is troubling but recall that it is not necessary to understand *everything* in the code at this point as we can rely on our tests.
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![We can select the characters and draw their orientation.]({{site.baseurl}}/assets/ja_mod/pt2/entity_axis.png)
+![We can select the characters and draw their orientation.]({{site.baseurl}}/assets/ja_mod/pt3/entity_axis.png)
 <div class="custom_caption" markdown="1">
 \> We can select the characters and draw their orientation.
 </div>
@@ -94,7 +94,7 @@ for ( tr.currentEntityNum = 0; tr.currentEntityNum < tr.refdef.num_entities; tr.
 The code is more complex, with 3 nested loops 🔁: one for the entity index, one for the model index in the entity? and one for the bone index. We then try to display the `lastPosition` of the bone as if it was local regarding the entity, shifting by its origin as we did before.
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![A first attempt to display bone information from the characters.]({{site.baseurl}}/assets/ja_mod/pt2/bone_attempt1.png)
+![A first attempt to display bone information from the characters.]({{site.baseurl}}/assets/ja_mod/pt3/bone_attempt1.png)
 <div class="custom_caption" markdown="1">
 \> A first attempt to display bone information from the characters.
 </div>
@@ -214,7 +214,7 @@ void R_RenderView (viewParms_t *parms) {
 As we see now in the screenshot bellow, the extracted position seem consistent with the body positions. However, we see lines going from one entity to another, suggesting a mismatch between the entity origin and the bone position.
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![We can select only the characters and draw their orientation.]({{site.baseurl}}/assets/ja_mod/pt2/bone_attempt2.png)
+![We can select only the characters and draw their orientation.]({{site.baseurl}}/assets/ja_mod/pt3/bone_attempt2.png)
 <div class="custom_caption" markdown="1">
 \> We can select only the characters and draw their orientation.
 </div>
@@ -236,7 +236,7 @@ for ( tr.currentEntityNum = 0; tr.currentEntityNum < tr.refdef.num_entities; tr.
 Once again, the definition of `G2_GenerateWorldMatrix([...])` needs to be added in the file `tr_main.cpp` to compile. With this additional initialization, the entity mismatch issue ↔️ is solved:
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![We can now successfully extract positions of the bones.]({{site.baseurl}}/assets/ja_mod/pt2/bone_attempt3.png)
+![We can now successfully extract positions of the bones.]({{site.baseurl}}/assets/ja_mod/pt3/bone_attempt3.png)
 <div class="custom_caption" markdown="1">
 \> We can now successfully extract positions of the bones.
 </div>
@@ -270,7 +270,7 @@ qglDepthRange(0.,1.);
 {% endhighlight %}
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![We start to see some bones but the skeleton is incomplete.]({{site.baseurl}}/assets/ja_mod/pt2/bone_attempt4.png)
+![We start to see some bones but the skeleton is incomplete.]({{site.baseurl}}/assets/ja_mod/pt3/bone_attempt4.png)
 <div class="custom_caption" markdown="1">
 \> We start to see some bones but the skeleton is incomplete.
 </div>
@@ -306,7 +306,7 @@ class CBoneCache
 We now have a complete skeleton 🥳:
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![The skeleton is now complete.]({{site.baseurl}}/assets/ja_mod/pt2/bone_attempt5.png)
+![The skeleton is now complete.]({{site.baseurl}}/assets/ja_mod/pt3/bone_attempt5.png)
 <div class="custom_caption" markdown="1">
 \> The skeleton is now complete.
 </div>
@@ -420,8 +420,8 @@ for ( tr.currentEntityNum = 0; tr.currentEntityNum < tr.refdef.num_entities; tr.
 The result is satisfying but there is still one drawing issue to solve. We can see that the skeleton is actually not well adjusted with the 3D character model. The offset seems bigger when the player is looking up:
 
 <div style="display: flex; align-items: center; gap: 0.5em; max-width: 100%">
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt2/bone_attempt6.png" alt="Debug rendering of a limited set of bones." /></div>
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt2/bone_attempt7.png" alt="The skeleton is not well superposed with the character model." /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt3/bone_attempt6.png" alt="Debug rendering of a limited set of bones." /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt3/bone_attempt7.png" alt="The skeleton is not well superposed with the character model." /></div>
 </div>
 <div class="custom_caption" markdown="1">
 \> Debug rendering of a limited set of bones. The skeleton is not well superposed with the character model. 
@@ -451,8 +451,8 @@ for(int j = 0; j < 3; j ++) {
 The bone placement is now correct. It is hard to explain the difference between the fields `angles` and `axis` but once again, a complete understanding of the code is not required at this stage.
 
 <div style="display: flex; align-items: center; gap: 0.5em; max-width: 100%">
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt2/bone_attempt9.png" alt="The skeleton is not well superposed with the character model." /></div>
-<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt2/bone_attempt8.png" alt="Debug rendering of a limited set of bones." /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt3/bone_attempt9.png" alt="The skeleton is not well superposed with the character model." /></div>
+<div style="display flex;"><img src="{{site.baseurl}}/assets/ja_mod/pt3/bone_attempt8.png" alt="Debug rendering of a limited set of bones." /></div>
 </div>
 <div class="custom_caption" markdown="1">
 \> The bone placement is now perfect. 
@@ -492,7 +492,7 @@ qglLineWidth(1.);
 This helps to understand the bone placement. We can see that the first axis in red is always oriented in the direction of the children bone.
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![We can select only the characters and draw their orientation.]({{site.baseurl}}/assets/ja_mod/pt2/bone_orientation.png)
+![We can select only the characters and draw their orientation.]({{site.baseurl}}/assets/ja_mod/pt3/bone_orientation.png)
 <div class="custom_caption" markdown="1">
 \> Bones are oriented so that the first axis is pointing toward the children bone's position.
 </div>
@@ -512,7 +512,6 @@ std::vector<std::string> bone_matrix_draw = {"rhumerus", "rradius", "rhand", "lh
 
 R_IssuePendingRenderCommands();
 GL_Bind( tr.whiteImage);
-qglDepthRange(0.,0.);
 // select the first entity (player)
 trRefEntity_t* ent = &tr.refdef.entities[0];
 refEntity_t* e = &(ent->e);
@@ -526,6 +525,7 @@ if(currentModel->type != MOD_BAD) {
 if(!ent->e.ghoul2) {
 	return;
 }
+qglDepthRange(0.,0.);
 
 // setup "word" matrix			
 for(int j = 0; j < 3; j ++) {
@@ -594,7 +594,7 @@ for(int i = 0; i < ghoul2.size(); i ++) {
 And we have the final result for this skeleton drawing phase:
 
 <div style="display: block; margin-left: auto; margin-right: auto; width: 70%;" markdown="1">
-![We are finally able to draw the player's skeleton.]({{site.baseurl}}/assets/ja_mod/pt2/skeleton_final.png)
+![We are finally able to draw the player's skeleton.]({{site.baseurl}}/assets/ja_mod/pt3/skeleton_final.png)
 <div class="custom_caption" markdown="1">
 \> We are finally able to draw the player's skeleton.
 </div>
