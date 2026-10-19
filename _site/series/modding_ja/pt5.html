@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Modding Jedi Academy with the Kinect&#58 Integrating the Kinect 🎥 &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="series_article">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  <a id="subscribe-link" class="icon" title="Subscribe" aria-label="Subscribe"
+    href="/feed.xml">
+    <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+
+  </a>
+
+  <a id="mastodon-link" class="icon" title="Mastodon" aria-label="Mastodon"
+    href="https://social.linux.pizza/@smbct">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+  <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+</svg>
+
+  </a>
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="22" width="22"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+
+
+
+<!-- index pages are treated separately to handle pagination -->
+
+
+<!-- for other pages, the link to the translated page is in a file -->
+
+
+<!-- When one of the link is not set, the corresponding flag cannot be clicked -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     
+     >
+🇬🇧 <div></div>
+</a>
+<a id="icon_flag"
+  class="icon_flag"
+  
+>
+🇫🇷 <div></div>
+</a>
+
+
+
+</nav>
+
+  <p>
+  &copy; 2026.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+
+  <div id="credit">
+  Made with <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> and <a href="https://giscus.app">giscus</a>.
+  Hosted by <a href="https://pages.github.com">github</a>.
+  </div>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+  <h1 class="post-title">Modding Jedi Academy with the Kinect&#58 Integrating the Kinect 🎥</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      04 Oct 2026
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    9 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        modding
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p>In the <a href="/series/modding_ja/pt4">last post</a> of the series, I gave an overview of how to interact with Jedi Academy’s bone positioning code.
+In this new post, I will cover the integration of the Kinect camera in the game to control the characters with our own gesture!</p>
+
+<h2 id="the-kinect-why">The Kinect, why?</h2>
+
+<p>The Kinect is a gaming device 🎮 released by Microsoft for its xbox consoles.
+The device allows the user to control games with their own gestures.
+The Kinect (more precisely its software) is actually able to predict a simplified 3D skeleton of the player 🩻.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+<img alt="3d pose tracking illustration" src="https://www.researchgate.net/profile/Melvyn-Roerdink/publication/283536111/figure/fig1/AS:339855277084674@1458039220277/Body-points-derived-with-the-human-pose-estimation-software-of-Kinect-v1-A-RGB-image.png" />
+</div>
+<div class="custom_caption">
+  <p>&gt; An illustration of 3D pose tracking. Image by <a href="https://www.researchgate.net/publication/283536111_Kinematic_Validation_of_a_Multi-Kinect_v2_Instrumented_10-Meter_Walkway_for_Quantitative_Gait_Assessments">Melvyn Roerdink</a>.</p>
+</div>
+
+<p>I have covered the Kinects and other skeleton tracking solutions in <a href="/blog/kinect_tracking">this post</a> few times ago.
+As I explain in the <a href="/series/modding_ja/pt1">preamble</a> of the series, although my initial idea was to use the wiimote only for the mod, I finally decided to integrate the Kinect.
+Why? the Wiimote is simply not capable enough for the full tracking of the player’s arm.
+The Kinect is an old, cheap and functional solution to the skeleton tracking problem 💡 and I think its combination with the Wiimote makes the perfect motion tracking setup 🕺.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 70%;">
+  <p><img src="/assets/ja_mod/pt5/kinect_skeleton.png" alt="Skeleton tracking with the Kinect and OpenNI." /></p>
+</div>
+<div class="custom_caption">
+  <p>&gt; Skeleton tracking with the Kinect and OpenNI.</p>
+</div>
+
+<p>In this post, I will start from the simple example from my <a href="/blog/kinect_tracking">kinect post</a> and detail how I integrated the Kinect skeleton as an input to OpenJK’s engine and control the player’s arm!
+Basically, my sample program was already able to extract the information about the skeleton: concretely positions and orientations of several body joints 🦴 (shoulder, elbow, torso, etc..).
+I focused solely on the joints orientations that are expressed as rotation matrices (represented with the red-green-blue frames on the figure above).
+I had to find a way to feed these matrices to OpenJK directly.</p>
+
+<h2 id="more-about-jedi-academys-engine">More about Jedi Academy’s engine</h2>
+
+<h3 id="engines-main-loop">Engine’s main loop</h3>
+
+<p>I mentioned in the previous posts that the engine is split between a <strong>server</strong> and a <strong>client</strong> part 🛜.
+This separation exists in the single-player mode as well as the multi-player one 🤼🏼.
+Having a look at the game’s loop is useful to understand the synergy between these two parts.</p>
+
+<p>The <strong>main</strong> function is in the <code class="language-plaintext highlighter-rouge">shared/sys/sys_main.cpp</code> file. The engine’s main loop is clearly identified with a single function call: <code class="language-plaintext highlighter-rouge">Com_Frame();</code>.
+This organization actually seems to be a rework from the OpneJK community as compared to the original <a href="https://code.idtech.space/raven/jediacademy/src/branch/master/code">engine’s architecture</a>.
+The <code class="language-plaintext highlighter-rouge">Com_Frame()</code> function contains several additional “frame” functions: <code class="language-plaintext highlighter-rouge">IN_Frame()</code>, <code class="language-plaintext highlighter-rouge">SV_Frame()</code> and <code class="language-plaintext highlighter-rouge">CL_Frame()</code>.
+Names are self-explanatory: <strong>in</strong> corresponds to the user inputs events, <strong>sv</strong> is for the server and <strong>cl</strong> for the client.
+So game inputs are notably processed in the input frame associated function but few additional steps are performed before these are actually sent to the server game, where the game logic happens.</p>
+
+<h3 id="game-inputs">Game inputs</h3>
+
+<p>Where to start with the Kinect 📸? Integrating a new input device in a game engine is not easy. I needed to find a “suitable place” in the code to insert the new function calls.
+I consider the Kinect skeleton data as a game <strong>input</strong> the same way the keyboard and mouse are ⌨️, so I started to look at how the user inputs are passed to the game Engine.
+<a href="https://github.com/JACoders/OpenJK/">Openjk</a>’s code is actually based on the <a href="https://www.libsdl.org/">SDL library</a> for this aspect (contrary to the <a href="https://code.idtech.space/raven/jediacademy/">original engine’s code</a>). Luckily, I was already familiar with this library which made the understanding of the code easier.</p>
+
+<p>In OpenJK’s code, the SDL part is located in the <code class="language-plaintext highlighter-rouge">shared/sdl/sdl_input.cpp</code> file.
+In this file, I found out that the SDL’s mouse motion event is turned into a game engine’s event through the function <code class="language-plaintext highlighter-rouge">Sys_QueEvent( 0, SE_MOUSE, e.motion.xrel, e.motion.yrel, 0, NULL );</code>.
+Searching for <code class="language-plaintext highlighter-rouge">SE_MOUSE</code> 🖱️ throughout the code, I ended up finding the function <code class="language-plaintext highlighter-rouge">CL_MouseEvent([..])</code>, “CL” meaning “client”.
+This function has two different behaviors: ingame and menu display. I focused on the field <code class="language-plaintext highlighter-rouge">mouseDx</code> that seemed to refer to the latter case.
+I additionally found the <code class="language-plaintext highlighter-rouge">CL_MouseMove(usercmd_t *cmd)</code> function that put me on the track of the command and message transmission system in the engine.</p>
+
+<h3 id="client---server-communication">Client - Server communication</h3>
+
+<p>The split between the client and the server makes things difficult as information does not transit easily between the two 🚝.
+The game logic being mainly processed on the server side, the character control would also occur there and communicating the kinect matrices from one to the other is mandatory.
+I spotted the <code class="language-plaintext highlighter-rouge">usercmd_t</code> structure in the <code class="language-plaintext highlighter-rouge">CL_MouseMove(usercmd_t *cmd)</code> function. It contains information that are sent from the client to the server, including the client inputs (that are transformed from the user input such as keys, mouse, etc..).
+<code class="language-plaintext highlighter-rouge">usercmd_s</code> is defined in <code class="language-plaintext highlighter-rouge">qcommon/q_shared.h</code>. There I could find information about the direction angles of a player and the buttons that are pressed 🕹️.
+By tracing the calls from function <code class="language-plaintext highlighter-rouge">CL_MouesMove</code>, I was able to find <code class="language-plaintext highlighter-rouge">CL_CreateCmd</code> and then <code class="language-plaintext highlighter-rouge">CL_CreateNewCommands</code>.
+I ended up at function <code class="language-plaintext highlighter-rouge">CL_SendCmd()</code> that actually send the data through a call to <code class="language-plaintext highlighter-rouge">CL_WritePacket()</code>.
+The relevant functions for adding information in the command are <code class="language-plaintext highlighter-rouge">MSG_WriteDeltaUsercmd(msg_t *msg, usercmd_t *from, usercmd_t *to)</code> and <code class="language-plaintext highlighter-rouge">MSG_ReadDeltaUsercmd(msg_t *msg, usercmd_t *from, usercmd_t *to)</code>.</p>
+
+<h2 id="adding-the-kinect-library">Adding the Kinect library</h2>
+
+<p>I decided to put all the kinect related code in a single file placed in the <code class="language-plaintext highlighter-rouge">shared</code> directory because it also contains the SDL code to manage game inputs.
+The functions use OpenNI library that I presented in the <a href="/blog/kinect_tracking">Kinect post</a>.
+I mainly re-used the <a href="https://github.com/smbct/KinectOpenNISetup">code sample</a> that I wrote to perform skeleton tracking (initialization, update and data extraction).
+I decided to store the Kinect data into global (static) objects in the file for simplicity (not quite elegant). 
+I also placed the kinect update function in a separate thread because this function seemed blocking and caused some ingame framerate issues.</p>
+
+<p>The init function is placed in the main function I mentioned earlier.
+The update function is placed in the <code class="language-plaintext highlighter-rouge">Com_Frame()</code>, just after the input update call.
+I also had to modify the <code class="language-plaintext highlighter-rouge">CMakeList</code> file to link the OpenNI library into the project.
+With these elements, I could already setup the camera and extract the information inside the engine.</p>
+
+<h3 id="from-game-inputs-to-the-server">From game inputs to the server</h3>
+
+<p>I focused on the <code class="language-plaintext highlighter-rouge">usercmd_t</code> data structure to pass the kinect joint information 🦾 to the game server.
+I started by adding the two <code class="language-plaintext highlighter-rouge">3x3=9</code> float matrices inside the structure: one for the humerus rotation and one for the radius one (I assumed other bones would not be necessary and wanted to start with a single arm!).</p>
+
+<p>I could spot the function <code class="language-plaintext highlighter-rouge">CL_CreateCmd(void)</code> from <code class="language-plaintext highlighter-rouge">cl_input.cpp</code> that is called from <code class="language-plaintext highlighter-rouge">CL_MouseMove</code>, and where I could store joint information from the kinect code to the command.
+Then, I had to find and modify the functions <code class="language-plaintext highlighter-rouge">MSG_WriteDeltaUsercmd</code> and <code class="language-plaintext highlighter-rouge">MSG_ReadDeltaUsercmd</code> to actually write and read the bytes from the matrices.
+These values are encoded in 32 bits as for some of the other fields.</p>
+
+<h3 id="actually-animating-the-player">Actually animating the player</h3>
+
+<p>I found a place to receive the matrices information in the function <code class="language-plaintext highlighter-rouge">PM_UpdateViewAngles( playerState_t *ps, usercmd_t *cmd, gentity_t *gent )</code>, that takes the command as parameter and processes angle information from it.
+Although the function takes as input a <code class="language-plaintext highlighter-rouge">playerState_t</code> structure, I ended up storing the matrices informaiton in class <code class="language-plaintext highlighter-rouge">PlayerStateBase.</code> And I do not remember exactly why but this was a place where I could recover the information when needed.</p>
+
+<p>I finally found a way to control the player’s arm movements in the function <code class="language-plaintext highlighter-rouge">void CG_G2PlayerAngles( centity_t *cent, vec3_t legs[3], vec3_t angles )</code>.
+In this function, I could recover the matrices information from the <code class="language-plaintext highlighter-rouge">centity_t</code> parameter (<code class="language-plaintext highlighter-rouge">cent-&gt;gent-&gt;client-&gt;ps</code> 🥵) and call the function <code class="language-plaintext highlighter-rouge">BG_G2SetBoneAngles()</code> to actually control the arm.
+Hence, I used the euler angles representation that I mentioned the <a href="/series/modding_ja/pt4">previous post</a>. The conversion between the rotation matrix and euler angles is however performed by the <a href="https://libeigen.gitlab.io/">Eigen library</a> here for simplicity.</p>
+
+<p>A difficult part here was to make sense of Jedia Academy’s conventions, i.e., axis orders and signs.
+I also had an annoying limitation by noticing that bone indices, required to call the “SetBoneAngles” function, were not all present.
+I had to add the additional bones once again by modifying few structures and functions 🦴.
+For most of the difficulties, I mainly looked at the engine’s code to find hints.</p>
+
+<p>And with all these steps that’s it, it is now possible ton control jedi academy’s player through the Kinect!</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="/assets/ja_mod/pt5/kinect_saber.gif" alt="We can naturally control the lightsaber thanks to the Kinect." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can naturally control the lightsaber thanks to the Kinect.</p>
+  </div>
+</div>
+
+<p>There are still few limitations at this point: we can see that the saber seems rigid. This is because the kinect v1 is not capable of tracking the wrist movement.
+The Kinect v2 or other devices such as a Wiimote is required here to do it.
+Another limitation comes from the code: in this configuration the saber does not cause any damages because they were accounted for only when the player presses the attack button! 
+Last, but not least, the skeleton tracking can be used for weapons others than the lightsabler in the third person view but once again, the projectile trajectory has to be modified to account for the new game mod.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="/assets/ja_mod/pt5/kinect_blaster.gif" alt="We can control blasters as well." /></p>
+  <div class="custom_caption">
+    <p>&gt; We can control blasters as well.</p>
+  </div>
+</div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>I tried to give an overview of the steps needed to perform this modification without giving too much details.
+This is probably not the best way to do it (for instance could we use directly rotation matrices? Is the PlayerStateBase the suitable place for the joint information?) but I was still able to produce a working solution on my own.
+I will cover the integration of the Wiimote in the next post to address some of the limitations seen here.
+By the time, that the source code remains available at <a href="https://github.com/smbct/jamod">this repository</a>.</p>
+
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#programming-modding-video-games-virtual-reality">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">programming modding video-games virtual-reality</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+
+</div>
+
+
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
