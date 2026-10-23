@@ -22,3 +22,5 @@ This series is about creating a mod for the Star Wars game [Jedi Academy](https:
 * [Entry 3: Understanding skeleton positioning](/series/modding_ja/pt4)
 
 * [Entry 4: Integrating the Kinect 🎥](/series/modding_ja/pt5)
+
+* [Entry 5: Integrating the Wiimote 🎮](/series/modding_ja/pt6)
