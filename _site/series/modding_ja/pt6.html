@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <link href="https://gmpg.org/xfn/11" rel="profile" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+  
+
+  <title>
+    
+      Modding Jedi Academy with the Kinect&#58 Integrating the Wiimote 🎮 &middot; smbct's blog
+    
+  </title>
+
+  <!-- 
+ -->
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface" />
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/favicon.png" />
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml" />
+
+  <!-- Additional head bits without overriding original head -->
+</head>
+
+
+  <body class="series_article">
+
+    
+    <div id="sidebar">
+  <header>
+    <div class="site-title">
+      <a href="/">
+        
+          <span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>
+        
+        smbct's blog
+      </a>
+    </div>
+    <p class="lead">Notes on computer science, programming, society and more.</p>
+  </header>
+  <nav id="sidebar-nav-links">
+
+  
+    
+      <a class="home-link "
+          href="/">Blog</a>
+    
+  
+  
+  
+
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+
+  <!-- should be improved -->
+  
+  <a class="category-link "
+          href="/pages/series.html">Series </a>
+  
+
+  
+
+
+  
+    
+  
+
+  
+    
+      <a class="category-link "
+          href="/pages/about.html">About</a>
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+
+  <!-- Optional additional links to insert in sidebar nav -->
+</nav>
+
+
+  
+
+  <nav id="sidebar-icon-links">
+
+  <a id="subscribe-link" class="icon" title="Subscribe" aria-label="Subscribe"
+    href="/feed.xml">
+    <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <circle cx="6.18" cy="17.82" r="2.18"/>
+    <path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/>
+</svg>
+
+  </a>
+
+  <a id="mastodon-link" class="icon" title="Mastodon" aria-label="Mastodon"
+    href="https://social.linux.pizza/@smbct">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-mastodon" viewBox="0 0 16 16">
+  <path d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a4 4 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522q0-1.288.66-2.046c.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764q.662.757.661 2.046z"/>
+</svg>
+
+  </a>
+
+  
+    <a id="github-link"
+       class="icon" title="Github Profile" aria-label="Github Profile"
+       href="https://github.com/smbct">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 28" height="22" width="22"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-0.609 0.109-0.828-0.266-0.828-0.578 0-0.391 0.016-1.687 0.016-3.297 0-1.125-0.375-1.844-0.812-2.219 2.672-0.297 5.484-1.313 5.484-5.922 0-1.313-0.469-2.375-1.234-3.219 0.125-0.313 0.531-1.531-0.125-3.187-1-0.313-3.297 1.234-3.297 1.234-0.953-0.266-1.984-0.406-3-0.406s-2.047 0.141-3 0.406c0 0-2.297-1.547-3.297-1.234-0.656 1.656-0.25 2.875-0.125 3.187-0.766 0.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-0.344 0.313-0.656 0.844-0.766 1.609-0.688 0.313-2.438 0.844-3.484-1-0.656-1.141-1.844-1.234-1.844-1.234-1.172-0.016-0.078 0.734-0.078 0.734 0.781 0.359 1.328 1.75 1.328 1.75 0.703 2.141 4.047 1.422 4.047 1.422 0 1 0.016 1.937 0.016 2.234 0 0.313-0.219 0.688-0.828 0.578-4.766-1.594-8.203-6.094-8.203-11.391 0-6.625 5.375-12 12-12zM4.547 19.234c0.031-0.063-0.016-0.141-0.109-0.187-0.094-0.031-0.172-0.016-0.203 0.031-0.031 0.063 0.016 0.141 0.109 0.187 0.078 0.047 0.172 0.031 0.203-0.031zM5.031 19.766c0.063-0.047 0.047-0.156-0.031-0.25-0.078-0.078-0.187-0.109-0.25-0.047-0.063 0.047-0.047 0.156 0.031 0.25 0.078 0.078 0.187 0.109 0.25 0.047zM5.5 20.469c0.078-0.063 0.078-0.187 0-0.297-0.063-0.109-0.187-0.156-0.266-0.094-0.078 0.047-0.078 0.172 0 0.281s0.203 0.156 0.266 0.109zM6.156 21.125c0.063-0.063 0.031-0.203-0.063-0.297-0.109-0.109-0.25-0.125-0.313-0.047-0.078 0.063-0.047 0.203 0.063 0.297 0.109 0.109 0.25 0.125 0.313 0.047zM7.047 21.516c0.031-0.094-0.063-0.203-0.203-0.25-0.125-0.031-0.266 0.016-0.297 0.109s0.063 0.203 0.203 0.234c0.125 0.047 0.266 0 0.297-0.094zM8.031 21.594c0-0.109-0.125-0.187-0.266-0.172-0.141 0-0.25 0.078-0.25 0.172 0 0.109 0.109 0.187 0.266 0.172 0.141 0 0.25-0.078 0.25-0.172zM8.937 21.438c-0.016-0.094-0.141-0.156-0.281-0.141-0.141 0.031-0.234 0.125-0.219 0.234 0.016 0.094 0.141 0.156 0.281 0.125s0.234-0.125 0.219-0.219z"></path>
+</svg>
+
+    </a>
+  
+
+  
+  
+  
+  
+
+  
+    <a id="tags-link"
+       class="icon"
+       title="Tags" aria-label="Tags"
+       href="/tags.html">
+      <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+    </a>
+  
+
+  
+
+  <!-- Optional additional links to insert for icons links -->
+
+
+
+
+<!-- index pages are treated separately to handle pagination -->
+
+
+<!-- for other pages, the link to the translated page is in a file -->
+
+
+<!-- When one of the link is not set, the corresponding flag cannot be clicked -->
+
+<a id="icon_flag"
+     class="icon_flag active"
+     
+     >
+🇬🇧 <div></div>
+</a>
+<a id="icon_flag"
+  class="icon_flag"
+  
+>
+🇫🇷 <div></div>
+</a>
+
+
+
+</nav>
+
+  <p>
+  &copy; 2026.
+  <a href="/LICENSE.md">MIT License.</a>
+</p>
+
+
+  <div id="credit">
+  Made with <a href="https://jekyllrb.com">Jekyll</a>, <a href="https://github.com/fongandrew/hydeout">Hydeout</a> and <a href="https://giscus.app">giscus</a>.
+  Hosted by <a href="https://pages.github.com">github</a>.
+  </div>
+
+</div>
+    
+
+    <main class="container">
+      <header>
+  
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+  <h1 class="post-title">Modding Jedi Academy with the Kinect&#58 Integrating the Wiimote 🎮</h1>
+</header>
+<div class="content">
+  <div class="post-meta">
+  
+  <!-- Thanks to https://stackoverflow.com/questions/10714980/locale-specific-date-in-jekyll -->
+  <span class="post-date">
+    📅
+    
+      20 Oct 2026
+    
+  </span>
+
+  • ⏲️
+  <!-- taken from https://carlosbecker.com/posts/jekyll-reading-time-without-plugins/ -->
+
+<span class="reading-time" title="Estimated read time">
+  
+  
+    13 
+    
+      mins
+    
+  
+</span>
+  •
+  
+  🇬🇧
+  
+
+  <span class="post-categories">
+    
+      &bull;
+
+      
+      
+      
+
+      
+        modding
+      
+    
+  </span>
+</div>
+
+
+
+  <div class="post-body">
+    <p>In the <a href="/series/modding_ja/pt5">last post</a> of the series, I explained how I integrated the Kinect skeleton tracking in the game engine.
+Playing with the Kinect only as the game controller is rather limited even if several star wars games already proposed the experience.
+The Wiimote brings fills missing pieces of the mod for the best experience: buttons and additional motion tracking.
+I will detail here how I integrated this device 🎮 in OpenJK.</p>
+
+<h2 id="what-is-the-wiimote">What is the Wiimote?</h2>
+
+<p>The Wiimote is Nintendo Wii’s official controller, released in 2005 together with the console.
+It has a remote shape and contains several buttons, including a trigger.
+It also supports several extensions, the nunchuck being the main one with its joystick 🕹️.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://upload.wikimedia.org/wikipedia/commons/0/07/Nintendo-Wii-Remote-wNunchuk.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=index&amp;utm_content=original" alt="The wiimote with the nunckuck extension." /></p>
+  <div class="custom_caption">
+    <p>&gt; The wiimote with the nunckuck extension. Image from <a href="https://en.wikipedia.org/wiki/Wii_Remote">wikipedia</a>.</p>
+  </div>
+</div>
+
+<p>Most importantly, the Wiimote has several motion control sensors in order to bring a new gaming experience.
+I already <a href="/series/modding_ja/pt5">covered the different sensors</a> (accelerometers and IR camera) in the preamble of the series as well as the gyroscope introduced by the <a href="https://en.wikipedia.org/wiki/Wii_MotionPlus">Wii motion</a> plus (Wm+) extension.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Wii_Remote_Motion_Plus_comparison.jpg?utm_source=commons.wikimedia.org&amp;utm_campaign=index&amp;utm_content=original" alt="On the right: a classical Wiimote with the Wm+ passthrough extension. On the left: the newer Wiimote with the integrated Wm+." /></p>
+  <div class="custom_caption">
+    <p>&gt; On the right: a classical Wiimote with the Wm+ passthrough extension. On the left: the newer Wiimote with the integrated Wm+. Image from <a href="https://en.wikipedia.org/wiki/Wii_MotionPlus">Wikipedia</a>.</p>
+  </div>
+</div>
+
+<p>I explained in the last post that despite having the Kinect integrated, the orientation of the wrist ✊ is still missing for this new gaming experience.
+For this reason, I focused on exploiting the accelerometers and gyroscopes data to compute a global orientation of the Wiimote.</p>
+
+<p>Regarding the IR camera, I decided to not use it at all ⛔. Although this sensor is interesting in the first person shooter view that Jedi Academy also offers, the setup will probably not work out with the Kinect and Wiimote simultaneously because the Kinect already emits an infrared source 🤷.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://reso-nance.org/wiki/_media/projets/smashword/synopsys-android-virtual-prototyping-part-3-fig-12-.jpg" alt="The &quot;yaw pitch roll&quot; orientation system illustrated on the Wiimote." /></p>
+  <div class="custom_caption">
+    <p>&gt; The “yaw pitch roll” orientation system illustrated on the Wiimote. Image from <a href="https://reso-nance.org/wiki/projets/smashwords/dev/accueil">reso-nance.org</a>.</p>
+  </div>
+</div>
+
+<p>So the main task here was to find a way to exploit the Wiimote information (sent over Bluetooth) through a C++ library.
+One difficulty is that the Wiimote does not directly outputs its orientation to a program.
+It rather send raw or preprocessed accelerometers data (relatively to gravity) and gyroscope data (angular speed on the 3 yaw-pitch-roll directions).</p>
+
+<h2 id="the-wiimote-on-linux-how-to-">The Wiimote on linux, how to ?</h2>
+
+<p>Using the Wiimote on linux (and other OS) has been intensively documented soon after the release of the device.
+Several libraries appeared for all platforms but I only focus on Linux here.
+Many of them are actually <a href="https://wiibrew.org/wiki/Wiimote/Library">listed on wiibrew</a>.
+I decided to use <a href="https://github.com/rpavlik/wiiuse">Wiiuse</a>, a C library that basically gives access to all the Wiimote functionalities ⚙️, including its Wm+ extension that I needed in the project.</p>
+
+<p>It is also worth mentioning <a href="https://xwiimote.github.io/xwiimote/">XWiimote</a>, a younger alternative that is actually implemented in the Linux kernel!
+It may seem surprising but drivers are now also available for the switch’s Joycon!
+Using XWiimote could be more interesting in the mod since the Wiimote can be connected outside of the game process, a much more comfortable mode when developing the mod.
+It also has a better design principle that I will mention hereafter, but I decided to stick to wiiuse for now.</p>
+
+<p>I additionally wanted to mention <a href="https://fr.dolphin-emu.org/">Dolphin’s emulator</a> work around the Wiimote.
+Their emulated driver actually contains the code needed to exploit the motion sensors in almost every possible way 🫨.
+They also wrote an interesting article about <a href="nb.dolphin-emu.org/blog/2019/04/26/mastering-motion/">the Wii motion +</a>.
+This piece of information is valuable because exploiting the raw motion data is not easy.</p>
+
+<h3 id="estimating-the-wiimote-angles">Estimating the Wiimote angles</h3>
+
+<p>Having access to the Wiimote’s button is trivial but exploiting its sensor information poses a serious challenge.
+Libraries such as Wiiuse actually gives access to either raw sensor values or to a simple and imperfect <a href="https://www.youtube.com/watch?v=ZirGW_64kzk">processed model</a>. 
+For this project, I needed to obtain a full orientation of the wiimote, as a rotation matrix or even 3 angles (the representation does not matter).
+I understood after some research 📚 that I needed both the gyroscope (wm+) and the accelerometers data to obtain an orientation of the Wiimote.
+However, the combination is not trivial.
+The web is full of <a href="https://stackoverflow.com/questions/1586658/combine-gyroscope-and-accelerometer-data">threads about this problem</a> and I could see complicated notions such as <a href="https://en.wikipedia.org/wiki/Kalman_filter">Kalman</a> or <a href="https://ahrs.readthedocs.io/en/latest/filters/complementary.html">Complementary</a> filters 🧑‍🔬.
+The system that combines both sensors actually has its own name: <a href="https://en.wikipedia.org/wiki/Inertial_measurement_unit">Inertial Measurement Unit</a>.</p>
+
+<p>Unfortunately, despite seeing plenty of documentation about the problem, I could not find an easy-to-use-implementation that could be applied to the Wiimote.
+Code samples were often too simple, too complex or would not contain enough details so that I could adapt them 🧑‍💻.
+Even searching specifically for samples for the Wiimote did not help me find a suitable solution.
+<a href="https://www.youtube.com/watch?v=V5p23OTXn7E">This video</a> that I mentioned in the <a href="/series/modding_ja/pt1">preamble</a> is actually one of the only example that I could find and the code seems not available anymore 😭.
+One library that appeared several time though was <a href="https://github.com/xioTechnologies/Fusion">Fusion</a>.
+It seemed a good option at first: an open source code that is well documented and widely used.
+However, I have never been able to make it work correctly the the Wiimote in my tests. 
+I made another attempt by exploiting the code from <a href="https://github.com/Looking-Glass/JoyconLib">JoyconLib</a> a library to use the Joycon library in Unity (joycons have a similar pair of accelerometers/gyroscope sensors).
+I thought I had the solution but the it was still imperfect.
+The prediction would not follow the real orientation in some of the rotations, and it was once again unsatisfying and not suitable 😰.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+  <p><img src="https://camo.githubusercontent.com/49b547707bf36f902ce0e23460a06953919044aa6d5926b6bb74ffb6fbf68c64/68747470733a2f2f692e696d6775722e636f6d2f426256365372672e676966" alt="JoyconLib was almost the solution" /></p>
+  <div class="custom_caption">
+    <p>&gt; JoyconLib was almost the solution. Image from <a href="https://github.com/Looking-Glass/JoyconLib">github</a>.</p>
+  </div>
+</div>
+
+<p>The solution finally came out of LLM’s. 
+It is still important for me in 2026 to produce the code of this mod by myself but AI 🤖 remains very good sometimes to put in the right direction.
+Although I believe that this technology is mainly not beneficial for humans (because of its energetic and social implications), I was desperate enough to give it a try for the mod.
+My initial goal was to correct the Joyconlib’s code to obtain a more realistic orientation.</p>
+
+<p>So I described my problem in ChatGPT. My initial attempt was to produce an orientation from the gyroscope only, just to see if I could get rid of the odd behavior that I observed before.
+It produced a simple solution with Eigen, as I asked, that integrates the angular speed values from the gyroscope into an <code class="language-plaintext highlighter-rouge">angleAxis</code> object.
+I missed that the gyroscope offset values could be directly interpreted as a vector around which the rotation is performed, definitly not intuitive!</p>
+
+<p>The second part of the solution came from Gemini. I was still not able to use the accelerometer data to correct the pitch and roll drift from the gyroscope with chatGPT.
+My initial idea then was to “correct” the gyroscope-estimated orientation from the yaw angle so that the resulting orientation is directly comparable to the acceleration vector. 
+Gemini produced a simple solution once again.
+It turned out that a simple cross product was sufficient to compute a correction that is independant of the yaw rotation. Once again, not intuitive 🤷!
+These two solutions, gyroscope integration and accelerometer correction, resulted as the perfect compute routine for the Wiimote rotation estimation code in the mod.
+I released a <a href="https://github.com/smbct/wiimote_IMU/tree/main">sample code</a> in github with opengl so that it is available to anyone that encounters this problem in the future.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="https://github.com/smbct/wiimote_IMU/blob/main/output.gif?raw=true" alt="We can control blasters as well." /></p>
+  <div class="custom_caption">
+    <p>&gt; The Wiimote/wm+ orientation estimation algorithm in action.</p>
+  </div>
+</div>
+
+<p>At this point, the solution is already viable but things does not stop here because the Wiimote solution suffers from one issue: the Wiimote is not capable of keeping an absolute reference its yaw orientation. This results in an inevitable drift over this angle after some use time 🕙, as a consequence of accumulating small errors each time a new angular speed data is processed from the gyroscope.
+I potentially identified a more annoying issue from Wiiuse itself that I mention in the code sample <a href="https://github.com/smbct/wiimote_IMU/blob/main/README.md">README</a>.
+The Wiimote data is received through bluetooth as packets but the gyroscope data in Wiiuse are read asynchronously by the user.
+This may cause issues because the time is measured between two accesses but the same values may be accounted for several time.
+Apparently, the <strong>XWiimote</strong> library does not have this issue (gyroscope data is accessed in an event based manner).
+It would probably be better to migrate to this library in the future but the current code is still functional enough for the development.</p>
+
+<p>The good thing is that the method is also compatible with the Joycons as they rely on accelerometers and gyroscopes as well.
+This may also be usable with the new version of the joycons, the <a href="https://en.wikipedia.org/wiki/Joy-Con#Joy-Con_2">Joycon2</a>, that additionally contains <a href="https://www.reddit.com/r/GyroGaming/comments/1td86u3/switch_2_controllers_now_have_9axis_support_on_pc/">a megnotometer</a>.
+The magnetometer could be used to correct the drift on the yaw angle and I bet that a simple additional cross-product like correction would be possible to do it here.</p>
+
+<h2 id="the-wiimote-and-nunchuck-in-openjk">The Wiimote and nunchuck in OpenJK</h2>
+
+<h3 id="wiimote-code-and-initialization">Wiimote code and initialization</h3>
+
+<p>Having integrated the Kinect <a href="/series/modding_ja/pt5">in the previous post</a> makes the Wiimote integration quite simple.
+I started the same way by adding a source file dedicated to the Wiimote in the “shared” directory.
+The file contains functions to initialize the Wiimote through the wiiuse library, access its input data and compute its orientation.
+The wiiuse object is stored as a static object like the kinect one.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 90%;">
+  <p><img src="/assets/ja_mod/pt6/wiimote_menu.png" alt="The custom menu for the wiimote connection." /></p>
+  <div class="custom_caption">
+    <p>&gt; The custom menu for the wiimote connection.</p>
+  </div>
+</div>
+
+<p>I placed the wiimote initialization code in the same place as the Kinect one in <code class="language-plaintext highlighter-rouge">sys_main.cpp</code>, easy!.
+The same was done for the update function that checks the buttons status and process the motion tracking data.</p>
+
+<p>The wiiuse library also requires to connect to the Wiimote using a blocking function with a timeout parameter.
+I added a custom menu in the game specifically to add a <code class="language-plaintext highlighter-rouge">connect</code> button for the wiimote.
+The wimmote connection function is called from <code class="language-plaintext highlighter-rouge">ui_main.cpp</code>, where I can test if the button is clicked.
+The function runs once again in a separate thread so that the blocking behavior does not disturb the game display. 
+I then use a <strong>Cvar</strong> (client variable): <code class="language-plaintext highlighter-rouge">cl_wiimotestatus</code> to updatz the UI when the wiimote status changes.</p>
+
+<h3 id="adding-the-buttons">Adding the buttons</h3>
+
+<p>For the integration of the wiimote buttons, I manly read the SDL code of OpenJK where keys and mouse buttons are handled.
+I was able to find the <code class="language-plaintext highlighter-rouge">Sys_QueEvent</code> function that is called to notify the game that a given key is pressed.
+I modified the <code class="language-plaintext highlighter-rouge">fakeAscii_t</code> structure in <code class="language-plaintext highlighter-rouge">client/keycode.h</code> to add entries for the wiimote and nunchuck buttons.
+I could also specify an ascii name of the button in the <code class="language-plaintext highlighter-rouge">keyname_t</code> data structure, in <code class="language-plaintext highlighter-rouge">cl_keys.cpp</code>.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 90%;">
+  <p><img src="/assets/ja_mod/pt6/buttons_menu.png" alt="The input menu gives access almost natively to the new input buttons." /></p>
+  <div class="custom_caption">
+    <p>&gt; The input menu gives access almost natively to the new input buttons.</p>
+  </div>
+</div>
+
+<p>And that’s it! The integration is performed on top of the input event system and all of its machinery is already compatible with these additional buttons.
+Even the input menu is able to update and display correctly the wiimote buttons! If only this could be always as easy!</p>
+
+<h3 id="adding-the-orientation">Adding the orientation</h3>
+
+<p>Passing the wiimote orientation matrix mentioned above to OpenJK may seem to be a significantly harder task than handling the buttons but most of the work was actually already done in the Kinect case.
+The rotation matrix is computed in the wiimote update function the same way that it is described above.
+The matrix is retrieved and sent to the game server side in <code class="language-plaintext highlighter-rouge">CL_CreateCmd()</code> and it is received in <code class="language-plaintext highlighter-rouge">PM_UpdateViewAngles()</code> similarly than the kinect matrices.</p>
+
+<p>The rotation finally occurs in <code class="language-plaintext highlighter-rouge">PM_UpdateViewAngles()</code>.
+It was however hard to find the relevant skeleton bone to control the saber (or any other weapon 🔫).
+After several trial-and-errors, I was however able to identify <code class="language-plaintext highlighter-rouge">rhang_tag_bone</code> that works for the saber as well as other weapons.</p>
+
+<p>⚠️ An important thing to note about the Wiimote orientation: additionaly to the possible drift, the wiimote has no absolute reference about the yaw angle.
+This means that we need to decide where it points in the first place in the game.
+I assumed that the pointing direction would be the direction of the player view, assuming the player points the Wiimote in the direction of its screen in it is initialized.</p>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="/assets/ja_mod/pt6/kinect_wiimote.gif" alt="Kinect+Wiimote control of the lightsaber." /></p>
+  <div class="custom_caption">
+    <p>&gt; Kinect+Wiimote control of the lightsaber.</p>
+  </div>
+</div>
+
+<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  <p><img src="/assets/ja_mod/pt6/wiimote_kinect_weapon.gif" alt="Kinect+Wiimote control of a blaster." /></p>
+  <div class="custom_caption">
+    <p>&gt; Kinect+Wiimote control of a blaster.</p>
+  </div>
+</div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>With the Wiimote control and the wrist movement, the mod is now almost playable.
+There are still several limitations: additional modifications are required to account for the saber damages.
+Apparently, the game engine dose not keep track of the damages when the saber is not in an attack (which seems reasonable actually).</p>
+
+<p>Another issue is the lack of movement of the hand when the saber moves.
+This is purely cosmetic but achieving this turns out to be difficult.
+The hand is composed of several bones but they are not connected to a single “wrist” anchor.
+As a result, it does not seem to be possible to simply orient the hand with a rotation matrix 😥.
+For now I don’t see any solution to improve that point.</p>
+
+<p>I have not mentioned the other weapons here but the rotation of the wiimote is still relevant.
+However, with these modifications, it becomes necessary to change the trajectory of the shots. By default, the shot is always performed in the direction of the screen center.
+I also plan to make a first person version of the control, at least for the other weapons.
+With these elements, the mod should be already playable.</p>
+
+    
+
+
+
+<div class="post-tags">
+  
+    
+    <a href="/tags.html#programming-modding-video-games-virtual-reality">
+    
+      <span class="icon">
+        <svg fill="#000000" height="26" viewBox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0h24v24H0z" fill="none"/>
+    <path d="M17.63 5.84C17.27 5.33 16.67 5 16 5L5 5.01C3.9 5.01 3 5.9 3 7v10c0 1.1.9 1.99 2 1.99L16 19c.67 0 1.27-.33 1.63-.84L22 12l-4.37-6.16z"/>
+</svg>
+
+      </span>&nbsp;<span class="tag-name">programming modding video-games virtual-reality</span>
+    </a>
+  
+</div>
+  </div>
+
+  
+
+  
+  <section class="comments">
+    <!-- <h2>Comments</h2> -->
+    <script src="https://giscus.app/client.js"
+        data-repo="smbct/smbct.github.io"
+        data-repo-id="R_kgDOL0ffhg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOL0ffhs4CfYJ5"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+  </script>
+
+  </section>
+
+
+</div>
+
+
+
+
+<p class="back-link">
+    <a href="/series/modding_ja/headline.html"><span class="back-arrow icon"><svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0h24v24H0z" fill="none"/>
+  <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+</svg></span>Modding Jedi Academy with pose tracking</a>
+</p>
+
+
+    </main>
+
+    <!-- Optional footer content -->
+
+  </body>
+</html>
